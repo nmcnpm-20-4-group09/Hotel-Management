@@ -1,9 +1,13 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic');
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic');
 
 /* Variables */
 $primary-color: #47b5ff;
 $secondary-color: #256d85;
+$bg-color: #f5f5f5;
+$fail-color: #f31d1d;
+$success-color: #41ef25;
 
 /* Reset CSS */
 * {
