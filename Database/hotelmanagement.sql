@@ -31,8 +31,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_changeRate` (`mapt` VARCHAR(5), 
     WHERE pt.MaPhuThu = mapt ;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_Customer` ()   BEGIN
-    SELECT kh.ID_KhachHang, kh.HoTen, kh.LoaiKhach,kh.CMND,kh.SoDienThoai,pt.MaPhong as 'MaPhong'
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_Customer` ( )   BEGIN
+    return SELECT kh.ID_KhachHang, kh.HoTen, kh.LoaiKhach,kh.CMND,kh.SoDienThoai,pt.MaPhong as 'MaPhong'
     FROM khachhang as kh, phieu_thuephong as pt, chitiet_phieuthue as ctpt
     WHERE kh.ID_KhachHang=ctpt.ID_KhachHang and ctpt.SoPhieuThue=pt.SoPhieuThue;
 END$$
