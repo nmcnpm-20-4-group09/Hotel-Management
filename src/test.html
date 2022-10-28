@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload='getBillDetails()'>
+    <div id="test">OK</div>
+</body>
+<script>
+    function getBillDetails() {
+        var url = "BillDetails.php" 
+        + "?SoPhieuThue=" + '1'
+        + "&SoHoaDon=" + '1';
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = onReceiveResult;
+
+        xhr.open("GET", url, true);
+        xhr.send(null);
+        console.log(url);
+    }
+
+    function onReceiveResult() 
+    {
+        if (this.readyState == 4) {
+                if (this.status == 200) 
+                {
+                    var received = JSON.parse(this.responseText);
+                    var response = received['result'];
+                    
+                    for (let i = 0; i < response.length; i++)
+                    {
+                        var details = response[i];
+                        console.log(details);
+                        console.log(details['SoPhieuThue']);
+                        console.log(details['SoHoaDon']);
+                        console.log(details['SoNgayThueThuc']);
+                        console.log(details['TienThuePhong']);
+                        console.log(details['MaPhuThu']);
+                    }
+                }
+            }
+    }
+</script>
+
+</html>
