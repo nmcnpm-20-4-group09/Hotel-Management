@@ -22,3 +22,25 @@ BEGIN
     FROM KhachHang;
 END//
 DELIMITER ;
+
+-- Lấy danh mục phòng
+DROP PROCEDURE IF EXISTS sp_danhMucPhong;
+DELIMITER //
+CREATE 
+PROCEDURE sp_danhMucPhong ()   
+BEGIN
+    SELECT *
+    FROM LoaiPhong;
+END//
+DELIMITER ;
+
+-- Lấy danh sách phòng
+DROP PROCEDURE IF EXISTS sp_danhSachPhong;
+DELIMITER //
+CREATE 
+PROCEDURE sp_danhSachPhong ()   
+BEGIN
+    SELECT *
+    FROM Phong;
+END//
+DELIMITER ;

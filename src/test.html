@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Demo parsing response with JavaScript</title>
 </head>
 <body >
     <button onclick="console.clear(), getBillDetails()">Click to exec getBillDetails(1, 1)</button>
     <button onclick="console.clear(), getCustomerList()">Click to exec getCustomerList()</button>
+    <button onclick="console.clear(), getRoomCategories()">Click to exec getRoomCategories()</button>
+    <button onclick="console.clear(), getRoomList()">Click to exec getRoomList()</button>
 </body>
 <script>
     function getBillDetails() {
-        var url = "BillDetails.php" 
+        var url = "ChiTietHoaDon.php" 
         + "?SoPhieuThue=" + '1'
         + "&SoHoaDon=" + '1';
         
@@ -55,7 +57,7 @@
     }
 
     function getCustomerList () {
-        var url = "CustomerList.php";
+        var url = "DanhSachKhach.php";
         
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = onReceiveCustomerList;
@@ -77,17 +79,17 @@
                 
                 for (let i = 0; i < response.length; i++)
                 {
-                    var details = response[i];
-                    console.log(details);
+                    var customer = response[i];
+                    console.log(customer);
 
                     // Un-comment those to get specific data
-                    // console.log(details['ID_KhachHang']);
-                    // console.log(details['LoaiKhach']);
-                    // console.log(details['HoTen']);
-                    // console.log(details['NgaySinh']);
-                    // console.log(details['DiaChi']);
-                    // console.log(details['SoDienThoai']);
-                    // console.log(details['CMND']);
+                    // console.log(customer['ID_KhachHang']);
+                    // console.log(customer['LoaiKhach']);
+                    // console.log(customer['HoTen']);
+                    // console.log(customer['NgaySinh']);
+                    // console.log(customer['DiaChi']);
+                    // console.log(customer['SoDienThoai']);
+                    // console.log(customer['CMND']);
                 }
             }
             else
@@ -96,6 +98,90 @@
             }
         }       
     }
+
+    function getRoomCategories() {
+        var url = "DanhMucPhong.php";
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = onReceiveRoomCategories;
+
+        xhr.open("GET", url, true);
+        xhr.send();
+        console.log(url);
+    }
+
+    function onReceiveRoomCategories() 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            var received = JSON.parse(this.responseText);
+            
+            if (received['success'])
+            {
+                var response = received['result'];
+                
+                for (let i = 0; i < response.length; i++)
+                {
+                    var roomCategory = response[i];
+                    console.log(roomCategory);
+
+                    // Un-comment those to get specific data
+                    // console.log(roomCategory['MaLoai']);
+                    // console.log(roomCategory['SoLuongPhong']);
+                    // console.log(roomCategory['DonGia']);
+                    // console.log(roomCategory['LuongKhachToiDa']);
+                }
+            }
+            else
+            {
+                console.log(received['message']);
+            }
+        }       
+    }
+
+    function getRoomList() {
+        var url = "DanhSachPhong.php";
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = onReceiveRoomList;
+
+        xhr.open("GET", url, true);
+        xhr.send();
+        console.log(url);
+    }
+
+    function onReceiveRoomList() 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            var received = JSON.parse(this.responseText);
+            
+            if (received['success'])
+            {
+                var response = received['result'];
+                
+                for (let i = 0; i < response.length; i++)
+                {
+                    var room = response[i];
+                    console.log(room);
+
+                    // Un-comment those to get specific data
+                    // console.log(room['MaPhong']);
+                    // console.log(room['MaLoai']);
+                    // console.log(room['TinhTrang']);
+                    // console.log(room['GhiChu']);
+                }
+            }
+            else
+            {
+                console.log(received['message']);
+            }
+        }       
+    }
+
 </script>
+
+
+
 
 </html>
