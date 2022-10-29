@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body onload='getBillDetails(), getCustomerList()'>
-    <div id="test">OK</div>
+<body >
+    <button onclick="console.clear(), getBillDetails()">Click to exec getBillDetails(1, 1)</button>
+    <button onclick="console.clear(), getCustomerList()">Click to exec getCustomerList()</button>
 </body>
 <script>
     function getBillDetails() {
@@ -37,11 +38,13 @@
                 {
                     var details = response[i];
                     console.log(details);
-                    console.log(details['SoPhieuThue']);
-                    console.log(details['SoHoaDon']);
-                    console.log(details['SoNgayThueThuc']);
-                    console.log(details['TienThuePhong']);
-                    console.log(details['MaPhuThu']);
+                    
+                    // Un-comment those to get specific data
+                    // console.log(details['SoPhieuThue']);
+                    // console.log(details['SoHoaDon']);
+                    // console.log(details['SoNgayThueThuc']);
+                    // console.log(details['TienThuePhong']);
+                    // console.log(details['MaPhuThu']);
                 }
             }
             else
@@ -76,13 +79,15 @@
                 {
                     var details = response[i];
                     console.log(details);
-                    console.log(details['ID_KhachHang']);
-                    console.log(details['LoaiKhach']);
-                    console.log(details['HoTen']);
-                    console.log(details['NgaySinh']);
-                    console.log(details['DiaChi']);
-                    console.log(details['SoDienThoai']);
-                    console.log(details['CMND']);
+
+                    // Un-comment those to get specific data
+                    // console.log(details['ID_KhachHang']);
+                    // console.log(details['LoaiKhach']);
+                    // console.log(details['HoTen']);
+                    // console.log(details['NgaySinh']);
+                    // console.log(details['DiaChi']);
+                    // console.log(details['SoDienThoai']);
+                    // console.log(details['CMND']);
                 }
             }
             else
