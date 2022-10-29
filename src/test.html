@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body onload='getBillDetails()'>
+<body onload='getBillDetails(), getCustomerList()'>
     <div id="test">OK</div>
 </body>
 <script>
@@ -16,33 +16,80 @@
         + "&SoHoaDon=" + '1';
         
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveResult;
+        xhr.onreadystatechange = onReceiveBillDetails;
 
         xhr.open("GET", url, true);
-        xhr.send(null);
+        xhr.send();
         console.log(url);
     }
 
-    function onReceiveResult() 
+    function onReceiveBillDetails() 
     {
-        if (this.readyState == 4) {
-                if (this.status == 200) 
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            var received = JSON.parse(this.responseText);
+            
+            if (received['success'])
+            {
+                var response = received['result'];
+                
+                for (let i = 0; i < response.length; i++)
                 {
-                    var received = JSON.parse(this.responseText);
-                    var response = received['result'];
-                    
-                    for (let i = 0; i < response.length; i++)
-                    {
-                        var details = response[i];
-                        console.log(details);
-                        console.log(details['SoPhieuThue']);
-                        console.log(details['SoHoaDon']);
-                        console.log(details['SoNgayThueThuc']);
-                        console.log(details['TienThuePhong']);
-                        console.log(details['MaPhuThu']);
-                    }
+                    var details = response[i];
+                    console.log(details);
+                    console.log(details['SoPhieuThue']);
+                    console.log(details['SoHoaDon']);
+                    console.log(details['SoNgayThueThuc']);
+                    console.log(details['TienThuePhong']);
+                    console.log(details['MaPhuThu']);
                 }
             }
+            else
+            {
+                console.log(received['message']);
+            }
+        }       
+    }
+
+    function getCustomerList () {
+        var url = "CustomerList.php";
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = onReceiveCustomerList;
+
+        xhr.open("GET", url, true);
+        xhr.send();
+        console.log(url);
+    }
+
+    function onReceiveCustomerList() 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            var received = JSON.parse(this.responseText);
+            
+            if (received['success'])
+            {
+                var response = received['result'];
+                
+                for (let i = 0; i < response.length; i++)
+                {
+                    var details = response[i];
+                    console.log(details);
+                    console.log(details['ID_KhachHang']);
+                    console.log(details['LoaiKhach']);
+                    console.log(details['HoTen']);
+                    console.log(details['NgaySinh']);
+                    console.log(details['DiaChi']);
+                    console.log(details['SoDienThoai']);
+                    console.log(details['CMND']);
+                }
+            }
+            else
+            {
+                console.log(received['message']);
+            }
+        }       
     }
 </script>
 

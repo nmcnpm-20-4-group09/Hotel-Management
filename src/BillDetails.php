@@ -11,7 +11,7 @@
     $isValidData = (
         preg_match($pattern, $SoPhieuThue) and
         preg_match($pattern, $SoHoaDon)
-    );
+    );  
 
     if (!$isValidData) 
     {

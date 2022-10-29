@@ -11,3 +11,14 @@ BEGIN
     AND ct.SoHoaDon = SoHoaDon;
 END//
 DELIMITER ;
+
+-- Lấy danh sách khách hàng
+DROP PROCEDURE IF EXISTS sp_chiTietHoaDon;
+DELIMITER //
+CREATE 
+PROCEDURE sp_danhSachKhachHang ()   
+BEGIN
+    SELECT *
+    FROM KhachHang;
+END//
+DELIMITER ;
