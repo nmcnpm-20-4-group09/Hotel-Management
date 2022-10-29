@@ -13,7 +13,7 @@ END//
 DELIMITER ;
 
 -- Lấy danh sách khách hàng
-DROP PROCEDURE IF EXISTS sp_chiTietHoaDon;
+DROP PROCEDURE IF EXISTS sp_danhSachKhachHang;
 DELIMITER //
 CREATE 
 PROCEDURE sp_danhSachKhachHang ()   
@@ -42,5 +42,21 @@ PROCEDURE sp_danhSachPhong ()
 BEGIN
     SELECT *
     FROM Phong;
+END//
+DELIMITER ;
+
+-- Thay đổi tỉ lệ phụ thu
+DROP PROCEDURE IF EXISTS sp_doiTiLePhuThu;
+DELIMITER //
+CREATE 
+PROCEDURE sp_doiTiLePhuThu (MaPhuThu VARCHAR(5), TiLeMoi DOUBLE)
+BEGIN
+    UPDATE PhuThu as pt
+    SET pt.TiLe = TiLeMoi
+    WHERE pt.MaPhuThu = MaPhuThu;
+
+    SELECT *
+    FROM PhuThu as pt
+    WHERE pt.MaPhuThu = MaPhuThu;
 END//
 DELIMITER ;

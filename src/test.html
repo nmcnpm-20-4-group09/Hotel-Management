@@ -11,7 +11,9 @@
     <button onclick="console.clear(), getCustomerList()">Click to exec getCustomerList()</button>
     <button onclick="console.clear(), getRoomCategories()">Click to exec getRoomCategories()</button>
     <button onclick="console.clear(), getRoomList()">Click to exec getRoomList()</button>
+    <button onclick="console.clear(), updateSurcharge()">Click to exec updateSurcharge()</button>
 </body>
+
 <script>
     function getBillDetails() {
         var url = "ChiTietHoaDon.php" 
@@ -179,9 +181,59 @@
         }       
     }
 
+    function updateSurcharge() {
+        var data = { 
+            "MaPhuThu" : "PT01",
+            "TiLeMoi" : 12345678
+        }; 
+
+        var xhr = new XMLHttpRequest(); 
+    
+        xhr.onreadystatechange = onReceiveUpdateSurcharge;
+    
+        xhr.open("PUT", "ThayDoiPhuThu.php", true); 
+        xhr.setRequestHeader('Content-Type', 'application/json'); 
+        xhr.send(JSON.stringify(data)); 
+
+        console.log(
+            'PUT: ThayDoiPhuThu.php, data: ' 
+            + JSON.stringify(data)
+        );
+    }
+
+    function onReceiveUpdateSurcharge() 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            var received = JSON.parse(this.responseText);
+            
+            if (received['success'])
+            {
+                var response = received['result'];
+                
+                if (response.length == 0) 
+                    console.log("No things was update");
+                else
+                    console.log("Changed: ");
+
+                for (let i = 0; i < response.length; i++)
+                {
+                    var surcharge = response[i];
+                    console.log(surcharge);
+
+                    // Un-comment those to get specific data
+                    // console.log(surcharge['MaPhong']);
+                    // console.log(surcharge['MaLoai']);
+                    // console.log(surcharge['TinhTrang']);
+                    // console.log(surcharge['GhiChu']);
+                }
+            }
+            else
+            {
+                console.log(received['message']);
+            }
+        }       
+    }
+
 </script>
-
-
-
-
 </html>
