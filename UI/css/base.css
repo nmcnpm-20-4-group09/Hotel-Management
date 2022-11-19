@@ -23,7 +23,7 @@ html {
   box-sizing: border-box;
 }
 
-/* Main */
+/* Base Styles */
 .main {
   height: 100vh;
   background-color: #f7f7f7;
@@ -32,7 +32,8 @@ html {
   justify-content: center;
   align-items: center;
 }
-.main .sidebar {
+
+.sidebar {
   padding: 50px 0;
   background-color: #fff;
   box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
@@ -44,12 +45,12 @@ html {
   align-items: center;
   /* Feature List */
 }
-.main .sidebar img {
+.sidebar img {
   margin-bottom: 30px;
   width: 60px;
   height: 60px;
 }
-.main .sidebar ul li {
+.sidebar ul li {
   margin-bottom: 24px;
   padding-left: 20px;
   text-transform: uppercase;
@@ -58,66 +59,121 @@ html {
   height: 50px;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #000;
+  color: unset;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
-.main .sidebar ul li i {
+.sidebar ul li i {
   margin-right: 12px;
 }
-.main .sidebar ul li:hover {
+.sidebar ul li:hover {
   cursor: pointer;
   color: #228be6;
   background-color: #dff6ff;
 }
-.main .sidebar ul li.actived {
+.sidebar ul li.actived {
   color: #228be6;
   background-color: #dff6ff;
 }
-.main .management {
+
+.management {
   flex: 1;
   height: 100%;
 }
-.main .management header {
+.management header {
   margin: 16px 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.main .management header h1 {
+.management header h1 {
   font-size: 3.8rem;
   font-weight: 700;
-  color: #000;
+  color: unset;
   text-transform: uppercase;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
-.main .management header div {
+.management header div {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
-.main .management header div span {
+.management header div span {
   padding: 8px;
   font-size: 1.6rem;
   font-weight: 500;
-  color: #000;
+  color: unset;
 }
-.main .management header div img {
+.management header div img {
   width: 50px;
   height: 50px;
 }
-.main .management header div i {
+.management header div div i {
   font-size: 2rem;
   padding: 8px;
-  position: relative;
 }
-.main .management header div i:hover {
+.management header div div:hover {
+  cursor: pointer;
+}
+.management header div div:hover > i {
   cursor: pointer;
   opacity: 0.5;
+}
+.management header div div:hover ul {
+  display: block;
+}
+
+.account-settings {
+  display: none;
+  position: absolute;
+  top: 54px;
+  right: 0;
+  width: 200px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 6px 0px #bebcbc;
+}
+.account-settings li a {
+  color: #000;
+  padding: 0 8px;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.account-settings li a:hover {
+  color: #fff;
+  background-color: #47b5ff;
+}
+.account-settings li a i {
+  padding: 8px;
+  font-size: 2rem;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+}
+.account-settings li a p {
+  padding: 0 8px;
+  color: inherit;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: unset;
+}
+
+.account-settings::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: 0;
+  width: 50%;
+  height: 30px;
+  background-color: transparent;
 }
 
 /*# sourceMappingURL=base.css.map */

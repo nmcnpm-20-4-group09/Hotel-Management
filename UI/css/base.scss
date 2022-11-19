@@ -20,7 +20,7 @@ $success-color: #41ef25;
     width: $width;
     height: $height;
 }
-@mixin font($size, $weight: 400, $color: #000) {
+@mixin font($size, $weight: 400, $color: unset) {
     font-size: $size;
     font-weight: $weight;
     color: $color;
@@ -51,82 +51,140 @@ html {
     box-sizing: border-box;
 }
 
-/* Main */
+/* Base Styles */
+
 .main {
     height: 100vh;
     background-color: #f7f7f7;
     @include flex(row, center, center);
+}
 
-    .sidebar {
-        padding: 50px 0;
-        background-color: #fff;
-        box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
-        @include size(244px, 100%);
-        @include flex(column, flex-start, center);
+.sidebar {
+    padding: 50px 0;
+    background-color: #fff;
+    box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
+    @include size(244px, 100%);
+    @include flex(column, flex-start, center);
 
-        img {
-            margin-bottom: 30px;
-            @include size(60px);
-        }
-
-        /* Feature List */
-        ul li {
-            margin-bottom: 24px;
-            padding-left: 20px;
-            text-transform: uppercase;
-            border-radius: 12px;
-            @include size(200px, 50px);
-            @include font(1.4rem, 700);
-            @include flex(row, flex-start, center);
-
-            i {
-                margin-right: 12px;
-            }
-        }
-        ul li:hover {
-            cursor: pointer;
-            @include actived-feature();
-        }
-        ul li.actived {
-            @include actived-feature();
-        }
+    img {
+        margin-bottom: 30px;
+        @include size(60px);
     }
 
-    .management {
-        flex: 1;
-        height: 100%;
+    /* Feature List */
+    ul li {
+        margin-bottom: 24px;
+        padding-left: 20px;
+        text-transform: uppercase;
+        border-radius: 12px;
+        @include size(200px, 50px);
+        @include font(1.4rem, 700);
+        @include flex(row, flex-start, center);
 
-        header {
-            margin: 16px 50px;
-            @include flex(row, space-between, center);
+        i {
+            margin-right: 12px;
+        }
+    }
+    ul li:hover {
+        cursor: pointer;
+        @include actived-feature();
+    }
+    ul li.actived {
+        @include actived-feature();
+    }
+}
 
-            h1 {
-                @include font(3.8rem, 700);
-                text-transform: uppercase;
-                text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+.management {
+    flex: 1;
+    height: 100%;
+
+    header {
+        margin: 16px 50px;
+        @include flex(row, space-between, center);
+
+        h1 {
+            @include font(3.8rem, 700);
+            text-transform: uppercase;
+            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+        }
+        div {
+            position: relative;
+            @include flex(row, space-around, center);
+
+            span {
+                padding: 8px;
+                @include font(1.6rem, 500);
             }
+
+            img {
+                @include size(50px);
+            }
+
             div {
-                @include flex(row, space-around, center);
-
-                span {
-                    padding: 8px;
-                    @include font(1.6rem, 500);
-                }
-
-                img {
-                    @include size(50px);
-                }
-
                 i {
                     font-size: 2rem;
                     padding: 8px;
-                    position: relative;
                 }
-                i:hover {
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:hover > i {
                     cursor: pointer;
                     opacity: 0.5;
+                }
+
+                &:hover ul {
+                    display: block;
                 }
             }
         }
     }
+}
+
+.account-settings {
+    display: none;
+    position: absolute;
+    top: 54px;
+    right: 0;
+    width: 200px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 6px 0px #bebcbc;
+
+    li {
+        a {
+            color: #000;
+            padding: 0 8px;
+            font-family: 'Roboto', sans-serif;
+            text-decoration: none;
+            @include flex(row, flex-start, center);
+
+            &:hover {
+                color: #fff;
+                background-color: #47b5ff;
+            }
+
+            i {
+                padding: 8px;
+                font-size: 2rem;
+                text-align: center;
+                @include size(40px);
+            }
+            p {
+                padding: 0 8px;
+                color: inherit;
+                @include font(1.6rem, 400);
+            }
+        }
+    }
+}
+.account-settings::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 50%;
+    height: 30px;
+    background-color: transparent;
 }
