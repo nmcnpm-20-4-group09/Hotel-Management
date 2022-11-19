@@ -235,8 +235,9 @@ html {
 
 .table {
     flex: 1;
+    overflow-y: scroll;
     margin-right: 50px;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 180px);
     @include flex(row, flex-start, flex-start);
 
     table {

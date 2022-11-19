@@ -222,8 +222,9 @@ html {
 
 .table {
   flex: 1;
+  overflow-y: scroll;
   margin-right: 50px;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 180px);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
