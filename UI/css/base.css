@@ -222,9 +222,7 @@ html {
 
 .table {
   flex: 1;
-  overflow-y: scroll;
   margin-right: 50px;
-  height: calc(100vh - 180px);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -234,61 +232,82 @@ html {
   width: 100%;
   border-collapse: collapse;
 }
+.table table thead {
+  display: block;
+  width: calc(100% - 17px);
+}
+.table table tbody {
+  display: block;
+  overflow-y: scroll;
+  height: calc(100vh - 250px);
+}
+.table table tr {
+  display: table;
+  width: 100%;
+}
+.table table tr.actived td {
+  background-color: #dff6ff;
+}
+.table table th,
+.table table td {
+  width: 12.5%;
+  padding: 20px 10px;
+}
 .table table th {
-  width: 160px;
-  padding: 20px 0;
   text-align: left;
+  padding: 20px 10px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 1.8rem;
   font-weight: 500;
 }
-.table table th:nth-of-type(3) {
-  width: 200px;
+.table table th i {
+  font-size: 1.4rem;
+  padding: 8px;
+  color: rgb(75, 73, 73);
 }
-.table table th:nth-of-type(2),
-.table table th:nth-of-type(5),
-.table table th:nth-of-type(6) {
-  width: 100px;
+.table table th i:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 .table table td:not(.spacer) {
-  padding-top: 20px;
-  padding-bottom: 20px;
   background-color: #fff;
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
   font-size: 1.4rem;
   font-weight: 500;
 }
-.table table td:nth-of-type(2) {
-  width: 120px;
+.table table td:not(.spacer) i {
+  font-size: 2.4rem;
+}
+.table table td:not(.spacer) i:hover {
+  cursor: pointer;
   color: #47b5ff;
-}
-.table table th:first-of-type,
-.table table td:first-of-type {
-  width: 60px;
-  padding: 20px;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
-}
-.table table th:last-of-type,
-.table table td:last-of-type {
-  text-align: center;
-  padding: 20px;
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
+  opacity: 0.8;
 }
 .table table td.spacer {
   padding: 10px;
 }
-.table table tr.actived td {
-  background-color: #dff6ff;
-}
-.table table i {
-  font-size: 2.4rem;
-}
-.table table i:hover {
-  cursor: pointer;
+.table table td:nth-of-type(2) {
   color: #47b5ff;
-  opacity: 0.8;
+}
+.table table th:first-of-type,
+.table table td:first-of-type {
+  width: 10%;
+  padding-left: 20px;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  text-align: center;
+}
+.table table th:nth-of-type(3),
+.table table td:nth-of-type(3) {
+  width: 20%;
+}
+.table table th:last-of-type,
+.table table td:last-of-type {
+  width: 16.6666666667%;
+  padding-right: 20px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=base.css.map */
