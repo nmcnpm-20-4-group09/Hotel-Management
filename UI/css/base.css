@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic");
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
 /* Variables */
+/* Mixins */
 /* Reset CSS */
 * {
   box-sizing: inherit;
@@ -19,6 +20,60 @@ html {
   font-family: "Roboto", sans-serif;
   font-size: 62.5%;
   box-sizing: border-box;
+}
+
+/* Main */
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  height: 100vh;
+}
+.main .sidebar {
+  width: 244px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+  padding: 50px 0;
+  /* Feature list */
+}
+.main .sidebar .home-page {
+  margin-bottom: 30px;
+  width: 60px;
+  height: 60px;
+}
+.main .sidebar .feature-list div {
+  margin-bottom: 24px;
+  padding-left: 20px;
+  font-family: "Roboto";
+  text-transform: uppercase;
+  border-radius: 12px;
+  width: 200px;
+  height: 50px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main .sidebar .feature-list div i {
+  margin-right: 12px;
+}
+.main .sidebar .feature-list div:hover {
+  cursor: pointer;
+  color: #228be6;
+  background-color: #dff6ff;
+}
+.main .sidebar div.actived {
+  color: #228be6;
+  background-color: #dff6ff;
 }
 
 /*# sourceMappingURL=base.css.map */
