@@ -9,47 +9,55 @@
         <link rel="stylesheet" href="./css/base.css" />
 
         <!-- Font Awesome -->
-        <script src="https://kit.fontawesome.com/f31e1a0778.js" crossorigin="anonymous"></script>
-        
+        <script
+            src="https://kit.fontawesome.com/f31e1a0778.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
 
     <body>
         <div class="main">
             <div class="sidebar">
                 <a href="#">
-                    <img class="home-page" src="./assets/icons/home_page.png" alt="Home page"/>
+                    <img src="./assets/icons/home_page.png" alt="Home page" />
                 </a>
-                <div class="feature-list">
-                    <div class="feature-item actived">
+                <ul>
+                    <li class="actived">
                         <i class="fa-solid fa-bed"></i>
-                        <p>Danh sách phòng</p>
-                    </div>
-                    <div class="feature-item">
+                        <span>Danh sách phòng</span>
+                    </li>
+                    <li>
                         <i class="fa-solid fa-person"></i>
-                        <p>Danh sách khách</p>
-                    </div>
-                    <div class="feature-item">
+                        <span>Danh sách khách</span>
+                    </li>
+                    <li>
                         <i class="fa-solid fa-receipt"></i>
-                        <p>Danh sách hóa đơn</p>
-                    </div>
-                    <div class="feature-item">
+                        <span>Danh sách hóa đơn</span>
+                    </li>
+                    <li>
                         <i class="fa-solid fa-chart-simple"></i>
-                        <p>Báo cáo</p>
-                    </div>
-                </div>
+                        <span>Báo cáo</span>
+                    </li>
+                </ul>
             </div>
             <div class="management">
-                <div class="header">
-                    <div class="title"></div>
-                    <div class="account"></div>
-                </div>
+                <header>
+                    <h1>Tiêu đề chức năng</h1>
+                    <div>
+                        <span class="account-name">Tên người dùng</span>
+                        <img
+                            class="account-avatar"
+                            src="./assets/icons/profile.png"
+                            alt="Profile"
+                        />
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                </header>
                 <div class="feature">
                     <div class="table"></div>
                     <div class="toolbar"></div>
                 </div>
             </div>
         </div>
-
-
     </body>
 </html>

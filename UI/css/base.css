@@ -44,15 +44,14 @@ html {
   align-items: center;
   /* Feature List */
 }
-.main .sidebar .home-page {
+.main .sidebar img {
   margin-bottom: 30px;
   width: 60px;
   height: 60px;
 }
-.main .sidebar .feature-list div {
+.main .sidebar ul li {
   margin-bottom: 24px;
   padding-left: 20px;
-  font-family: "Roboto";
   text-transform: uppercase;
   border-radius: 12px;
   width: 200px;
@@ -65,21 +64,60 @@ html {
   justify-content: flex-start;
   align-items: center;
 }
-.main .sidebar .feature-list div i {
+.main .sidebar ul li i {
   margin-right: 12px;
 }
-.main .sidebar .feature-list div:hover {
+.main .sidebar ul li:hover {
   cursor: pointer;
   color: #228be6;
   background-color: #dff6ff;
 }
-.main .sidebar .feature-list div.actived {
+.main .sidebar ul li.actived {
   color: #228be6;
   background-color: #dff6ff;
 }
 .main .management {
   flex: 1;
   height: 100%;
+}
+.main .management header {
+  margin: 16px 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.main .management header h1 {
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+.main .management header div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.main .management header div span {
+  padding: 8px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #000;
+}
+.main .management header div img {
+  width: 50px;
+  height: 50px;
+}
+.main .management header div i {
+  font-size: 2rem;
+  padding: 8px;
+  position: relative;
+}
+.main .management header div i:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 /*# sourceMappingURL=base.css.map */
