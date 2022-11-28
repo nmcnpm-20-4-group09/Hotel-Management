@@ -44,6 +44,10 @@ p {
     margin: 0;
 }
 
+a {
+    color: #000;
+}
+
 /* Global Styles */
 html {
     font-family: 'Roboto', sans-serif;
@@ -62,7 +66,7 @@ html {
     padding: 50px 0;
     background-color: #fff;
     box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
-    @include size(244px, 100%);
+    @include size(280px, 100%);
     @include flex(column, flex-start, center);
 
     img {
@@ -72,13 +76,17 @@ html {
 
     /* Feature List */
     ul li {
+        overflow: hidden;
         margin-bottom: 24px;
-        padding-left: 20px;
         text-transform: uppercase;
         border-radius: 12px;
-        @include size(200px, 50px);
-        @include font(1.4rem, 700);
+        @include size(220px, 50px);
+        @include font(1.2rem, 700);
         @include flex(row, flex-start, center);
+
+        a {
+            padding: 0 16px;
+        }
 
         i {
             margin-right: 12px;
@@ -87,13 +95,19 @@ html {
         &:hover {
             cursor: pointer;
             opacity: 0.7;
-            color: #228be6;
             background-color: #dff6ff;
+
+            a {
+                color: #228be6;
+            }
         }
 
         &.actived {
-            color: #228be6;
             background-color: #dff6ff;
+
+            a {
+                color: #228be6;
+            }
         }
     }
 }
@@ -143,7 +157,7 @@ html {
                 cursor: pointer;
             }
 
-            &:hover>i {
+            &:hover > i {
                 cursor: pointer;
                 opacity: 0.5;
             }
