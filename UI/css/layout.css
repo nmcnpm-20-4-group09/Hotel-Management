@@ -3,6 +3,17 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
 /* Variables */
 /* Global Mixins */
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 /* Reset CSS */
 * {
   box-sizing: inherit;
@@ -20,11 +31,23 @@ p {
   margin: 0;
 }
 
+a {
+  color: #000;
+}
+
 /* Global Styles */
 html {
   font-family: "Roboto", sans-serif;
   font-size: 62.5%;
   box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .container {
@@ -234,16 +257,24 @@ html {
   justify-content: space-between;
   align-items: flex-start;
 }
+.feature .banner-wrapper {
+  width: 100%;
+  height: calc(100vh - 250px + 50px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.feature .banner-wrapper .banner {
+  height: 100%;
+}
 
 .toolbar {
   padding: 12px;
   border-radius: 16px;
   background-color: #fff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  display: none;
 }
 .toolbar button {
   padding: 10px;
@@ -265,6 +296,13 @@ html {
 }
 .toolbar button.actived {
   color: #47b5ff;
+}
+.toolbar.actived {
+  animation: slideIn 1s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .table-wrapper {
