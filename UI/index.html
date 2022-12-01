@@ -51,7 +51,7 @@
             </div>
             <div class="main">
                 <header class="header">
-                    <h1 class="feature-title">Tiêu đề chức năng</h1>
+                    <h1 class="feature-title">Trang chủ</h1>
                     <div class="account">
                         <span class="account-name">Tên người dùng</span>
                         <img
@@ -287,19 +287,26 @@
         <script>
             const sidebar = document.querySelector('.sidebar')
             const sidebarButtons = sidebar.querySelectorAll('li')
+            const featureTitle = document.querySelector('.feature-title')
 
             // Xử lý sự kiện click vào nút sidebar
             function handleSideBarButtons() {
                 sidebarButtons.forEach((button) => {
+                    // Xử lý class actived
                     button.addEventListener('click', () => {
                         sidebarButtons.forEach((btn) => {
                             btn.classList.remove('actived')
                         })
 
                         button.classList.add('actived')
+
+                        // Thay đổi tiêu đề
+                        featureTitle.textContent =
+                            button.querySelector('span').textContent
                     })
                 })
             }
+
             handleSideBarButtons()
         </script>
     </body>
