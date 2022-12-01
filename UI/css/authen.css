@@ -1,0 +1,141 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic");
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
+/* Variables */
+/* Global Mixins */
+/* Reset CSS */
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: #000;
+}
+
+/* Global Styles */
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.container {
+  height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: #fff;
+}
+
+form {
+  width: 30%;
+  padding: 0px 50px;
+  border: 1px solid #000000;
+  border-radius: 16px;
+}
+form .form-title {
+  margin: 40px 0;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000000;
+  font-size: 3.4rem;
+  font-weight: 700;
+}
+form .form-label {
+  margin: 10px 2px;
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+form .form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #646161;
+  border-radius: 12px;
+}
+form .form-control.valid {
+  outline: #41ef25;
+  border-color: #41ef25;
+  border-width: 2px;
+}
+form .form-control.invalid {
+  outline: #f31d1d;
+  border-color: #f31d1d;
+  border-width: 2px;
+}
+form .form-text {
+  margin: 12px 2px;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+form .form-text.valid {
+  color: #41ef25;
+  border-width: 2px;
+}
+form .form-text.invalid {
+  color: #f31d1d;
+  border-width: 2px;
+}
+form .form-refs {
+  margin: 10px 0;
+}
+form .form-refs a {
+  margin-right: 10px;
+  color: #47b5ff;
+}
+form .form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+form .form-button {
+  width: 50%;
+  padding: 16px 0px;
+  margin: 40px 0;
+  border: none;
+  border-radius: 56px;
+  color: #fff;
+  background-color: #47b5ff;
+  text-transform: uppercase;
+}
+form .form-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+form .back-button {
+  text-align: left;
+  margin-right: auto;
+  background-color: #fff;
+}
+form .back-button a {
+  text-decoration: none;
+  color: #666;
+}
+
+/*# sourceMappingURL=authen.css.map */
