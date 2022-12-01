@@ -50,7 +50,7 @@ html {
 }
 
 /* Base Styles */
-.wrapper {
+.container {
     height: 100vh;
     background-color: #f7f7f7;
     @include flex(row, center, center);
@@ -63,13 +63,12 @@ html {
     @include size(300px, 100%);
     @include flex(column, flex-start, center);
 
-    img {
+    .home-icon img {
         margin-bottom: 30px;
         @include size(60px);
     }
 
-    /* Feature List */
-    ul li {
+    .sidebar-buttons li {
         margin-bottom: 24px;
         @include size(240px, 50px);
         @include font(1.4rem, 700);
@@ -114,105 +113,105 @@ html {
     margin: 20px 50px 70px 50px;
     @include flex(row, space-between, center);
 
-    h1 {
+    .feature-title {
         @include font(3.8rem, 700);
         text-transform: uppercase;
         text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
     }
-    div {
-        position: relative;
-        @include flex(row, space-around, center);
-
-        span {
-            padding: 8px;
-            @include font(1.6rem, 500);
-        }
-
-        img {
-            @include size(50px);
-        }
-
-        div {
-            i {
-                font-size: 2rem;
-                padding: 8px;
-            }
-
-            &:hover {
-                cursor: pointer;
-            }
-
-            &:hover > i {
-                cursor: pointer;
-                opacity: 0.5;
-            }
-
-            &:hover ul {
-                display: block;
-            }
-        }
-    }
 }
 
-// Drop down menu
-.account-settings {
-    display: none;
-    position: absolute;
-    top: 54px;
-    right: 0;
-    width: 240px;
-    border-radius: 4px;
-    box-shadow: 0px 0px 6px 0px #bebcbc;
-    background-color: #fff;
-    z-index: 1;
+.account {
+    position: relative;
+    @include flex(row, space-around, center);
 
-    li {
-        overflow: hidden;
+    .account-name {
+        padding: 8px;
+        @include font(1.6rem, 500);
+    }
 
-        a {
-            color: #000;
+    .account-avatar {
+        @include size(50px);
+    }
+
+    .account-expand-icon {
+        i {
+            font-size: 2rem;
             padding: 8px;
-            font-family: 'Roboto', sans-serif;
-            text-decoration: none;
-            @include flex(row, flex-start, center);
+        }
 
-            &:hover {
-                color: #fff;
-                background-color: $primary-color;
-            }
+        &:hover {
+            cursor: pointer;
+        }
 
-            i {
-                padding: 8px;
-                font-size: 2rem;
-                text-align: center;
-                @include size(40px);
-            }
-            p {
-                padding: 0 8px;
-                color: inherit;
-                @include font(1.6rem, 400);
-            }
+        &:hover > i {
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        &:hover ul {
+            display: block;
         }
     }
 
-    li:first-of-type {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-    }
-
-    li:last-of-type {
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-    }
-
-    &::before {
-        content: '';
+    .account-settings {
+        display: none;
         position: absolute;
-        top: -30px;
+        top: 54px;
         right: 0;
-        width: 50%;
-        height: 30px;
-        background-color: transparent;
+        width: 240px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 6px 0px #bebcbc;
+        background-color: #fff;
+        z-index: 1;
+
+        li {
+            overflow: hidden;
+
+            a {
+                color: #000;
+                padding: 8px;
+                font-family: 'Roboto', sans-serif;
+                text-decoration: none;
+                @include flex(row, flex-start, center);
+
+                &:hover {
+                    color: #fff;
+                    background-color: $primary-color;
+                }
+
+                i {
+                    padding: 8px;
+                    font-size: 2rem;
+                    text-align: center;
+                    @include size(40px);
+                }
+                p {
+                    padding: 0 8px;
+                    color: inherit;
+                    @include font(1.6rem, 400);
+                }
+            }
+        }
+
+        li:first-of-type {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        li:last-of-type {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 50%;
+            height: 30px;
+            background-color: transparent;
+        }
     }
 }
 
@@ -220,40 +219,41 @@ html {
     margin: 16px 50px;
     position: relative;
     @include flex(row, space-between, flex-start);
+}
 
-    .toolbar {
-        padding: 12px;
-        border-radius: 16px;
-        background-color: #fff;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-        @include flex(column, space-around, center);
+.toolbar {
+    padding: 12px;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    @include flex(column, space-around, center);
 
-        button {
-            padding: 10px;
-            margin: 16px 0;
-            outline: none;
-            border: none;
-            border-radius: 8px;
-            background: transparent;
-            box-shadow: 0 0 6px 0 rgba(100, 99, 99, 0.25);
+    button {
+        padding: 10px;
+        margin: 16px 0;
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        background: transparent;
+        box-shadow: 0 0 6px 0 rgba(100, 99, 99, 0.25);
 
-            i {
-                @include font(2.4rem, 700);
-            }
+        i {
+            @include font(2.4rem, 700);
+        }
 
-            &:hover {
-                color: $primary-color;
-                opacity: 0.7;
-                cursor: pointer;
-            }
-            &.actived {
-                color: $primary-color;
-            }
+        &:hover {
+            color: $primary-color;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        &.actived {
+            color: $primary-color;
         }
     }
 }
 
-.table {
+.table-wrapper {
+    $scrollbar-width: 17px;
     flex: 1;
     margin-right: 50px;
     @include flex(row, flex-start, flex-start);
@@ -264,7 +264,7 @@ html {
 
         thead {
             display: block;
-            width: calc(100% - 17px);
+            width: calc(100% - $scrollbar-width);
         }
         tbody {
             display: block;
