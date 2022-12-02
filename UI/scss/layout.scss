@@ -207,16 +207,6 @@ $sidebar-button-actived-w: 240px;
     margin: 16px 50px;
     position: relative;
     @include flex(row, space-between, flex-start);
-
-    .banner-wrapper {
-        width: 100%;
-        height: calc($table-height + 50px);
-        @include flex(row, center, center);
-
-        .banner {
-            height: 100%;
-        }
-    }
 }
 
 .toolbar {
