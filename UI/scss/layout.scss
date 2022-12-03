@@ -27,6 +27,7 @@ $sidebar-button-actived-w: 240px;
 
     .home-icon img {
         margin-bottom: 30px;
+        transition: all 0.5s ease;
         @include size(60px);
     }
     .sidebar-buttons {
@@ -71,6 +72,14 @@ $sidebar-button-actived-w: 240px;
     &.actived,
     &:hover {
         width: $sidebar-actived-w;
+
+        .home-icon {
+            padding: 30px;
+
+            img {
+                @include size(80px);
+            }
+        }
 
         .sidebar-buttons li {
             width: $sidebar-button-actived-w;
