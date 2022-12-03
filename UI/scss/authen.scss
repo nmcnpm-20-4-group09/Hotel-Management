@@ -1,0 +1,98 @@
+@import 'base.scss';
+
+.container {
+    background-color: #fff;
+}
+
+form {
+    width: 30%;
+    padding: 0px 50px;
+    border: 1px solid #000000;
+    border-radius: 16px;
+
+    .form-title {
+        margin: 40px 0;
+        text-transform: uppercase;
+        text-align: center;
+        color: #000000;
+        @include font(3.4rem, 700);
+    }
+
+    .form-label {
+        margin: 10px 2px;
+        display: block;
+        @include font(1.8rem, 500);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #646161;
+        border-radius: 12px;
+
+        &.valid {
+            outline: $success-color;
+            border-color: $success-color;
+            border-width: 2px;
+        }
+        &.invalid {
+            outline: $fail-color;
+            border-color: $fail-color;
+            border-width: 2px;
+        }
+    }
+
+    .form-text {
+        margin: 12px 2px;
+        @include font(1.2rem, 400);
+
+        &.valid {
+            color: $success-color;
+            border-width: 2px;
+        }
+        &.invalid {
+            color: $fail-color;
+            border-width: 2px;
+        }
+    }
+
+    .form-refs {
+        margin: 10px 0;
+
+        a {
+            margin-right: 10px;
+            color: $primary-color;
+        }
+    }
+
+    .form-buttons {
+        @include flex(row, center, center);
+    }
+
+    .form-button {
+        width: 50%;
+        padding: 16px 0px;
+        margin: 40px 0;
+        border: none;
+        border-radius: 56px;
+        color: #fff;
+        background-color: $primary-color;
+        text-transform: uppercase;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+    }
+
+    .back-button {
+        text-align: left;
+        margin-right: auto;
+        background-color: #fff;
+
+        a {
+            text-decoration: none;
+            color: #666;
+        }
+    }
+}
