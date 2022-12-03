@@ -115,13 +115,12 @@ html {
 }
 .sidebar .sidebar-buttons li:hover a {
   cursor: pointer;
-  opacity: 0.7;
+  color: #228be6;
   background-color: #dff6ff;
 }
 .sidebar .sidebar-buttons li.actived a {
   color: #228be6;
-}
-.sidebar ul li.actived {
+  border-radius: 12px;
   background-color: #dff6ff;
 }
 .sidebar.actived, .sidebar:hover {
@@ -257,17 +256,6 @@ html {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-}
-.feature .banner-wrapper {
-  width: 100%;
-  height: calc(100vh - 250px + 50px);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.feature .banner-wrapper .banner {
-  height: 100%;
 }
 
 .toolbar {

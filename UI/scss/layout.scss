@@ -57,22 +57,20 @@ $sidebar-button-actived-w: 240px;
 
         &:hover a {
             cursor: pointer;
-            opacity: 0.7;
             color: #228be6;
             background-color: #dff6ff;
         }
 
         &.actived a {
             color: #228be6;
+            border-radius: 12px;
             background-color: #dff6ff;
         }
     }
 
     &.actived,
     &:hover {
-        & {
-            width: $sidebar-actived-w;
-        }
+        width: $sidebar-actived-w;
 
         .sidebar-buttons li {
             width: $sidebar-button-actived-w;
