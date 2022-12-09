@@ -1,4 +1,4 @@
-<?php include '../layouts/header.php'; ?>
+<?php include '../components/header.php'; ?>
 
 <body>
     <div class="container">

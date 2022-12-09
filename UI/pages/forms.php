@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="../css/layout.css" />
 
-<?php include '../layouts/header.php'; ?>
+<?php include '../components/header.php'; ?>
 
 <body>
     <div class="container">
 
         <?php
-        include "../layouts/globals.php";
+        include "../components/globals.php";
         global $activedForm;
         
         if ($activedForm == Form::SIGNIN)

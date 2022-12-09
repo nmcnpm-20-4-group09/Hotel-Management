@@ -1,4 +1,4 @@
-<?php include '../layouts/header.php'; ?>
+<?php include '../components/header.php'; ?>
 
 <body>
     <div class="container">
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <?php include '../layouts/script.php'; ?>
+    <?php include '../components/script.php'; ?>
     <script>
         const roomListButton = sidebarButtons[3];
         roomListButton.classList.add('actived');
