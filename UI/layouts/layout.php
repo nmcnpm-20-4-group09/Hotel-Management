@@ -11,7 +11,7 @@
             <?php include '../components/heading.php'; ?>
 
             <div class="feature">
-                <?php include '../components/feature.php'; ?>
+                <?php include '../components/list.php'; ?>
                 <?php include '../components/toolbar.php'; ?>
             </div>
         </div>

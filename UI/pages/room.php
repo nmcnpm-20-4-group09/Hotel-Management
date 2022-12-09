@@ -31,7 +31,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -44,7 +44,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -57,7 +57,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -70,7 +70,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -83,7 +83,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -96,7 +96,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -109,7 +109,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -122,7 +122,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -135,7 +135,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -148,7 +148,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -161,7 +161,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -174,7 +174,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
@@ -187,7 +187,7 @@
                                 <td>150.000</td>
                                 <td>Trống</td>
                                 <td>
-                                    <a href="booking.html">
+                                    <a href="./booking.php">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                 </td>
