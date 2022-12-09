@@ -5,31 +5,44 @@
     const sidebarButtons = $('.sidebar')?.querySelectorAll('li')
     const toolbarButtons = $('.toolbar')?.querySelectorAll('button')
     const featureTitle = $('.feature-title')
-
-    // Xử lý sự kiện click vào nút sidebar
-    function handleButtons(buttons) {
-        buttons.forEach((button) => {
-            // Xử lý class actived
-            button.addEventListener('click', () => {
-                buttons.forEach((btn) => {
-                    btn.classList.remove('actived')
-                })
-
-                button.classList.add('actived')
-                changeFeatureTitle()
-            })
-        })
+    const features = {
+        'room': 0,
+        'customer': 1,
+        'bill': 2,
+        'report': 3,
     }
 
-    // Thay đổi tiêu đề
-    function changeFeatureTitle() {
+    // Xử lý sự kiện
+    function handleEvents() {
+        function handleButtons(buttons) {
+            if (buttons) {
+                buttons.forEach((button) => {
+                    button.addEventListener('click', () => {
+                        buttons.forEach((btn) => {
+                            btn.classList.remove('actived')
+                        })
+
+                        button.classList.add('actived')
+                    })
+                })
+            }
+        }
+
+        handleButtons(sidebarButtons)
+        handleButtons(toolbarButtons)
+    }
+
+    // Thay đổi giao diện của chức năng
+    function updateFeature(featureIndex) {
+        // Cập nhật nút chức năng
+        const featureButton = sidebarButtons[features[featureIndex]];
+        featureButton?.classList.add('actived');
+
+        // Cập nhật tiêu đề chức năng
         sidebarButtons.forEach((button) => {
             if (button.classList.contains('actived'))
                 featureTitle.textContent =
                 button.querySelector('span').textContent
         })
     }
-
-    handleButtons(sidebarButtons)
-    handleButtons(toolbarButtons)
 </script>

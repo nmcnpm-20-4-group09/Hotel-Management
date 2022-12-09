@@ -11,4 +11,19 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/f31e1a0778.js" crossorigin="anonymous"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/layout.css" />
 </head>
+
+<?php
+
+enum Form
+{
+    case SIGNIN;
+    case SIGNUP;
+};
+$activedForm = Form::SIGNIN;
+$componentPath = "../components/";
+
+?>

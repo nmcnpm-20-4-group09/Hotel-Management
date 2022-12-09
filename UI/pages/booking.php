@@ -1,9 +1,9 @@
-<?php include '../components/header.php'; ?>
+<?php include "../components/header.php"; ?>
 
 <body>
     <div class="container">
 
-        <?php require '../components/sidebar.php'; ?>
+        <?php require $componentPath . 'sidebar.php'; ?>
 
         <div class="main">
             <header class="header">
@@ -130,6 +130,3 @@
 </body>
 
 </html>
-
-<!-- Styles -->
-<link rel="stylesheet" href="../css/layout.css" />

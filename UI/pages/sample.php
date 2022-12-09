@@ -1,25 +1,23 @@
 <!-- Đây là trang layout mẫu -->
-<?php include './header.php'; ?>
+<?php include '../components/header.php'; ?>
 
 <body>
     <div class="container">
 
-        <?php require '../components/sidebar.php'; ?>
+        <?php require $componentPath . 'sidebar.php'; ?>
 
         <div class="main">
 
-            <?php include '../components/heading.php'; ?>
+            <?php include $componentPath . 'heading.php'; ?>
 
             <div class="feature">
-                <?php include '../components/list.php'; ?>
-                <?php include '../components/toolbar.php'; ?>
+                <?php include $componentPath . 'table.php'; ?>
+                <?php include $componentPath . 'toolbar.php'; ?>
             </div>
         </div>
     </div>
 
-    <?php include './script.php'; ?>
+    <?php include $componentPath . 'script.php'; ?>
 </body>
 
 </html>
-
-<link rel="stylesheet" href="../css/layout.css" />

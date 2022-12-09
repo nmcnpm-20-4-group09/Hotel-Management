@@ -1,0 +1,29 @@
+@import './base.scss';
+
+.months {
+    @include flex(row, space-between, center);
+    flex-wrap: wrap;
+
+    .month {
+        margin: 0px 70px 40px;
+        background: #47b5ff;
+        box-shadow: 0px 10px 0px 1px #256d85;
+        border-radius: 50px;
+        @include size(220px);
+        @include flex(row, center, center);
+
+        p {
+            text-transform: uppercase;
+            color: #ffffff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            @include font(5rem, 400);
+        }
+    }
+    .month:active {
+        transform: translateY(10px);
+        box-shadow: none;
+    }
+}

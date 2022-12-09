@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../css/report.css">
+
 <div class="months">
     <div class="month">
         <p>1</p>

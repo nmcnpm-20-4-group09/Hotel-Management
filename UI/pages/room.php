@@ -1,13 +1,13 @@
-<?php include '../components/header.php'; ?>
+<?php include "../components/header.php"; ?>
 
 <body>
     <div class="container">
 
-        <?php require '../components/sidebar.php'; ?>
+        <?php require $componentPath . 'sidebar.php'; ?>
 
         <div class="main">
 
-            <?php include '../components/heading.php'; ?>
+            <?php include $componentPath . 'heading.php'; ?>
 
             <div class="feature">
                 <div class="table-wrapper">
@@ -196,21 +196,16 @@
                     </table>
                 </div>
 
-                <?php include '../components/toolbar.php'; ?>
+                <?php include $componentPath . 'toolbar.php'; ?>
             </div>
         </div>
     </div>
 
-    <?php include '../components/script.php'; ?>
+    <?php include $componentPath . 'script.php'; ?>
     <script>
-        const roomListButton = sidebarButtons[0];
-        roomListButton.classList.add('actived');
-
-        changeFeatureTitle()
+        updateFeature('room')
+        handleEvents()
     </script>
 </body>
 
 </html>
-
-<!-- Styles -->
-<link rel="stylesheet" href="../css/layout.css" />

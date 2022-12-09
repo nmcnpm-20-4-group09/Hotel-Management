@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../css/index.css" />
+
 <div class="recent-orders">
     <h3>Các phiếu thuê mới nhất</h3>
     <div class="recent-orders-table">

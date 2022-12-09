@@ -3,7 +3,7 @@
 /* Variables */
 
 $sidebar-w: 100px;
-$sidebar-button-w: 40px;
+$sidebar-button-w: 50px;
 
 $header-h: 50px;
 
@@ -27,7 +27,6 @@ $sidebar-button-actived-w: 240px;
 
     .home-icon img {
         margin-bottom: 30px;
-        transition: all 0.5s ease;
         @include size(60px);
     }
     .sidebar-buttons {
@@ -36,7 +35,7 @@ $sidebar-button-actived-w: 240px;
     }
     .sidebar-buttons li {
         margin-bottom: 24px;
-        @include size($sidebar-button-w, 50px);
+        @include size($sidebar-button-w);
         @include font(1.4rem, 700);
 
         a {
@@ -72,14 +71,6 @@ $sidebar-button-actived-w: 240px;
     &.actived,
     &:hover {
         width: $sidebar-actived-w;
-
-        .home-icon {
-            padding: 30px;
-
-            img {
-                @include size(80px);
-            }
-        }
 
         .sidebar-buttons li {
             width: $sidebar-button-actived-w;
@@ -344,33 +335,5 @@ $sidebar-button-actived-w: 240px;
             border-bottom-right-radius: 16px;
             text-align: center;
         }
-    }
-}
-
-.months {
-    @include flex(row, space-between, center);
-    flex-wrap: wrap;
-
-    .month {
-        margin: 0px 60px 40px;
-        background: #47b5ff;
-        box-shadow: 0px 10px 0px 1px #256d85;
-        border-radius: 50px;
-        @include size(220px);
-        @include flex(row, center, center);
-
-        p {
-            text-transform: uppercase;
-            color: #ffffff;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            @include font(5rem, 400);
-        }
-    }
-    .month:active {
-        transform: translateY(10px);
-        box-shadow: none;
     }
 }

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../css/index.css" />
+
 <div class="overview">
     <div class="stats">
         <h3>Tổng quan</h3>

@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <a class="home-icon" href="#">
+    <a class="home-icon" href="./index.php">
         <img src="../assets/icons/home.png" alt="Home page" />
     </a>
     <ul class="sidebar-buttons">
@@ -10,7 +10,7 @@
             </a>
         </li>
         <li>
-            <a href="./guest.php">
+            <a href="./customer.php">
                 <i class="fa-solid fa-person"></i>
                 <span>Danh sách khách</span>
             </a>

@@ -1,41 +1,26 @@
-<?php include '../components/header.php'; ?>
+<?php include "../components/header.php"; ?>
 
 <body>
     <div class="container">
 
-        <?php require '../components/sidebar.php'; ?>
+        <?php require $componentPath . 'sidebar.php'; ?>
 
         <div class="main">
 
-            <?php include '../components/heading.php'; ?>
+            <?php include $componentPath . 'heading.php'; ?>
 
             <div class="feature">
-                <?php include '../components/months.php'; ?>
-                <?php include '../components/toolbar.php'; ?>
+                <?php include $componentPath . 'months.php'; ?>
             </div>
         </div>
     </div>
 
-    <?php include '../components/script.php'; ?>
+    <?php include $componentPath . 'script.php'; ?>
     <script>
-        const roomListButton = sidebarButtons[3];
-        roomListButton.classList.add('actived');
-
-        const months = $$('.month')
-        let activedMonth = 1
-        months.forEach((month) => {
-            month.addEventListener('click', () => {
-                activedMonth = month.querySelector('p').innerText
-                
-            })
-        })
-
-        changeFeatureTitle()
+        updateFeature('report')
+        handleEvents()
     </script>
 
 </body>
 
 </html>
-
-<!-- Styles -->
-<link rel="stylesheet" href="../css/layout.css" />
