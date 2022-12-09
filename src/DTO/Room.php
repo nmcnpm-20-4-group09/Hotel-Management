@@ -37,3 +37,5 @@ class RoomDTO
         return $this->ghiChu;
     }
 }
+
+?>

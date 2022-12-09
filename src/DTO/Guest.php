@@ -65,3 +65,5 @@ class PersonDTO
         $this->cmnd;
     }
 }
+
+?>
