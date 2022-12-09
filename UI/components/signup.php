@@ -1,3 +1,10 @@
+<!-- Icon -->
+<link rel="icon" type="image/x-icon" href="https://img.
+icons8.com/fluency/96/null/circled-up-2.png" />
+
+<!-- Style -->
+<link rel="stylesheet" href="../css/authen.css" />
+
 <form class="signup-form" method="PUT">
     <h2 class="form-title">Đăng ký</h2>
 
@@ -18,15 +25,8 @@
 
     <div class="form-buttons">
         <button type="button" class="form-button back-button">
-            <a href="./signin.html">Đăng nhập</a>
+            <a href="#">Đăng nhập</a>
         </button>
         <button type="submit" class="form-button">Tiếp theo</button>
     </div>
 </form>
-
-<!-- Icon -->
-<link rel="icon" type="image/x-icon" href="https://img.
-icons8.com/fluency/96/null/circled-up-2.png" />
-
-<!-- Style -->
-<link rel="stylesheet" href="../css/authen.css" />
