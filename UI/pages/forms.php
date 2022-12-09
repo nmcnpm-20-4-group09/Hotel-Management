@@ -1,4 +1,5 @@
-<!-- Đây là trang layout mẫu -->
+<link rel="stylesheet" href="../css/layout.css" />
+
 <?php include '../layouts/header.php'; ?>
 
 <body>
@@ -9,9 +10,9 @@
         global $activedForm;
         
         if ($activedForm == Form::SIGNIN)
-            include '../components/signup.php';
-        elseif ($activedForm == Form::SIGNUP)
             include '../components/signin.php';
+        elseif ($activedForm == Form::SIGNUP)
+            include '../components/signup.php';
         else
             echo "Error: Invalid form";
         ?>
@@ -20,5 +21,3 @@
 </body>
 
 </html>
-
-<link rel="stylesheet" href="../css/layout.css" />
