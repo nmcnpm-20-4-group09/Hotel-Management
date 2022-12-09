@@ -1,20 +1,20 @@
-<?php include "../components/header.php"; ?>
+<?php include "../components/preset.php"; ?>
 
 <body>
     <div class="container">
 
         <?php
-        global $activedForm;
-
-        if ($activedForm == Form::SIGNIN)
-            include $componentPath . 'signin.php';
-        elseif ($activedForm == Form::SIGNUP)
-            include $componentPath . 'signup.php';
-        else
-            echo "Error: Invalid form";
+        include $formPath . 'signin.php';
+        include $formPath . 'signup.php';
+        include $formPath . 'reports.php';
         ?>
 
     </div>
+
+    <?php include $componentPath . 'script.php' ?>
+    <script>
+        renderForm('report-form')
+    </script>
 </body>
 
 </html>

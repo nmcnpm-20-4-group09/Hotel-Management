@@ -2,15 +2,16 @@
     const $ = document.querySelector.bind(document);
     const $$ = document.querySelectorAll.bind(document);
 
-    const sidebarButtons = $('.sidebar')?.querySelectorAll('li')
-    const toolbarButtons = $('.toolbar')?.querySelectorAll('button')
-    const featureTitle = $('.feature-title')
     const features = {
         'room': 0,
         'customer': 1,
         'bill': 2,
         'report': 3,
     }
+
+    const featureTitle = $('.feature-title')
+    const sidebarButtons = $('.sidebar')?.querySelectorAll('li')
+    const toolbarButtons = $('.toolbar')?.querySelectorAll('button')
 
     // Xử lý sự kiện
     function handleEvents() {
@@ -43,6 +44,28 @@
             if (button.classList.contains('actived'))
                 featureTitle.textContent =
                 button.querySelector('span').textContent
+        })
+    }
+
+    // Thay đổi form
+    function renderForm(formName) {
+        const forms = Array.from($$('form'))
+        forms.forEach((form) => {
+            const formClassName = form.classList[0]
+            if (formClassName == formName)
+                form.classList.remove('hidden')
+        })
+    }
+
+    // Xử lý sự kiện khi click vào tháng
+    function handleMonths() {
+        const months = $$('.month')
+        months.forEach((month) => {
+            month.addEventListener('click', (e) => {
+                const activeMonth = e.target.innerText
+                const formToBeRendered = 'report-form'
+                // Xử lý chuyển hướng trang
+            })
         })
     }
 </script>

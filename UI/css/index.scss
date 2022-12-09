@@ -142,15 +142,15 @@ $stats-w: 700px;
                 padding-bottom: 20px;
                 width: 15%;
                 @include font(20px, 400);
+
+                &:nth-of-type(4) {
+                    width: 20%;
+                }
             }
             td {
                 text-align: center;
                 padding-bottom: 20px;
                 @include font(18px, 800);
-            }
-
-            th:nth-of-type(4) {
-                width: 20%;
             }
         }
     }

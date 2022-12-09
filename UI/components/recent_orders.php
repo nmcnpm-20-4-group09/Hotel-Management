@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="">
+                <tr>
                     <td scope="row">A</td>
                     <td scope="row">A1.2</td>
                     <td scope="row">30/2/2022</td>
@@ -23,7 +23,7 @@
                     <td scope="row">0999888777</td>
                     <td scope="row">01010101010</td>
                 </tr>
-                <tr class="">
+                <tr>
                     <td scope="row">A</td>
                     <td scope="row">A1.2</td>
                     <td scope="row">30/2/2022</td>
@@ -31,7 +31,7 @@
                     <td scope="row">0999888777</td>
                     <td scope="row">01010101010</td>
                 </tr>
-                <tr class="">
+                <tr>
                     <td scope="row">A</td>
                     <td scope="row">A1.2</td>
                     <td scope="row">30/2/2022</td>
@@ -39,7 +39,7 @@
                     <td scope="row">0999888777</td>
                     <td scope="row">01010101010</td>
                 </tr>
-                <tr class="">
+                <tr>
                     <td scope="row">A</td>
                     <td scope="row">A1.2</td>
                     <td scope="row">30/2/2022</td>
@@ -47,7 +47,7 @@
                     <td scope="row">0999888777</td>
                     <td scope="row">01010101010</td>
                 </tr>
-                <tr class="">
+                <tr>
                     <td scope="row">A</td>
                     <td scope="row">A1.2</td>
                     <td scope="row">30/2/2022</td>

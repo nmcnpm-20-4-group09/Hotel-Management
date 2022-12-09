@@ -1,28 +1,17 @@
 @import './base.scss';
 
-/* Variables */
-
-$sidebar-w: 100px;
-$sidebar-button-w: 50px;
-
-$header-h: 50px;
-
-$account-settings-w: 240px;
-
-$scrollbar-width: 17px;
-$table-height: calc(100vh - 250px);
-
 /* Styles */
-$sidebar-actived-w: 300px;
-$sidebar-button-actived-w: 240px;
-
+$sidebar-width: 100px;
+$sidebar-button-width: 50px;
+$sidebar-actived-width: 300px;
+$sidebar-button-actived-width: 240px;
 .sidebar {
     padding: 50px 0;
     background-color: #fff;
     box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
     transition: width 0.5s ease;
     overflow: hidden;
-    @include size($sidebar-w, 100%);
+    @include size($sidebar-width, 100%);
     @include flex(column, flex-start, center);
 
     .home-icon img {
@@ -35,7 +24,7 @@ $sidebar-button-actived-w: 240px;
     }
     .sidebar-buttons li {
         margin-bottom: 24px;
-        @include size($sidebar-button-w);
+        @include size($sidebar-button-width);
         @include font(1.4rem, 700);
 
         a {
@@ -70,10 +59,10 @@ $sidebar-button-actived-w: 240px;
 
     &.actived,
     &:hover {
-        width: $sidebar-actived-w;
+        width: $sidebar-actived-width;
 
         .sidebar-buttons li {
-            width: $sidebar-button-actived-w;
+            width: $sidebar-button-actived-width;
 
             a {
                 padding-left: 20px;
@@ -94,8 +83,9 @@ $sidebar-button-actived-w: 240px;
     height: 100%;
 }
 
+$header-height: 50px;
 .header {
-    height: $header-h;
+    height: $header-height;
     margin: 20px 50px 70px 50px;
     @include flex(row, space-between, center);
 
@@ -106,6 +96,7 @@ $sidebar-button-actived-w: 240px;
     }
 }
 
+$account-settings-width: 240px;
 .account {
     position: relative;
     @include flex(row, space-around, center);
@@ -144,7 +135,7 @@ $sidebar-button-actived-w: 240px;
         position: absolute;
         top: 54px;
         right: 0;
-        width: $account-settings-w;
+        width: $account-settings-width;
         border-radius: 4px;
         box-shadow: 0px 0px 6px 0px #bebcbc;
         background-color: #fff;
@@ -237,103 +228,105 @@ $sidebar-button-actived-w: 240px;
     }
 
     &.actived {
-        animation: slideIn 1s ease;
         @include flex(column, space-around, center);
     }
 }
 
+$table-max-height: calc(100vh - 250px);
+$column-width: 15%;
 .table-wrapper {
     flex: 1;
     margin-right: 50px;
-    @include flex(row, flex-start, flex-start);
 
     table {
         width: 100%;
-        border-collapse: collapse;
 
-        thead {
-            display: block;
-            width: calc(100% - $scrollbar-width);
-        }
-        tbody {
-            display: block;
-            overflow-y: scroll;
-            height: $table-height;
-        }
-        tr {
-            display: table;
-            width: 100%;
-        }
         tr.actived td {
             background-color: #dff6ff;
         }
-
         th,
         td {
-            width: calc(100% / 8);
+            width: $column-width;
             padding: 20px 10px;
+            text-align: center;
+
+            &:first-of-type {
+                border-top-left-radius: 16px;
+                border-bottom-left-radius: 16px;
+            }
+
+            &:last-of-type {
+                border-top-right-radius: 16px;
+                border-bottom-right-radius: 16px;
+            }
         }
 
         th {
-            text-align: left;
-            padding: 20px 10px;
             color: rgba(0, 0, 0, 0.6);
             @include font(1.8rem, 500);
+        }
+        td {
+            &.spacer {
+                padding: 10px;
+            }
+            &:not(.spacer) {
+                background-color: #fff;
+                box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
+                @include font(1.4rem, 500);
 
-            i {
-                font-size: 1.4rem;
-                padding: 8px;
-                color: rgb(75, 73, 73);
-
-                &:hover {
-                    cursor: pointer;
-                    opacity: 0.6;
+                i {
+                    font-size: 2.4rem;
+                    &:hover {
+                        cursor: pointer;
+                        color: $primary-color;
+                        opacity: 0.8;
+                    }
                 }
+            }
+            &:nth-of-type(2) {
+                color: $primary-color;
             }
         }
 
-        td:not(.spacer) {
-            background-color: #fff;
-            box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
-            @include font(1.4rem, 500);
+        &.scrollable {
+            @include scrollable-table($table-max-height);
+        }
+    }
+}
 
-            i {
-                font-size: 2.4rem;
-                &:hover {
-                    cursor: pointer;
-                    color: $primary-color;
-                    opacity: 0.8;
-                }
-            }
-        }
-        td.spacer {
-            padding: 10px;
-        }
-        td:nth-of-type(2) {
-            color: $primary-color;
-        }
+.months {
+    @include flex(row, space-between, center);
+    flex-wrap: wrap;
 
-        th:first-of-type,
-        td:first-of-type {
-            width: 10%;
-            padding-left: 20px;
-            border-top-left-radius: 16px;
-            border-bottom-left-radius: 16px;
-            text-align: center;
+    .month {
+        margin: 0px 70px 40px;
+        background: #47b5ff;
+        box-shadow: 0px 10px 0px 1px #256d85;
+        border-radius: 50px;
+        text-decoration: none;
+        @include size(220px);
+        @include flex(row, center, center);
+        p {
+            text-transform: uppercase;
+            color: #ffffff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            @include font(5rem, 400);
         }
+    }
+    .month:active {
+        transform: translateY(10px);
+        box-shadow: none;
+    }
+}
 
-        th:nth-of-type(3),
-        td:nth-of-type(3) {
-            width: calc(100% / 5);
-        }
+.reports {
+    @include flex(row, center, center);
 
-        th:last-of-type,
-        td:last-of-type {
-            width: calc(100% / 6);
-            padding-right: 20px;
-            border-top-right-radius: 16px;
-            border-bottom-right-radius: 16px;
-            text-align: center;
-        }
+    form {
+        border: none;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
     }
 }

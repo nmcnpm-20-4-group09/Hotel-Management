@@ -1,4 +1,4 @@
-<div class="toolbar actived">
+<div class="toolbar active">
     <button>
         <i class="fa-solid fa-magnifying-glass"></i>
     </button>

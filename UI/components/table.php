@@ -1,5 +1,5 @@
 <div class="table-wrapper">
-    <table>
+    <table class="scrollable">
         <thead>
             <tr>
                 <th scope="col">

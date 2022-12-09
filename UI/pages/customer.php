@@ -1,4 +1,4 @@
-<?php include "../components/header.php"; ?>
+<?php include "../components/preset.php"; ?>
 
 <body>
     <div class="container">
@@ -7,11 +7,11 @@
 
         <div class="main">
 
-            <?php include $componentPath . 'heading.php'; ?>
+            <?php include $componentPath . 'header.php'; ?>
 
             <div class="feature">
                 <div class="table-wrapper">
-                    <table>
+                    <table class="scrollable">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>

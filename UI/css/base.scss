@@ -26,6 +26,23 @@ $container-h: 100vh;
     font-size: $size;
     font-weight: $weight;
 }
+@mixin scrollable-table($table-max-height: 400px) {
+    border-collapse: collapse;
+
+    thead {
+        display: block;
+        width: calc(100% - 17px);
+    }
+    tbody {
+        display: block;
+        overflow-y: scroll;
+        max-height: $table-max-height;
+    }
+    tr {
+        display: table;
+        width: 100%;
+    }
+}
 
 /* Animations */
 @keyframes slideIn {
@@ -67,14 +84,12 @@ html {
     font-size: 62.5%;
     box-sizing: border-box;
 }
-
 .hidden {
     display: none;
 }
 .invisible {
     visibility: hidden;
 }
-
 .container {
     height: $container-h;
     background-color: $bg-color;

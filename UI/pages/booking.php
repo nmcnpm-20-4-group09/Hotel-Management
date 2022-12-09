@@ -1,4 +1,4 @@
-<?php include "../components/header.php"; ?>
+<?php include "../components/preset.php"; ?>
 
 <body>
     <div class="container">
@@ -14,7 +14,7 @@
 
             <div class="feature">
                 <div class="table-wrapper">
-                    <table>
+                    <table class="scrollable">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
@@ -26,7 +26,7 @@
                         </thead>
                         <tbody>
                             <td class="spacer"></td>
-                            <tr class="actived">
+                            <tr>
                                 <td scope="row">1</td>
                                 <td>Đặng Võ Hoàng Kim Tuyền</td>
                                 <td>Khách thường</td>

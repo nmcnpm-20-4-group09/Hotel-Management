@@ -1,5 +1,5 @@
 <!-- Đây là trang layout mẫu -->
-<?php include '../components/header.php'; ?>
+<?php include '../components/preset.php'; ?>
 
 <body>
     <div class="container">
@@ -8,7 +8,7 @@
 
         <div class="main">
 
-            <?php include $componentPath . 'heading.php'; ?>
+            <?php include $componentPath . 'header.php'; ?>
 
             <div class="feature">
                 <?php include $componentPath . 'table.php'; ?>
