@@ -12,6 +12,7 @@ class MySQLiConnection implements DBConnectionInterface
     private $password;
     private $database;
 
+    // Singleton
     private static $connection = null;
 
     private function __construct(
@@ -35,6 +36,7 @@ class MySQLiConnection implements DBConnectionInterface
 
     private function __clone()
     {
+        // Do nothing
     }
 
     public static function instance()
@@ -61,7 +63,14 @@ class MySQLiConnection implements DBConnectionInterface
 
     public function execQuery($queryString)
     {
-        $queryResult = $this->connection->query($queryString);
+        $queryResult = [];
+
+        if ($this->connection == null) {
+            $queryResult = null;
+        } else {
+            $this->connection->query($queryString);
+        }
+
         return $queryResult;
     }
 }
