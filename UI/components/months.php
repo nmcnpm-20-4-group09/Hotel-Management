@@ -1,38 +1,29 @@
-<div class="months">
-    <a class="month" href="./forms.php">
-        <p>1</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>2</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>3</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>4</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>5</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>6</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>7</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>8</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>9</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>10</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>11</p>
-    </a>
-    <a class="month" href="./forms.php">
-        <p>12</p>
-    </a>
-</div>
+<?php
+require_once("../components/View.php");
+
+class Months extends Component
+{
+    private function renderMonths()
+    {
+        $monthElements = '';
+        for ($month = 1; $month <= 12; $month++) {
+            $monthElements .= <<<EOT
+                <a class="month" href="./forms.php">
+                    <p>$month</p>
+                </a>
+            EOT;
+        }
+        return $monthElements;
+    }
+    
+    public function render()
+    {
+        $monthElements = $this->renderMonths();
+        
+        return <<<EOT
+            <div class="months">
+                $monthElements
+            </div>
+            EOT;
+    }
+}

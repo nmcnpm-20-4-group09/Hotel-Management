@@ -1,17 +1,39 @@
-<div class="toolbar active">
-    <button>
-        <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
-    <button>
-        <i class="fa-solid fa-pen-to-square"></i>
-    </button>
-    <button>
-        <i class="fa-solid fa-trash"></i>
-    </button>
-    <button>
-        <i class="fa-solid fa-plus"></i>
-    </button>
-    <button>
-        <i class="fa-solid fa-sliders"></i>
-    </button>
-</div>
+<?php
+require_once("../components/View.php");
+
+class Toolbar extends Component
+{
+    private $buttonIcons = [
+        'magnifying-glass',
+        'pen-to-square',
+        'trash',
+        'plus',
+        'sliders'
+    ];
+
+    private function renderButtons()
+    {
+        $buttonElements = '';
+        foreach ($this->buttonIcons as $icon) {
+            $buttonElements .= <<<EOT
+            <button type="button">
+                <i class="fa-solid fa-$icon"></i>
+            </button>
+            EOT;
+        }
+
+        return $buttonElements;
+    }
+
+    public function render()
+    {
+        $buttonElements = $this->renderButtons();
+        
+        return <<<EOT
+        <div class="toolbar active">
+            $buttonElements
+        </div>
+        EOT;
+    }
+}
+?>

@@ -1,32 +1,21 @@
 <?php
-require "../components/View.php";
+require_once("../components/View.php");
 require_once(COMPONENT_PATH . "Sidebar.php");
 require_once(COMPONENT_PATH . "Header.php");
 require_once(COMPONENT_PATH . "Overview.php");
-require_once(COMPONENT_PATH . "RecentOrders.php");
+require_once(COMPONENT_PATH . "RecentOrdersTable.php");
 ?>
 
 <body>
     <div class="container">
-        <?php
-        $sidebar = new Sidebar();
-        echo $sidebar->render();
-        ?>
+        <?php render(new Sidebar()); ?>
 
         <div class="main">
-            <?php
-            $header = new Header();
-            echo $header->render();
-            ?>
+            <?php render(new Header()); ?>
 
             <div class="feature">
-                <?php
-                $overview = new Overview();
-                echo $overview->render();
-
-                $recentOrders = new RecentOrders();
-                echo $recentOrders->render();
-                ?>
+                <?php render(new Overview()); ?>
+                <?php render(new RecentOrdersTable()); ?>
 
             </div>
         </div>

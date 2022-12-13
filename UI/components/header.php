@@ -1,35 +1,32 @@
 <?php
-require "../components/View.php";
-
+require_once("../components/View.php");
 
 class Header extends Component
 {
-    public function __construct()
-    {
-        $this->buttons = [
-            [
-                'link' => '#',
-                'icon' => 'info',
-                'text' => 'Thông tin chi tiết'
-            ],
-            [
-                'link' => '#',
-                'icon' => 'lock',
-                'text' => 'Đổi mật khẩu',
-            ],
-            [
-                'link' => '#',
-                'icon' => 'user',
-                'text' => 'Chuyển tài khoản'
-            ],
-            [
-                'link' => '#',
-                'icon' => 'right-from-bracket',
-                'text' => 'Đăng xuất'
-            ]
-        ];
-    }
-    
+    private $buttons = [
+        [
+            'link' => '#',
+            'icon' => 'info',
+            'text' => 'Thông tin chi tiết'
+        ],
+        [
+            'link' => '#',
+            'icon' => 'lock',
+            'text' => 'Đổi mật khẩu',
+        ],
+        [
+            'link' => '#',
+            'icon' => 'user',
+            'text' => 'Chuyển tài khoản'
+        ],
+        [
+            'link' => '#',
+            'icon' => 'right-from-bracket',
+            'text' => 'Đăng xuất'
+        ]
+    ];
+    private $homeIcon = "../assets/icons/profile.png";
+
     private function renderButtons()
     {
         $buttonElements = '';
@@ -50,13 +47,14 @@ class Header extends Component
     public function render()
     {
         $buttonElements = $this->renderButtons();
+        $homeIcon = $this->homeIcon;
 
         return <<< EOT
         <header class="header">
         <h1 class="feature-title">Trang chủ</h1>
         <div class="account">
             <span class="account-name">Tên người dùng</span>
-            <img class="account-avatar" src="../assets/icons/profile.png" alt="Profile" />
+            <img class="account-avatar" src="$homeIcon" alt="Profile" />
             <div class="account-expand-icon">
                 <i class="fa-solid fa-angle-down"> </i>
                 <ul class="account-settings">

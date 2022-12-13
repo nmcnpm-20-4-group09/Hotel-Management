@@ -27,8 +27,6 @@ $container-h: 100vh;
     font-weight: $weight;
 }
 @mixin scrollable-table($table-max-height: 400px) {
-    border-collapse: collapse;
-
     thead {
         display: block;
         width: calc(100% - 17px);

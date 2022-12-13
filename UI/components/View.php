@@ -1,65 +1,65 @@
 <?php
-
+// Paths
 if (!defined("ROOT")) define("ROOT", $_SERVER['DOCUMENT_ROOT']);
 if (!defined("COMPONENT_PATH")) define("COMPONENT_PATH", ROOT . "/UI/components/");
 if (!defined("FORM_PATH")) define("FORM_PATH", ROOT . "/UI/components/forms/");
 
-if (!class_exists('Component')) {
+// Component abstract classes
+abstract class Component
+{
+    abstract public function render();
+};
 
-    abstract class Component
+abstract class TableComponent
+{
+    abstract public function render();
+
+    public function renderHeaders()
     {
-        abstract public function render();
-    };
-}
+        $headerElements = '';
 
-if (!class_exists('TableComponent')) {
-    abstract class TableComponent
+        foreach ($this->fields as $field) {
+            $headerElements .= <<<EOT
+                <th scope="col">{$field}</th>
+            EOT;
+        }
+
+        return "<tr>" . $headerElements . "</tr>";
+    }
+
+    public function renderFields($entry)
     {
-        abstract public function render();
+        $entryElement = '';
 
-        public function renderHeaders()
-        {
-            $headerElements = '';
-
-            foreach ($this->fields as $field) {
-                $headerElements .= <<<EOT
-                    <th scope="col">{$field}</th>
-                EOT;
-            }
-
-            return "<tr>" . $headerElements . "</tr>";
+        foreach ($entry as $field) {
+            $entryElement .= <<<EOT
+                <td scope="row">{$field}</td>
+            EOT;
         }
 
-        public function renderFields($entry)
-        {
-            $entryElement = '';
+        return $entryElement;
+    }
 
-            foreach ($entry as $field) {
-                $entryElement .= <<<EOT
-                    <td scope="row">{$field}</td>
-                EOT;
-            }
+    public function renderEntries()
+    {
+        $entryElements = '';
 
-            return $entryElement;
+        foreach ($this->entries as $entry) {
+            $entryElement = $this->renderFields($entry);
+            $entryElements .= "<tr>" . $entryElement . "</tr>";
         }
 
-        public function renderEntries()
-        {
-            $entryElements = '';
-
-            foreach ($this->entries as $entry) {
-                $entryElement = $this->renderFields($entry);
-                $entryElements .= "<tr>" . $entryElement . "</tr>";
-            }
-
-            return $entryElements;
-        }
+        return $entryElements;
     }
 }
 
-
+function render($component)
+{
+    echo $component->render();
+}
 ?>
 
+<!-- Preset -->
 <!DOCTYPE html>
 <html lang="en">
 

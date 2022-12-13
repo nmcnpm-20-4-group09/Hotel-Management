@@ -20,10 +20,10 @@
                 buttons.forEach((button) => {
                     button.addEventListener('click', () => {
                         buttons.forEach((btn) => {
-                            btn.classList.remove('actived')
+                            btn.classList.remove('active')
                         })
 
-                        button.classList.add('actived')
+                        button.classList.add('active')
                     })
                 })
             }
@@ -37,11 +37,11 @@
     function updateFeature(featureIndex) {
         // Cập nhật nút chức năng
         const featureButton = sidebarButtons[features[featureIndex]];
-        featureButton?.classList.add('actived');
+        featureButton?.classList.add('active');
 
         // Cập nhật tiêu đề chức năng
         sidebarButtons.forEach((button) => {
-            if (button.classList.contains('actived'))
+            if (button.classList.contains('active'))
                 featureTitle.textContent =
                 button.querySelector('span').textContent
         })

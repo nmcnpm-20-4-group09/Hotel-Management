@@ -3,8 +3,8 @@
 /* Styles */
 $sidebar-width: 100px;
 $sidebar-button-width: 50px;
-$sidebar-actived-width: 300px;
-$sidebar-button-actived-width: 240px;
+$sidebar-active-width: 300px;
+$sidebar-button-active-width: 240px;
 .sidebar {
     padding: 50px 0;
     background-color: #fff;
@@ -50,19 +50,19 @@ $sidebar-button-actived-width: 240px;
             background-color: #dff6ff;
         }
 
-        &.actived a {
+        &.active a {
             color: #228be6;
             border-radius: 12px;
             background-color: #dff6ff;
         }
     }
 
-    &.actived,
+    &.active,
     &:hover {
-        width: $sidebar-actived-width;
+        width: $sidebar-active-width;
 
         .sidebar-buttons li {
-            width: $sidebar-button-actived-width;
+            width: $sidebar-button-active-width;
 
             a {
                 padding-left: 20px;
@@ -222,17 +222,17 @@ $account-settings-width: 240px;
             color: $primary-color;
             cursor: pointer;
         }
-        &.actived {
+        &.active {
             color: $primary-color;
         }
     }
 
-    &.actived {
+    &.active {
         @include flex(column, space-around, center);
     }
 }
 
-$table-max-height: calc(100vh - 250px);
+$table-max-height: calc(100vh - 400px);
 $column-width: 15%;
 .table-wrapper {
     flex: 1;
@@ -240,8 +240,10 @@ $column-width: 15%;
 
     table {
         width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
 
-        tr.actived td {
+        tr.active td {
             background-color: #dff6ff;
         }
         th,

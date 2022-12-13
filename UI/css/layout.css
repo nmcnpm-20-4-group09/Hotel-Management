@@ -127,25 +127,25 @@ html {
   color: #228be6;
   background-color: #dff6ff;
 }
-.sidebar .sidebar-buttons li.actived a {
+.sidebar .sidebar-buttons li.active a {
   color: #228be6;
   border-radius: 12px;
   background-color: #dff6ff;
 }
-.sidebar.actived, .sidebar:hover {
+.sidebar.active, .sidebar:hover {
   width: 300px;
 }
-.sidebar.actived .sidebar-buttons li, .sidebar:hover .sidebar-buttons li {
+.sidebar.active .sidebar-buttons li, .sidebar:hover .sidebar-buttons li {
   width: 240px;
 }
-.sidebar.actived .sidebar-buttons li a, .sidebar:hover .sidebar-buttons li a {
+.sidebar.active .sidebar-buttons li a, .sidebar:hover .sidebar-buttons li a {
   padding-left: 20px;
   justify-content: flex-start;
 }
-.sidebar.actived .sidebar-buttons li i, .sidebar:hover .sidebar-buttons li i {
+.sidebar.active .sidebar-buttons li i, .sidebar:hover .sidebar-buttons li i {
   margin-right: 12px;
 }
-.sidebar.actived .sidebar-buttons li span, .sidebar:hover .sidebar-buttons li span {
+.sidebar.active .sidebar-buttons li span, .sidebar:hover .sidebar-buttons li span {
   display: block;
 }
 
@@ -291,10 +291,10 @@ html {
   color: #47b5ff;
   cursor: pointer;
 }
-.toolbar button.actived {
+.toolbar button.active {
   color: #47b5ff;
 }
-.toolbar.actived {
+.toolbar.active {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -307,8 +307,10 @@ html {
 }
 .table-wrapper table {
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
 }
-.table-wrapper table tr.actived td {
+.table-wrapper table tr.active td {
   background-color: #dff6ff;
 }
 .table-wrapper table th,
@@ -352,9 +354,6 @@ html {
 .table-wrapper table td:nth-of-type(2) {
   color: #47b5ff;
 }
-.table-wrapper table.scrollable {
-  border-collapse: collapse;
-}
 .table-wrapper table.scrollable thead {
   display: block;
   width: calc(100% - 17px);
@@ -362,7 +361,7 @@ html {
 .table-wrapper table.scrollable tbody {
   display: block;
   overflow-y: scroll;
-  max-height: calc(100vh - 250px);
+  max-height: calc(100vh - 400px);
 }
 .table-wrapper table.scrollable tr {
   display: table;
