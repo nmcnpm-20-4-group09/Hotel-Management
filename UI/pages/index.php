@@ -1,22 +1,24 @@
-<?php include "../components/preset.php"; ?>
+<?php
+require "../components/View.php";
+require_once(COMPONENT_PATH . "Sidebar.php");
+?>
 
 <body>
     <div class="container">
-
-        <?php require $componentPath . 'sidebar.php'; ?>
+        <?php
+        $sidebar = new Sidebar();
+        echo $sidebar->render();
+        ?>
 
         <div class="main">
-
-            <?php include $componentPath . 'header.php'; ?>
+        
 
             <div class="feature">
-                <?php include $componentPath . 'overview.php'; ?>
-                <?php include $componentPath . 'recent_orders.php'; ?>
+
             </div>
         </div>
     </div>
 
-    <?php include $componentPath . 'script.php'; ?>
 </body>
 
 </html>

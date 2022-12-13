@@ -1,31 +1,61 @@
-<div class="sidebar">
-    <a class="home-icon" href="./index.php">
-        <img src="../assets/icons/home.png" alt="Home page" />
-    </a>
-    <ul class="sidebar-buttons">
-        <li>
-            <a href="./room.php">
-                <i class="fa-solid fa-bed"></i>
-                <span>Danh sách phòng</span>
-            </a>
-        </li>
-        <li>
-            <a href="./customer.php">
-                <i class="fa-solid fa-person"></i>
-                <span>Danh sách khách</span>
-            </a>
-        </li>
-        <li>
-            <a href="./bill.php">
-                <i class="fa-solid fa-receipt"></i>
-                <span>Danh sách hóa đơn</span>
-            </a>
-        </li>
-        <li>
-            <a href="./report.php">
-                <i class="fa-solid fa-chart-simple"></i>
-                <span>Báo cáo</span>
-            </a>
-        </li>
-    </ul>
-</div>
+<?php
+require "../components/View.php";
+
+$buttons = [
+    [
+        'link' => './room.php',
+        'icon' => 'bed',
+        'text' => 'Danh sách phòng'
+    ],
+    [
+        'link' => './customer.php',
+        'icon' => 'person',
+        'text' => 'Danh sách khách',
+    ],
+    [
+        'link' => './bill.php',
+        'icon' => 'receipt',
+        'text' => 'Danh sách hóa đơn'
+    ],
+    [
+        'link' => './report.php',
+        'icon' => 'chart-simple',
+        'text' => 'Báo cáo'
+    ]
+];
+
+class Sidebar extends Component
+{
+    private function renderButtons()
+    {
+        $buttonElements = '';
+        global $buttons;
+
+        foreach ($buttons as $button) {
+            $buttonElements .= <<<EOT
+                <li>
+                    <a href="{$button['link']}">
+                        <i class="fa-solid fa-{$button['icon']}"></i>
+                        <span>{$button['text']}</span>
+                    </a>
+                </li>
+            EOT;
+        }
+
+        return $buttonElements;
+    }
+    public function render()
+    {
+        $buttonElements = $this->renderButtons();
+        return <<<EOT
+            <div class="sidebar">
+                <a class="home-icon" href="./index.php">
+                    <img src="../assets/icons/home.png" alt="Home page" />
+                </a>
+                <ul class="sidebar-buttons">
+                    $buttonElements
+                </ul>
+            </div>  
+            EOT;
+    }
+}

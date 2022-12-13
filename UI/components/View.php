@@ -1,3 +1,20 @@
+<?php
+
+if (!defined("ROOT")) define("ROOT", $_SERVER['DOCUMENT_ROOT']);
+if (!defined("COMPONENT_PATH")) define("COMPONENT_PATH", ROOT . "/UI/components/");
+if (!defined("FORM_PATH")) define("FORM_PATH", ROOT . "/UI/components/forms/");
+
+if (!class_exists('Component')) {
+
+    abstract class Component
+    {
+        abstract public function render();
+    };
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +32,3 @@
     <!-- Styles -->
     <link rel="stylesheet" href="../css/layout.css" />
 </head>
-
-<?php
-$componentPath = "../components/";
-$formPath = $componentPath . 'forms/';
-?>
