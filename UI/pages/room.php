@@ -1,211 +1,24 @@
-<?php include "../components/preset.php"; ?>
+<?php
+require "../components/View.php";
+require_once(COMPONENT_PATH . "Sidebar.php");
+require_once(COMPONENT_PATH . "Header.php");
+require_once(COMPONENT_PATH . "RoomTable.php");
+require_once(COMPONENT_PATH . "Toolbar.php");
+?>
 
 <body>
     <div class="container">
-
-        <?php require $componentPath . 'sidebar.php'; ?>
+        <?php View::render(new Sidebar()) ?>
 
         <div class="main">
-
-            <?php include $componentPath . 'header.php'; ?>
+            <?php View::render(new Header()) ?>
 
             <div class="feature">
-                <div class="table-wrapper">
-                    <table class="scrollable">
-                        <thead>
-                            <tr>
-                                <th scope="col">STT</th>
-                                <th scope="col">PHÒNG</th>
-                                <th scope="col">LOẠI PHÒNG</th>
-                                <th scope="col">ĐƠN GIÁ</th>
-                                <th scope="col">TÌNH TRẠNG</th>
-                                <th scope="col">CHI TIẾT THUÊ PHÒNG</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <td class="spacer"></td>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>1403</td>
-                                <td>A</td>
-                                <td>150.000</td>
-                                <td>Trống</td>
-                                <td>
-                                    <a href="./booking.php">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <?php include $componentPath . 'toolbar.php'; ?>
+                <?php View::render(new RoomTable()) ?>
+                <?php View::render(new Toolbar()) ?>
             </div>
         </div>
     </div>
-
-    <?php include $componentPath . 'script.php'; ?>
-    <script>
-        updateFeature('room')
-        handleEvents()
-    </script>
 </body>
 
 </html>

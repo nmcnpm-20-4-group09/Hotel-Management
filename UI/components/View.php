@@ -1,10 +1,12 @@
 <?php
 // Paths
-if (!defined("ROOT")) define("ROOT", $_SERVER['DOCUMENT_ROOT']);
-if (!defined("COMPONENT_PATH")) define("COMPONENT_PATH", ROOT . "/UI/components/");
-if (!defined("FORM_PATH")) define("FORM_PATH", ROOT . "/UI/components/forms/");
+define("ROOT", $_SERVER['DOCUMENT_ROOT']);
+define("COMPONENT_PATH", ROOT . "/UI/components/");
+define("FORM_PATH", ROOT . "/UI/components/forms/");
+define("VIEW_PATH", ROOT . "/UI/views/");
 
-// Component abstract classes
+
+// View classes and functions
 abstract class Component
 {
     abstract public function render();
@@ -33,7 +35,7 @@ abstract class TableComponent
 
         foreach ($entry as $field) {
             $entryElement .= <<<EOT
-                <td scope="row">{$field}</td>
+                <td>{$field}</td>
             EOT;
         }
 
@@ -53,9 +55,20 @@ abstract class TableComponent
     }
 }
 
-function render($component)
+class View
 {
-    echo $component->render();
+    static function render($component)
+    {
+        echo $component->render();
+    }
+
+    static function renderView($viewName)
+    {
+        $viewPath = VIEW_PATH . $viewName . ".php";
+        require_once($viewPath);
+        $view = new $viewName();
+        View::render($view);
+    }
 }
 ?>
 

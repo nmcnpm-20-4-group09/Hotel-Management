@@ -1,27 +1,22 @@
-<?php include "../components/preset.php"; ?>
+<?php
+require "../components/View.php";
+require_once(COMPONENT_PATH . "Sidebar.php");
+require_once(COMPONENT_PATH . "Header.php");
+require_once(COMPONENT_PATH . "Months.php");
+?>
 
 <body>
     <div class="container">
-
-        <?php require $componentPath . 'sidebar.php'; ?>
+        <?php View::render(new Sidebar()) ?>
 
         <div class="main">
-
-            <?php include $componentPath . 'header.php'; ?>
+            <?php View::render(new Header()) ?>
 
             <div class="feature">
-                <?php include $componentPath . 'months.php'; ?>
+                <?php View::render(new Months()) ?>
             </div>
         </div>
     </div>
-
-    <?php include $componentPath . 'script.php'; ?>
-    <script>
-        updateFeature('report')
-        handleEvents()
-        handleMonths()
-    </script>
-
 </body>
 
 </html>

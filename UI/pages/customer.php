@@ -8,14 +8,14 @@ require_once(COMPONENT_PATH . "Toolbar.php");
 
 <body>
     <div class="container">
-        <?php render(new Sidebar()) ?>
+        <?php View::render(new Sidebar()) ?>
 
         <div class="main">
-        <?php render(new Header()) ?>
+        <?php View::render(new Header()) ?>
         
         <div class="feature">
-                <?php render(new CustomerTable()) ?>
-                <?php render(new Toolbar()) ?>
+                <?php View::render(new CustomerTable()) ?>
+                <?php View::render(new Toolbar()) ?>
             </div>
         </div>
     </div>

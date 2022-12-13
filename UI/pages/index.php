@@ -8,14 +8,14 @@ require_once(COMPONENT_PATH . "RecentOrdersTable.php");
 
 <body>
     <div class="container">
-        <?php render(new Sidebar()); ?>
+        <?php View::render(new Sidebar()); ?>
 
         <div class="main">
-            <?php render(new Header()); ?>
+            <?php View::render(new Header()); ?>
 
             <div class="feature">
-                <?php render(new Overview()); ?>
-                <?php render(new RecentOrdersTable()); ?>
+                <?php View::render(new Overview()); ?>
+                <?php View::render(new RecentOrdersTable()); ?>
 
             </div>
         </div>
