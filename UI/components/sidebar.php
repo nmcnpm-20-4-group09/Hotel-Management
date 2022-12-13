@@ -1,37 +1,38 @@
 <?php
 require "../components/View.php";
 
-$buttons = [
-    [
-        'link' => './room.php',
-        'icon' => 'bed',
-        'text' => 'Danh sách phòng'
-    ],
-    [
-        'link' => './customer.php',
-        'icon' => 'person',
-        'text' => 'Danh sách khách',
-    ],
-    [
-        'link' => './bill.php',
-        'icon' => 'receipt',
-        'text' => 'Danh sách hóa đơn'
-    ],
-    [
-        'link' => './report.php',
-        'icon' => 'chart-simple',
-        'text' => 'Báo cáo'
-    ]
-];
-
 class Sidebar extends Component
 {
+    public function __construct()
+    {
+        $this->buttons = [
+            [
+                'link' => './room.php',
+                'icon' => 'bed',
+                'text' => 'Danh sách phòng'
+            ],
+            [
+                'link' => './customer.php',
+                'icon' => 'person',
+                'text' => 'Danh sách khách',
+            ],
+            [
+                'link' => './bill.php',
+                'icon' => 'receipt',
+                'text' => 'Danh sách hóa đơn'
+            ],
+            [
+                'link' => './report.php',
+                'icon' => 'chart-simple',
+                'text' => 'Báo cáo'
+            ]
+        ];
+    }
+
     private function renderButtons()
     {
         $buttonElements = '';
-        global $buttons;
-
-        foreach ($buttons as $button) {
+        foreach ($this->buttons as $button) {
             $buttonElements .= <<<EOT
                 <li>
                     <a href="{$button['link']}">
@@ -44,6 +45,7 @@ class Sidebar extends Component
 
         return $buttonElements;
     }
+    
     public function render()
     {
         $buttonElements = $this->renderButtons();

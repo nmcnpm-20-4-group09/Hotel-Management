@@ -12,6 +12,51 @@ if (!class_exists('Component')) {
     };
 }
 
+if (!class_exists('TableComponent')) {
+    abstract class TableComponent
+    {
+        abstract public function render();
+
+        public function renderHeaders()
+        {
+            $headerElements = '';
+
+            foreach ($this->fields as $field) {
+                $headerElements .= <<<EOT
+                    <th scope="col">{$field}</th>
+                EOT;
+            }
+
+            return "<tr>" . $headerElements . "</tr>";
+        }
+
+        public function renderFields($entry)
+        {
+            $entryElement = '';
+
+            foreach ($entry as $field) {
+                $entryElement .= <<<EOT
+                    <td scope="row">{$field}</td>
+                EOT;
+            }
+
+            return $entryElement;
+        }
+
+        public function renderEntries()
+        {
+            $entryElements = '';
+
+            foreach ($this->entries as $entry) {
+                $entryElement = $this->renderFields($entry);
+                $entryElements .= "<tr>" . $entryElement . "</tr>";
+            }
+
+            return $entryElements;
+        }
+    }
+}
+
 
 ?>
 
