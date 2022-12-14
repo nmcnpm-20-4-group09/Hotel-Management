@@ -323,12 +323,3 @@ $column-width: 15%;
         box-shadow: none;
     }
 }
-
-.reports {
-    @include flex(row, center, center);
-
-    form {
-        border: none;
-        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
-    }
-}

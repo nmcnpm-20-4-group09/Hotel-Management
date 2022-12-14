@@ -24,7 +24,7 @@ class CustomerTable extends TableComponent
     ];
 
     // Ghi đè phương thức của lớp cha
-    public function renderHeaders()
+    public function renderFields()
     {
         $headerElements = '';
         $index = 0;
@@ -56,7 +56,7 @@ class CustomerTable extends TableComponent
 
         // Tạm thời sinh dữ liệu giả
         for ($i = 0; $i < 10; $i++) {
-            $entryElement = $this->renderFields($entry);
+            $entryElement = $this->renderColumns($entry);
             $entryElement .= '
             <td>
                 <i class="fa-solid fa-circle-info"></i>
@@ -69,7 +69,7 @@ class CustomerTable extends TableComponent
 
     public function render()
     {
-        $fieldElements = $this->renderHeaders();
+        $fieldElements = $this->renderFields();
         $entryElements = $this->renderEntries();
 
         return <<<EOT

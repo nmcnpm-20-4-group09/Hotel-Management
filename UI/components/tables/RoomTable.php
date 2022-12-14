@@ -30,7 +30,7 @@ class RoomTable extends TableComponent
 
         // Tạm thời sinh dữ liệu giả
         for ($i = 0; $i < 10; $i++) {
-            $entryElement = $this->renderFields($entry);
+            $entryElement = $this->renderColumns($entry);
             $entryElement .= '
             <td>
                 <a href="./booking.php">
@@ -45,7 +45,7 @@ class RoomTable extends TableComponent
 
     public function render()
     {
-        $fieldElements = $this->renderHeaders();
+        $fieldElements = $this->renderFields();
         $entryElements = $this->renderEntries();
 
         return <<<EOT

@@ -25,7 +25,7 @@ class RecentOrdersTable extends TableComponent
 
     public function render()
     {
-        $orderHeaders = $this->renderHeaders();
+        $orderHeaders = $this->renderFields();
         $orderEntries = $this->renderEntries();
         
         return <<< EOT

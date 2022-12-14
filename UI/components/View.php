@@ -2,7 +2,8 @@
 // Paths
 define("ROOT", $_SERVER['DOCUMENT_ROOT']);
 define("COMPONENT_PATH", ROOT . "/UI/components/");
-define("FORM_PATH", ROOT . "/UI/components/forms/");
+define("TABLE_PATH", COMPONENT_PATH . "/tables/");
+define("FORM_PATH", COMPONENT_PATH . "/forms/");
 define("VIEW_PATH", ROOT . "/UI/views/");
 
 
@@ -12,11 +13,9 @@ abstract class Component
     abstract public function render();
 };
 
-abstract class TableComponent
+abstract class TableComponent extends Component
 {
-    abstract public function render();
-
-    public function renderHeaders()
+    protected function renderFields()
     {
         $headerElements = '';
 
@@ -29,7 +28,7 @@ abstract class TableComponent
         return "<tr>" . $headerElements . "</tr>";
     }
 
-    public function renderFields($entry)
+    protected function renderColumns($entry)
     {
         $entryElement = '';
 
@@ -42,16 +41,49 @@ abstract class TableComponent
         return $entryElement;
     }
 
-    public function renderEntries()
+    protected function renderEntries()
     {
         $entryElements = '';
 
         foreach ($this->entries as $entry) {
-            $entryElement = $this->renderFields($entry);
+            $entryElement = $this->renderColumns($entry);
             $entryElements .= "<tr>" . $entryElement . "</tr>";
         }
 
         return $entryElements;
+    }
+}
+
+abstract class FormComponent extends Component
+{
+    protected function renderInputClasses($group)
+    {
+        $classes = '';
+        if (isset($group["classes"])) {
+            foreach ($group["classes"] as $class) {
+                $classes .= $class . " ";
+            }
+        }
+        return $classes;
+    }
+
+    protected function renderGroups()
+    {
+        $groupElements = '';
+        foreach ($this->groups as $group) {
+            if (!isset($group['placeholder'])) $group['placeholder'] = '';
+            if (!isset($group['text'])) $group['text'] = '';
+            $inputClasses = $this->renderInputClasses($group);
+
+            $groupElements .= <<< EOT
+            <label for="{$group['id']}" class="form-label">{$group['label']}</label>
+            <input  class="form-control $inputClasses" placeholder="{$group['placeholder']}"
+            name="{$group['name']}" id="{$group['id']}" type="{$group['type']}"/>
+            <p class="form-text">{$group['text']}</p>
+            EOT;
+        }
+
+        return $groupElements;
     }
 }
 

@@ -1,9 +1,8 @@
 <?php
-require "../components/View.php";
+require_once("../components/View.php");
 require_once(COMPONENT_PATH . "Sidebar.php");
 require_once(COMPONENT_PATH . "Header.php");
-require_once(COMPONENT_PATH . "RoomTable.php");
-require_once(COMPONENT_PATH . "Toolbar.php");
+require_once(COMPONENT_PATH . "Months.php");
 ?>
 
 <body>
@@ -14,8 +13,7 @@ require_once(COMPONENT_PATH . "Toolbar.php");
             <?php View::render(new Header()) ?>
 
             <div class="feature">
-                <?php View::render(new RoomTable()) ?>
-                <?php View::render(new Toolbar()) ?>
+                <?php View::render(new Months()) ?>
             </div>
         </div>
     </div>
