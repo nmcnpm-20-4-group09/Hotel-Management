@@ -85,6 +85,10 @@ html {
 }
 .sidebar .home {
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 .sidebar .home .home-icon {
   border-radius: 16px;
@@ -92,9 +96,8 @@ html {
   width: 60px;
   height: 60px;
 }
-.sidebar .home .home-button {
-  width: 280px;
-  padding: 14px 40px;
+.sidebar .home .home-text {
+  padding: 10px 0;
   text-transform: uppercase;
   font-size: 2.2rem;
   font-weight: 900;
@@ -104,10 +107,10 @@ html {
 }
 .sidebar .sidebar-buttons {
   flex: 1;
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: start;
   align-items: center;
 }
 .sidebar .sidebar-buttons li {
@@ -150,10 +153,13 @@ html {
 .sidebar.active, .sidebar:hover {
   width: 340px;
 }
-.sidebar.active .home-icon, .sidebar:hover .home-icon {
-  display: none;
+.sidebar.active .home, .sidebar:hover .home {
+  width: 280px;
 }
-.sidebar.active .home-button, .sidebar:hover .home-button {
+.sidebar.active .home .home-icon, .sidebar:hover .home .home-icon {
+  margin-right: 12px;
+}
+.sidebar.active .home .home-text, .sidebar:hover .home .home-text {
   display: block;
 }
 .sidebar.active .sidebar-buttons li, .sidebar:hover .sidebar-buttons li {
@@ -291,7 +297,6 @@ html {
 .toolbar {
   padding: 12px;
   border-radius: 16px;
-  margin-top: 20px;
   background-color: #fff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   display: none;

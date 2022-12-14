@@ -16,6 +16,7 @@ $sidebar-button-active-width: 280px;
 
     .home {
         text-decoration: none;
+        @include flex(row, flex-start, center);
 
         .home-icon {
             border-radius: 16px;
@@ -23,9 +24,8 @@ $sidebar-button-active-width: 280px;
             @include size(60px);
         }
 
-        .home-button {
-            width: $sidebar-button-active-width;
-            padding: 14px 40px;
+        .home-text {
+            padding: 10px 0;
             text-transform: uppercase;
             @include font(2.2rem, 900);
             @include gradient-text($primary-color, $secondary-color);
@@ -34,8 +34,8 @@ $sidebar-button-active-width: 280px;
 
     .sidebar-buttons {
         flex: 1;
-        margin-top: 50px;
-        @include flex(column, flex-start, center);
+        margin-top: 30px;
+        @include flex(column, start, center);
     }
     .sidebar-buttons li {
         margin-bottom: 24px;
@@ -76,11 +76,16 @@ $sidebar-button-active-width: 280px;
     &:hover {
         width: $sidebar-active-width;
 
-        .home-icon {
-            display: none;
-        }
-        .home-button {
-            display: block;
+        .home {
+            width: $sidebar-button-active-width;
+
+            .home-icon {
+                margin-right: 12px;
+            }
+
+            .home-text {
+                display: block;
+            }
         }
 
         .sidebar-buttons li {
@@ -223,7 +228,6 @@ $account-settings-width: 240px;
 .toolbar {
     padding: 12px;
     border-radius: 16px;
-    margin-top: 20px;
     background-color: #fff;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     display: none;

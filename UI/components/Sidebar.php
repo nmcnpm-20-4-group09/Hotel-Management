@@ -51,7 +51,7 @@ class Sidebar extends Component
             <div class="sidebar">
                 <a class="home" href="./index.php">
                     <img class="home-icon" src="../assets/icons/home.png" alt="Home page" />
-                    <p class="home-button hidden"> Về trang chủ </p>
+                    <p class="home-text hidden"> Về trang chủ </p>
                 </a>
                 <ul class="sidebar-buttons">
                     $buttonElements
