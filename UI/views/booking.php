@@ -8,16 +8,10 @@ require_once(COMPONENT_PATH . "Toolbar.php");
 
 <body>
     <div class="container">
-
         <?php View::render(new Sidebar()) ?>
 
-
         <div class="main">
-            <header class="header">
-                <h1>CHI TIẾT THUÊ</h1>
-                <h1>PHÒNG 1403</h1>
-                <h1>Ngày bắt đầu thuê: 10/10/2020</h1>
-            </header>
+            <?php View::render(new Header(["title" => 'Chi tiết phiếu thuê'])) ?>
 
             <div class="feature">
                 <?php View::render(new BookingTable()) ?>

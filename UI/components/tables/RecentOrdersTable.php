@@ -29,7 +29,8 @@ class RecentOrdersTable extends TableComponent
         $orderEntries = $this->renderEntries();
         
         return <<< EOT
-        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/RecentOrders.css" />
+        
         <div class="recent-orders">
             <h3>Các phiếu thuê mới nhất</h3>
             <div class="recent-orders-table">

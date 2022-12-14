@@ -25,7 +25,13 @@ class Header extends Component
             'text' => 'Đăng xuất'
         ]
     ];
-    private $profileIcon = "../assets/icons/profile.png";
+
+    private $title;
+
+    public function __construct($props = ['title' => ""])
+    {
+        $this->title = $props['title'];
+    }
 
     private function renderButtons()
     {
@@ -47,14 +53,15 @@ class Header extends Component
     public function render()
     {
         $buttonElements = $this->renderButtons();
-        $profileIcon = $this->profileIcon;
 
         return <<< EOT
+        <link rel="stylesheet" href="../css/Header.css">
+        
         <header class="header">
-        <h1 class="feature-title">Trang chủ</h1>
+        <h1 class="feature-title">$this->title</h1>
         <div class="account">
             <span class="account-name">Tên người dùng</span>
-            <img class="account-avatar" src="$profileIcon" alt="Profile" />
+            <img class="account-avatar" src="../assets/icons/profile.png" alt="Profile" />
             <div class="account-expand-icon">
                 <i class="fa-solid fa-angle-down"> </i>
                 <ul class="account-settings">

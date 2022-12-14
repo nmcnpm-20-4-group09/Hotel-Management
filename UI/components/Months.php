@@ -21,6 +21,8 @@ class Months extends Component
         $monthElements = $this->renderMonths();
         
         return <<<EOT
+            <link rel="stylesheet" href="../css/Months.css">
+
             <div class="months">
                 $monthElements
             </div>

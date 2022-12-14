@@ -48,15 +48,17 @@ class Sidebar extends Component
         $buttonElements = $this->renderButtons();
 
         return <<<EOT
-            <div class="sidebar">
-                <a class="home" href="./index.php">
-                    <img class="home-icon" src="../assets/icons/home.png" alt="Home page" />
-                    <p class="home-text hidden"> Về trang chủ </p>
-                </a>
-                <ul class="sidebar-buttons">
-                    $buttonElements
-                </ul>
-            </div>  
-            EOT;
+        <link rel="stylesheet" href="../css/Sidebar.css">
+        
+        <div class="sidebar">
+            <a class="home" href="./index.php">
+                <img class="home-icon" src="../assets/icons/home.png" alt="Home page" />
+                <p class="home-text hidden"> Về trang chủ </p>
+            </a>
+            <ul class="sidebar-buttons">
+                $buttonElements
+            </ul>
+        </div>  
+        EOT;
     }
 }

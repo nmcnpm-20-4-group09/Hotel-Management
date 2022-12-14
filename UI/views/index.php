@@ -13,7 +13,7 @@ require_once(TABLE_PATH . "RecentOrdersTable.php");
         <div class="main">
             <?php View::render(new Header()); ?>
 
-            <div class="feature">
+            <div class="index">
                 <?php View::render(new Overview()); ?>
                 <?php View::render(new RecentOrdersTable()); ?>
 

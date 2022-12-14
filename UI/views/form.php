@@ -10,7 +10,7 @@ require_once(FORM_PATH . "RoomReportForm.php");
 
 <body>
     <div class="container">
-        <?php View::render(new RoomReportForm()); ?>
+        <?php View::render(new RevenueReportForm()); ?>
     </div>
 </body>
 

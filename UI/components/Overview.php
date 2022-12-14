@@ -65,7 +65,8 @@ class Overview extends Component
         $statElements = $this->renderStats();
         
         return <<< EOT
-        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/Overview.css" />
+        
         <div class="overview">
             <div class="stats">
                 <h3>Tổng quan</h3>

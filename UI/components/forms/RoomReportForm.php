@@ -28,6 +28,8 @@ class RoomReportForm extends TableComponent
         $fieldElements = $this->renderFields();
         $entryElements = $this->renderEntries();
         return <<< EOT
+        <link rel="stylesheet" href="../css/Table.css">
+
         <form class="report-form">
             <h2 class="form-title">Báo cáo mật độ sử dụng phòng</h2>
             <div class="form-month">Tháng <p>12</p>

@@ -95,5 +95,3 @@ class View
         View::render($view);
     }
 }
-?>
-

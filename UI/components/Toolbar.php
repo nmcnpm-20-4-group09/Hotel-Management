@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once("../View.php");
 
 class Toolbar extends Component
@@ -30,6 +30,8 @@ class Toolbar extends Component
         $buttonElements = $this->renderButtons();
         
         return <<<EOT
+        <link rel="stylesheet" href="../css/Toolbar.css">
+        
         <div class="toolbar active">
             $buttonElements
         </div>

@@ -49,6 +49,8 @@ class RoomTable extends TableComponent
         $entryElements = $this->renderEntries();
 
         return <<<EOT
+            <link rel="stylesheet" href="../css/Table.css">
+
             <div class="table-wrapper">
                 <table class="scrollable">
                     <thead>

@@ -82,7 +82,7 @@ a {
     color: #000;
 }
 
-/* Global Styles */
+/* Global styles */
 html {
     font-family: 'Roboto', sans-serif;
     font-size: 62.5%;
@@ -94,8 +94,26 @@ html {
 .invisible {
     visibility: hidden;
 }
+
+/* Layout styles */
 .container {
     height: $container-h;
     background-color: $bg-color;
     @include flex(row, center, center);
+}
+.main {
+    flex: 1;
+    height: 100%;
+}
+.feature {
+    margin: 16px 50px;
+    @include flex(row, space-between, flex-start);
+}
+.index {
+    margin: 16px 50px;
+    @include flex(column, center, flex-start);
+
+    h3 {
+        @include font(2rem, 700);
+    }
 }
