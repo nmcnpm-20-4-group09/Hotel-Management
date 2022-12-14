@@ -1,6 +1,10 @@
 <?php
-    $SoPhieuThue = $_GET["SoPhieuThue"];
-    $SoHoaDon = $_GET["SoHoaDon"];
+
+use BLL\MySQLQueryStringCreator;
+use DAL\MySQLiConnection;
+
+    $soPhieuThue = $_GET["SoPhieuThue"];
+    $soHoaDon = $_GET["SoHoaDon"];
 
     $success = TRUE;
     $message = "";
@@ -9,8 +13,8 @@
     $pattern = "/^[0-9]*$/";
 
     $isValidData = (
-        preg_match($pattern, $SoPhieuThue) and
-        preg_match($pattern, $SoHoaDon)
+        preg_match($pattern, $soPhieuThue) and
+        preg_match($pattern, $soHoaDon)
     );  
 
     if (!$isValidData) 
@@ -25,21 +29,18 @@
         $database = 'HotelManagement';
         $servername= 'localhost';
 
-        $connect = new mysqli($servername, $user, $password, $database);
+        $connection = MySQLiConnection::instance();
     
-        if ($connect->connect_error) 
+        if ($connection == null) 
         {
             $success = FALSE;
-            $message = 
-                "execQuery(...): "
-                ."(".$connect->connect_errno . ") "
-                .$connect->connect_error;
+            $message = "Unable to connect to the database!";
         }
         else
         {
-            $sqlQuery = "call sp_chiTietHoaDon(".$SoPhieuThue.", ".$SoHoaDon.");";
+            $queryString = MySQLQueryStringCreator::chiTietHoaDon($soPhieuThue, $soHoaDon);
 
-            $data = $connect->query($sqlQuery);
+            $data = $connection->query($queryString);
 
             while($row = $data->fetch_assoc())
             {
@@ -58,8 +59,8 @@
             
             
             mysqli_free_result($data);
-            $connect->close(); 
-        } // if ($connect->connect_error) 
+            $connection->close(); 
+        } // if ($connection->connection_error) 
     } // if (!$isValidData) else
     
     $response = array(

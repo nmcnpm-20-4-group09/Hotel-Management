@@ -1,0 +1,24 @@
+https://sites.google.com/site/wordpresstaivietnam/huong-dan-kich-hoat-module-rewrite-trong-apache
+
+tìm tới file httpd.confi của Apache và tìm dòng
+
+# LoadModule rewrite_module modules / mod_rewrite.so
+
+Sau đó bỏ dấu # ở phía trước được như thế này
+
+LoadModule rewrite_module modules / mod_rewrite.so
+
+http://localhost/dashboard/docs/configure-vhosts.html
+
+https://xuanthulab.net/apache/
+
+sudo apachectl restart
+sudo apachectl stop
+sudo killall httpd
+
+sudo chown -R daemon wordpress-folder
+
+
+https://stackoverflow.com/questions/21267064/mysql-database-wont-start-in-xampp-manager-osx
+sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start    
+
