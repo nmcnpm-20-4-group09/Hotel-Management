@@ -1,5 +1,5 @@
 <?php
-require_once("../components/View.php");
+require_once("../Preset.php");
 require_once(COMPONENT_PATH . "Sidebar.php");
 require_once(COMPONENT_PATH . "Header.php");
 require_once(COMPONENT_PATH . "Months.php");
@@ -17,6 +17,11 @@ require_once(COMPONENT_PATH . "Months.php");
             </div>
         </div>
     </div>
+    
+    <script>
+        handleEvents()
+        updateFeature('report')
+    </script>
 </body>
 
 </html>

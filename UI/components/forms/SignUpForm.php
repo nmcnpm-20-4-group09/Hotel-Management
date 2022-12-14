@@ -6,7 +6,7 @@ icons8.com/fluency/96/null/circled-up-2.png" />
 <link rel="stylesheet" href="../css/form.css" />
 
 <?php
-require_once("../components/View.php");
+require_once("../View.php");
 
 class SignUpForm extends FormComponent
 {

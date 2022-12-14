@@ -1,5 +1,5 @@
 <?php
-require_once("../components/View.php");
+require_once("../View.php");
 
 class Sidebar extends Component
 {
@@ -22,7 +22,7 @@ class Sidebar extends Component
         [
             'link' => './report.php',
             'icon' => 'chart-simple',
-            'text' => 'Báo cáo'
+            'text' => 'Báo cáo theo tháng'
         ]
     ];
 

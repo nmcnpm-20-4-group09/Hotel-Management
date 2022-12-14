@@ -1,5 +1,5 @@
 <?php
-require_once("../components/View.php");
+require_once("../Preset.php");
 require_once(COMPONENT_PATH . "Sidebar.php");
 require_once(COMPONENT_PATH . "Header.php");
 require_once(FORM_PATH . "SignInForm.php");

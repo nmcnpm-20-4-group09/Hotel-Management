@@ -1,5 +1,5 @@
 <?php
-require_once("../components/View.php");
+require_once("../View.php");
 
 class CustomerTable extends TableComponent
 {
