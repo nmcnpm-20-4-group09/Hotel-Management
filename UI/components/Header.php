@@ -25,7 +25,7 @@ class Header extends Component
             'text' => 'Đăng xuất'
         ]
     ];
-    private $homeIcon = "../assets/icons/profile.png";
+    private $profileIcon = "../assets/icons/profile.png";
 
     private function renderButtons()
     {
@@ -47,14 +47,14 @@ class Header extends Component
     public function render()
     {
         $buttonElements = $this->renderButtons();
-        $homeIcon = $this->homeIcon;
+        $profileIcon = $this->profileIcon;
 
         return <<< EOT
         <header class="header">
         <h1 class="feature-title">Trang chủ</h1>
         <div class="account">
             <span class="account-name">Tên người dùng</span>
-            <img class="account-avatar" src="$homeIcon" alt="Profile" />
+            <img class="account-avatar" src="$profileIcon" alt="Profile" />
             <div class="account-expand-icon">
                 <i class="fa-solid fa-angle-down"> </i>
                 <ul class="account-settings">

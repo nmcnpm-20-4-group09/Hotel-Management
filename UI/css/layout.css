@@ -71,7 +71,7 @@ html {
 
 /* Styles */
 .sidebar {
-  padding: 50px 0;
+  padding: 30px 0;
   background-color: #fff;
   box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
   transition: width 0.5s ease;
@@ -83,13 +83,28 @@ html {
   justify-content: flex-start;
   align-items: center;
 }
-.sidebar .home-icon img {
-  margin-bottom: 30px;
+.sidebar .home {
+  text-decoration: none;
+}
+.sidebar .home .home-icon {
+  border-radius: 16px;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
   width: 60px;
   height: 60px;
 }
+.sidebar .home .home-button {
+  width: 280px;
+  padding: 14px 40px;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: -webkit-linear-gradient(#47b5ff, #256d85);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .sidebar .sidebar-buttons {
   flex: 1;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -133,14 +148,16 @@ html {
   background-color: #dff6ff;
 }
 .sidebar.active, .sidebar:hover {
-  padding-top: 30px;
-  width: 320px;
+  width: 340px;
 }
-.sidebar.active .home-icon img, .sidebar:hover .home-icon img {
-  transform: scale(1.05);
+.sidebar.active .home-icon, .sidebar:hover .home-icon {
+  display: none;
+}
+.sidebar.active .home-button, .sidebar:hover .home-button {
+  display: block;
 }
 .sidebar.active .sidebar-buttons li, .sidebar:hover .sidebar-buttons li {
-  width: 260px;
+  width: 280px;
 }
 .sidebar.active .sidebar-buttons li a, .sidebar:hover .sidebar-buttons li a {
   padding-left: 20px;
@@ -160,7 +177,7 @@ html {
 
 .header {
   height: 50px;
-  margin: 20px 50px 70px 50px;
+  margin: 30px 50px 40px 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -274,6 +291,7 @@ html {
 .toolbar {
   padding: 12px;
   border-radius: 16px;
+  margin-top: 20px;
   background-color: #fff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   display: none;

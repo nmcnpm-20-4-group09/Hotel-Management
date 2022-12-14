@@ -3,10 +3,10 @@
 /* Styles */
 $sidebar-width: 100px;
 $sidebar-button-width: 50px;
-$sidebar-active-width: 300px;
-$sidebar-button-active-width: 240px;
+$sidebar-active-width: 340px;
+$sidebar-button-active-width: 280px;
 .sidebar {
-    padding: 50px 0;
+    padding: 30px 0;
     background-color: #fff;
     box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
     transition: width 0.5s ease;
@@ -14,12 +14,27 @@ $sidebar-button-active-width: 240px;
     @include size($sidebar-width, 100%);
     @include flex(column, flex-start, center);
 
-    .home-icon img {
-        margin-bottom: 30px;
-        @include size(60px);
+    .home {
+        text-decoration: none;
+
+        .home-icon {
+            border-radius: 16px;
+            box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 25%);
+            @include size(60px);
+        }
+
+        .home-button {
+            width: $sidebar-button-active-width;
+            padding: 14px 40px;
+            text-transform: uppercase;
+            @include font(2.2rem, 900);
+            @include gradient-text($primary-color, $secondary-color);
+        }
     }
+
     .sidebar-buttons {
         flex: 1;
+        margin-top: 50px;
         @include flex(column, flex-start, center);
     }
     .sidebar-buttons li {
@@ -61,6 +76,13 @@ $sidebar-button-active-width: 240px;
     &:hover {
         width: $sidebar-active-width;
 
+        .home-icon {
+            display: none;
+        }
+        .home-button {
+            display: block;
+        }
+
         .sidebar-buttons li {
             width: $sidebar-button-active-width;
 
@@ -86,7 +108,7 @@ $sidebar-button-active-width: 240px;
 $header-height: 50px;
 .header {
     height: $header-height;
-    margin: 20px 50px 70px 50px;
+    margin: 30px 50px 40px 50px;
     @include flex(row, space-between, center);
 
     .feature-title {
@@ -201,6 +223,7 @@ $account-settings-width: 240px;
 .toolbar {
     padding: 12px;
     border-radius: 16px;
+    margin-top: 20px;
     background-color: #fff;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     display: none;
