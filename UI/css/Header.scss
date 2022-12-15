@@ -1,0 +1,110 @@
+@import './base.scss';
+
+$header-height: 50px;
+.header {
+    height: $header-height;
+    margin: 30px 50px 40px 50px;
+    @include flex(row, space-between, center);
+
+    .feature-title {
+        @include font(3.8rem, 700);
+        text-transform: uppercase;
+        text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    }
+}
+
+$account-settings-width: 240px;
+.account {
+    position: relative;
+    @include flex(row, space-around, center);
+
+    .account-name {
+        padding: 8px;
+        @include font(1.6rem, 500);
+    }
+
+    .account-avatar {
+        @include size(50px);
+    }
+
+    .account-expand-icon {
+        i {
+            font-size: 2rem;
+            padding: 8px;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:hover > i {
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        &:hover ul {
+            display: block;
+        }
+    }
+
+    .account-settings {
+        display: none;
+        position: absolute;
+        top: 54px;
+        right: 0;
+        width: $account-settings-width;
+        border-radius: 4px;
+        box-shadow: 0px 0px 6px 0px #bebcbc;
+        background-color: #fff;
+        z-index: 1;
+
+        li {
+            overflow: hidden;
+
+            a {
+                color: #000;
+                padding: 8px;
+                font-family: 'Roboto', sans-serif;
+                text-decoration: none;
+                @include flex(row, flex-start, center);
+
+                &:hover {
+                    color: #fff;
+                    background-color: $primary-color;
+                }
+
+                i {
+                    padding: 8px;
+                    font-size: 2rem;
+                    text-align: center;
+                    @include size(40px);
+                }
+                p {
+                    padding: 0 8px;
+                    color: inherit;
+                    @include font(1.6rem, 400);
+                }
+            }
+        }
+
+        li:first-of-type {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        li:last-of-type {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: 0;
+            width: 50%;
+            height: 30px;
+            background-color: transparent;
+        }
+    }
+}

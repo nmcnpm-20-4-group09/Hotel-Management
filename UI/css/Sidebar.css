@@ -1,0 +1,202 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic");
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
+/* Variables */
+/* Global Mixins */
+/* Animations */
+@-webkit-keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+/* Reset CSS */
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: #000;
+}
+
+/* Global styles */
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* Layout styles */
+.container {
+  height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  height: 100%;
+}
+
+.feature {
+  margin: 16px 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.index {
+  margin: 16px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.index h3 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.sidebar {
+  padding: 30px 0;
+  background-color: #fff;
+  box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.25);
+  transition: width 0.5s ease;
+  overflow: hidden;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.sidebar .home {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.sidebar .home .home-icon {
+  border-radius: 16px;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  width: 60px;
+  height: 60px;
+}
+.sidebar .home .home-text {
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: -webkit-linear-gradient(#47b5ff, #256d85);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sidebar .sidebar-buttons {
+  flex: 1;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+.sidebar .sidebar-buttons li {
+  margin-bottom: 24px;
+  width: 50px;
+  height: 50px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.sidebar .sidebar-buttons li a {
+  flex: 1;
+  height: 100%;
+  border-radius: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar .sidebar-buttons li i {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+.sidebar .sidebar-buttons li span {
+  display: none;
+}
+.sidebar .sidebar-buttons li:hover a {
+  cursor: pointer;
+  color: #228be6;
+  background-color: #dff6ff;
+}
+.sidebar .sidebar-buttons li.active a {
+  color: #228be6;
+  border-radius: 12px;
+  background-color: #dff6ff;
+}
+.sidebar.active, .sidebar:hover {
+  width: 340px;
+}
+.sidebar.active .home, .sidebar:hover .home {
+  width: 280px;
+}
+.sidebar.active .home .home-icon, .sidebar:hover .home .home-icon {
+  margin-right: 12px;
+}
+.sidebar.active .home .home-text, .sidebar:hover .home .home-text {
+  display: block;
+}
+.sidebar.active .sidebar-buttons li, .sidebar:hover .sidebar-buttons li {
+  width: 280px;
+}
+.sidebar.active .sidebar-buttons li a, .sidebar:hover .sidebar-buttons li a {
+  padding-left: 20px;
+  justify-content: flex-start;
+}
+.sidebar.active .sidebar-buttons li i, .sidebar:hover .sidebar-buttons li i {
+  margin-right: 12px;
+}
+.sidebar.active .sidebar-buttons li span, .sidebar:hover .sidebar-buttons li span {
+  display: block;
+}/*# sourceMappingURL=Sidebar.css.map */
