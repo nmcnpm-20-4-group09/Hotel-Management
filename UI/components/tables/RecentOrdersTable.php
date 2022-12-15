@@ -1,35 +1,53 @@
-<?php
-require_once("../View.php");
+<link rel="stylesheet" href="./css/RecentOrders.css" />
 
+<?php
 class RecentOrdersTable extends TableComponent
 {
-    protected $fields = [
-        'Loại phòng',
-        'Tên phòng',
-        'Ngày bắt đầu thuê',
-        'Tên khách',
-        'Số điện thoại',
-        'CMND',
-    ];
+    public function __construct()
+    {
+        $this->fields = [
+            'Loại phòng',
+            'Tên phòng',
+            'Ngày bắt đầu thuê',
+            'Tên khách',
+            'Số điện thoại',
+            'CMND',
+        ];
 
-    protected $entries = [
-        [
-            'A',
-            'A1.2',
-            '30/2/2022',
-            'Nguyễn Văn A',
-            '0999888777',
-            '01010101010',
-        ],
-    ];
+        $this->entries = [
+            [
+                'A',
+                'A1.2',
+                '30/2/2022',
+                'Nguyễn Văn A',
+                '0999888777',
+                '01010101010',
+            ],
+            [
+                'A',
+                'A1.2',
+                '30/2/2022',
+                'Nguyễn Văn A',
+                '0999888777',
+                '01010101010',
+            ],
+            [
+                'A',
+                'A1.2',
+                '30/2/2022',
+                'Nguyễn Văn A',
+                '0999888777',
+                '01010101010',
+            ],
+        ];
+    }
 
     public function render()
     {
         $orderHeaders = $this->renderFields();
         $orderEntries = $this->renderEntries();
-        
+
         return <<< EOT
-        <link rel="stylesheet" href="../css/RecentOrders.css" />
         
         <div class="recent-orders">
             <h3>Các phiếu thuê mới nhất</h3>

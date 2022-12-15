@@ -1,30 +1,34 @@
-<?php
-require_once("../View.php");
+<link rel="stylesheet" href="./css/Sidebar.css">
 
+<?php
 class Sidebar extends Component
 {
-    private $buttons = [
-        [
-            'link' => './room.php',
-            'icon' => 'bed',
-            'text' => 'Danh sách phòng'
-        ],
-        [
-            'link' => './customer.php',
-            'icon' => 'person',
-            'text' => 'Danh sách khách',
-        ],
-        [
-            'link' => './bill.php',
-            'icon' => 'receipt',
-            'text' => 'Danh sách hóa đơn'
-        ],
-        [
-            'link' => './report.php',
-            'icon' => 'chart-simple',
-            'text' => 'Báo cáo theo tháng'
-        ]
-    ];
+    public function __construct()
+    {
+        $this->homeIcon = './assets/icons/home.png';
+        $this->buttons = [
+            [
+                'link' => '/room',
+                'icon' => 'bed',
+                'text' => 'Danh sách phòng'
+            ],
+            [
+                'link' => '/customer',
+                'icon' => 'person',
+                'text' => 'Danh sách khách',
+            ],
+            [
+                'link' => '/bill',
+                'icon' => 'receipt',
+                'text' => 'Danh sách hóa đơn'
+            ],
+            [
+                'link' => '/report',
+                'icon' => 'chart-simple',
+                'text' => 'Báo cáo theo tháng'
+            ]
+        ];
+    }
 
     private function renderButtons()
     {
@@ -48,11 +52,9 @@ class Sidebar extends Component
         $buttonElements = $this->renderButtons();
 
         return <<<EOT
-        <link rel="stylesheet" href="../css/Sidebar.css">
-        
         <div class="sidebar">
-            <a class="home" href="./index.php">
-                <img class="home-icon" src="../assets/icons/home.png" alt="Home page" />
+            <a class="home" href="/">
+                <img class="home-icon" src="$this->homeIcon" alt="Home page" />
                 <p class="home-text hidden"> Về trang chủ </p>
             </a>
             <ul class="sidebar-buttons">

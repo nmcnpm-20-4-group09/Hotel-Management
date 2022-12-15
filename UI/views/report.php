@@ -1,8 +1,7 @@
 <?php
-require_once("../Preset.php");
-require_once(COMPONENT_PATH . "Sidebar.php");
-require_once(COMPONENT_PATH . "Header.php");
-require_once(COMPONENT_PATH . "Months.php");
+include_once COMPONENT_PATH . "Sidebar.php";
+include_once COMPONENT_PATH . "Header.php";
+include_once COMPONENT_PATH . "Months.php";
 ?>
 
 <body>

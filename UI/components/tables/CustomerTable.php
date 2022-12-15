@@ -1,27 +1,30 @@
-<?php
-require_once("../View.php");
+<link rel="stylesheet" href="./css/Table.css">
 
+<?php
 class CustomerTable extends TableComponent
 {
-    private $fields = [
-        'STT',
-        'Mã khách',
-        'Họ và tên',
-        'Loại khách',
-        'CMND',
-        'SĐT',
-        'Thông tin chi tiết'
-    ];
-    private $entries = [
-        [
-            '1',
-            'KH20221010',
-            'Đặng Võ Hoàng Kim Tuyền',
-            'Khách thường',
-            '123456789012',
-            '1234567890',
-        ],
-    ];
+    public function __construct()
+    {
+        $this->fields = [
+            'STT',
+            'Mã khách',
+            'Họ và tên',
+            'Loại khách',
+            'CMND',
+            'SĐT',
+            'Thông tin chi tiết'
+        ];
+        $this->entries = [
+            [
+                '1',
+                'KH20221010',
+                'Đặng Võ Hoàng Kim Tuyền',
+                'Khách thường',
+                '123456789012',
+                '1234567890',
+            ],
+        ];
+    }
 
     // Ghi đè phương thức của lớp cha
     public function renderFields()
@@ -73,8 +76,6 @@ class CustomerTable extends TableComponent
         $entryElements = $this->renderEntries();
 
         return <<<EOT
-            <link rel="stylesheet" href="../css/Table.css">
-        
             <div class="table-wrapper">
                 <table class="scrollable">
                     <thead>

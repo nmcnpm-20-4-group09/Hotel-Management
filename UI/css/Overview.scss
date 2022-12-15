@@ -84,7 +84,7 @@ $stats-w: 700px;
     .banner {
         border-radius: 32px;
         box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
-        background: url('../assets/hotel.jpg') no-repeat center center;
+        background: url('../../assets/hotel.jpg') no-repeat center center;
         background-size: cover;
         transition: transform 0.5s ease;
         margin-left: auto;
@@ -96,7 +96,7 @@ $stats-w: 700px;
         }
 
         & + .banner {
-            background-image: url('../assets/inside.jpg');
+            background-image: url('../../assets/inside.jpg');
         }
     }
 }

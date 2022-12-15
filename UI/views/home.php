@@ -1,9 +1,8 @@
 <?php
-require_once("../Preset.php");
-require_once(COMPONENT_PATH . "Sidebar.php");
-require_once(COMPONENT_PATH . "Header.php");
-require_once(COMPONENT_PATH . "Overview.php");
-require_once(TABLE_PATH . "RecentOrdersTable.php");
+include_once COMPONENT_PATH . "Sidebar.php";
+include_once COMPONENT_PATH . "Header.php";
+include_once COMPONENT_PATH . "Overview.php";
+include_once TABLE_PATH . "RecentOrdersTable.php";
 ?>
 
 <body>
@@ -20,9 +19,10 @@ require_once(TABLE_PATH . "RecentOrdersTable.php");
             </div>
         </div>
     </div>
-    
+
     <script>
         handleEvents()
+        updateFeature()
     </script>
 </body>
 

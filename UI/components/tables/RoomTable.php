@@ -1,26 +1,28 @@
+<link rel="stylesheet" href="./css/Table.css">
 
 <?php
-require_once("../View.php");
-
 class RoomTable extends TableComponent
 {
-    protected $fields = [
-        'STT',
-        'Phòng',
-        'Loại phòng',
-        'Đơn giá',
-        'Tình trạng',
-        'Chi tiết thuê phòng',
-    ];
-    protected $entries = [
-        [
-            '1',
-            '1403',
-            'A',
-            '150.000 VNĐ',
-            'Trống',
-        ],
-    ];
+    public function __construct()
+    {
+        $this->fields = [
+            'STT',
+            'Phòng',
+            'Loại phòng',
+            'Đơn giá',
+            'Tình trạng',
+            'Chi tiết thuê phòng',
+        ];
+        $this->entries = [
+            [
+                '1',
+                '1403',
+                'A',
+                '150.000 VNĐ',
+                'Trống',
+            ],
+        ];
+    }
 
     // Ghi đè phương thức của lớp cha
     public function renderEntries()
@@ -33,7 +35,7 @@ class RoomTable extends TableComponent
             $entryElement = $this->renderColumns($entry);
             $entryElement .= '
             <td>
-                <a href="./booking.php">
+                <a href="./room-booking">
                     <i class="fa-solid fa-circle-info"></i>
                 </a>
             </td>';
@@ -49,7 +51,6 @@ class RoomTable extends TableComponent
         $entryElements = $this->renderEntries();
 
         return <<<EOT
-            <link rel="stylesheet" href="../css/Table.css">
 
             <div class="table-wrapper">
                 <table class="scrollable">

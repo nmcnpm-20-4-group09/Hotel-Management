@@ -1,6 +1,6 @@
-<?php
-require_once("../View.php");
+<link rel="stylesheet" href="./css/Months.css">
 
+<?php
 class Months extends Component
 {
     private function renderMonths()
@@ -8,24 +8,23 @@ class Months extends Component
         $monthElements = '';
         for ($month = 1; $month <= 12; $month++) {
             $monthElements .= <<<EOT
-                <a class="month" href="./form.php">
+                <a class="month" href="/form?type=report&month=$month">
                     <p>$month</p>
                 </a>
             EOT;
         }
         return $monthElements;
     }
-    
+
     public function render()
     {
         $monthElements = $this->renderMonths();
-        
-        return <<<EOT
-            <link rel="stylesheet" href="../css/Months.css">
 
+        return <<<EOT
             <div class="months">
                 $monthElements
             </div>
             EOT;
     }
 }
+?>

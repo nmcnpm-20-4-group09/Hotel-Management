@@ -19,7 +19,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            @include font(5rem, 400);
+            @include font(5rem, 400); 
         }
     }
     .month:active {

@@ -1,9 +1,8 @@
 <?php
-require_once("../Preset.php");
-require_once(COMPONENT_PATH . "Sidebar.php");
-require_once(COMPONENT_PATH . "Header.php");
-require_once(TABLE_PATH . "RoomTable.php");
-require_once(COMPONENT_PATH . "Toolbar.php");
+include_once COMPONENT_PATH . "Sidebar.php";
+include_once COMPONENT_PATH . "Header.php";
+include_once TABLE_PATH . "RoomTable.php";
+include_once COMPONENT_PATH . "Toolbar.php";
 ?>
 
 <body>

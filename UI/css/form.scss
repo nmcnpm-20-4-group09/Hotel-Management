@@ -109,6 +109,7 @@ form {
             margin-left: 30px;
             padding: 10px;
             border-radius: 12px;
+            min-width: 80px;
             color: #fff;
             background-color: $primary-color;
             @include font(4rem, 700);

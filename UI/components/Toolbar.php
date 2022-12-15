@@ -1,15 +1,18 @@
-<?php 
-require_once("../View.php");
+<link rel="stylesheet" href="./css/Toolbar.css">
 
+<?php
 class Toolbar extends Component
 {
-    private $buttonIcons = [
-        'magnifying-glass',
-        'pen-to-square',
-        'trash',
-        'plus',
-        'sliders'
-    ];
+    public function __construct()
+    {
+        $this->buttonIcons = [
+            'magnifying-glass',
+            'pen-to-square',
+            'trash',
+            'plus',
+            'sliders'
+        ];
+    }
 
     private function renderButtons()
     {
@@ -28,14 +31,11 @@ class Toolbar extends Component
     public function render()
     {
         $buttonElements = $this->renderButtons();
-        
+
         return <<<EOT
-        <link rel="stylesheet" href="../css/Toolbar.css">
-        
         <div class="toolbar active">
             $buttonElements
         </div>
         EOT;
     }
 }
-?>

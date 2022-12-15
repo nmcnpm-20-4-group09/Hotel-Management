@@ -1,39 +1,41 @@
-<?php
-require_once("../View.php");
+<link rel="stylesheet" href="./css/Table.css">
 
+<?php
 class BookingTable extends TableComponent
 {
-    protected $fields = [
-        'STT',
-        'KHÁCH HÀNG',
-        'LOẠI KHÁCH',
-        'CMND',
-        'ĐỊA CHỈ',
-    ];
-    protected $entries = [
-        [
-            '1',
-            'Đặng Võ Hoàng Kim Tuyền',
-            'Khách thường',
-            '123456789012',
-            'Thành phố Hồ Chí Minh',
-        ],
-        [
-            '1',
-            'Đặng Võ Hoàng Kim Tuyền',
-            'Khách thường',
-            '123456789012',
-            'Thành phố Hồ Chí Minh',
-        ],
-        [
-            '1',
-            'Đặng Võ Hoàng Kim Tuyền',
-            'Khách thường',
-            '123456789012',
-            'Thành phố Hồ Chí Minh',
-        ],
-    ];
-
+    public function __construct()
+    {
+        $this->fields = [
+            'STT',
+            'KHÁCH HÀNG',
+            'LOẠI KHÁCH',
+            'CMND',
+            'ĐỊA CHỈ',
+        ];
+        $this->entries = [
+            [
+                '1',
+                'Đặng Võ Hoàng Kim Tuyền',
+                'Khách thường',
+                '123456789012',
+                'Thành phố Hồ Chí Minh',
+            ],
+            [
+                '1',
+                'Đặng Võ Hoàng Kim Tuyền',
+                'Khách thường',
+                '123456789012',
+                'Thành phố Hồ Chí Minh',
+            ],
+            [
+                '1',
+                'Đặng Võ Hoàng Kim Tuyền',
+                'Khách thường',
+                '123456789012',
+                'Thành phố Hồ Chí Minh',
+            ],
+        ];
+    }
 
     public function render()
     {
@@ -41,7 +43,6 @@ class BookingTable extends TableComponent
         $entryElements = $this->renderEntries();
 
         return <<< EOT
-        <link rel="stylesheet" href="../css/Table.css">
 
         <div class="table-wrapper">
             <table class="scrollable">

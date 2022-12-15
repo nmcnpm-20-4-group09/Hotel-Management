@@ -3,11 +3,9 @@
 icons8.com/fluency/96/null/circled-up-2.png" />
 
 <!-- Style -->
-<link rel="stylesheet" href="../css/form.css" />
+<link rel="stylesheet" href="./css/Form.css" />
 
 <?php
-require_once("../View.php");
-
 class SignUpForm extends FormComponent
 {
 
@@ -44,14 +42,14 @@ class SignUpForm extends FormComponent
     {
         $groupElements = $this->renderGroups();
         return <<< EOT
-        <form class="signup-form" method="PUT">
+        <form action="./?type=signup" class="signup-form" method="POST">
         <h2 class="form-title">Đăng ký</h2>
 
         $groupElements
 
         <div class="form-buttons">
             <button type="button" class="form-button back-button">
-                <a href="#">Đăng nhập</a>
+                <a href="/form?type=signin">Đăng nhập</a>
             </button>
             <button type="submit" class="form-button">Tiếp theo</button>
         </div>

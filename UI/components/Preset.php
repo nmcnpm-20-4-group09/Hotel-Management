@@ -1,13 +1,3 @@
-<?php
-
-// Paths
-define("ROOT", $_SERVER['DOCUMENT_ROOT']);
-define("COMPONENT_PATH", ROOT . "/UI/components/");
-define("TABLE_PATH", COMPONENT_PATH . "/tables/");
-define("FORM_PATH", COMPONENT_PATH . "/forms/");
-define("VIEW_PATH", ROOT . "/UI/views/");
-?>
-
 <!-- Header -->
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +14,8 @@ define("VIEW_PATH", ROOT . "/UI/views/");
     <script src="https://kit.fontawesome.com/f31e1a0778.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="../css/base.css" />
-    
-    <!-- Scripts -->
-    <script src="../scripts/index.js"></script>
-</head>
+    <link rel="stylesheet" href="./css/base.css" />
 
+    <!-- Scripts -->
+    <script src="./scripts/index.js"></script>
+</head>

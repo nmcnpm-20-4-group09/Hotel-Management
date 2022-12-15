@@ -1,6 +1,4 @@
 <?php
-require_once("../Preset.php");
-
 abstract class Component
 {
     abstract public function render();
@@ -8,6 +6,7 @@ abstract class Component
 
 abstract class TableComponent extends Component
 {
+    // TODO: use array reduce
     protected function renderFields()
     {
         $headerElements = '';
@@ -49,6 +48,13 @@ abstract class TableComponent extends Component
 
 abstract class FormComponent extends Component
 {
+    public function __construct($props)
+    {
+        foreach ($props as $key => $value) {
+            $this->$key = $value ?? "";
+        }
+    }
+
     protected function renderInputClasses($group)
     {
         $classes = '';
@@ -87,11 +93,42 @@ class View
         echo $component->render();
     }
 
-    static function renderView($viewName)
+    static function renderView($view)
     {
-        $viewPath = VIEW_PATH . $viewName . ".php";
-        require_once($viewPath);
-        $view = new $viewName();
-        View::render($view);
+        // Render the preset
+        include_once "./components/Preset.php";
+
+        // Render the view
+        $viewPath  = VIEW_PATH . $view . ".php";
+        include_once $viewPath;
+    }
+
+    // TODO: implement this
+    static function redirect($view)
+    {
+    }
+
+    static function renderForm($formName, $props = [])
+    {
+        include_once FORM_PATH . "SignInForm.php";
+        include_once FORM_PATH . "SignUpForm.php";
+        include_once FORM_PATH . "RevenueReportForm.php";
+        include_once FORM_PATH . "RoomReportForm.php";
+
+        $forms = [
+            "signin" => "SignInForm",
+            "signup" => "SignUpForm",
+            "revenue-report" => "RevenueReportForm",
+            "room-report" => "RoomReportForm"
+        ];
+        $form = new $forms[$formName]($props);
+
+        echo "
+        <body>
+            <div class='container'>" .
+            $form->render() .
+            "</div>
+        </body>
+        </html>";
     }
 }
