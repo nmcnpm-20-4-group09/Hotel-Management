@@ -93,4 +93,71 @@ html {
 .index h3 {
   font-size: 2rem;
   font-weight: 700;
-}/*# sourceMappingURL=base.css.map */
+}
+
+.table-wrapper {
+  flex: 1;
+  margin-right: 50px;
+}
+.table-wrapper table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+.table-wrapper table tr.active td {
+  background-color: #dff6ff;
+}
+.table-wrapper table th,
+.table-wrapper table td {
+  width: 15%;
+  padding: 20px 10px;
+  text-align: center;
+}
+.table-wrapper table th:first-of-type,
+.table-wrapper table td:first-of-type {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.table-wrapper table th:last-of-type,
+.table-wrapper table td:last-of-type {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+.table-wrapper table th {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+.table-wrapper table td.spacer {
+  padding: 10px;
+}
+.table-wrapper table td:not(.spacer) {
+  background-color: #fff;
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.table-wrapper table td:not(.spacer) i {
+  font-size: 2.4rem;
+}
+.table-wrapper table td:not(.spacer) i:hover {
+  cursor: pointer;
+  color: #47b5ff;
+  opacity: 0.8;
+}
+.table-wrapper table td:nth-of-type(2) {
+  color: #47b5ff;
+}
+.table-wrapper table.scrollable thead {
+  display: block;
+  width: calc(100% - 17px);
+}
+.table-wrapper table.scrollable tbody {
+  display: block;
+  overflow-y: scroll;
+  max-height: calc(100vh - 400px);
+}
+.table-wrapper table.scrollable tr {
+  display: table;
+  width: 100%;
+}/*# sourceMappingURL=Table.css.map */

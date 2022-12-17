@@ -5,6 +5,7 @@
 /* Variables */
 $primary-color: #47b5ff;
 $secondary-color: #256d85;
+$third-color: #dff6ff;
 $bg-color: #f5f5f5;
 $fail-color: #f31d1d;
 $success-color: #41ef25;
@@ -27,8 +28,6 @@ $container-h: 100vh;
     font-weight: $weight;
 }
 @mixin scrollable-table($table-max-height: 400px) {
-    border-collapse: collapse;
-
     thead {
         display: block;
         width: calc(100% - 17px);
@@ -42,6 +41,11 @@ $container-h: 100vh;
         display: table;
         width: 100%;
     }
+}
+@mixin gradient-text($color1, $color2) {
+    background: -webkit-linear-gradient($color1, $color2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Animations */
@@ -78,7 +82,7 @@ a {
     color: #000;
 }
 
-/* Global Styles */
+/* Global styles */
 html {
     font-family: 'Roboto', sans-serif;
     font-size: 62.5%;
@@ -90,8 +94,26 @@ html {
 .invisible {
     visibility: hidden;
 }
+
+/* Layout styles */
 .container {
     height: $container-h;
     background-color: $bg-color;
     @include flex(row, center, center);
+}
+.main {
+    flex: 1;
+    height: 100%;
+}
+.feature {
+    margin: 16px 50px;
+    @include flex(row, space-between, flex-start);
+}
+.index {
+    margin: 16px 50px;
+    @include flex(column, center, flex-start);
+
+    h3 {
+        @include font(2rem, 700);
+    }
 }
