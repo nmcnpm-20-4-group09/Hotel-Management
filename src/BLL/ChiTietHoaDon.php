@@ -1,73 +1,68 @@
 <?php
 
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/BillDetail.php";
+
 use BLL\MySQLQueryStringCreator;
 use DAL\MySQLiConnection;
+use DTO\BillDetailDTO;
 
-    $soPhieuThue = $_GET["SoPhieuThue"];
-    $soHoaDon = $_GET["SoHoaDon"];
+$soPhieuThue = $_GET["SoPhieuThue"];
+$soHoaDon = $_GET["SoHoaDon"];
 
-    $success = TRUE;
-    $message = "";
-    $result = [];
+$success = true;
+$message = "";
+$result = [];
 
-    $pattern = "/^[0-9]*$/";
+$pattern = "/^[0-9]*$/";
 
-    $isValidData = (
-        preg_match($pattern, $soPhieuThue) and
-        preg_match($pattern, $soHoaDon)
-    );  
+$isValidData = (preg_match($pattern, $soPhieuThue) and
+    preg_match($pattern, $soHoaDon)
+);
 
-    if (!$isValidData) 
-    {
-        $success = FALSE;
-        $message = "Invalid parameters!";
-    }
-    else
-    {
-        $user = 'root';
-        $password = ''; 
-        $database = 'HotelManagement';
-        $servername= 'localhost';
-
+if (!$isValidData) {
+    $success = FALSE;
+    $message = "Invalid parameters!";
+} else {
+    $queryString = MySQLQueryStringCreator::chiTietHoaDon($soPhieuThue, $soHoaDon);
+    try {
         $connection = MySQLiConnection::instance();
-    
-        if ($connection == null) 
-        {
-            $success = FALSE;
-            $message = "Unable to connect to the database!";
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+
+    if ($connection == null) {
+        $success = FALSE;
+        $message = "Unable to connect to the database!";
+    } else {
+        $queryString = MySQLQueryStringCreator
+            ::chiTietHoaDon(
+                $soPhieuThue,
+                $soHoaDon
+            );
+
+        $dtoList = $connection->execQuery(
+            $queryString,
+            $isReading = true,
+            new BillDetailDTO(null, null, null, null, null)
+        );
+
+        $result = [];
+        foreach ($dtoList as $dto) {
+            $result[] = $dto->toDictionary();
         }
-        else
-        {
-            $queryString = MySQLQueryStringCreator::chiTietHoaDon($soPhieuThue, $soHoaDon);
 
-            $data = $connection->query($queryString);
+        $success = true;
+    }
+} // if (!$isValidData)
 
-            while($row = $data->fetch_assoc())
-            {
-                $detail = array(
-                    'SoPhieuThue' => $row['SoPhieuThue'],
-                    'SoHoaDon' => $row['SoHoaDon'],
-                    'SoNgayThueThuc' => $row['SoNgayThueThuc'],
-                    'TienThuePhong' => $row['TienThuePhong'],
-                    'MaPhuThu' => $row['MaPhuThu']
-                );
-                
-                $result[] = $detail;
-            }
+$response = array(
+    'success' => $success,
+    'message' => $message,
+    'result' => $result
+);
 
-            $success = TRUE;
-            
-            
-            mysqli_free_result($data);
-            $connection->close(); 
-        } // if ($connection->connection_error) 
-    } // if (!$isValidData) else
-    
-    $response = array(
-        'success' => $success,
-        'message' => $message,
-        'result' => $result
-    );
-    
-    echo json_encode($response);
+echo json_encode($response);
+
 ?>

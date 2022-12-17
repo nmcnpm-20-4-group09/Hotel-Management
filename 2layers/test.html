@@ -16,7 +16,7 @@
 
 <script>
     function getBillDetails() {
-        var url = "BLL/ChiTietHoaDon.php" 
+        var url = "ChiTietHoaDon.php" 
         + "?SoPhieuThue=" + '1'
         + "&SoHoaDon=" + '1';
         
@@ -59,7 +59,7 @@
     }
 
     function getCustomerList () {
-        var url = "BLL/DanhSachKhach.php";
+        var url = "DanhSachKhach.php";
         
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = onReceiveCustomerList;
@@ -102,7 +102,7 @@
     }
 
     function getRoomCategories() {
-        var url = "BLL/DanhMucPhong.php";
+        var url = "DanhMucPhong.php";
         
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = onReceiveRoomCategories;
@@ -142,7 +142,7 @@
     }
 
     function getRoomList() {
-        var url = "BLL/DanhSachPhong.php";
+        var url = "DanhSachPhong.php";
         
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = onReceiveRoomList;
@@ -191,7 +191,7 @@
     
         xhr.onreadystatechange = onReceiveUpdateSurcharge;
     
-        xhr.open("PUT", "BLL/ThayDoiPhuThu.php", true); 
+        xhr.open("PUT", "ThayDoiPhuThu.php", true); 
         xhr.setRequestHeader('Content-Type', 'application/json'); 
         xhr.send(JSON.stringify(data)); 
 

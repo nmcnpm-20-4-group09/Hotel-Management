@@ -2,7 +2,7 @@
 
 namespace DTO;
 
-class BookingDTO
+class BookingDTO implements DTOInterface
 {
     private $soPhieuThue;
     private $idKhachHang;
@@ -22,6 +22,28 @@ class BookingDTO
         $this->ngayBatDauThue = $ngayBatDauThue;
         $this->soNgayThue = $soNgayThue;
         $this->maPhong = $maPhong;
+    }
+
+    public function getDBColumnMapper()
+    {
+        return [
+            "SoPhieuThue" => null,
+            "IDKhachHang" => null,
+            "NgayBatDauThue" => null,
+            "SoNgayThue" => null,
+            "MaPhong" => null
+        ];
+    }
+
+    public function getNewInstance($dbColumnMapper)
+    {
+        return new BookingDTO(
+            $dbColumnMapper["SoPhieuThue"],
+            $dbColumnMapper["IDKhachHang"],
+            $dbColumnMapper["NgayBatDauThue"],
+            $dbColumnMapper["SoNgayThue"],
+            $dbColumnMapper["MaPhong"]
+        );
     }
 
     public function soPhieuThue()

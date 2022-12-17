@@ -2,7 +2,7 @@
 
 namespace DTO;
 
-class BookingDetailDTO
+class BookingDetailDTO implements DTOInterface
 {
     private $idKhachHang;
     private $soPhieuThue;
@@ -12,6 +12,22 @@ class BookingDetailDTO
     {
         $this->idKhachHang = $idKhachHang;
         $this->soPhieuThue = $soPhieuThue;
+    }
+
+    public function getDBColumnMapper()
+    {
+        return [
+            "IDKhachHang" => null,
+            "SoPhieuThue" => null
+        ];
+    }
+
+    public function getNewInstance($dbColumnMapper)
+    {
+        return new BookingDetailDTO(
+            $dbColumnMapper["IDKhachHang"],
+            $dbColumnMapper["SoPhieuThue"]
+        );
     }
 
     public function idKhachHang()

@@ -20,17 +20,17 @@
     }
     else
     {
-        $sqlQuery = "call sp_danhSachPhong();";
+        $sqlQuery = "call sp_danhMucPhong();";
 
         $data = $connect->query($sqlQuery);
 
         while($row = $data->fetch_assoc())
         {
             $detail = array(
-                'MaPhong' => $row['MaPhong'],
                 'MaLoai' => $row['MaLoai'],
-                'TinhTrang' => $row['TinhTrang'],
-                'GhiChu' => $row['GhiChu']
+                'SoLuongPhong' => $row['SoLuongPhong'],
+                'DonGia' => $row['DonGia'],
+                'LuongKhachToiDa' => $row['LuongKhachToiDa']
             );
             
             $result[] = $detail;

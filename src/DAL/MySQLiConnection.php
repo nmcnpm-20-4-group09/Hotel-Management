@@ -2,6 +2,8 @@
 
 namespace DAL;
 
+require __DIR__ . "/DBConnectionInterface.php";
+
 use Exception;
 use mysqli;
 
@@ -11,9 +13,10 @@ class MySQLiConnection implements DBConnectionInterface
     private $user;
     private $password;
     private $database;
+    private $connection;
 
     // Singleton
-    private static $connection = null;
+    private static $instance = null;
 
     private function __construct(
         $servername = 'localhost',
@@ -27,11 +30,22 @@ class MySQLiConnection implements DBConnectionInterface
         $this->database = $database;
 
         $this->connection = new mysqli(
-            $servername,
-            $user,
-            $password,
-            $database
+            $this->servername,
+            $this->user,
+            $this->password,
+            $this->database
         );
+    }
+
+    public function __destruct()
+    {
+        if (self::$instance != null) {
+            try {
+                self::$instance->connection->close();
+            } catch (Exception $e) {
+                // Do nothing
+            }
+        }
     }
 
     private function __clone()
@@ -41,34 +55,45 @@ class MySQLiConnection implements DBConnectionInterface
 
     public static function instance()
     {
-        if (self::$connection == null) {
+        if (self::$instance == null) {
             try {
-                self::$connection = new mysqli(
-                    self::$servername,
-                    self::$user,
-                    self::$password,
-                    self::$database
-                );
+                self::$instance = new MySQLiConnection();
 
-                if (self::$connection->connect_error) {
-                    self::$connection = null;
+                if (self::$instance->connection->connect_error) {
+                    self::$instance = null;
                 }
             } catch (Exception $e) {
-                self::$connection = null;
+                self::$instance = null;
             }
         }
 
-        return self::$connection;
+        return self::$instance;
     }
 
-    public function execQuery($queryString)
-    {
+    public function execQuery(
+        $queryString,
+        $isReading = false,
+        $dto = null
+    ) {
         $queryResult = [];
 
         if ($this->connection == null) {
             $queryResult = null;
-        } else {
-            $this->connection->query($queryString);
+        } else if ($isReading) {
+            $data = $this->connection->query($queryString);
+
+            while ($row = $data->fetch_assoc()) {
+                $dbColumnMapper = $dto->getDBColumnMapper();
+
+                foreach ($dbColumnMapper as $key => $value) {
+                    $dbColumnMapper[$key] = $row[$key];
+                }
+
+                $rowToObject = $dto->getNewInstance($dbColumnMapper);
+                $queryResult[] = $rowToObject;
+            }
+
+            mysqli_free_result($data);
         }
 
         return $queryResult;

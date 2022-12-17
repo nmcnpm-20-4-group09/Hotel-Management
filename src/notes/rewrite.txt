@@ -19,6 +19,8 @@ sudo killall httpd
 sudo chown -R daemon wordpress-folder
 
 
+sudo killall mysqld
 https://stackoverflow.com/questions/21267064/mysql-database-wont-start-in-xampp-manager-osx
 sudo /Applications/XAMPP/xamppfiles/bin/mysql.server start    
 
+mysql_upgrade --force --force

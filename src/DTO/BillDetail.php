@@ -2,7 +2,9 @@
 
 namespace DTO;
 
-class BillDetailDTO
+require __DIR__ . "/DTOInterface.php";
+
+class BillDetailDTO implements DTOInterface
 {
     private $soPhieuThue;
     private $soHoaDon;
@@ -22,6 +24,41 @@ class BillDetailDTO
         $this->soNgayThueThuc = $soNgayThueThuc;
         $this->tienThuePhong = $tienThuePhong;
         $this->maPhuThu = $maPhuThu;
+    }
+
+    public function getDBColumnMapper()
+    {
+        return array(
+            "SoPhieuThue" => null,
+            "SoHoaDon" => null,
+            "SoNgayThueThuc" => null,
+            "TienThuePhong" => null,
+            "MaPhuThu" => null
+        );
+    }
+
+    public function getNewInstance($dbColumnMapper)
+    {
+        $result = new BillDetailDTO(
+            $dbColumnMapper["SoPhieuThue"],
+            $dbColumnMapper["SoHoaDon"],
+            $dbColumnMapper["SoNgayThueThuc"],
+            $dbColumnMapper["TienThuePhong"],
+            $dbColumnMapper["MaPhuThu"]
+        );
+
+        return $result;
+    }
+
+    public function toDictionary()
+    {
+        return array(
+            "SoPhieuThue" => $this->soPhieuThue,
+            "SoHoaDon" => $this->soHoaDon,
+            "SoNgayThueThuc" => $this->soNgayThueThuc,
+            "TienThuePhong" => $this->tienThuePhong,
+            "MaPhuThu" => $this->maPhuThu
+        );
     }
 
     public function soPhieuThue()

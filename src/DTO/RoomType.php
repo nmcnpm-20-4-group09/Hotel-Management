@@ -2,7 +2,7 @@
 
 namespace DTO;
 
-class RoomTypeDTO
+class RoomTypeDTO implements DTOInterface
 {
     private $maLoai;
     private $soLuongPhong;
@@ -22,6 +22,28 @@ class RoomTypeDTO
         $this->donGia = $donGia;
         $this->soLuongPhongTrong = $soLuongPhongTrong;
         $this->luongKhachToiDa = $luongKhachToiDa;
+    }
+
+    public function getDBColumnMapper()
+    {
+        return [
+            "MaLoai" => null,
+            "SoLuongPhong" => null,
+            "DonGia" => null,
+            "SoLuongPhongTrong" => null,
+            "LuongKhachToiDa" => null
+        ];
+    }
+
+    public function getNewInstance($dbColumnMapper)
+    {
+        return new RoomTypeDTO(
+            $dbColumnMapper["MaLoai"],
+            $dbColumnMapper["SoLuongPhong"],
+            $dbColumnMapper["DonGia"],
+            $dbColumnMapper["SoLuongPhongTrong"],
+            $dbColumnMapper["LuongKhachToiDa"]
+        );
     }
 
     public function maLoai()

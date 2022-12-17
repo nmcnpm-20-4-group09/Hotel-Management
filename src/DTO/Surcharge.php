@@ -2,7 +2,7 @@
 
 namespace DTO;
 
-class SurchargeDTO
+class SurchargeDTO implements DTOInterface
 {
     private $maPhuThu;
     private $tenPhuThu;
@@ -13,6 +13,24 @@ class SurchargeDTO
         $this->maPhuThu = $maPhuThu;
         $this->tenPhuThu = $tenPhuThu;
         $this->tiLe = $tiLe;
+    }
+
+    public function getDBColumnMapper()
+    {
+        return [
+            "MaPhuThu" => null,
+            "TenPhuThu" => null,
+            "TiLe" => null
+        ];
+    }
+
+    public function getNewInstance($dbColumnMapper)
+    {
+        return new SurchargeDTO(
+            $dbColumnMapper["MaPhuThu"],
+            $dbColumnMapper["TenPhuThu"],
+            $dbColumnMapper["TiLe"]
+        );
     }
 
     public function maPhuThu()

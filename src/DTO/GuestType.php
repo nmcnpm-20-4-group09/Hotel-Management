@@ -2,7 +2,7 @@
 
 namespace DTO;
 
-class GuestTypeDTO
+class GuestTypeDTO implements DTOInterface
 {
     private $maLoaiKhach;
     private $tenLoaiKhach;
@@ -13,6 +13,24 @@ class GuestTypeDTO
         $this->maLoaiKhach = $maLoaiKhach;
         $this->tenLoaiKhach = $tenLoaiKhach;
         $this->heSo = $heSo;
+    }
+
+    public function getDBColumnMapper()
+    {
+        return [
+            "MaLoaiKhach" => null,
+            "TenLoaiKhach" => null,
+            "HeSo" => null
+        ];
+    }
+
+    public function getNewInstance($dbColumnMapper)
+    {
+        return new GuestTypeDTO(
+            $dbColumnMapper["MaLoaiKhach"],
+            $dbColumnMapper["TenLoaiKhach"],
+            $dbColumnMapper["HeSo"]
+        );
     }
 
     public function maLoaiKhach()

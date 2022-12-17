@@ -2,7 +2,7 @@
 
 namespace DTO;
 
-class BillDTO
+class BillDTO implements DTOInterface
 {
     private $soHoaDon;
     private $ngayThanhToan;
@@ -13,6 +13,24 @@ class BillDTO
         $this->soHoaDon = $soHoaDon;
         $this->ngayThanhToan = $ngayThanhToan;
         $this->triGia = $triGia;
+    }
+
+    public function getDBColumnMapper()
+    {
+        return [
+            "SoHoaDon" => null,
+            "NgayThanhToan" => null,
+            "TriGia" => null
+        ];
+    }
+
+    public function getNewInstance($dbColumnMapper)
+    {
+        return new BillDTO(
+            $dbColumnMapper["SoHoaDon"],
+            $dbColumnMapper["SoHoaDon"],
+            $dbColumnMapper["TriGia"]
+        );
     }
 
     public function soHoaDon()
