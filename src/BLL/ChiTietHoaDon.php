@@ -25,7 +25,6 @@ if (!$isValidData) {
     $success = FALSE;
     $message = "Invalid parameters!";
 } else {
-    $queryString = MySQLQueryStringCreator::chiTietHoaDon($soPhieuThue, $soHoaDon);
     try {
         $connection = MySQLiConnection::instance();
     } catch (Exception $e) {

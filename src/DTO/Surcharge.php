@@ -2,6 +2,8 @@
 
 namespace DTO;
 
+require __DIR__ . "/DTOInterface.php";
+
 class SurchargeDTO implements DTOInterface
 {
     private $maPhuThu;
@@ -30,6 +32,15 @@ class SurchargeDTO implements DTOInterface
             $dbColumnMapper["MaPhuThu"],
             $dbColumnMapper["TenPhuThu"],
             $dbColumnMapper["TiLe"]
+        );
+    }
+
+    public function toDictionary()
+    {
+        return array(
+            "MaPhuThu" => $this->maPhuThu,
+            "TenPhuThu" => $this->tenPhuThu,
+            "TiLe" => $this->tiLe
         );
     }
 
