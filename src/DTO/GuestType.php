@@ -2,6 +2,8 @@
 
 namespace DTO;
 
+require __DIR__ . "/DTOInterface.php";
+
 class GuestTypeDTO implements DTOInterface
 {
     private $maLoaiKhach;

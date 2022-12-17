@@ -2,6 +2,8 @@
 
 namespace DTO;
 
+require __DIR__ . "/DTOInterface.php";
+
 class RoomTypeDTO implements DTOInterface
 {
     private $maLoai;
@@ -43,6 +45,17 @@ class RoomTypeDTO implements DTOInterface
             $dbColumnMapper["DonGia"],
             $dbColumnMapper["SoLuongPhongTrong"],
             $dbColumnMapper["LuongKhachToiDa"]
+        );
+    }
+
+    public function toDictionary()
+    {
+        return array(
+            "MaLoai" => $this->maLoai,
+            "SoLuongPhong" => $this->soLuongPhong,
+            "DonGia" => $this->donGia,
+            "SoLuongPhongTrong" => $this->soLuongPhongTrong,
+            "LuongKhachToiDa" => $this->luongKhachToiDa
         );
     }
 

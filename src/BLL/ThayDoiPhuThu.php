@@ -1,4 +1,5 @@
 <?php
+
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/Surcharge.php";
@@ -66,7 +67,6 @@ if (!$isValidData) {
         foreach ($dtoList as $dto) {
             $result[] = $dto->toDictionary();
         }
-
 
         $countChanged = count($result);
         if ($countChanged == 0) {
