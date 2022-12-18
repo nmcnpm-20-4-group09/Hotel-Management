@@ -1,52 +1,49 @@
 <?php
-    $success = TRUE;
-    $message = "";
-    $result = [];
 
-    $user = 'root';
-    $password = ''; 
-    $database = 'HotelManagement';
-    $servername= 'localhost';
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/Room.php";
 
-    $connect = new mysqli($servername, $user, $password, $database);
+use BLL\MySQLQueryStringCreator;
+use DAL\MySQLiConnection;
+use DTO\RoomDTO;
 
-    if ($connect->connect_error) 
-    {
-        $success = FALSE;
-        $message = 
-            "execQuery(...): "
-            ."(".$connect->connect_errno . ") "
-            .$connect->connect_error;
-    }
-    else
-    {
-        $sqlQuery = "call sp_danhSachPhong();";
+$success = true;
+$message = "";
+$result = [];
 
-        $data = $connect->query($sqlQuery);
+try {
+    $connection = MySQLiConnection::instance();
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
 
-        while($row = $data->fetch_assoc())
-        {
-            $detail = array(
-                'MaPhong' => $row['MaPhong'],
-                'MaLoai' => $row['MaLoai'],
-                'TinhTrang' => $row['TinhTrang'],
-                'GhiChu' => $row['GhiChu']
-            );
-            
-            $result[] = $detail;
-        }
+if ($connection == null) {
+    $success = false;
+    $message = "Unable to connect to the database!";
+} else {
+    $queryString = MySQLQueryStringCreator::danhSachPhong();
 
-        $success = TRUE;
-        
-        mysqli_free_result($data);
-        $connect->close(); 
-    } // if ($connect->connect_error) 
-    
-    $response = array(
-        'success' => $success,
-        'message' => $message,
-        'result' => $result
+    $dtoList = $connection->execQuery(
+        $queryString,
+        $isReading = true,
+        new RoomDTO(null, null, null, null, null, null, null)
     );
-    
-    echo json_encode($response);
+
+    $result = [];
+    foreach ($dtoList as $dto) {
+        $result[] = $dto->toDictionary();
+    }
+
+    $success = true;
+}
+
+$response = array(
+    'success' => $success,
+    'message' => $message,
+    'result' => $result
+);
+
+echo json_encode($response);
+
 ?>

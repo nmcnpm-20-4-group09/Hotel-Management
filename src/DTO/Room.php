@@ -39,6 +39,16 @@ class RoomDTO implements DTOInterface
         );
     }
 
+    public function toDictionary()
+    {
+        return array(
+            "MaPhong" => $this->maPhong,
+            "MaLoai" => $this->maLoai,
+            "TinhTrang" => $this->tinhTrang,
+            "GhiChu" => $this->ghiChu
+        );
+    }
+
     public function maPhong()
     {
         return $this->maPhong;

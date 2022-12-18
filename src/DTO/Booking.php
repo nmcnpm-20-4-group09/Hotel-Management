@@ -47,6 +47,17 @@ class BookingDTO implements DTOInterface
             $dbColumnMapper["MaPhong"]
         );
     }
+    
+    public function toDictionary()
+    {
+        return array(
+            "SoPhieuThue" => $this->soPhieuThue,
+            "IDKhachHang" => $this->idKhachHang,
+            "NgayBatDauThue" => $this->ngayBatDauThue,
+            "SoNgayThue" => $this->soNgayThue,
+            "MaPhong" => $this->maPhong
+        );
+    }
 
     public function soPhieuThue()
     {

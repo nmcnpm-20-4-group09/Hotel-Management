@@ -1,56 +1,49 @@
 <?php
-    $success = TRUE;
-    $message = "";
-    $result = [];
 
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/Guest.php";
 
-    $user = 'root';
-    $password = ''; 
-    $database = 'HotelManagement';
-    $servername= 'localhost';
+use BLL\MySQLQueryStringCreator;
+use DAL\MySQLiConnection;
+use DTO\GuestDTO;
 
-    $connect = new mysqli($servername, $user, $password, $database);
+$success = true;
+$message = "";
+$result = [];
 
-    if ($connect->connect_error) 
-    {
-        $success = FALSE;
-        $message = 
-            "execQuery(...): "
-            ."(".$connect->connect_errno . ") "
-            .$connect->connect_error;
-    }
-    else
-    {
-        $sqlQuery = "call sp_danhSachKhachHang();";
-        
-        $data = $connect->query($sqlQuery);
-        
-        while($row = $data->fetch_assoc())
-        {
-            $customer = array(
-                'ID_KhachHang' => $row['ID_KhachHang'],
-                'LoaiKhach' => $row['LoaiKhach'],
-                'HoTen' => $row['HoTen'],
-                'NgaySinh' => $row['NgaySinh'],
-                'DiaChi' => $row['DiaChi'],
-                'SoDienThoai' => $row['SoDienThoai'],
-                'CMND' => $row['CMND']
-            );
-            
-            $result[] = $customer;
-        }
+try {
+    $connection = MySQLiConnection::instance();
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
 
-        $success = TRUE;
-        
-        mysqli_free_result($data);
-        $connect->close(); 
-    } // if ($connect->connect_error)     
-    
-    $response = array(
-        'success' => $success,
-        'message' => $message,
-        'result' => $result
+if ($connection == null) {
+    $success = false;
+    $message = "Unable to connect to the database!";
+} else {
+    $queryString = MySQLQueryStringCreator::danhSachKhachHang();
+
+    $dtoList = $connection->execQuery(
+        $queryString,
+        $isReading = true,
+        new GuestDTO(null, null, null, null, null, null, null)
     );
-    
-    echo json_encode($response);
+
+    $result = [];
+    foreach ($dtoList as $dto) {
+        $result[] = $dto->toDictionary();
+    }
+
+    $success = true;
+}
+
+$response = array(
+    'success' => $success,
+    'message' => $message,
+    'result' => $result
+);
+
+echo json_encode($response);
+
 ?>

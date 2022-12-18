@@ -35,6 +35,15 @@ class GuestTypeDTO implements DTOInterface
         );
     }
 
+    public function toDictionary()
+    {
+        return array(
+            "MaLoaiKhach" => $this->idKhachHang,
+            "TenLoaiKhach" => $this->loaiKhach,
+            "HeSo" => $this->hoTen
+        );
+    }
+
     public function maLoaiKhach()
     {
         return $this->maLoaiKhach;

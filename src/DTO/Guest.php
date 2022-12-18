@@ -35,7 +35,7 @@ class GuestDTO implements DTOInterface
     public function getDBColumnMapper()
     {
         return [
-            "IDKhachHang" => null,
+            "ID_KhachHang" => null,
             "LoaiKhach" => null,
             "HoTen" => null,
             "NgaySinh" => null,
@@ -48,13 +48,26 @@ class GuestDTO implements DTOInterface
     public function getNewInstance($dbColumnMapper)
     {
         return new GuestDTO(
-            $dbColumnMapper["IDKhachHang"],
+            $dbColumnMapper["ID_KhachHang"],
             $dbColumnMapper["LoaiKhach"],
             $dbColumnMapper["HoTen"],
             $dbColumnMapper["NgaySinh"],
             $dbColumnMapper["DiaChi"],
             $dbColumnMapper["SoDienThoai"],
             $dbColumnMapper["CMND"]
+        );
+    }
+
+    public function toDictionary()
+    {
+        return array(
+            "IDKhachHang" => $this->idKhachHang,
+            "LoaiKhach" => $this->loaiKhach,
+            "HoTen" => $this->hoTen,
+            "NgaySinh" => $this->ngaySinh,
+            "DiaChi" => $this->diaChi,
+            "SoDienThoai" => $this->soDienThoai,
+            "CMND" => $this->cmnd
         );
     }
 
