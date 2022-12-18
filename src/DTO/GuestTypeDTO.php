@@ -44,6 +44,11 @@ class GuestTypeDTO implements DTOInterface
         );
     }
 
+    public static function getPrototype()
+    {
+        return new GuestTypeDTO(null, null, null);
+    }
+
     public function maLoaiKhach()
     {
         return $this->maLoaiKhach;

@@ -18,18 +18,31 @@ class BookingDetailDTO implements DTOInterface
 
     public function getDBColumnMapper()
     {
-        return [
-            "IDKhachHang" => null,
+        return array(
+            "ID_KhachHang" => null,
             "SoPhieuThue" => null
-        ];
+        );
     }
 
     public function getNewInstance($dbColumnMapper)
     {
         return new BookingDetailDTO(
-            $dbColumnMapper["IDKhachHang"],
+            $dbColumnMapper["ID_KhachHang"],
             $dbColumnMapper["SoPhieuThue"]
         );
+    }
+   
+    public function toDictionary()
+    {
+        return array(
+            "ID_KhachHang" => $this->soPhieuThue,
+            "SoPhieuThue" => $this->idKhachHang
+        );
+    }
+
+    public static function getPrototype()
+    {
+        return new BookingDetailDTO(null, null);
     }
 
     public function idKhachHang()

@@ -28,9 +28,23 @@ class BillDTO implements DTOInterface
     {
         return new BillDTO(
             $dbColumnMapper["SoHoaDon"],
-            $dbColumnMapper["SoHoaDon"],
+            $dbColumnMapper["NgayThanhToan"],
             $dbColumnMapper["TriGia"]
         );
+    }
+
+    public function toDictionary()
+    {
+        return array(
+            "SoHoaDon" => $this->soHoaDon,
+            "NgayThanhToan" => $this->ngayThanhToan,
+            "TriGia" => $this->triGia
+        );
+    }
+
+    public static function getPrototype()
+    {
+        return new BillDTO(null, null, null);
     }
 
     public function soHoaDon()

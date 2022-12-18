@@ -59,6 +59,11 @@ class RoomTypeDTO implements DTOInterface
         );
     }
 
+    public static function getPrototype()
+    {
+        return new RoomTypeDTO(null, null, null, null, null);
+    }
+
     public function maLoai()
     {
         return $this->maLoai;

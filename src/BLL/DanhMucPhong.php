@@ -2,7 +2,7 @@
 
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/RoomType.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/RoomTypeDTO.php";
 
 use BLL\MySQLQueryStringCreator;
 use DAL\MySQLiConnection;
@@ -27,7 +27,7 @@ if ($connection == null) {
     $dtoList = $connection->execQuery(
         $queryString,
         $isReading = true,
-        new RoomTypeDTO(null, null, null, null, null)
+        RoomTypeDTO::getPrototype()
     );
 
     $result = [];

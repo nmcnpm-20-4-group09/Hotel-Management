@@ -61,6 +61,11 @@ class BillDetailDTO implements DTOInterface
         );
     }
 
+    public static function getPrototype()
+    {
+        return new BillDetailDTO(null, null, null, null, null);
+    }
+
     public function soPhieuThue()
     {
         return $this->soPhieuThue;

@@ -30,7 +30,7 @@ class BookingDTO implements DTOInterface
     {
         return [
             "SoPhieuThue" => null,
-            "IDKhachHang" => null,
+            "ID_KhachHang" => null,
             "NgayBatDauThue" => null,
             "SoNgayThue" => null,
             "MaPhong" => null
@@ -41,7 +41,7 @@ class BookingDTO implements DTOInterface
     {
         return new BookingDTO(
             $dbColumnMapper["SoPhieuThue"],
-            $dbColumnMapper["IDKhachHang"],
+            $dbColumnMapper["ID_KhachHang"],
             $dbColumnMapper["NgayBatDauThue"],
             $dbColumnMapper["SoNgayThue"],
             $dbColumnMapper["MaPhong"]
@@ -52,11 +52,16 @@ class BookingDTO implements DTOInterface
     {
         return array(
             "SoPhieuThue" => $this->soPhieuThue,
-            "IDKhachHang" => $this->idKhachHang,
+            "ID_KhachHang" => $this->idKhachHang,
             "NgayBatDauThue" => $this->ngayBatDauThue,
             "SoNgayThue" => $this->soNgayThue,
             "MaPhong" => $this->maPhong
         );
+    }
+
+    public static function getPrototype()
+    {
+        return new BookingDTO(null, null, null, null, null);
     }
 
     public function soPhieuThue()

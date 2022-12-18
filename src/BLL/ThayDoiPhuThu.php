@@ -2,7 +2,7 @@
 
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/Surcharge.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/SurchargeDTO.php";
 
 use BLL\MySQLQueryStringCreator;
 use DAL\MySQLiConnection;
@@ -60,7 +60,7 @@ if (!$isValidData) {
         $dtoList = $connection->execQuery(
             $queryString,
             $isReading = true,
-            new SurchargeDTO(null, null, null)
+            SurchargeDTO::getPrototype()
         );
 
         $result = [];

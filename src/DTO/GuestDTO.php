@@ -71,6 +71,11 @@ class GuestDTO implements DTOInterface
         );
     }
 
+    public static function getPrototype()
+    {
+        return new GuestDTO(null, null, null, null, null, null, null);
+    }
+
     public function idKhachHang()
     {
         $this->idKhachHang;

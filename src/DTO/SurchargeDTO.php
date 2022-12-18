@@ -44,6 +44,11 @@ class SurchargeDTO implements DTOInterface
         );
     }
 
+    public static function getPrototype()
+    {
+        return new SurchargeDTO(null, null, null);
+    }
+
     public function maPhuThu()
     {
         return $this->maPhuThu;

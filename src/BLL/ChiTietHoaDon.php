@@ -2,7 +2,7 @@
 
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/BillDetail.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/BillDetailDTO.php";
 
 use BLL\MySQLQueryStringCreator;
 use DAL\MySQLiConnection;
@@ -44,7 +44,7 @@ if (!$isValidData) {
         $dtoList = $connection->execQuery(
             $queryString,
             $isReading = true,
-            new BillDetailDTO(null, null, null, null, null)
+            BillDetailDTO::getPrototype()
         );
 
         $result = [];

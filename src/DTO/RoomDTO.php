@@ -49,6 +49,11 @@ class RoomDTO implements DTOInterface
         );
     }
 
+    public static function getPrototype()
+    {
+        return new RoomDTO(null, null, null, null);
+    }
+
     public function maPhong()
     {
         return $this->maPhong;
