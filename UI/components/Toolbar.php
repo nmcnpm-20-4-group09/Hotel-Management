@@ -12,15 +12,26 @@ class Toolbar extends Component
             'plus',
             'sliders'
         ];
+
+        $this->eventHandlers =[
+            'handleSearch',
+            'handleEdit',
+            'handleDelete',
+            'handleAdd',
+            'handleRule',
+        ];
     }
 
     private function renderButtons()
     {
         $buttonElements = '';
-        foreach ($this->buttonIcons as $icon) {
+        for ($i = 0; $i < count($this->buttonIcons); $i++) {
+            $eventHandler = $this->eventHandlers[$i];
+            $buttonIcon = $this->buttonIcons[$i];
+
             $buttonElements .= <<<EOT
-            <button type="button">
-                <i class="fa-solid fa-$icon"></i>
+            <button type="button" onclick="$eventHandler()">
+                <i class="fa-solid fa-$buttonIcon"></i>
             </button>
             EOT;
         }
