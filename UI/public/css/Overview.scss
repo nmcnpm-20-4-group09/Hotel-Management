@@ -84,11 +84,7 @@ $stats-w: 700px;
     .banner {
         border-radius: 32px;
         box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
-<<<<<<< HEAD:UI/css/Overview.scss
-        background: url('../../assets/hotel.jpg') no-repeat center center;
-=======
         background: url('../images/hotel.jpg') no-repeat center center;
->>>>>>> ui_quan:UI/public/css/Overview.scss
         background-size: cover;
         transition: transform 0.5s ease;
         margin-left: auto;
@@ -100,11 +96,7 @@ $stats-w: 700px;
         }
 
         & + .banner {
-<<<<<<< HEAD:UI/css/Overview.scss
-            background-image: url('../../assets/inside.jpg');
-=======
             background-image: url('../images/inside.jpg');
->>>>>>> ui_quan:UI/public/css/Overview.scss
         }
     }
 }

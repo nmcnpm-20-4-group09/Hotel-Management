@@ -1,46 +1,14 @@
 <?php
+
 namespace App\Components\Tables;
+
 use App\Components\TableComponent;
 
 class RecentOrdersTable extends TableComponent
 {
-    public function __construct()
+    public function __construct($props = [])
     {
-        $this->fields = [
-            'Loại phòng',
-            'Tên phòng',
-            'Ngày bắt đầu thuê',
-            'Tên khách',
-            'Số điện thoại',
-            'CMND',
-        ];
-
-        $this->entries = [
-            [
-                'A',
-                'A1.2',
-                '30/2/2022',
-                'Nguyễn Văn A',
-                '0999888777',
-                '01010101010',
-            ],
-            [
-                'A',
-                'A1.2',
-                '30/2/2022',
-                'Nguyễn Văn A',
-                '0999888777',
-                '01010101010',
-            ],
-            [
-                'A',
-                'A1.2',
-                '30/2/2022',
-                'Nguyễn Văn A',
-                '0999888777',
-                '01010101010',
-            ],
-        ];
+        parent::__construct($props);
     }
 
     public function render()

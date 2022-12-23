@@ -10,6 +10,8 @@ class ComposerStaticInit1eec4b94b1472c1a90967a1c9f53d758
         'A' => 
         array (
             'App\\Views\\' => 10,
+            'App\\Components\\Tables\\' => 22,
+            'App\\Components\\Forms\\' => 21,
             'App\\Components\\' => 15,
         ),
     );
@@ -19,6 +21,14 @@ class ComposerStaticInit1eec4b94b1472c1a90967a1c9f53d758
         array (
             0 => __DIR__ . '/../..' . '/app/views',
         ),
+        'App\\Components\\Tables\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/components/tables',
+        ),
+        'App\\Components\\Forms\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/components/forms',
+        ),
         'App\\Components\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/components',
@@ -26,6 +36,9 @@ class ComposerStaticInit1eec4b94b1472c1a90967a1c9f53d758
     );
 
     public static $classMap = array (
+        'App\\Components\\Component' => __DIR__ . '/../..' . '/app/components/Component.php',
+        'App\\Components\\FormComponent' => __DIR__ . '/../..' . '/app/components/Component.php',
+        'App\\Components\\TableComponent' => __DIR__ . '/../..' . '/app/components/Component.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

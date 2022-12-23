@@ -98,13 +98,10 @@ html {
 .table-wrapper {
   flex: 1;
   margin-right: 50px;
-<<<<<<< HEAD:UI/css/Table.css
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: space-between;
-=======
->>>>>>> ui_quan:UI/public/css/Table.css
 }
 .table-wrapper table {
   width: 100%;
@@ -114,12 +111,9 @@ html {
 .table-wrapper table tr.active td {
   background-color: #dff6ff;
 }
-<<<<<<< HEAD:UI/css/Table.css
 .table-wrapper table tr.spaceUnder > td {
   padding-bottom: 1em;
 }
-=======
->>>>>>> ui_quan:UI/public/css/Table.css
 .table-wrapper table th,
 .table-wrapper table td {
   width: 15%;
@@ -138,10 +132,7 @@ html {
 }
 .table-wrapper table th {
   color: rgba(0, 0, 0, 0.6);
-<<<<<<< HEAD:UI/css/Table.css
   text-transform: uppercase;
-=======
->>>>>>> ui_quan:UI/public/css/Table.css
   font-size: 1.8rem;
   font-weight: 500;
 }
@@ -177,17 +168,6 @@ html {
 .table-wrapper table.scrollable tr {
   display: table;
   width: 100%;
-<<<<<<< HEAD:UI/css/Table.css
-}
-.table-wrapper table td .dribbble {
-  position: fixed;
-  display: block;
-  right: 20px;
-  bottom: 20px;
-}
-.table-wrapper table td .dribbble img {
-  display: block;
-  height: 28px;
 }
 
 .default {
@@ -373,6 +353,4 @@ button .change_button:hover {
 }
 button .change_button.actived {
   color: #47b5ff;
-=======
->>>>>>> ui_quan:UI/public/css/Table.css
 }/*# sourceMappingURL=Table.css.map */

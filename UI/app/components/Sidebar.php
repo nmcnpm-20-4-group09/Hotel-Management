@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Components;
 
 class Sidebar extends Component
@@ -60,7 +61,8 @@ class Sidebar extends Component
             <ul class="sidebar-buttons">
                 $buttonElements
             </ul>
-        </div>  
+        </div>
+
         EOT;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Components;
 
 class Header extends Component
@@ -24,7 +25,7 @@ class Header extends Component
                 'text' => 'Chuyển tài khoản'
             ],
             [
-                'link' => '/form?type=signin',
+                'link' => '/form?type=signup',
                 'icon' => 'right-from-bracket',
                 'text' => 'Đăng xuất'
             ]
@@ -66,6 +67,7 @@ class Header extends Component
             </div>
         </div>
         </header>
+
         EOT;
     }
 }

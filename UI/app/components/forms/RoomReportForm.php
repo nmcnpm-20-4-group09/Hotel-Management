@@ -1,27 +1,14 @@
 <?php
+
 namespace App\Components\Forms;
+
 use App\Components\TableComponent;
 
 class RoomReportForm extends TableComponent
 {
     public function __construct($props)
     {
-        $this->fields =
-            [
-                'STT',
-                'Phòng',
-                'Số ngày thuê',
-                'Tỷ lệ',
-            ];
-        $this->entries =
-            [
-                [
-                    '1',
-                    'A1.2',
-                    '11',
-                    '33.3%',
-                ],
-            ];
+        parent::__construct($props);
         $this->month = $props['month'];
     }
 
@@ -29,6 +16,7 @@ class RoomReportForm extends TableComponent
     {
         $fieldElements = $this->renderFields();
         $entryElements = $this->renderEntries();
+
         return <<< EOT
         <form class="report-form">
             <h2 class="form-title">Báo cáo mật độ sử dụng phòng</h2>

@@ -4,60 +4,9 @@ use App\Components\TableComponent;
 
 class RevenueReportForm extends TableComponent
 {
-    public function __construct($props)
+    public function __construct($props = [])
     {
-        $this->fields =
-            [
-                'STT',
-                'Loại phòng',
-                'Doanh thu',
-                'Tỷ lệ',
-            ];
-        $this->entries =
-            [
-                [
-                    '1',
-                    'A',
-                    '150.000.000',
-                    '33.3%',
-                ],
-                [
-                    '1',
-                    'A',
-                    '150.000.000',
-                    '33.3%',
-                ],
-                [
-                    '1',
-                    'A',
-                    '150.000.000',
-                    '33.3%',
-                ],
-                [
-                    '1',
-                    'A',
-                    '150.000.000',
-                    '33.3%',
-                ],
-                [
-                    '1',
-                    'A',
-                    '150.000.000',
-                    '33.3%',
-                ],
-                [
-                    '1',
-                    'A',
-                    '150.000.000',
-                    '33.3%',
-                ],
-                [
-                    '1',
-                    'A',
-                    '150.000.000',
-                    '33.3%',
-                ],
-            ];
+        parent::__construct($props);
         $this->month = $props['month'];
     }
 
@@ -65,6 +14,7 @@ class RevenueReportForm extends TableComponent
     {
         $fieldElements = $this->renderFields();
         $entryElements = $this->renderEntries();
+        
         return <<< EOT
         <form class="report-form">
             <h2 class="form-title">Báo cáo doanh thu theo loại phòng</h2>

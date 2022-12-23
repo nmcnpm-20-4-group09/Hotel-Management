@@ -1,30 +1,14 @@
 <?php
+
 namespace App\Components\Tables;
+
 use App\Components\TableComponent;
 
 class CustomerTable extends TableComponent
 {
-    public function __construct()
+    public function __construct($props = [])
     {
-        $this->fields = [
-            'STT',
-            'Mã khách',
-            'Họ và tên',
-            'Loại khách',
-            'CMND',
-            'SĐT',
-            'Thông tin chi tiết'
-        ];
-        $this->entries = [
-            [
-                '1',
-                'KH20221010',
-                'Đặng Võ Hoàng Kim Tuyền',
-                'Khách thường',
-                '123456789012',
-                '1234567890',
-            ],
-        ];
+        parent::__construct($props);
     }
 
     // Ghi đè phương thức của lớp cha
@@ -56,11 +40,9 @@ class CustomerTable extends TableComponent
     public function renderEntries()
     {
         $entryElements = '';
-        $entry = $this->entries[0];
 
-        // Tạm thời sinh dữ liệu giả
-        for ($i = 0; $i < 10; $i++) {
-            $entryElement = $this->renderColumns($entry);
+        foreach ($this->entries as $entry) {
+            $entryElement = $this->renderEntry($entry);
             $entryElement .= '
             <td>
                 <i class="fa-solid fa-circle-info"></i>

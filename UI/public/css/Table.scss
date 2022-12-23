@@ -5,10 +5,7 @@ $column-width: 15%;
 .table-wrapper {
     flex: 1;
     margin-right: 50px;
-<<<<<<< HEAD:UI/css/Table.scss
     @include flex(column, end, space-between);
-=======
->>>>>>> ui_quan:UI/public/css/Table.scss
 
     table {
         width: 100%;
@@ -18,14 +15,11 @@ $column-width: 15%;
         tr.active td {
             background-color: #dff6ff;
         }
-<<<<<<< HEAD:UI/css/Table.scss
         // ?
         tr.spaceUnder>td {
             padding-bottom: 1em;
         }
 
-=======
->>>>>>> ui_quan:UI/public/css/Table.scss
         th,
         td {
             width: $column-width;
@@ -45,10 +39,7 @@ $column-width: 15%;
 
         th {
             color: rgba(0, 0, 0, 0.6);
-<<<<<<< HEAD:UI/css/Table.scss
             text-transform: uppercase;
-=======
->>>>>>> ui_quan:UI/public/css/Table.scss
             @include font(1.8rem, 500);
         }
         td {
@@ -76,19 +67,6 @@ $column-width: 15%;
 
         &.scrollable {
             @include scrollable-table($table-max-height);
-        }
-<<<<<<< HEAD:UI/css/Table.scss
-
-        td .dribbble {
-            position: fixed;
-            display: block;
-            right: 20px;
-            bottom: 20px;
-
-            img {
-                display: block;
-                height: 28px;
-            }
         }
     }
 }
@@ -307,7 +285,5 @@ button {
             color: $primary-color;
         }
 
-=======
->>>>>>> ui_quan:UI/public/css/Table.scss
     }
 }
