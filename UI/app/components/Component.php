@@ -32,12 +32,12 @@ abstract class TableComponent extends Component
 
     protected function renderSelect($options)
     {
-        $field = "<select data-menu>";
+        $field = "<select title='category'>";
         $options = explode("|", $options);
 
         foreach ($options as $option) {
             $field .= <<<EOT
-                <option>{$option}</option>
+                <option value="$option">$option</option>
             EOT;
         }
 

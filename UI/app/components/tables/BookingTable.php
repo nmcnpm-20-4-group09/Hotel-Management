@@ -16,7 +16,7 @@ class BookingTable extends TableComponent
 
     public function renderTableButtons()
     {
-        $buttonsElement = '';
+        $buttonsElement = "<div class='table-buttons'>";
 
         foreach ($this->buttons as $button) {
             $text = $button['text'] ?? '';
@@ -33,7 +33,7 @@ class BookingTable extends TableComponent
             EOT;
         }
 
-        return $buttonsElement;
+        return $buttonsElement . "</div>";
     }
 
     protected function renderEntries()
@@ -45,7 +45,13 @@ class BookingTable extends TableComponent
 
             // Thêm checkbox vào các dòng
             if ($this->action == "delete" || $this->action == "justify") {
-                $entryElement .= "<td><input type='checkbox' class='checkbox'></td>";
+                $entryElement .= "
+                <td>
+                    <label>
+                        <input type='checkbox' class='checkbox'>
+                        <span class='checkmark'></span> 
+                    </label>
+                </td>";
             } else {
             }
 

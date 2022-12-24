@@ -112,7 +112,7 @@ route("/room-booking", function () {
                             "editable" => true
                         ],
                         [
-                            "value" => "Loại A|Loại B|Loại C",
+                            "value" => "Chọn loại phòng|Loại A|Loại B|Loại C",
                         ],
                         [
                             "value" => "150.000",
@@ -191,14 +191,14 @@ route("/room-booking", function () {
                     [
                         ["value" => "1",],
                         ["value" => "1403", "editable" => true],
-                        ["value" => "Loại A|Loại B|Loại C",],
+                        ["value" => "Chọn loại phòng|Loại A|Loại B|Loại C",],
                         ["value" => "150.000", "editable" => true],
                         ["value" => "Trống",],
                     ]
                 ],
                 "buttons" =>
                 [
-                    ["text" => "Thêm"]
+                    ["text" => "Thêm"],
                 ]
 
             ]
