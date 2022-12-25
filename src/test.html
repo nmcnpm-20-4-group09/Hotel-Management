@@ -7,28 +7,29 @@
     <title>Demo parsing response with JavaScript</title>
 </head>
 <body >
-    <button onclick="console.clear(), getBillDetails()">Click to exec getBillDetails(1, 1)</button>
+    <button onclick="console.clear(), getBillDetail()">Click to exec getBillDetail(1, 1)</button>
     <button onclick="console.clear(), getCustomerList()">Click to exec getCustomerList()</button>
-    <button onclick="console.clear(), getRoomCategories()">Click to exec getRoomCategories()</button>
+    <button onclick="console.clear(), getRoomCategoryList()">Click to exec getRoomCategoryList()</button>
     <button onclick="console.clear(), getRoomList()">Click to exec getRoomList()</button>
     <button onclick="console.clear(), updateSurcharge()">Click to exec updateSurcharge()</button>
+    <button onclick="console.clear(), getBillList()">Click to exec getBillList()</button>
 </body>
 
 <script>
-    function getBillDetails() {
-        var url = "BLL/ChiTietHoaDon.php" 
+    function getBillDetail() {
+        var url = "BLL/GET/BillDetail.php" 
         + "?SoPhieuThue=" + '1'
         + "&SoHoaDon=" + '1';
         
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveBillDetails;
+        xhr.onreadystatechange = onReceiveBillDetail;
 
         xhr.open("GET", url, true);
         xhr.send();
         console.log(url);
     }
 
-    function onReceiveBillDetails() 
+    function onReceiveBillDetail() 
     {
         if (this.readyState == 4 && this.status == 200) 
         {
@@ -59,7 +60,7 @@
     }
 
     function getCustomerList () {
-        var url = "BLL/DanhSachKhach.php";
+        var url = "BLL/GET/CustomerList.php";
         
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = onReceiveCustomerList;
@@ -101,18 +102,18 @@
         }       
     }
 
-    function getRoomCategories() {
-        var url = "BLL/DanhMucPhong.php";
+    function getRoomCategoryList() {
+        var url = "BLL/GET/RoomCategoryList.php";
         
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveRoomCategories;
+        xhr.onreadystatechange = onReceiveRoomCategoryList;
 
         xhr.open("GET", url, true);
         xhr.send();
         console.log(url);
     }
 
-    function onReceiveRoomCategories() 
+    function onReceiveRoomCategoryList() 
     {
         if (this.readyState == 4 && this.status == 200) 
         {
@@ -142,7 +143,7 @@
     }
 
     function getRoomList() {
-        var url = "BLL/DanhSachPhong.php";
+        var url = "BLL/GET/RoomList.php";
         
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = onReceiveRoomList;
@@ -191,12 +192,12 @@
     
         xhr.onreadystatechange = onReceiveUpdateSurcharge;
     
-        xhr.open("PUT", "BLL/ThayDoiPhuThu.php", true); 
+        xhr.open("PUT", "BLL/PUT/Surcharge.php", true); 
         xhr.setRequestHeader('Content-Type', 'application/json'); 
         xhr.send(JSON.stringify(data)); 
 
         console.log(
-            'PUT: ThayDoiPhuThu.php, data: ' 
+            'PUT: Surcharge.php, data: ' 
             + JSON.stringify(data)
         );
     }
@@ -235,5 +236,43 @@
         }       
     }
 
+    function getBillList() {
+        var url = "BLL/GET/BillList.php";
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = onReceiveRoomList;
+
+        xhr.open("GET", url, true);
+        xhr.send();
+        console.log(url);
+    }
+
+    function onReceiveBillList() 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            var received = JSON.parse(this.responseText);
+            
+            if (received['success'])
+            {
+                var response = received['result'];
+                
+                for (let i = 0; i < response.length; i++)
+                {
+                    var bill = response[i];
+                    console.log(bill);
+
+                    // Un-comment those to get specific data
+                    // console.log(bill['SoHoaDon']);
+                    // console.log(bill['NgayThanhToan']);
+                    // console.log(bill['TriGia']);
+                }
+            }
+            else
+            {
+                console.log(received['message']);
+            }
+        }       
+    }
 </script>
 </html>

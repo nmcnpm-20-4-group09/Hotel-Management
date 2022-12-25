@@ -4,7 +4,7 @@ namespace DTO;
 
 require __DIR__ . "/DTOInterface.php";
 
-class RoomTypeDTO implements DTOInterface
+class RoomCategoryDTO implements DTOInterface
 {
     private $maLoai;
     private $soLuongPhong;
@@ -39,7 +39,7 @@ class RoomTypeDTO implements DTOInterface
 
     public function getNewInstance($dbColumnMapper)
     {
-        return new RoomTypeDTO(
+        return new RoomCategoryDTO(
             $dbColumnMapper["MaLoai"],
             $dbColumnMapper["SoLuongPhong"],
             $dbColumnMapper["DonGia"],
@@ -61,7 +61,7 @@ class RoomTypeDTO implements DTOInterface
 
     public static function getPrototype()
     {
-        return new RoomTypeDTO(null, null, null, null, null);
+        return new RoomCategoryDTO(null, null, null, null, null);
     }
 
     public function maLoai()

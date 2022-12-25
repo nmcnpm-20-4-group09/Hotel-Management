@@ -33,6 +33,12 @@ class MySQLQueryStringCreator
         $queryString = "call sp_doiTiLePhuThu ('" . $MaPhuThu . "', " . $TiLeMoi . ")";
         return $queryString;
     }
+
+    public static function danhSachHoaDon()
+    {
+        $queryString = "call sp_danhSachHoaDon();";
+        return $queryString;
+    }
 }
 
 ?>

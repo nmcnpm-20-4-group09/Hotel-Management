@@ -79,21 +79,25 @@ class MySQLiConnection implements DBConnectionInterface
 
         if ($this->connection == null) {
             $queryResult = null;
-        } else if ($isReading) {
+        } else {
             $data = $this->connection->query($queryString);
 
-            while ($row = $data->fetch_assoc()) {
-                $dbColumnMapper = $dto->getDBColumnMapper();
+            if ($data == false) {
+                $queryResult = null;
+            } else if ($isReading) {
+                while ($row = $data->fetch_assoc()) {
+                    $dbColumnMapper = $dto->getDBColumnMapper();
 
-                foreach ($dbColumnMapper as $key => $value) {
-                    $dbColumnMapper[$key] = $row[$key];
+                    foreach ($dbColumnMapper as $key => $value) {
+                        $dbColumnMapper[$key] = $row[$key];
+                    }
+
+                    $rowToObject = $dto->getNewInstance($dbColumnMapper);
+                    $queryResult[] = $rowToObject;
                 }
 
-                $rowToObject = $dto->getNewInstance($dbColumnMapper);
-                $queryResult[] = $rowToObject;
+                mysqli_free_result($data);
             }
-
-            mysqli_free_result($data);
         }
 
         return $queryResult;

@@ -28,8 +28,8 @@ $success = TRUE;
 $message = "";
 $result = [];
 
-$regex_MaPhuThu = "/^([A-Za-z0-9]){1,5}$/"; // VARCHAR(5)
-$regex_TiLeMoi = "/^([0-9]+)((\.[0-9]+)?)$/"; // DOUBLE
+$regex_MaPhuThu = "/^([A-Za-z0-9]){1,5}$/"; // VARCHAR(5) with len in [1, 5]
+$regex_TiLeMoi = "/^([0-9]+)((\.[0-9]+)?)$/"; // DOUBLE [accept x.y or x], [not accept x. or .x]
 
 $isValidData = (preg_match($regex_MaPhuThu, $MaPhuThu) and
     preg_match($regex_TiLeMoi, $TiLeMoi)

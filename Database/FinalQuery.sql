@@ -60,3 +60,14 @@ BEGIN
     WHERE pt.MaPhuThu = MaPhuThu;
 END//
 DELIMITER ;
+
+-- Lấy danh sách hoá đơn
+DROP PROCEDURE IF EXISTS sp_danhSachHoaDon;
+DELIMITER //
+CREATE 
+PROCEDURE sp_danhSachHoaDon ()   
+BEGIN
+    SELECT *
+    FROM HoaDon;
+END//
+DELIMITER ;
