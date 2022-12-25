@@ -1,0 +1,35 @@
+@import './base.scss';
+
+.toolbar {
+    padding: 12px;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    display: none;
+
+    .button {
+        padding: 10px;
+        margin: 16px 0;
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        background: transparent;
+        box-shadow: 0 0 6px 0 rgba(100, 99, 99, 0.25);
+
+        i {
+            @include font(2.4rem, 700);
+        }
+
+        &:hover {
+            color: $primary-color;
+            cursor: pointer;
+        }
+        &.active {
+            color: $primary-color;
+        }
+    }
+
+    &.active {
+        @include flex(column, space-around, center);
+    }
+}

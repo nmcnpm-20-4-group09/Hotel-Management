@@ -1,0 +1,107 @@
+@import './base.scss';
+
+$table-max-height: calc(100vh - 400px);
+$column-width: 15%;
+.table-wrapper {
+    flex: 1;
+    margin-right: 50px;
+    @include flex(column, end, space-between);
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+
+        tr.active td {
+            background-color: #dff6ff;
+        }
+
+        th,
+        td {
+            width: $column-width;
+            padding: 20px 10px;
+            text-align: center;
+
+            &:first-of-type {
+                border-top-left-radius: 16px;
+                border-bottom-left-radius: 16px;
+            }
+
+            &:last-of-type {
+                border-top-right-radius: 16px;
+                border-bottom-right-radius: 16px;
+            }
+        }
+
+        th {
+            color: rgba(0, 0, 0, 0.6);
+            text-transform: uppercase;
+            @include font(1.8rem, 500);
+        }
+        td {
+            &.spacer {
+                padding: 10px;
+            }
+            &:not(.spacer) {
+                background-color: #fff;
+                box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
+                @include font(1.4rem, 500);
+
+                i {
+                    font-size: 2.4rem;
+                    &:hover {
+                        cursor: pointer;
+                        color: $primary-color;
+                        opacity: 0.8;
+                    }
+                }
+            }
+            &:nth-of-type(2) {
+                color: $primary-color;
+            }
+        }
+        td[contenteditable='true'] {
+            outline: none;
+        }
+
+        select {
+            outline: none;
+            padding: 8px;
+            border: 1px solid $primary-color;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        input[type='checkbox'] {
+            @include size(20px);
+        }
+
+        &.scrollable {
+            @include scrollable-table($table-max-height);
+        }
+    }
+
+    .table-buttons {
+        margin: 20px 17px 0 0;
+        @include flex(row, center, center);
+
+        button {
+            color: #fff;
+            outline: none;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 30px;
+            margin: 0 8px;
+            box-shadow: 0px 3px 0px 0px #256d85;
+            background-color: $primary-color;
+
+            &:hover {
+                cursor: pointer;
+            }
+            &:active {
+                transform: translateY(5px);
+                box-shadow: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,102 @@
+@import './base.scss';
+
+$stats-w: 700px;
+.overview {
+    width: 100%;
+    margin-bottom: 30px;
+    @include flex(row, flex-start, center);
+
+    .stats {
+        flex-shrink: 1;
+        width: $stats-w;
+
+        & > div {
+            flex-wrap: wrap;
+            @include flex(row, space-between, center);
+
+            .stat {
+                width: 30%;
+                padding: 20px 30px;
+                box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 12px;
+                text-align: left;
+                margin-top: 20px;
+                transition: transform 0.5s ease;
+
+                &:hover {
+                    transform: translateY(-10%);
+                }
+
+                .image-wrapper {
+                    border-radius: 50%;
+                    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+                    background-color: #fff;
+                    @include size(60px);
+                    @include flex(row, center, center);
+
+                    img {
+                        @include size(70%);
+                    }
+                }
+
+                p {
+                    margin: 10px 0;
+                    color: #5e5757;
+                    @include font(1.6rem, 400);
+                }
+                b {
+                    color: #5e5757;
+                    @include font(1.8rem, 800);
+                }
+            }
+
+            .stat:nth-of-type(1) {
+                background-color: #bbf8db;
+            }
+            .stat:nth-of-type(2) {
+                background-color: #dff6ff;
+            }
+            .stat:nth-of-type(3) {
+                background-color: #f8dea0;
+            }
+            .stat:last-of-type {
+                width: 100%;
+                padding: 30px 15px;
+                background-color: #fff;
+                @include flex(row, flex-start, center);
+
+                &:hover {
+                    transform: none;
+                }
+
+                div:not(.image-wrapper) {
+                    p {
+                        margin: 0 0 4px 0;
+                    }
+                    margin: 0 10px;
+                }
+            }
+        }
+    }
+
+    $banner-w: 25%;
+    $banner-h: 360px;
+    .banner {
+        border-radius: 32px;
+        box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+        background: url('../images/hotel.jpg') no-repeat center center;
+        background-size: cover;
+        transition: transform 0.5s ease;
+        margin-left: auto;
+        flex-shrink: 1;
+        @include size($banner-w, $banner-h);
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        & + .banner {
+            background-image: url('../images/inside.jpg');
+        }
+    }
+}
