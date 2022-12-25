@@ -1,6 +1,6 @@
 <?php
 
-namespace DAL;
+namespace DALv1;
 
 require __DIR__ . "/DBConnectionInterface.php";
 

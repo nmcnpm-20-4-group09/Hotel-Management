@@ -1,6 +1,6 @@
 <?php
 
-namespace DTO;
+namespace DTOv2;
 
 require __DIR__ . "/DTOInterface.php";
 
@@ -8,15 +8,15 @@ class RoomDTO implements DTOInterface
 {
     private $maPhong;
     private $maLoai;
+    private $donGia;
     private $tinhTrang;
-    private $ghiChu;
 
-    public function __construct($maPhong, $maLoai, $tinhTrang, $ghiChu)
+    public function __construct($maPhong, $maLoai, $donGia, $tinhTrang)
     {
         $this->maPhong = $maPhong;
         $this->maLoai = $maLoai;
+        $this->donGia = $donGia;
         $this->tinhTrang = $tinhTrang;
-        $this->ghiChu = $ghiChu;
     }
 
     public function getDBColumnMapper()
@@ -24,8 +24,8 @@ class RoomDTO implements DTOInterface
         return [
             "MaPhong" => null,
             "MaLoai" => null,
-            "TinhTrang" => null,
-            "GhiChu" => null
+            "DonGia" => null,
+            "TinhTrang" => null
         ];
     }
 
@@ -34,8 +34,8 @@ class RoomDTO implements DTOInterface
         return new RoomDTO(
             $dbColumnMapper["MaPhong"],
             $dbColumnMapper["MaLoai"],
-            $dbColumnMapper["TinhTrang"],
-            $dbColumnMapper["GhiChu"]
+            $dbColumnMapper["DonGia"],
+            $dbColumnMapper["TinhTrang"]
         );
     }
 
@@ -44,8 +44,8 @@ class RoomDTO implements DTOInterface
         return array(
             "MaPhong" => $this->maPhong,
             "MaLoai" => $this->maLoai,
-            "TinhTrang" => $this->tinhTrang,
-            "GhiChu" => $this->ghiChu
+            "DonGia" => $this->donGia,
+            "TinhTrang" => $this->tinhTrang
         );
     }
 

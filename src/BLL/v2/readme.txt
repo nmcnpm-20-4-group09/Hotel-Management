@@ -1,0 +1,1 @@
+Xử lý dựa trên các màn hình giao diện và dựa trên các DTO v2.

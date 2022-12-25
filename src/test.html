@@ -1,278 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>  
+
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo parsing response with JavaScript</title>
+    <script src="script-v1.js"></script>
+    <script src="script-v2.js"></script>
 </head>
-<body >
-    <button onclick="console.clear(), getBillDetail()">Click to exec getBillDetail(1, 1)</button>
-    <button onclick="console.clear(), getCustomerList()">Click to exec getCustomerList()</button>
-    <button onclick="console.clear(), getRoomCategoryList()">Click to exec getRoomCategoryList()</button>
-    <button onclick="console.clear(), getRoomList()">Click to exec getRoomList()</button>
-    <button onclick="console.clear(), updateSurcharge()">Click to exec updateSurcharge()</button>
-    <button onclick="console.clear(), getBillList()">Click to exec getBillList()</button>
+
+<body>
+    <span>v1</span>
+    <div>
+        <button onclick="console.clear(), v1_getBillDetail(1, 1)">Click to exec v1_getBillDetail(1, 1)</button>
+        <button onclick="console.clear(), v1_getCustomerList()">Click to exec v1_getCustomerList()</button>
+        <button onclick="console.clear(), v1_getRoomCategoryList()">Click to exec v1_getRoomCategoryList()</button>
+        <button onclick="console.clear(), v1_getRoomList()">Click to exec v1_getRoomList()</button>
+        <button onclick="console.clear(), v1_updateSurcharge()">Click to exec v1_updateSurcharge()</button>
+        <button onclick="console.clear(), v1_getBillList()">Click to exec v1_getBillList()</button>
+        <button onclick="console.clear(), v1_getBookingDetail(5)">Click to exec v1_getBookingDetail(5)</button>
+    </div>
+    <span>v2</span>
+        <button onclick="console.clear(), v2_getRoomList()">Click to exec v2_getRoomList()</button>
+    <div>
+        
+    </div>
 </body>
 
-<script>
-    function getBillDetail() {
-        var url = "BLL/GET/BillDetail.php" 
-        + "?SoPhieuThue=" + '1'
-        + "&SoHoaDon=" + '1';
-        
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveBillDetail;
-
-        xhr.open("GET", url, true);
-        xhr.send();
-        console.log(url);
-    }
-
-    function onReceiveBillDetail() 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            var received = JSON.parse(this.responseText);
-            
-            if (received['success'])
-            {
-                var response = received['result'];
-                
-                for (let i = 0; i < response.length; i++)
-                {
-                    var details = response[i];
-                    console.log(details);
-                    
-                    // Un-comment those to get specific data
-                    console.log(details['SoPhieuThue']);
-                    console.log(details['SoHoaDon']);
-                    console.log(details['SoNgayThueThuc']);
-                    console.log(details['TienThuePhong']);
-                    console.log(details['MaPhuThu']);
-                }
-            }
-            else
-            {
-                console.log(received['message']);
-            }
-        }       
-    }
-
-    function getCustomerList () {
-        var url = "BLL/GET/CustomerList.php";
-        
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveCustomerList;
-
-        xhr.open("GET", url, true);
-        xhr.send();
-        console.log(url);
-    }
-
-    function onReceiveCustomerList() 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            var received = JSON.parse(this.responseText);
-            
-            if (received['success'])
-            {
-                var response = received['result'];
-                
-                for (let i = 0; i < response.length; i++)
-                {
-                    var customer = response[i];
-                    console.log(customer);
-
-                    // Un-comment those to get specific data
-                    // console.log(customer['ID_KhachHang']);
-                    // console.log(customer['LoaiKhach']);
-                    // console.log(customer['HoTen']);
-                    // console.log(customer['NgaySinh']);
-                    // console.log(customer['DiaChi']);
-                    // console.log(customer['SoDienThoai']);
-                    // console.log(customer['CMND']);
-                }
-            }
-            else
-            {
-                console.log(received['message']);
-            }
-        }       
-    }
-
-    function getRoomCategoryList() {
-        var url = "BLL/GET/RoomCategoryList.php";
-        
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveRoomCategoryList;
-
-        xhr.open("GET", url, true);
-        xhr.send();
-        console.log(url);
-    }
-
-    function onReceiveRoomCategoryList() 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            var received = JSON.parse(this.responseText);
-            
-            if (received['success'])
-            {
-                var response = received['result'];
-                
-                for (let i = 0; i < response.length; i++)
-                {
-                    var roomCategory = response[i];
-                    console.log(roomCategory);
-
-                    // Un-comment those to get specific data
-                    // console.log(roomCategory['MaLoai']);
-                    // console.log(roomCategory['SoLuongPhong']);
-                    // console.log(roomCategory['DonGia']);
-                    // console.log(roomCategory['LuongKhachToiDa']);
-                }
-            }
-            else
-            {
-                console.log(received['message']);
-            }
-        }       
-    }
-
-    function getRoomList() {
-        var url = "BLL/GET/RoomList.php";
-        
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveRoomList;
-
-        xhr.open("GET", url, true);
-        xhr.send();
-        console.log(url);
-    }
-
-    function onReceiveRoomList() 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            var received = JSON.parse(this.responseText);
-            
-            if (received['success'])
-            {
-                var response = received['result'];
-                
-                for (let i = 0; i < response.length; i++)
-                {
-                    var room = response[i];
-                    console.log(room);
-
-                    // Un-comment those to get specific data
-                    // console.log(room['MaPhong']);
-                    // console.log(room['MaLoai']);
-                    // console.log(room['TinhTrang']);
-                    // console.log(room['GhiChu']);
-                }
-            }
-            else
-            {
-                console.log(received['message']);
-            }
-        }       
-    }
-
-    function updateSurcharge() {
-        var data = { 
-            "MaPhuThu" : "PT01",
-            "TiLeMoi" : Math.random()
-        }; 
-
-        var xhr = new XMLHttpRequest(); 
-    
-        xhr.onreadystatechange = onReceiveUpdateSurcharge;
-    
-        xhr.open("PUT", "BLL/PUT/Surcharge.php", true); 
-        xhr.setRequestHeader('Content-Type', 'application/json'); 
-        xhr.send(JSON.stringify(data)); 
-
-        console.log(
-            'PUT: Surcharge.php, data: ' 
-            + JSON.stringify(data)
-        );
-    }
-
-    function onReceiveUpdateSurcharge() 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            var received = JSON.parse(this.responseText);
-            
-            if (received['success'])
-            {
-                var response = received['result'];
-                
-                if (response.length == 0) 
-                    console.log("No things was update");
-                else
-                    console.log("Changed: ");
-
-                for (let i = 0; i < response.length; i++)
-                {
-                    var surcharge = response[i];
-                    console.log(surcharge);
-
-                    // Un-comment those to get specific data
-                    // console.log(surcharge['MaPhong']);
-                    // console.log(surcharge['MaLoai']);
-                    // console.log(surcharge['TinhTrang']);
-                    // console.log(surcharge['GhiChu']);
-                }
-            }
-            else
-            {
-                console.log(received['message']);
-            }
-        }       
-    }
-
-    function getBillList() {
-        var url = "BLL/GET/BillList.php";
-        
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = onReceiveRoomList;
-
-        xhr.open("GET", url, true);
-        xhr.send();
-        console.log(url);
-    }
-
-    function onReceiveBillList() 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            var received = JSON.parse(this.responseText);
-            
-            if (received['success'])
-            {
-                var response = received['result'];
-                
-                for (let i = 0; i < response.length; i++)
-                {
-                    var bill = response[i];
-                    console.log(bill);
-
-                    // Un-comment those to get specific data
-                    // console.log(bill['SoHoaDon']);
-                    // console.log(bill['NgayThanhToan']);
-                    // console.log(bill['TriGia']);
-                }
-            }
-            else
-            {
-                console.log(received['message']);
-            }
-        }       
-    }
-</script>
 </html>

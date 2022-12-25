@@ -1,6 +1,6 @@
 <?php
 
-namespace DTO;
+namespace DTOv1;
 
 interface DTOInterface
 {

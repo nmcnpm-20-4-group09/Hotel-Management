@@ -1,28 +1,25 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/BillDetailDTO.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/v1/MySQLQueryStringGenerator.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/v1/MySQLiConnection.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/v1/BookingDetailDTO.php";
 
-use BLL\MySQLQueryStringCreator;
-use DAL\MySQLiConnection;
-use DTO\BillDetailDTO;
+use BLLv1\MySQLQueryStringGenerator;
+use DALv1\MySQLiConnection;
+use DTOv1\BookingDetailDTO;
 
 $soPhieuThue = $_GET["SoPhieuThue"];
-$soHoaDon = $_GET["SoHoaDon"];
 
 $success = true;
 $message = "";
 $result = [];
 
-$pattern = "/^[0-9]*$/";
+$pattern = "/^[0-9]+$/"; // INT
 
-$isValidData = (preg_match($pattern, $soPhieuThue) and
-    preg_match($pattern, $soHoaDon)
-);
+$isValidData = preg_match($pattern, $soPhieuThue);
 
 if (!$isValidData) {
-    $success = FALSE;
+    $success = false;
     $message = "Invalid parameters!";
 } else {
     try {
@@ -35,16 +32,15 @@ if (!$isValidData) {
         $success = FALSE;
         $message = "Unable to connect to the database!";
     } else {
-        $queryString = MySQLQueryStringCreator
-            ::chiTietHoaDon(
-                $soPhieuThue,
-                $soHoaDon
+        $queryString = MySQLQueryStringGenerator
+            ::chiTietPhieuThue(
+                $soPhieuThue
             );
 
         $dtoList = $connection->execQuery(
             $queryString,
             $isReading = true,
-            BillDetailDTO::getPrototype()
+            BookingDetailDTO::getPrototype()
         );
 
         $result = [];

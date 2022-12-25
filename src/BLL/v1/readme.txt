@@ -1,0 +1,1 @@
+Xử lý dựa trên các bảng và dựa trên các DTO v1.

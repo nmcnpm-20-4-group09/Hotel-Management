@@ -1,0 +1,1 @@
+Mỗi DTO được dựa trên các trường dữ liệu ở mỗi bảng của database.

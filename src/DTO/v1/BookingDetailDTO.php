@@ -1,6 +1,6 @@
 <?php
 
-namespace DTO;
+namespace DTOv1;
 
 require __DIR__ . "/DTOInterface.php";
 
@@ -35,8 +35,8 @@ class BookingDetailDTO implements DTOInterface
     public function toDictionary()
     {
         return array(
-            "ID_KhachHang" => $this->soPhieuThue,
-            "SoPhieuThue" => $this->idKhachHang
+            "ID_KhachHang" => $this->idKhachHang,
+            "SoPhieuThue" => $this->soPhieuThue
         );
     }
 

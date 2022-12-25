@@ -1,12 +1,12 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/RoomDTO.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/v1/MySQLQueryStringGenerator.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/v1/MySQLiConnection.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/v1/BillDTO.php";
 
-use BLL\MySQLQueryStringCreator;
-use DAL\MySQLiConnection;
-use DTO\RoomDTO;
+use BLLv1\MySQLQueryStringGenerator;
+use DALv1\MySQLiConnection;
+use DTOv1\BillDTO;
 
 $success = true;
 $message = "";
@@ -22,12 +22,12 @@ if ($connection == null) {
     $success = false;
     $message = "Unable to connect to the database!";
 } else {
-    $queryString = MySQLQueryStringCreator::danhSachPhong();
+    $queryString = MySQLQueryStringGenerator::danhSachHoaDon();
 
     $dtoList = $connection->execQuery(
         $queryString,
         $isReading = true,
-        RoomDTO::getPrototype()
+        BillDTO::getPrototype()
     );
 
     $result = [];

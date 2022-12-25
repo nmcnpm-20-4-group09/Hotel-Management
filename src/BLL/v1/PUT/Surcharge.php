@@ -1,12 +1,12 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/MySQLQueryStringCreator.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/SurchargeDTO.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/v1/MySQLQueryStringGenerator.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/v1/MySQLiConnection.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/v1/SurchargeDTO.php";
 
-use BLL\MySQLQueryStringCreator;
-use DAL\MySQLiConnection;
-use DTO\SurchargeDTO;
+use BLLv1\MySQLQueryStringGenerator;
+use DALv1\MySQLiConnection;
+use DTOv1\SurchargeDTO;
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -51,7 +51,7 @@ if (!$isValidData) {
         $success = FALSE;
         $message = "Unable to connect to the database!";
     } else {
-        $queryString = MySQLQueryStringCreator
+        $queryString = MySQLQueryStringGenerator
             ::doiTiLePhuThu(
                 $MaPhuThu,
                 $TiLeMoi
