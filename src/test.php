@@ -1,32 +1,20 @@
 <?php
 
-require "/Applications/XAMPP/xamppfiles/htdocs/Hotel-Management/src/DAL/MySQLiConnection.php";
-// require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/MySQLiConnection.php";
-
-use DAL\MySQLiConnection;
-
-try {
-    $connection = MySQLiConnection::instance();
-} catch (Exception $e) {
-    echo $e->getMessage();
+$response = file_get_contents('http://localhost/Hotel-Management/src/BLL/v2/GET/RoomList.php');
+// echo $response;
+$response = json_decode($response, true);
+// echo $response;
+echo $response["success"];
+echo "</br>";
+echo $response["message"];
+echo "</br>";
+foreach ($response["result"] as $item)
+{
+    echo $item["MaPhong"]; echo " ";
+    echo $item["MaLoai"]; echo " ";
+    echo $item["DonGia"]; echo " ";
+    echo $item["TinhTrang"]; echo "</br>";
 }
 
-if ($connection == null) {
-    $success = FALSE;
-    $message = "Unable to connect to the database!";
-    echo $message;
-} else {
-    $queryString = ("UPDATE `phong` SET `GhiChu` = `12345` FROM `phong` WHERE `MaPhong` = `P01`;");
-    
-    $dtoList = $connection->execQuery($queryString);
-    if ($dtoList == null)
-    {
-        echo "null";
-    }else{
-        $message = "OK";
-        echo $queryString;
-        echo $message;
-    }
-}
 
 ?>
