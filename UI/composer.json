@@ -9,6 +9,9 @@
         },
         "classmap": [
             "./app/components/Component.php"
+        ],
+        "files":[
+            "./config.php"
         ]
     },
     "authors": [

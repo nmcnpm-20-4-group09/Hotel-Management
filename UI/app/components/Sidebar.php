@@ -9,22 +9,22 @@ class Sidebar extends Component
         $this->homeIcon = './images/icons/home.png';
         $this->buttons = [
             [
-                'link' => '/room',
+                'link' => '?page=room',
                 'icon' => 'bed',
                 'text' => 'Danh sách phòng'
             ],
             [
-                'link' => '/customer',
+                'link' => '?page=customer',
                 'icon' => 'person',
                 'text' => 'Danh sách khách',
             ],
             [
-                'link' => '/bill',
+                'link' => '?page=bill',
                 'icon' => 'receipt',
                 'text' => 'Danh sách hóa đơn'
             ],
             [
-                'link' => '/report',
+                'link' => '?page=report',
                 'icon' => 'chart-simple',
                 'text' => 'Báo cáo theo tháng'
             ]
@@ -54,7 +54,7 @@ class Sidebar extends Component
 
         return <<<EOT
         <div class="sidebar">
-            <a class="home" href="/">
+            <a class="home" href="?page=home">
                 <img class="home-icon" src="$this->homeIcon" alt="Home page" />
                 <p class="home-text hidden"> Về trang chủ </p>
             </a>

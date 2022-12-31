@@ -6,7 +6,7 @@ require_once "../vendor/autoload.php";
 
 $routes = [];
 
-route("/", function () {
+route("home", function () {
     View::renderView(
         "home",
         [
@@ -48,7 +48,7 @@ route("/", function () {
     );
 });
 
-route("/room", function () {
+route("room", function () {
     View::renderView(
         "room",
         [
@@ -87,7 +87,7 @@ route("/room", function () {
     );
 });
 
-route("/room-booking", function () {
+route("room-booking", function () {
     $action = $_GET['action'] ?? "";
 
     if ($action == "edit") {
@@ -274,7 +274,7 @@ route("/room-booking", function () {
     }
 });
 
-route("/customer", function () {
+route("customer", function () {
     View::renderView(
         "customer",
         [
@@ -301,16 +301,16 @@ route("/customer", function () {
     );
 });
 
-route("/bill", function () {
+route("bill", function () {
     View::renderView("bill");
 });
 
-route("/report", function () {
+route("report", function () {
     View::renderView("report");
 });
 
 
-route("/form", function () {
+route("form", function () {
     $formType = $_GET['type'] ?? "";
 
     if ($formType == 'report') {
@@ -405,7 +405,8 @@ function run()
     global $routes;
 
     $uri = $_SERVER['REQUEST_URI'];
-    $route = explode('?', $uri)[0];
+    $page = explode('?', $uri)[1] ?? "page=home";
+    $route = explode('=', $page)[1];
 
     if (array_key_exists($route, $routes)) {
         $routes[$route]();
