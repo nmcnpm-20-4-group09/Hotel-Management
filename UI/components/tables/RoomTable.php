@@ -1,33 +1,20 @@
 <?php
-
-namespace App\Components\Tables;
-
-use App\Components\TableComponent;
+namespace Components\Tables;
+use Components\TableComponent;
 
 class RoomTable extends TableComponent
 {
     public function __construct($props = [])
     {
         parent::__construct($props);
-    }
 
-    // Ghi đè phương thức của lớp cha
-    public function renderEntries()
-    {
-        $entryElements = '';
-
-        foreach ($this->entries as $entry) {
-            $entryElement = $this->renderEntry($entry);
-            $entryElement .= '
-            <td>
-                <a href="./room-booking">
-                    <i class="fa-solid fa-circle-info"></i>
-                </a>
-            </td>';
-            $entryElements .= "<tr>" . $entryElement . "</tr>";
-        }
-
-        return $entryElements;
+        $this->fields = [
+            'STT',
+            'Phòng',
+            'Loại phòng',
+            'Đơn giá',
+            'Tình trạng',
+        ];
     }
 
     public function render()

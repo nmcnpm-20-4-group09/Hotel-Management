@@ -3,9 +3,10 @@ const $$ = document.querySelectorAll.bind(document)
 
 const features = {
     room: 0,
-    customer: 1,
-    bill: 2,
-    report: 3,
+    booking: 1,
+    customer: 2,
+    bill: 3,
+    report: 4,
 }
 
 // Xử lý sự kiện cho các nút bấm

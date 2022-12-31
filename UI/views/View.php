@@ -1,15 +1,5 @@
 <?php
-
-namespace App\Views;
-
-// ! Move to form view
-use App\Components\Forms\SignInForm;
-use App\Components\Forms\SignUpForm;
-use App\Components\Forms\RevenueReportForm;
-use App\Components\Forms\RoomReportForm;
-
-use App\Views\RoomView;
-
+namespace Views;
 
 class View
 {
@@ -37,10 +27,5 @@ class View
         $view = new View::$views[$viewName]($props);
 
         echo $view->render();
-    }
-
-    // TODO: implement this
-    static function redirect($view)
-    {
     }
 }

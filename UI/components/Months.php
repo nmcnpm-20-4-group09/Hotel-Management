@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Components;
+namespace Components;
 
 class Months extends Component
 {

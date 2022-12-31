@@ -6,8 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Views\\' => array($baseDir . '/app/views'),
-    'App\\Components\\Tables\\' => array($baseDir . '/app/components/tables'),
-    'App\\Components\\Forms\\' => array($baseDir . '/app/components/forms'),
-    'App\\Components\\' => array($baseDir . '/app/components'),
+    'Views\\' => array($baseDir . '/views'),
+    'Components\\Tables\\' => array($baseDir . '/components/tables'),
+    'Components\\Forms\\' => array($baseDir . '/components/forms'),
+    'Components\\' => array($baseDir . '/components'),
 );

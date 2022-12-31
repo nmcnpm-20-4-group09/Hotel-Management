@@ -6,43 +6,42 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit1eec4b94b1472c1a90967a1c9f53d758
 {
-    public static $files = array (
-        'e7adc90a310609dcb66b19407909e868' => __DIR__ . '/../..' . '/config.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'A' => 
+        'V' => 
         array (
-            'App\\Views\\' => 10,
-            'App\\Components\\Tables\\' => 22,
-            'App\\Components\\Forms\\' => 21,
-            'App\\Components\\' => 15,
+            'Views\\' => 6,
+        ),
+        'C' => 
+        array (
+            'Components\\Tables\\' => 18,
+            'Components\\Forms\\' => 17,
+            'Components\\' => 11,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'App\\Views\\' => 
+        'Views\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/views',
+            0 => __DIR__ . '/../..' . '/views',
         ),
-        'App\\Components\\Tables\\' => 
+        'Components\\Tables\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/components/tables',
+            0 => __DIR__ . '/../..' . '/components/tables',
         ),
-        'App\\Components\\Forms\\' => 
+        'Components\\Forms\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/components/forms',
+            0 => __DIR__ . '/../..' . '/components/forms',
         ),
-        'App\\Components\\' => 
+        'Components\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/components',
+            0 => __DIR__ . '/../..' . '/components',
         ),
     );
 
     public static $classMap = array (
-        'App\\Components\\Component' => __DIR__ . '/../..' . '/app/components/Component.php',
-        'App\\Components\\FormComponent' => __DIR__ . '/../..' . '/app/components/Component.php',
-        'App\\Components\\TableComponent' => __DIR__ . '/../..' . '/app/components/Component.php',
+        'Components\\Component' => __DIR__ . '/../..' . '/components/Component.php',
+        'Components\\FormComponent' => __DIR__ . '/../..' . '/components/Component.php',
+        'Components\\TableComponent' => __DIR__ . '/../..' . '/components/Component.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

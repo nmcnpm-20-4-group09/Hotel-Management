@@ -1,6 +1,6 @@
 <?php
-namespace App\Components\Forms;
-use App\Components\FormComponent;
+namespace Components\Forms;
+use Components\FormComponent;
 
 class SignUpForm extends FormComponent
 {

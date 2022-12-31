@@ -1,11 +1,10 @@
 <?php
+namespace Views;
 
-namespace App\Views;
-
-use App\Components\Forms\SignInForm;
-use App\Components\Forms\SignUpForm;
-use App\Components\Forms\RevenueReportForm;
-use App\Components\Forms\RoomReportForm;
+use Components\Forms\SignInForm;
+use Components\Forms\SignUpForm;
+use Components\Forms\RevenueReportForm;
+use Components\Forms\RoomReportForm;
 
 class FormView
 {

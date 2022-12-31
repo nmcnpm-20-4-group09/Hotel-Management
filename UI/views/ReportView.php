@@ -1,13 +1,11 @@
 <?php
+namespace Views;
 
-namespace App\Views;
+use Components\Sidebar;
+use Components\Header;
+use Components\Months;
 
-use App\Components\Sidebar;
-use App\Components\Header;
-use App\Components\Toolbar;
-
-
-class BillView
+class ReportView
 {
     public function __construct($props = [])
     {
@@ -18,7 +16,7 @@ class BillView
     {
         $sideBar =  View::render(new Sidebar());
         $header = View::render(new Header());
-        $toolbar = View::render(new Toolbar($this->props));
+        $months = View::render(new Months());
 
         $view =  <<<EOT
         <body>
@@ -28,20 +26,19 @@ class BillView
                     $header
 
                     <div class="feature">
-                        $toolbar
+                        $months
                     </div>
                 </div>
             </div>
 
             <script>
                 handleEvents()
-                updateFeature('bill')
+                updateFeature('report')
             </script>
             </body>
         </html>
         EOT;
 
         return $view;
-
     }
 }

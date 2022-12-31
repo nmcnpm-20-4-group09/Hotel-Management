@@ -1,11 +1,10 @@
 <?php
+namespace Views;
 
-namespace App\Views;
-
-use App\Components\Sidebar;
-use App\Components\Header;
-use App\Components\Overview;
-use App\Components\Tables\RecentOrdersTable;
+use Components\Sidebar;
+use Components\Header;
+use Components\Overview;
+use Components\Tables\RecentOrdersTable;
 
 class HomeView
 {

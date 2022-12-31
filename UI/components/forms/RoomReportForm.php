@@ -1,8 +1,6 @@
 <?php
-
-namespace App\Components\Forms;
-
-use App\Components\TableComponent;
+namespace Components\Forms;
+use Components\TableComponent;
 
 class RoomReportForm extends TableComponent
 {

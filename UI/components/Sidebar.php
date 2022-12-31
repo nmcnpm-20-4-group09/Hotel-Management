@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Components;
+namespace Components;
 
 class Sidebar extends Component
 {
@@ -12,6 +11,11 @@ class Sidebar extends Component
                 'link' => './room',
                 'icon' => 'bed',
                 'text' => 'Danh sách phòng'
+            ],
+            [
+                'link' => './booking',
+                'icon' => 'file-contract',
+                'text' => 'Danh sách phiếu thuê',
             ],
             [
                 'link' => './customer',

@@ -1,8 +1,6 @@
 <?php
-
-namespace App\Components\Tables;
-
-use App\Components\TableComponent;
+namespace Components\Tables;
+use Components\TableComponent;
 
 class BookingTable extends TableComponent
 {

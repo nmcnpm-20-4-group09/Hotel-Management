@@ -1,11 +1,10 @@
 <?php
+namespace Views;
 
-namespace App\Views;
-
-use App\Components\Sidebar;
-use App\Components\Header;
-use App\Components\Toolbar;
-use App\Components\Tables\RoomTable;
+use Components\Sidebar;
+use Components\Header;
+use Components\Toolbar;
+use Components\Tables\RoomTable;
 
 class RoomView
 {

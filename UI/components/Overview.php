@@ -1,5 +1,5 @@
 <?php
-namespace App\Components;
+namespace Components;
 
 class Overview extends Component
 {

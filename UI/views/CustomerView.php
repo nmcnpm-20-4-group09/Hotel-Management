@@ -1,10 +1,10 @@
 <?php
-namespace App\Views;
+namespace Views;
 
-use App\Components\Sidebar;
-use App\Components\Header;
-use App\Components\Toolbar;
-use App\Components\Tables\CustomerTable;
+use Components\Sidebar;
+use Components\Header;
+use Components\Toolbar;
+use Components\Tables\CustomerTable;
 
 class CustomerView
 {

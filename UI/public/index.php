@@ -1,40 +1,29 @@
 <?php
 
-use App\Views\View;
+use Views\View;
 
 require_once "../vendor/autoload.php";
 
 $routes = [];
 
+function fetchAPI($url)
+{
+    $response = file_get_contents($url);
+    $response = json_decode($response, true);
+
+    if ($response['success'] == true) {
+        return $response['result'];
+    } else {
+        $message = $response['message'];
+        echo $message;
+    }
+}
+
 route("home", function () {
     View::renderView(
         "home",
         [
-            "fields" => [
-                'Loại phòng',
-                'Tên phòng',
-                'Ngày bắt đầu thuê',
-                'Tên khách',
-                'Số điện thoại',
-                'CMND',
-            ],
             "entries" => [
-                [
-                    ["value" => 'A',],
-                    ["value" => 'A1.2',],
-                    ["value" => '30/2/2022',],
-                    ["value" => 'Nguyễn Văn A',],
-                    ["value" => '0999888777',],
-                    ["value" => '01010101010',],
-                ],
-                [
-                    ["value" => 'A',],
-                    ["value" => 'A1.2',],
-                    ["value" => '30/2/2022',],
-                    ["value" => 'Nguyễn Văn A',],
-                    ["value" => '0999888777',],
-                    ["value" => '01010101010',],
-                ],
                 [
                     ["value" => 'A',],
                     ["value" => 'A1.2',],
@@ -49,45 +38,25 @@ route("home", function () {
 });
 
 route("room", function () {
-    View::renderView(
-        "room",
-        [
-            "fields" => [
-                'STT',
-                'Phòng',
-                'Loại phòng',
-                'Đơn giá',
-                'Tình trạng',
-                'Chi tiết thuê phòng',
-            ],
-            "entries" => [
-                [
-                    ["value" => '1',],
-                    ["value" => '1403',],
-                    ["value" => 'A',],
-                    ["value" => '150.000 VNĐ',],
-                    ["value" => 'Trống',],
-                ],
-                [
-                    ["value" => '1',],
-                    ["value" => '1403',],
-                    ["value" => 'A',],
-                    ["value" => '150.000 VNĐ',],
-                    ["value" => 'Trống',],
-                ],
-                [
-                    ["value" => '1',],
-                    ["value" => '1403',],
-                    ["value" => 'A',],
-                    ["value" => '150.000 VNĐ',],
-                    ["value" => 'Trống',],
-                ],
-            ]
-        ]
-    );
+    $url = 'http://localhost/hotel_management/src/BLL/v2/GET/RoomList.php';
+    $rooms = fetchAPI($url);
+
+    $entries = [];
+    foreach ($rooms as $index => $room) {
+        $entry = [
+            ["value" => $index + 1],
+            ["value" => $room['MaPhong']],
+            ["value" => $room['MaLoai']],
+            ["value" => $room['DonGia']],
+            ["value" => $room['TinhTrang']],
+        ];
+        $entries[] = $entry;
+    }
+
+    View::renderView("room", ["entries" => $entries]);
 });
 
-route("room-booking", function () {
+route("booking", function () {
     $action = $_GET['action'] ?? "";
 
     if ($action == "edit") {
@@ -275,40 +244,46 @@ route("room-booking", function () {
 });
 
 route("customer", function () {
-    View::renderView(
-        "customer",
-        [
-            "fields" => [
-                'STT',
-                'Mã khách',
-                'Họ và tên',
-                'Loại khách',
-                'CMND',
-                'SĐT',
-                'Thông tin chi tiết'
-            ],
-            "entries" => [
-                [
-                    ["value" => '1',],
-                    ["value" => 'KH20221010',],
-                    ["value" => 'Đặng Võ Hoàng Kim Tuyền',],
-                    ["value" => 'Khách thường',],
-                    ["value" => '123456789012',],
-                    ["value" => '1234567890',],
-                ]
-            ]
-        ]
-    );
+    $url = 'http://localhost/hotel_management/src/BLL/v1/GET/CustomerList.php';
+    $customers = fetchAPI($url);
+
+    $entries = [];
+    foreach ($customers as $index => $customer) {
+        $entry = [
+            ["value" => $index + 1],
+            ["value" => $customer['IDKhachHang']],
+            ["value" => $customer['LoaiKhach']],
+            ["value" => $customer['HoTen']],
+            ["value" => $customer['SoDienThoai']],
+            ["value" => $customer['CMND']],
+        ];
+        $entries[] = $entry;
+    }
+
+    View::renderView("customer", ["entries" => $entries]);
 });
 
 route("bill", function () {
-    View::renderView("bill");
+    $url = 'http://localhost/hotel_management/src/BLL/v1/GET/BillList.php';
+    $bills = fetchAPI($url);
+
+    $entries = [];
+    foreach ($bills as $index => $bill) {
+        $entry = [
+            ["value" => $index + 1],
+            ["value" => $bill['SoHoaDon']],
+            ["value" => $bill['NgayThanhToan']],
+            ["value" => $bill['TriGia'] ?? "Chưa có"],
+        ];
+        $entries[] = $entry;
+    }
+
+    View::renderView("bill", ["entries" => $entries]);
 });
-    
+
 route("report", function () {
     View::renderView("report");
 });
-
 
 route("form", function () {
     $formType = $_GET['type'] ?? "";
@@ -384,11 +359,6 @@ route("form", function () {
         View::renderView("form", [
             "type" => $formType
         ]);
-
-        // ![Lỗi]: không thể redirect khi submit form
-        if (isset($_POST['username'])) {
-            View::redirect("home");
-        }
     }
 });
 

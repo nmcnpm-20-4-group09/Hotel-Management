@@ -1,42 +1,22 @@
 <?php
+namespace Components\Tables;
+use Components\TableComponent;
 
-namespace App\Components\Tables;
-
-use App\Components\TableComponent;
-
-class CustomerTable extends TableComponent
+class BillTable extends TableComponent
 {
     public function __construct($props = [])
     {
         parent::__construct($props);
+
+        $this->fields = [
+            'STT',
+            'Số hóa đơn',
+            'Ngày thanh toán',
+            'Trị giá',
+            'Chi tiết hóa đơn',
+        ];
     }
 
-    // Ghi đè phương thức của lớp cha
-    public function renderFields()
-    {
-        $headerElements = '';
-        $index = 0;
-
-        foreach ($this->fields as $field) {
-            // Ba field đầu có nút sort
-            if ($index++ < 3) {
-                $headerElements .= <<<EOT
-                <th scope="col">
-                    $field
-                    <i class="fa-solid fa-sort"></i>
-                </th>
-                EOT;
-            } else {
-                $headerElements .= <<<EOT
-                <th scope="col">$field</th>
-                EOT;
-            }
-        }
-
-        return "<tr>" . $headerElements . "</tr>";
-    }
-
-    // Ghi đè phương thức của lớp cha
     public function renderEntries()
     {
         $entryElements = '';
