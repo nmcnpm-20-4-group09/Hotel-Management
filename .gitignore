@@ -1,3 +1,2 @@
 *.css.map
-.vscode/
-UI/vendor/
+src/PL/vendor/
