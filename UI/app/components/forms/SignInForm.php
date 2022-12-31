@@ -28,14 +28,14 @@ class SignInForm extends FormComponent
         $groupElements = $this->renderGroups();
 
         return <<< EOT
-        <form action="./form?type=signin" class="signin-form" method="POST">
+        <form action="./?action=signin" class="signin-form" method="POST">
             <h2 class="form-title">Đăng nhập</h2>
         
             $groupElements
         
             <div class="form-refs">
                 <a href="#" class="forget-password">Quên mật khẩu</a>
-                <a href="/form?type=signup" class="signup">Đăng ký</a>
+                <a href="./form?type=signup" class="signup">Đăng ký</a>
             </div>
         
             <div class="form-buttons">

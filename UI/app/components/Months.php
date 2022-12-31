@@ -9,7 +9,7 @@ class Months extends Component
         $monthElements = '';
         for ($month = 1; $month <= 12; $month++) {
             $monthElements .= <<<EOT
-                <a class="month" href="/form?type=report&month=$month">
+                <a class="month" href="./form?type=report&month=$month">
                     <p>$month</p>
                 </a>
             EOT;

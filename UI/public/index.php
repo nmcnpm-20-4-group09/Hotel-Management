@@ -404,10 +404,10 @@ function run()
 {
     global $routes;
 
-    $uri = $_SERVER['REQUEST_URI'];
-    $page = explode('/', $uri)[4];
-    $route = $page  == "" ? "home" : $page;
-    $route = explode('?', $route)[0];
+    $uri = $_SERVER['REQUEST_URI']; // /hotel-management-system/UI/public/home?param=123
+    $route = explode('/', $uri)[4]; // home?param=123
+    $route = $route  == "" ? "home" : $route; // home?param=123
+    $route = explode('?', $route)[0]; // home
 
 
     if (array_key_exists($route, $routes)) {

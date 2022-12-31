@@ -20,12 +20,12 @@ class Header extends Component
                 'text' => 'Đổi mật khẩu',
             ],
             [
-                'link' => '/form?type=signin',
+                'link' => './form?type=signin',
                 'icon' => 'user',
                 'text' => 'Chuyển tài khoản'
             ],
             [
-                'link' => '/form?type=signup',
+                'link' => './form?type=signup',
                 'icon' => 'right-from-bracket',
                 'text' => 'Đăng xuất'
             ]

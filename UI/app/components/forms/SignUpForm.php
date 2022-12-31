@@ -38,14 +38,14 @@ class SignUpForm extends FormComponent
     {
         $groupElements = $this->renderGroups();
         return <<< EOT
-        <form action="./?type=signup" class="signup-form" method="POST">
+        <form action="./?action=signup" class="signup-form" method="POST">
         <h2 class="form-title">Đăng ký</h2>
 
         $groupElements
 
         <div class="form-buttons">
             <button type="button" class="form-button back-button">
-                <a href="/form?type=signin">Đăng nhập</a>
+                <a href="./form?type=signin">Đăng nhập</a>
             </button>
             <button type="submit" class="form-button">Tiếp theo</button>
         </div>
