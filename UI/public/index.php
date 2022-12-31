@@ -304,7 +304,7 @@ route("customer", function () {
 route("bill", function () {
     View::renderView("bill");
 });
-
+    
 route("report", function () {
     View::renderView("report");
 });
@@ -405,8 +405,10 @@ function run()
     global $routes;
 
     $uri = $_SERVER['REQUEST_URI'];
-    $page = explode('?', $uri)[1] ?? "page=home";
-    $route = explode('=', $page)[1];
+    $page = explode('/', $uri)[4];
+    $route = $page  == "" ? "home" : $page;
+    $route = explode('?', $route)[0];
+
 
     if (array_key_exists($route, $routes)) {
         $routes[$route]();
