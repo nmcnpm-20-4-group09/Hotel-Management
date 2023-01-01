@@ -1,8 +1,8 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/BLL/v1/MySQLQueryStringGenerator.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DAL/v1/MySQLiConnection.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/Hotel-Management/src/DTO/v1/BillDTO.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/hotel_management/src/BLL/v1/MySQLQueryStringGenerator.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/hotel_management/src/DAL/v1/MySQLiConnection.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/hotel_management/src/DTO/v1/BillDTO.php";
 
 use BLLv1\MySQLQueryStringGenerator;
 use DALv1\MySQLiConnection;

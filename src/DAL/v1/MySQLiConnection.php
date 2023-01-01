@@ -22,7 +22,7 @@ class MySQLiConnection implements DBConnectionInterface
         $servername = 'localhost',
         $user = 'root',
         $password = '',
-        $database = 'HotelManagement'
+        $database = 'hotel_management'
     ) {
         $this->servername = $servername;
         $this->user = $user;

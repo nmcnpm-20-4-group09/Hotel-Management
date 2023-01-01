@@ -1,6 +1,6 @@
 <?php
 
-$response = file_get_contents('http://localhost/Hotel-Management/src/BLL/v2/GET/RoomList.php');
+$response = file_get_contents('http://localhost/hotel_management/src/BLL/v2/GET/RoomList.php');
 // echo $response;
 $response = json_decode($response, true);
 // echo $response;

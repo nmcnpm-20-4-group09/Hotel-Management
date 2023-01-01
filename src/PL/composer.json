@@ -1,0 +1,21 @@
+{
+    "name": "aleister/ui",
+    "autoload": {
+        "psr-4": {
+            "Components\\": "./components/",
+            "Components\\Forms\\": "./components/forms/",
+            "Components\\Tables\\": "./components/tables/",
+            "Views\\": "./views/"
+        },
+        "classmap": [
+            "./components/Component.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Lê Minh Quân",
+            "email": "marucube35@gmail.com"
+        }
+    ],
+    "require": {}
+}
