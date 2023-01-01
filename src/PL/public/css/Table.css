@@ -101,7 +101,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  align-items: space-between;
+  align-items: start;
 }
 .table-wrapper table {
   width: 100%;
@@ -135,19 +135,19 @@ html {
   font-size: 1.8rem;
   font-weight: 500;
 }
-.table-wrapper table td.spacer {
-  padding: 10px;
-}
-.table-wrapper table td:not(.spacer) {
+.table-wrapper table td {
   background-color: #fff;
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
   font-size: 1.4rem;
   font-weight: 500;
 }
-.table-wrapper table td:not(.spacer) i {
+.table-wrapper table td:focus {
+  color: #47b5ff;
+}
+.table-wrapper table td i {
   font-size: 2.4rem;
 }
-.table-wrapper table td:not(.spacer) i:hover {
+.table-wrapper table td i:hover {
   cursor: pointer;
   color: #47b5ff;
   opacity: 0.8;
@@ -173,13 +173,35 @@ html {
 .table-wrapper table.scrollable tbody {
   display: block;
   overflow-y: scroll;
-  max-height: calc(100vh - 400px);
+  max-height: calc(100vh - 450px);
 }
 .table-wrapper table.scrollable tr {
   display: table;
   width: 100%;
 }
+.table-wrapper .sample-entry {
+  width: calc(100% - 17px);
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.table-wrapper .sample-entry span {
+  width: 20%;
+  padding: 20px 10px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+}
+.table-wrapper .sample-entry span:focus {
+  color: #47b5ff;
+}
 .table-wrapper .table-buttons {
+  width: 100%;
   margin: 20px 17px 0 0;
   display: flex;
   flex-direction: row;
