@@ -4,6 +4,9 @@ use Views\View;
 
 require_once "../vendor/autoload.php";
 
+//! Có thể sửa hotel_management thành tên thư mục tùy ý
+define("API_ROOT", "http://localhost/hotel_management/");
+
 $routes = [];
 
 function fetchAPI($uri)
@@ -21,7 +24,7 @@ function fetchAPI($uri)
 
 function getRoomTypes($editable = false)
 {
-    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/RoomCategoryList.php';
+    $uri = API_ROOT . 'src/BLL/v1/GET/RoomCategoryList.php';
     $roomTypes = fetchAPI($uri);
 
     $entries = [];
@@ -48,7 +51,7 @@ function makeRoomTypeOptions()
 
 function getRooms($editable = false)
 {
-    $uri = 'http://localhost/hotel_management/src/BLL/v2/GET/RoomList.php';
+    $uri = API_ROOT . 'src/BLL/v2/GET/RoomList.php';
     $rooms = fetchAPI($uri);
 
     $entries = [];
@@ -66,7 +69,7 @@ function getRooms($editable = false)
 
 function getBookings($editable = false)
 {
-    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/BookingList.php';
+    $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
 
     //? Trường 'ngày bắt đầu thuê' và 'số ngày thuê' đem qua chi tiết thuê
@@ -83,7 +86,7 @@ function getBookings($editable = false)
 }
 
 route("home", function () {
-    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/BookingList.php';
+    $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
 
     $entries = [];
@@ -200,7 +203,7 @@ route("booking", function () {
 });
 
 route("customer", function () {
-    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/CustomerList.php';
+    $uri =  API_ROOT .  'src/BLL/v1/GET/CustomerList.php';
     $customers = fetchAPI($uri);
 
     $entries = [];
@@ -220,7 +223,7 @@ route("customer", function () {
 });
 
 route("bill", function () {
-    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/BillList.php';
+    $uri =  API_ROOT . 'src/BLL/v1/GET/BillList.php';
     $bills = fetchAPI($uri);
 
     $entries = [];
@@ -330,10 +333,11 @@ function run()
 {
     global $routes;
 
-    $uri = $_SERVER['REQUEST_URI']; // /hotel-management-system/UI/public/home?param=123
-    $route = explode('/', $uri)[5]; // home?param=123
-    $route = $route  == "" ? "home" : $route; // home?param=123
-    $route = explode('?', $route)[0]; // home
+    $uri = $_SERVER['REQUEST_URI'];
+    $route = explode('/', $uri);
+    $route = end($route);
+    $route = $route  == "" ? "home" : $route;
+    $route = explode('?', $route)[0];
 
 
     if (array_key_exists($route, $routes)) {
