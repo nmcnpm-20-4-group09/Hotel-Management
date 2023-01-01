@@ -18,7 +18,8 @@ abstract class TableComponent extends Component
     }
 
 
-    // TODO: use array reduce
+    // Tạo ra dòng tiêu đề trong bảng
+    // - return: chuỗi html của dòng tiêu đề
     protected function renderFields()
     {
         $headerElements = '';
@@ -32,6 +33,9 @@ abstract class TableComponent extends Component
         return "<tr>" . $headerElements . "</tr>";
     }
 
+    // Tạo ra một dòng trong bảng
+    // - param: một mảng các field
+    // - return: chuỗi html của dòng
     protected function renderEntry($entry)
     {
         $entryElement = "";
@@ -51,6 +55,9 @@ abstract class TableComponent extends Component
         return $entryElement;
     }
 
+    // Tạo ra các dòng trong bảng
+    // - param (optional): các column bổ sung.
+    // - return: chuỗi html của các dòng
     protected function renderEntries()
     {
         $entryElements = '';
@@ -68,11 +75,16 @@ abstract class TableComponent extends Component
         return $entryElements;
     }
 
+    // Tạo ra một dòng cho phép chỉnh sửa trong bảng
+    // - param (optional): các fields không cần hiển thị
+    // - return: chuỗi html của dòng chỉnh sửa
     protected function renderSampleEntry()
     {
+        $exceptions = func_get_args() ?? [];
         $entryElement = "<div class='sample-entry'>";
-        foreach ($this->fields as $index => $field) {
-            if ($index < 1) continue;
+
+        foreach ($this->fields as $field) {
+            if (in_array($field, $exceptions)) continue;
 
             $entryElement .= <<< EOT
                 <span contenteditable='true'>$field</span>
@@ -82,6 +94,8 @@ abstract class TableComponent extends Component
         return $entryElement . '</div>';
     }
 
+    // Tạo ra các nút thao tác trong bảng
+    // - return: chuỗi html của các nút thao tác
     protected function renderButtons()
     {
         $buttonsElement = "<div class='table-buttons'>";

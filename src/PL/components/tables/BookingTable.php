@@ -74,7 +74,7 @@ class BookingTable extends TableComponent
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
 
-        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry() : "";
+        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry("STT", "Chi tiết") : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<< EOT
