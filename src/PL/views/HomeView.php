@@ -4,7 +4,7 @@ namespace Views;
 use Components\Sidebar;
 use Components\Header;
 use Components\Overview;
-use Components\Tables\RecentOrdersTable;
+use Components\Tables\RecentBookingsTable;
 
 class HomeView
 {
@@ -18,7 +18,7 @@ class HomeView
         $sideBar =  View::render(new Sidebar());
         $header = View::render(new Header(['title' => "Trang chủ"]));
         $overview = View::render(new Overview());
-        $recentOrdersTable = View::render(new RecentOrdersTable($this->props));
+        $recentOrdersTable = View::render(new RecentBookingsTable($this->props));
 
         $view =  <<<EOT
         <body>

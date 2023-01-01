@@ -1,4 +1,5 @@
 <?php
+
 namespace Components;
 
 abstract class Component
@@ -29,39 +30,14 @@ abstract class TableComponent extends Component
         return "<tr>" . $headerElements . "</tr>";
     }
 
-    protected function renderSelect($options)
-    {
-        $field = "<select title='category'>";
-        $options = explode("|", $options);
-
-        foreach ($options as $option) {
-            $field .= <<<EOT
-                <option value="$option">$option</option>
-            EOT;
-        }
-
-        return $field .= "</select>";
-    }
-
     protected function renderEntry($entry)
     {
         $entryElement = "";
 
         foreach ($entry as $field) {
             $value = $field['value'] ?? '';
-            $editable = "";
-
-            // Render select box nếu dữ liệu có dạng a|b|c
-            if (strpos($value, "|")) {
-                $value = $this->renderSelect($value);
-            }
-
-            // Thêm thuộc tính editable cho field
-            if (array_key_exists('editable', $field))
-                $editable = "contenteditable='true'";
-
             $entryElement .= <<< EOT
-                <td $editable>$value</td>
+                <td>$value</td>
             EOT;
         }
 
@@ -78,6 +54,13 @@ abstract class TableComponent extends Component
         }
 
         return $entryElements;
+    }
+
+    protected function addColumn($field)
+    {
+        if (!in_array($field, $this->fields)) {
+            $this->fields[] = $field;
+        }
     }
 }
 

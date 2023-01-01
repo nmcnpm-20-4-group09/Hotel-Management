@@ -6,9 +6,9 @@ require_once "../vendor/autoload.php";
 
 $routes = [];
 
-function fetchAPI($url)
+function fetchAPI($uri)
 {
-    $response = file_get_contents($url);
+    $response = file_get_contents($uri);
     $response = json_decode($response, true);
 
     if ($response['success'] == true) {
@@ -20,26 +20,29 @@ function fetchAPI($url)
 }
 
 route("home", function () {
-    View::renderView(
-        "home",
-        [
-            "entries" => [
-                [
-                    ["value" => 'A',],
-                    ["value" => 'A1.2',],
-                    ["value" => '30/2/2022',],
-                    ["value" => 'Nguyễn Văn A',],
-                    ["value" => '0999888777',],
-                    ["value" => '01010101010',],
-                ],
-            ]
-        ]
-    );
+    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/BookingList.php';
+    $bookings = fetchAPI($uri);
+
+    $entries = [];
+    foreach ($bookings as $index => $booking) {
+        if ($index > 5) break;
+        $entry = [
+            ["value" => $index + 1],
+            ["value" => $booking['SoPhieuThue']],
+            ["value" => $booking['ID_KhachHang']],
+            ["value" => $booking['NgayBatDauThue']],
+            ["value" => $booking['SoNgayThue']],
+            ["value" => $booking['MaPhong']],
+        ];
+        $entries[] = $entry;
+    }
+
+    View::renderView("home", ["entries" => $entries]);
 });
 
 route("room", function () {
-    $url = 'http://localhost/hotel_management/src/BLL/v2/GET/RoomList.php';
-    $rooms = fetchAPI($url);
+    $uri = 'http://localhost/hotel_management/src/BLL/v2/GET/RoomList.php';
+    $rooms = fetchAPI($uri);
 
     $entries = [];
     foreach ($rooms as $index => $room) {
@@ -56,196 +59,73 @@ route("room", function () {
     View::renderView("room", ["entries" => $entries]);
 });
 
+function getBookingsData($editable = false)
+{
+    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/BookingList.php';
+    $bookings = fetchAPI($uri);
+
+    //? Trường 'ngày bắt đầu thuê' và 'số ngày thuê' đem qua chi tiết thuê
+    $entries = [];
+    foreach ($bookings as $index => $booking) {
+        $entry = [
+            ["value" => $index + 1],
+            ["value" => $booking['SoPhieuThue']],
+            ["value" => $booking['ID_KhachHang'], "editable" => $editable],
+            ["value" => $booking['MaPhong'], "editable" => $editable],
+        ];
+        $entries[] = $entry;
+    }
+    return $entries;
+}
+
 route("booking", function () {
-    $action = $_GET['action'] ?? "";
+    $action = $_GET['action'] ?? "view";
 
     if ($action == "edit") {
-        View::renderView(
-            "booking",
-            [
-                "action" => $action,
-                "fields" => [
-                    "STT",
-                    "Tên phòng",
-                    "Loại phòng",
-                    "Đơn giá",
-                    "Trạng thái",
-                ],
-                "entries" => [
-                    [
-                        [
-                            "value" => "1",
-                        ],
-                        [
-                            "value" => "1403",
-                            "editable" => true
-                        ],
-                        [
-                            "value" => "Chọn loại phòng|Loại A|Loại B|Loại C",
-                        ],
-                        [
-                            "value" => "150.000",
-                            "editable" => true
-                        ],
-                        [
-                            "value" => "Trống",
-                        ],
-                    ]
-                ],
-                "buttons" =>
-                [
-                    ["text" => "Lưu thay đổi"]
-                ]
+        View::renderView("booking", [
+            "action" => $action,
+            "entries" => getBookingsData(true),
+            "buttons" => [
+                ["text" => "Lưu thay đổi"],
             ]
-        );
+        ]);
     } else if ($action == "delete") {
-        View::renderView(
-            "booking",
+        View::renderView("booking", [
+            "action" => $action,
+            "entries" => getBookingsData(),
+            "buttons" =>
             [
-                "action" => $action,
-                "fields" => [
-                    "STT",
-                    "Tên phòng",
-                    "Loại phòng",
-                    "Đơn giá",
-                    "Trạng thái",
-                    "Chọn"
-                ],
-                "entries" => [
-                    [
-                        ["value" => "1",],
-                        ["value" => "1403",],
-                        ["value" => "Loại A",],
-                        ["value" => "150.000",],
-                        ["value" => "Trống",],
-                    ],
-                    [
-                        ["value" => "2",],
-                        ["value" => "1403",],
-                        ["value" => "Loại A",],
-                        ["value" => "150.000",],
-                        ["value" => "Trống",],
-                    ],
-                    [
-                        ["value" => "2",],
-                        ["value" => "1403",],
-                        ["value" => "Loại A",],
-                        ["value" => "150.000",],
-                        ["value" => "Trống",],
-                    ],
-                ],
-                "buttons" =>
                 [
-                    [
-                        "text" => "Xóa các dòng đã chọn",
-                        "handler" => "deleteSelectedEntries()"
-                    ]
-                ]
+                    "text" => "Xóa các dòng đã chọn",
+                    "handler" => "deleteSelectedEntries()"
+                ],
+                [
+                    "text" => "Lưu thay đổi",
+                ],
             ]
-
-        );
+        ]);
     } else if ($action == "add") {
-        View::renderView(
-            "booking",
+        View::renderView("booking", [
+            "action" => $action,
+            "entries" => getBookingsData(),
+            "buttons" =>
             [
-                "action" => $action,
-                "fields" => [
-                    "STT",
-                    "Tên phòng",
-                    "Loại phòng",
-                    "Đơn giá",
-                    "Trạng thái",
-                ],
-                "entries" => [
-                    [
-                        ["value" => "1",],
-                        ["value" => "1403", "editable" => true],
-                        ["value" => "Chọn loại phòng|Loại A|Loại B|Loại C",],
-                        ["value" => "150.000", "editable" => true],
-                        ["value" => "Trống",],
-                    ]
-                ],
-                "buttons" =>
-                [
-                    ["text" => "Thêm"],
-                ]
-
+                ["text" => "Thêm"],
             ]
-        );
+        ]);
     } else if ($action == "justify") {
-        View::renderView(
-            "booking",
-            [
-                "action" => $action,
-                "fields" => [
-                    "STT",
-                    "Loại phòng",
-                    "Đơn giá",
-                    "Chọn"
-                ],
-                "entries" => [
-                    [
-                        ["value" => "1",],
-                        ["value" => "A",],
-                        ["value" => "150.000",   "editable" => true],
-                    ],
-                    [
-                        ["value" => "1",],
-                        ["value" => "B",],
-                        ["value" => "150.000", "editable" => true],
-                    ],
-                    [
-                        ["value" => "1",],
-                        ["value" => "C",],
-                        ["value" => "150.000", "editable" => true],
-                    ],
-                    [
-                        ["value" => "1",],
-                        ["value" => "A",],
-                        [
-                            "value" => "Điền giá của loại phòng này",
-                            "editable" => true
-                        ],
-                    ],
-                ],
-                "buttons" =>
-                [
-                    [
-                        "text" => "Lưu thay đổi",
-                    ]
-                ]
-
-            ]
-        );
+        View::renderView("booking", ["action" => $action]);
     } else {
-        View::renderView(
-            "booking",
-            [
-                "action" => "view",
-                "fields" => [
-                    'stt',
-                    'Khách hàng',
-                    'Loại khách',
-                    'CMND',
-                    'Địa chỉ',
-                ],
-                "entries" => [
-                    [
-                        ["value" => "1",],
-                        ["value" => "1403",],
-                        ["value" => "Loại A",],
-                        ["value" => "150.000",],
-                        ["value" => "Trống",],
-                    ]
-                ]
-            ]
-        );
+        View::renderView("booking", [
+            "action" => $action,
+            "entries" => getBookingsData(),
+        ]);
     }
 });
 
 route("customer", function () {
-    $url = 'http://localhost/hotel_management/src/BLL/v1/GET/CustomerList.php';
-    $customers = fetchAPI($url);
+    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/CustomerList.php';
+    $customers = fetchAPI($uri);
 
     $entries = [];
     foreach ($customers as $index => $customer) {
@@ -264,8 +144,8 @@ route("customer", function () {
 });
 
 route("bill", function () {
-    $url = 'http://localhost/hotel_management/src/BLL/v1/GET/BillList.php';
-    $bills = fetchAPI($url);
+    $uri = 'http://localhost/hotel_management/src/BLL/v1/GET/BillList.php';
+    $bills = fetchAPI($uri);
 
     $entries = [];
     foreach ($bills as $index => $bill) {
@@ -375,7 +255,7 @@ function run()
     global $routes;
 
     $uri = $_SERVER['REQUEST_URI']; // /hotel-management-system/UI/public/home?param=123
-    $route = explode('/', $uri)[4]; // home?param=123
+    $route = explode('/', $uri)[5]; // home?param=123
     $route = $route  == "" ? "home" : $route; // home?param=123
     $route = explode('?', $route)[0]; // home
 

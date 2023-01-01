@@ -85,3 +85,15 @@ BEGIN
     WHERE ct.SoPhieuThue = SoPhieuThue;
 END//
 DELIMITER ;
+
+-- Lấy danh sách phiếu thuê
+DROP PROCEDURE IF EXISTS v1_sp_danhSachPhieuThue;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_danhSachPhieuThue ()   
+BEGIN
+    SELECT *
+    FROM phieu_thuephong;
+END//
+DELIMITER ;
+

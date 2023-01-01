@@ -2,19 +2,19 @@
 namespace Components\Tables;
 use Components\TableComponent;
 
-class RecentOrdersTable extends TableComponent
+class RecentBookingsTable extends TableComponent
 {
     public function __construct($props = [])
     {
         parent::__construct($props);
 
         $this-> fields =  [
-            'Loại phòng',
-            'Tên phòng',
-            'Ngày bắt đầu thuê',
-            'Tên khách',
-            'Số điện thoại',
-            'CMND',
+            "Số thứ tự",
+            "Số phiếu thuê",
+            "Mã khách hàng",
+            "Ngày bắt đầu thuê",
+            "Số ngày thuê",
+            "Mã phòng"
         ];
     }
 

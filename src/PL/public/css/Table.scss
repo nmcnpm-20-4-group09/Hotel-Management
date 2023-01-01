@@ -23,11 +23,13 @@ $column-width: 15%;
             text-align: center;
 
             &:first-of-type {
+                width: 10%;
                 border-top-left-radius: 16px;
                 border-bottom-left-radius: 16px;
             }
-
+            
             &:last-of-type {
+                width: 10%;
                 border-top-right-radius: 16px;
                 border-bottom-right-radius: 16px;
             }
@@ -55,9 +57,6 @@ $column-width: 15%;
                         opacity: 0.8;
                     }
                 }
-            }
-            &:nth-of-type(2) {
-                color: $primary-color;
             }
         }
         td[contenteditable='true'] {

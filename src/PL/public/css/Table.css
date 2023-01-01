@@ -60,13 +60,6 @@ html {
   visibility: hidden;
 }
 
-.unselectable {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
-}
-
 /* Layout styles */
 .container {
   height: 100vh;
@@ -126,11 +119,13 @@ html {
 }
 .table-wrapper table th:first-of-type,
 .table-wrapper table td:first-of-type {
+  width: 10%;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
 }
 .table-wrapper table th:last-of-type,
 .table-wrapper table td:last-of-type {
+  width: 10%;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
 }
@@ -156,9 +151,6 @@ html {
   cursor: pointer;
   color: #47b5ff;
   opacity: 0.8;
-}
-.table-wrapper table td:nth-of-type(2) {
-  color: #47b5ff;
 }
 .table-wrapper table td[contenteditable=true] {
   outline: none;

@@ -5,32 +5,26 @@ class Toolbar extends Component
 {
     public function __construct($props = [])
     {
-        $this->uri = explode($_SERVER['REQUEST_URI'], '?')[0];
         $this->buttons = [
             [
-                'icon' => 'magnifying-glass',
+                'icon' => 'list',
                 'action' => 'view',
-                'handler' => 'handleSearch'
             ],
             [
                 'icon' => 'pen-to-square',
                 'action' => 'edit',
-                'handler' => 'handleEdit'
             ],
             [
                 'icon' => 'trash',
                 'action' => 'delete',
-                'handler' => 'handleDelete'
             ],
             [
                 'icon' => 'plus',
                 'action' => 'add',
-                'handler' => 'handleAdd'
             ],
             [
                 'icon' => 'sliders',
                 'action' => 'justify',
-                'handler' => 'handleRule'
             ]
         ];
         $this->action = $props['action'] ?? '';
