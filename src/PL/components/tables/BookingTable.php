@@ -1,69 +1,81 @@
 <?php
+
 namespace Components\Tables;
+
 use Components\TableComponent;
 
 class BookingTable extends TableComponent
 {
-    public function __construct($props = [])
+    function __construct($props = [])
     {
-        $this->fields = $props['fields'] ?? [];
-        $this->entries = $props['entries'] ?? [];
-        $this->action = $props['action'] ?? '';
-        $this->buttons = $props['buttons'] ?? [];
-    }
+        parent::__construct($props);
 
-    public function renderTableButtons()
-    {
-        $buttonsElement = "<div class='table-buttons'>";
-
-        foreach ($this->buttons as $button) {
-            $text = $button['text'] ?? '';
-            $handler = $button['handler'] ?? '';
-
-            $buttonsElement .= <<<EOT
-                <button 
-                type="button"
-                class="save-change-button"
-                onclick="$handler"
-                >
-                    $text
-                </button>
-            EOT;
+        if (empty($this->fields)) {
+            $this->fields = [
+                "STT",
+                "Số phiếu thuê",
+                "Mã khách hàng",
+                "Mã phòng",
+                "Chi tiết",
+            ];
         }
 
-        return $buttonsElement . "</div>";
-    }
+        // Chế độ delete có thêm check box để chọn nên cần thêm field này vào tiêu đề cột
+        if ($this->action == "delete") $this->fields[] = "Chọn";
 
-    protected function renderEntries()
-    {
-        $entryElements = '';
-
-        foreach ($this->entries as $entry) {
-            $entryElement = $this->renderEntry($entry);
-
-            // Thêm checkbox vào các dòng
-            if ($this->action == "delete" || $this->action == "justify") {
-                $entryElement .= "
-                <td>
-                    <label>
-                        <input type='checkbox' class='checkbox'>
-                        <span class='checkmark'></span> 
-                    </label>
-                </td>";
-            } else {
-            }
-
-            $entryElements .= "<tr>" . $entryElement . "</tr>";
+        // Chế độ add có một dòng mẫu
+        if ($this->action == "add") {
+            $this->entries[] = [
+                ["value" => count($this->entries) + 1],
+                ["value" => $this->fields[1], "editable" => true],
+                ["value" => $this->fields[2], "editable" => true],
+                ["value" => $this->fields[3], "editable" => true],
+            ];
         }
 
-        return $entryElements;
+        // Chế độ edit không có chức năng nên xóa hết tiêu đề cột
+        if ($this->action == "justify") {
+            $this->fields = array();
+        }
     }
 
-    public function render()
+    // Thêm nút chi tiết phiếu thuê
+    private function makeDetailColumn()
+    {
+        return '
+        <td>
+            <a href="./booking-detail">
+                <i class="fa-solid fa-circle-info"></i>
+            </a>
+        </td>';
+    }
+
+    // Thêm checkbox vào các dòng trong chế độ delete
+    private function makeCheckBoxColumn()
+    {
+        if ($this->action == "delete") {
+            return '
+            <td>
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    <span class="checkmark"></span> 
+                </label>
+            </td>';
+        }
+
+        return "";
+    }
+
+    function render()
     {
         $fieldElements = $this->renderFields();
-        $entryElements = $this->renderEntries();
-        $tableButtons = $this->buttons != [] ? $this->renderTableButtons() : "";
+
+        $detailColumn = $this->makeDetailColumn();
+        $checkBoxColumn = $this->makeCheckBoxColumn();
+        $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
+
+        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry("STT", "Chi tiết") : "";
+        $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<< EOT
         <div class="table-wrapper">
@@ -75,7 +87,7 @@ class BookingTable extends TableComponent
                     $entryElements
                 </tbody>
             </table>
-
+            $sampleEntry
             $tableButtons
         </div>
         EOT;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Components;
 
 abstract class Component
@@ -12,10 +13,13 @@ abstract class TableComponent extends Component
     {
         $this->fields = $props['fields'] ?? [];
         $this->entries = $props['entries'] ?? [];
+        $this->action = $props['action'] ?? [];
+        $this->buttons = $props['buttons'] ?? [];
     }
 
 
-    // TODO: use array reduce
+    // Tạo ra dòng tiêu đề trong bảng
+    // - return: chuỗi html của dòng tiêu đề
     protected function renderFields()
     {
         $headerElements = '';
@@ -29,55 +33,88 @@ abstract class TableComponent extends Component
         return "<tr>" . $headerElements . "</tr>";
     }
 
-    protected function renderSelect($options)
-    {
-        $field = "<select title='category'>";
-        $options = explode("|", $options);
-
-        foreach ($options as $option) {
-            $field .= <<<EOT
-                <option value="$option">$option</option>
-            EOT;
-        }
-
-        return $field .= "</select>";
-    }
-
+    // Tạo ra một dòng trong bảng
+    // - param: một mảng các field
+    // - return: chuỗi html của dòng
     protected function renderEntry($entry)
     {
         $entryElement = "";
 
         foreach ($entry as $field) {
             $value = $field['value'] ?? '';
-            $editable = "";
 
-            // Render select box nếu dữ liệu có dạng a|b|c
-            if (strpos($value, "|")) {
-                $value = $this->renderSelect($value);
-            }
-
-            // Thêm thuộc tính editable cho field
-            if (array_key_exists('editable', $field))
-                $editable = "contenteditable='true'";
+            // Thêm thuộc tính edtiable cho các cột có thể chỉnh sửa
+            $editable = $field['editable'] ?? false;
+            $editableAttribute = $editable ? "contenteditable='true'" : "";
 
             $entryElement .= <<< EOT
-                <td $editable>$value</td>
+                <td $editableAttribute>$value</td>
             EOT;
         }
 
         return $entryElement;
     }
 
+    // Tạo ra các dòng trong bảng
+    // - param (optional): các column bổ sung.
+    // - return: chuỗi html của các dòng
     protected function renderEntries()
     {
         $entryElements = '';
 
         foreach ($this->entries as $entry) {
             $entryElement = $this->renderEntry($entry);
+
+            // Thêm các column truyền vào nếu có
+            foreach (func_get_args() as $column)
+                $entryElement .= $column;
+
             $entryElements .= "<tr>" . $entryElement . "</tr>";
         }
 
         return $entryElements;
+    }
+
+    // Tạo ra một dòng cho phép chỉnh sửa trong bảng
+    // - param (optional): các fields không cần hiển thị
+    // - return: chuỗi html của dòng chỉnh sửa
+    protected function renderSampleEntry()
+    {
+        $exceptions = func_get_args() ?? [];
+        $entryElement = "<div class='sample-entry'>";
+
+        foreach ($this->fields as $field) {
+            if (in_array($field, $exceptions)) continue;
+
+            $entryElement .= <<< EOT
+                <span contenteditable='true'>$field</span>
+            EOT;
+        }
+
+        return $entryElement . '</div>';
+    }
+
+    // Tạo ra các nút thao tác trong bảng
+    // - return: chuỗi html của các nút thao tác
+    protected function renderButtons()
+    {
+        $buttonsElement = "<div class='table-buttons'>";
+
+        foreach ($this->buttons as $button) {
+            $text = $button['text'] ?? '';
+            $handler = $button['handler'] ?? '';
+
+            $buttonsElement .= <<<EOT
+                <button 
+                type="button"
+                class="save-change-button"
+                onclick="$handler"
+                >
+                    $text
+                </button>
+            EOT;
+        }
+        return $buttonsElement . "</div>";
     }
 }
 

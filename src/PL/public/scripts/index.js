@@ -9,11 +9,13 @@ const features = {
     report: 4,
 }
 
-// Xử lý sự kiện cho các nút bấm
+// Xử lý sự kiện
 function handleEvents() {
     const sidebarButtons = $('.sidebar')?.querySelectorAll('li')
     const toolbarButtons = $('.toolbar')?.querySelectorAll('button')
-
+    const editableFields = $('.table-wrapper')?.querySelectorAll(
+        '[contenteditable=true]',
+    )
     function handleButtons(buttons) {
         if (buttons) {
             buttons.forEach((button) => {
@@ -28,8 +30,20 @@ function handleEvents() {
         }
     }
 
+    function handleFieldChange(editableFields) {
+        console.log(editableFields);
+        if (editableFields) {
+            editableFields.forEach((editableField) => {
+                editableField.addEventListener('keydown', (e) => {
+                    e.target.style.color = '#47b5ff'
+                })
+            })
+        }
+    }
+
     handleButtons(sidebarButtons)
     handleButtons(toolbarButtons)
+    handleFieldChange(editableFields)
 }
 
 // Thay đổi giao diện của chức năng

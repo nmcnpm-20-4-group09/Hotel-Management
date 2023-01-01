@@ -1,11 +1,11 @@
 @import './base.scss';
 
-$table-max-height: calc(100vh - 400px);
+$table-max-height: calc(100vh - 450px);
 $column-width: 15%;
 .table-wrapper {
     flex: 1;
     margin-right: 50px;
-    @include flex(column, end, space-between);
+    @include flex(column, end, start);
 
     table {
         width: 100%;
@@ -23,11 +23,13 @@ $column-width: 15%;
             text-align: center;
 
             &:first-of-type {
+                width: 10%;
                 border-top-left-radius: 16px;
                 border-bottom-left-radius: 16px;
             }
 
             &:last-of-type {
+                width: 10%;
                 border-top-right-radius: 16px;
                 border-bottom-right-radius: 16px;
             }
@@ -39,25 +41,21 @@ $column-width: 15%;
             @include font(1.8rem, 500);
         }
         td {
-            &.spacer {
-                padding: 10px;
-            }
-            &:not(.spacer) {
-                background-color: #fff;
-                box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
-                @include font(1.4rem, 500);
+            background-color: #fff;
+            box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
+            @include font(1.4rem, 500);
 
-                i {
-                    font-size: 2.4rem;
-                    &:hover {
-                        cursor: pointer;
-                        color: $primary-color;
-                        opacity: 0.8;
-                    }
-                }
-            }
-            &:nth-of-type(2) {
+            &:focus {
                 color: $primary-color;
+            }
+
+            i {
+                font-size: 2.4rem;
+                &:hover {
+                    cursor: pointer;
+                    color: $primary-color;
+                    opacity: 0.8;
+                }
             }
         }
         td[contenteditable='true'] {
@@ -81,7 +79,29 @@ $column-width: 15%;
         }
     }
 
+    .sample-entry {
+        width: calc(100% - 17px);
+        border-radius: 16px;
+        background-color: #fff;
+        box-shadow: 0px 2px 0px 0px rgb(0 0 0 / 25%);
+        @include flex(row, center, center);
+
+        span {
+            width: 20%;
+            padding: 20px 10px;
+            font-size: 1.4rem;
+            font-weight: 500;
+            text-align: center;
+            display: inline-block;
+
+            &:focus {
+                color: $primary-color;
+            }
+        }
+    }
+
     .table-buttons {
+        width: 100%;
         margin: 20px 17px 0 0;
         @include flex(row, center, center);
 
