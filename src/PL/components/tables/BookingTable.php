@@ -25,11 +25,10 @@ class BookingTable extends TableComponent
 
         // Chế độ add có một dòng mẫu
         if ($this->action == "add") {
-            $this->entries[] = [
-                ["value" => count($this->entries) + 1],
-                ["value" => $this->fields[1], "editable" => true],
-                ["value" => $this->fields[2], "editable" => true],
-                ["value" => $this->fields[3], "editable" => true],
+            $this->sampleEntryFields = [
+                "Số phiếu thuê" => "SoPhieuThue",
+                "Mã khách hàng" => "ID_KhachHang",
+                "Mã phòng" => "MaPhong"
             ];
         }
 
@@ -74,7 +73,8 @@ class BookingTable extends TableComponent
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
 
-        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry("STT", "Chi tiết") : "";
+        // TODO: sửa tham số của renderSampleEntry
+        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<< EOT

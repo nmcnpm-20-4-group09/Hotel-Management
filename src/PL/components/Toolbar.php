@@ -11,16 +11,16 @@ class Toolbar extends Component
                 'action' => 'view',
             ],
             [
-                'icon' => 'pen-to-square',
-                'action' => 'edit',
+                'icon' => 'plus',
+                'action' => 'add',
             ],
             [
                 'icon' => 'trash',
                 'action' => 'delete',
             ],
             [
-                'icon' => 'plus',
-                'action' => 'add',
+                'icon' => 'pen-to-square',
+                'action' => 'edit',
             ],
             [
                 'icon' => 'sliders',

@@ -13,7 +13,7 @@ class RoomTable extends TableComponent
         if (empty($this->fields)) {
             $this->fields = [
                 'STT',
-                'Phòng',
+                'Mã phòng',
                 'Loại phòng',
                 'Đơn giá',
                 'Tình trạng',
@@ -32,6 +32,14 @@ class RoomTable extends TableComponent
                 "Đơn giá",
                 "Lượng khách tối đa",
                 "Chọn",
+            ];
+        }
+
+        if ($this->action == "add") {
+            $this->sampleEntryFields = [
+                "Mã phòng" => "MaPhong",
+                "Loại phòng" => "MaLoai",
+                "Tình trạng" => "TinhTrang"
             ];
         }
     }
@@ -74,7 +82,6 @@ class RoomTable extends TableComponent
         return $entryElement;
     }
 
-
     // Tạo checkbox khi ở chế độ delete và justify
     private function makeCheckBoxColumn()
     {
@@ -97,7 +104,7 @@ class RoomTable extends TableComponent
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($checkBoxColumn);
 
-        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry("STT") : "";
+        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT
@@ -111,6 +118,7 @@ class RoomTable extends TableComponent
                     </tbody>
                 </table>
                 $sampleEntry
+                <p class="error-message"></p>
                 $tableButtons
             </div>
             EOT;

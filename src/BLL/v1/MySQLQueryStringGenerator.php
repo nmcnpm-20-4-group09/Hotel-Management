@@ -52,6 +52,10 @@ class MySQLQueryStringGenerator
         return $queryString;
 
     }
+    
+    public static function themPhong($MaPhong, $MaLoai, $TinhTrang)
+    {
+        $queryString = "call v1_sp_themPhong('" . $MaPhong . "', '" . $MaLoai . "', $TinhTrang);";
+        return $queryString;
+    }
 }
-
-?>

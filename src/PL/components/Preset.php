@@ -16,5 +16,6 @@
     <link rel="stylesheet" href="./css/base.css" />
 
     <!-- Scripts -->
+    <script src="./scripts/utils.js"></script>
     <script src="./scripts/index.js"></script>
 </head>

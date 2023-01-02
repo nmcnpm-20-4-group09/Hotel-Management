@@ -97,3 +97,13 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Thêm một phòng mới
+DROP PROCEDURE IF EXISTS v1_sp_themPhong;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_themPhong (MaPhong VARCHAR(5), MaLoai VARCHAR(5), TinhTrang INT)
+BEGIN
+    INSERT INTO phong (MaPhong, MaLoai, TinhTrang)
+    VALUES (MaPhong, MaLoai, TinhTrang);
+END//
+DELIMITER ;
