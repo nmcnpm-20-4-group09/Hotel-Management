@@ -124,8 +124,8 @@ route("room", function () {
             "entries" => getRooms(),
             "buttons" =>
             [
-                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteSelectedEntries()"],
-                ["text" => "Lưu thay đổi",],
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteRoomHandler()"],
+                ["text" => "Chọn tất cả", "handler" => "selectAllEntries()"],
             ]
         ]);
     } else if ($action == "edit") {
@@ -142,10 +142,7 @@ route("room", function () {
             "entries" => getRoomTypes(true),
             "buttons" =>
             [
-                [
-                    "text" => "Xóa các dòng đã chọn",
-                    "handler" => "deleteSelectedEntries()"
-                ],
+                ["text" => "Xóa các dòng đã chọn",],
                 ["text" => "Lưu thay đổi"],
             ]
         ]);
@@ -159,7 +156,7 @@ route("room", function () {
 
 route("booking", function () {
     $action = $_GET['action'] ?? "view";
-    
+
     if ($action == "add") {
         View::renderView("booking", [
             "action" => $action,
@@ -175,13 +172,8 @@ route("booking", function () {
             "entries" => getBookings(),
             "buttons" =>
             [
-                [
-                    "text" => "Xóa các dòng đã chọn",
-                    "handler" => "deleteSelectedEntries()"
-                ],
-                [
-                    "text" => "Lưu thay đổi",
-                ],
+                ["text" => "Xóa các dòng đã chọn",],
+                ["text" => "Lưu thay đổi",],
             ]
         ]);
     } else if ($action == "edit") {
