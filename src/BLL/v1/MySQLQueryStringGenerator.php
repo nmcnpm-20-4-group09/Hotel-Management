@@ -55,7 +55,13 @@ class MySQLQueryStringGenerator
     
     public static function themPhong($MaPhong, $MaLoai, $TinhTrang)
     {
-        $queryString = "call v1_sp_themPhong('" . $MaPhong . "', '" . $MaLoai . "', $TinhTrang);";
+        $queryString = "call v1_sp_themPhong('$MaPhong', '$MaLoai', $TinhTrang);";
+        return $queryString;
+    }
+
+    public static function xoaPhong($MaPhong)
+    {
+        $queryString = "call v1_sp_xoaPhong('$MaPhong');";
         return $queryString;
     }
 }

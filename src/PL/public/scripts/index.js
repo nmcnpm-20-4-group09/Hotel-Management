@@ -121,7 +121,6 @@ async function addRoomHandler() {
         // Nếu đúng hết thì mới gọi API để thêm
         if (isValidRoomID && isValidRoomType && isValidRoomStatus) {
             await addRoom()
-            setTimeout(() => (errorMessage.textContent = ''), 3000) // xóa thông điệp hiển thị
         } else {
             if (!isValidRoomID)
                 errors.push(
@@ -194,56 +193,46 @@ async function addRoomHandler() {
 }
 
 // Chức năng xóa phòng
-function deleteRoomHandler() {
+async function deleteRoomHandler() {
     const errorMessage = $('.table-wrapper').querySelector('.error-message')
     const entries = $('table tbody').querySelectorAll('tr')
     const selectedEntries = Array.from(entries).filter(
         (field) => field.querySelector('input')?.checked,
     )
 
-    const errors = []
-
     if (selectedEntries.length) {
         if (confirm('Bạn có chắc là muốn xóa những phòng này?')) {
-            selectedEntries.forEach(async function (entry) {
+            for (entry of selectedEntries) {
                 // Lấy mã phòng của phòng
-                const roomID = entry.querySelectorAll('tr:nth-of-type(2)').textContent
+                const roomID = entry.querySelectorAll('td')[1].textContent
 
                 // Xóa ở phía database
                 await deleteRoom(roomID)
 
                 // Cập nhật ở phía giao diện
-                deleteRoomOnUI(roomID)
-            })
+                entry.remove()
+            }
         }
     }
 
     async function deleteRoom(roomID) {
         const deleteRoomAPI =
-            API_ROOT + `src/BLL/v1/DELETE/RoomList.php?MaPhong=${roomID}` //! Chưa có API
+            API_ROOT + `src/BLL/v1/DELETE/RoomList.php?MaPhong=${roomID}`
 
         try {
             const deleteRoomResponse = await fetch(deleteRoomAPI)
             const deleteRoomData = await deleteRoomResponse.json()
+            const { success, message, result } = deleteRoomData
 
-            if (deleteRoomData['result'] === 'success') {
-                deleteRoomOnUI(roomID)
+            errorMessage.textContent = message
+
+            if (!success) errorMessage.classList.add('fail')
+            else {
                 errorMessage.classList.remove('fail')
-            } else {
-                errors.push(deleteRoomData['message'])
-                errorMessage.classList.add('fail')
             }
         } catch (e) {
-            errors.push(e)
+            errorMessage.textContent = e
             errorMessage.classList.add('fail')
         }
-        
-        errorMessage.textContent = errors.join(', ')
-    }
-
-    function deleteRoomOnUI(roomID) {
-        selectedEntries
-            .find((entry) => entry[1].textContent === roomID)
-            ?.remove()
     }
 }

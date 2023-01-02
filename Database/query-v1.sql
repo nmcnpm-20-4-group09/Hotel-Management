@@ -107,3 +107,15 @@ BEGIN
     VALUES (MaPhong, MaLoai, TinhTrang);
 END//
 DELIMITER ;
+
+-- Xóa một phòng
+DROP PROCEDURE IF EXISTS v1_sp_xoaPhong;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_xoaPhong (MaPhong VARCHAR(5)) 
+BEGIN    
+	DELETE p
+    FROM phong p
+    WHERE p.MaPhong = MaPhong;
+END//
+DELIMITER ;
