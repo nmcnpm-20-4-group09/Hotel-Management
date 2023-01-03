@@ -33,6 +33,13 @@ class RoomTable extends TableComponent
                 "Lượng khách tối đa",
                 "Chọn",
             ];
+
+            $this->sampleEntryFields = [
+                "Mã loại phòng" => "MaLoai",
+                "Số lượng phòng" => "SoLuongPhong",
+                "Đơn giá" => "DonGia",
+                "Lượng khách tối đa" => "LuongKhachToiDa",
+            ];
         }
 
         if ($this->action == "add") {
@@ -104,7 +111,8 @@ class RoomTable extends TableComponent
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($checkBoxColumn);
 
-        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
+        $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
+        $sampleEntry = $this->action == "justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT
