@@ -76,7 +76,7 @@ abstract class TableComponent extends Component
     }
 
     // Tạo ra một dòng cho phép chỉnh sửa trong bảng
-    // - param (optional): các fields không cần hiển thị
+    // - param (optional): các fields cần hiển thị
     // - return: chuỗi html của dòng chỉnh sửa
     protected function renderSampleEntry($fields = [])
     {

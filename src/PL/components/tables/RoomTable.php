@@ -112,7 +112,6 @@ class RoomTable extends TableComponent
         $entryElements = $this->renderEntries($checkBoxColumn);
 
         $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
-        $sampleEntry = $this->action == "justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT

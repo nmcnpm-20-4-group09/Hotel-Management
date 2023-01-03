@@ -97,7 +97,7 @@ BEGIN
 END//
 DELIMITER ;
 
---! Cần có trigger để đảm bảo phòng thêm vào không vượt quá số lượng cho phép
+-- Cần có ràng buộc để đảm bảo phòng thêm vào không vượt quá số lượng cho phép
 -- Thêm một phòng mới
 DROP PROCEDURE IF EXISTS v1_sp_themPhong;
 DELIMITER //
@@ -121,7 +121,7 @@ BEGIN
 END//
 DELIMITER ;
 
---! Cần phải cập nhật ở các nơi có tham chiếu khóa ngoại
+-- Cần phải cập nhật ở các nơi có tham chiếu khóa ngoại
 -- Chỉnh sửa phòng
 DROP PROCEDURE IF EXISTS v1_sp_chinhSuaPhong;
 DELIMITER //
