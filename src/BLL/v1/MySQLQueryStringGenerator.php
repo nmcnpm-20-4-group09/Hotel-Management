@@ -50,8 +50,23 @@ class MySQLQueryStringGenerator
     {
         $queryString = "call v1_sp_danhSachPhieuThue();";
         return $queryString;
+    }
 
+    public static function themPhong($MaPhong, $MaLoai, $TinhTrang)
+    {
+        $queryString = "call v1_sp_themPhong('$MaPhong', '$MaLoai', $TinhTrang);";
+        return $queryString;
+    }
+
+    public static function xoaPhong($MaPhong)
+    {
+        $queryString = "call v1_sp_xoaPhong('$MaPhong');";
+        return $queryString;
+    }
+
+    public static function chinhSuaPhong($MaPhong, $MaPhongMoi, $MaLoai, $TinhTrang)
+    {
+        $queryString = "call v1_sp_chinhSuaPhong('$MaPhong', '$MaPhongMoi', '$MaLoai', $TinhTrang);";
+        return $queryString;
     }
 }
-
-?>

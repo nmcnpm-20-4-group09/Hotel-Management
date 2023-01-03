@@ -60,7 +60,7 @@ function getRooms($editable = false)
             ["value" => $index + 1],
             ["value" => $room['MaPhong'], "editable" => $editable],
             ["value" => $room['MaLoai'], "options" => makeRoomTypeOptions()],
-            ["value" => $room['DonGia'], "editable" => $editable],
+            ["value" => $room['DonGia']],
             ["value" => $room['TinhTrang'], "editable" => $editable],
         ];
     }
@@ -109,13 +109,14 @@ route("home", function () {
 route("room", function () {
     $action = $_GET['action'] ?? "view";
 
-    if ($action == "edit") {
+    if ($action == "add") {
         View::renderView("room", [
             "action" => $action,
-            "entries" => getRooms(true),
-            "buttons" => [
-                ["text" => "Lưu thay đổi"],
-            ],
+            "entries" => getRooms(),
+            "buttons" =>
+            [
+                ["text" => "Thêm", "handler" => "addRoomHandler()"],
+            ]
         ]);
     } else if ($action == "delete") {
         View::renderView("room", [
@@ -123,18 +124,17 @@ route("room", function () {
             "entries" => getRooms(),
             "buttons" =>
             [
-                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteSelectedEntries()"],
-                ["text" => "Lưu thay đổi",],
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteRoomHandler()"],
+                ["text" => "Chọn tất cả", "handler" => "selectAllEntries()"],
             ]
         ]);
-    } else if ($action == "add") {
+    } else if ($action == "edit") {
         View::renderView("room", [
             "action" => $action,
-            "entries" => getRooms(),
-            "buttons" =>
-            [
-                ["text" => "Thêm"],
-            ]
+            "entries" => getRooms(true),
+            "buttons" => [
+                ["text" => "Lưu thay đổi", "handler" => "updateRoomHandler()"],
+            ],
         ]);
     } else if ($action == "justify") {
         View::renderView("room", [
@@ -142,10 +142,7 @@ route("room", function () {
             "entries" => getRoomTypes(true),
             "buttons" =>
             [
-                [
-                    "text" => "Xóa các dòng đã chọn",
-                    "handler" => "deleteSelectedEntries()"
-                ],
+                ["text" => "Xóa các dòng đã chọn",],
                 ["text" => "Lưu thay đổi"],
             ]
         ]);
@@ -160,12 +157,13 @@ route("room", function () {
 route("booking", function () {
     $action = $_GET['action'] ?? "view";
 
-    if ($action == "edit") {
+    if ($action == "add") {
         View::renderView("booking", [
             "action" => $action,
-            "entries" => getBookings(true),
-            "buttons" => [
-                ["text" => "Lưu thay đổi"],
+            "entries" => getBookings(),
+            "buttons" =>
+            [
+                ["text" => "Thêm"],
             ]
         ]);
     } else if ($action == "delete") {
@@ -174,22 +172,16 @@ route("booking", function () {
             "entries" => getBookings(),
             "buttons" =>
             [
-                [
-                    "text" => "Xóa các dòng đã chọn",
-                    "handler" => "deleteSelectedEntries()"
-                ],
-                [
-                    "text" => "Lưu thay đổi",
-                ],
+                ["text" => "Xóa các dòng đã chọn",],
+                ["text" => "Lưu thay đổi",],
             ]
         ]);
-    } else if ($action == "add") {
+    } else if ($action == "edit") {
         View::renderView("booking", [
             "action" => $action,
-            "entries" => getBookings(),
-            "buttons" =>
-            [
-                ["text" => "Thêm"],
+            "entries" => getBookings(true),
+            "buttons" => [
+                ["text" => "Lưu thay đổi"],
             ]
         ]);
     } else if ($action == "justify") {

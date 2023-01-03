@@ -97,3 +97,39 @@ BEGIN
 END//
 DELIMITER ;
 
+--! Cần có trigger để đảm bảo phòng thêm vào không vượt quá số lượng cho phép
+-- Thêm một phòng mới
+DROP PROCEDURE IF EXISTS v1_sp_themPhong;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_themPhong (MaPhong VARCHAR(5), MaLoai VARCHAR(5), TinhTrang INT)
+BEGIN
+    INSERT INTO phong (MaPhong, MaLoai, TinhTrang)
+    VALUES (MaPhong, MaLoai, TinhTrang);
+END//
+DELIMITER ;
+
+-- Xóa phòng
+DROP PROCEDURE IF EXISTS v1_sp_xoaPhong;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_xoaPhong (MaPhong VARCHAR(5)) 
+BEGIN    
+	DELETE p
+    FROM phong p
+    WHERE p.MaPhong = MaPhong;
+END//
+DELIMITER ;
+
+--! Cần phải cập nhật ở các nơi có tham chiếu khóa ngoại
+-- Chỉnh sửa phòng
+DROP PROCEDURE IF EXISTS v1_sp_chinhSuaPhong;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_chinhSuaPhong (MaPhong VARCHAR(5), MaPhongMoi VARCHAR(5), MaLoai VARCHAR(5), TinhTrang INT)
+BEGIN    
+	UPDATE phong p
+    SET p.MaPhong = MaPhongMoi, p.MaLoai = MaLoai, p.TinhTrang = TinhTrang
+    WHERE p.MaPhong = MaPhong;
+END//
+DELIMITER ;

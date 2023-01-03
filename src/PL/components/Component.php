@@ -78,20 +78,20 @@ abstract class TableComponent extends Component
     // Tạo ra một dòng cho phép chỉnh sửa trong bảng
     // - param (optional): các fields không cần hiển thị
     // - return: chuỗi html của dòng chỉnh sửa
-    protected function renderSampleEntry()
+    protected function renderSampleEntry($fields = [])
     {
-        $exceptions = func_get_args() ?? [];
-        $entryElement = "<div class='sample-entry'>";
+        $sampleEntryElement = "<div class='sample-entry'>";
 
-        foreach ($this->fields as $field) {
-            if (in_array($field, $exceptions)) continue;
-
-            $entryElement .= <<< EOT
-                <span contenteditable='true'>$field</span>
+        foreach ($fields as $title => $name) {
+            $sampleEntryElement .= <<< EOT
+                <div>
+                    <label for="$name">$title</label>
+                    <input type="text" name="$name" id="$name"></input>
+                </div>
             EOT;
         }
 
-        return $entryElement . '</div>';
+        return $sampleEntryElement . '</div>';
     }
 
     // Tạo ra các nút thao tác trong bảng
@@ -107,7 +107,6 @@ abstract class TableComponent extends Component
             $buttonsElement .= <<<EOT
                 <button 
                 type="button"
-                class="save-change-button"
                 onclick="$handler"
                 >
                     $text
