@@ -155,6 +155,9 @@ html {
 .table-wrapper table td[contenteditable=true] {
   outline: none;
 }
+.table-wrapper table td[contenteditable=true].edited {
+  color: #47b5ff;
+}
 .table-wrapper table select {
   outline: none;
   padding: 8px;
@@ -211,20 +214,7 @@ html {
   color: #47b5ff;
   outline: 1px solid #256d85;
 }
-.table-wrapper .error-message {
-  height: 20px;
-  width: 100%;
-  margin: 10px 0;
-  font-size: 1.2rem;
-  text-align: center;
-}
-.table-wrapper .error-message.success {
-  color: #41ef25;
-}
-.table-wrapper .error-message.fail {
-  color: #f31d1d;
-}
-.table-wrapper .error-message {
+.table-wrapper .message {
   height: 20px;
   width: 100%;
   margin: 10px 0;
@@ -233,20 +223,7 @@ html {
   text-align: center;
   color: #41ef25;
 }
-.table-wrapper .error-message.fail {
-  color: #f31d1d;
-}
-.table-wrapper .error-message {
-  height: 20px;
-  width: 100%;
-  margin: 10px 0;
-  font-size: 1.2rem;
-  text-align: center;
-}
-.table-wrapper .error-message.success {
-  color: #41ef25;
-}
-.table-wrapper .error-message.fail {
+.table-wrapper .message.fail {
   color: #f31d1d;
 }
 .table-wrapper .table-buttons {

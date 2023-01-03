@@ -9,6 +9,7 @@ use DALv1\MySQLiConnection;
 use DTOv1\RoomDTO;
 
 $MaPhong = $_GET["MaPhong"];
+$MaPhongMoi = $_GET["MaPhongMoi"];
 $MaLoai = $_GET["MaLoai"];
 $TinhTrang = $_GET["TinhTrang"];
 
@@ -17,7 +18,7 @@ $message = "";
 $result = [];
 
 $pattern = "/^[0-9]+$/"; // INT
-$isValidData = isset($MaPhong) and isset($MaLoai) and
+$isValidData = isset($MaPhong) and isset($MaPhongMoi) and isset($MaLoai) and
     isset($TinhTrang) and preg_match($pattern, $TinhTrang);
 
 if (!$isValidData) {
@@ -35,8 +36,9 @@ if (!$isValidData) {
         $message = "Unable to connect to the database!";
     } else {
         $queryString = MySQLQueryStringGenerator
-            ::themPhong(
+            ::chinhSuaPhong(
                 $MaPhong,
+                $MaPhongMoi,
                 $MaLoai,
                 $TinhTrang
             );
@@ -50,10 +52,10 @@ if (!$isValidData) {
         $result = $dtoList;
         if (count($result) == 0) {
             $success = true;
-            $message = "Thêm phòng thành công!";
+            $message = "Chỉnh sửa phòng $MaPhong thành công!";
         } else {
             $success = false;
-            $message = "Không thể thêm phòng, lỗi: " .  $result[0];
+            $message = "Không thể chỉnh sửa phòng $MaPhong, lỗi: " .  $result[0];
         }
     }
 } // if (!$isValidData)

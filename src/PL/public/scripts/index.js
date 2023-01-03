@@ -9,18 +9,22 @@ const features = {
     report: 4,
 }
 
-// Reload trang
-function reload(delayInSeconds = 1) {
-    setTimeout(() => window.location.reload(), delayInSeconds * 1000)
-}
-
 // Xử lý sự kiện
 function handleEvents() {
     const sidebarButtons = $('.sidebar')?.querySelectorAll('li')
     const toolbarButtons = $('.toolbar')?.querySelectorAll('button')
-    const editableFields = $('.table-wrapper')?.querySelectorAll(
+
+    const tableWrapper = $('.table-wrapper')
+    const editableFields = tableWrapper?.querySelectorAll(
         '[contenteditable=true]',
     )
+    const selectBoxes = tableWrapper?.querySelectorAll('select')
+
+    handleButtons(sidebarButtons)
+    handleButtons(toolbarButtons)
+    handleFieldChange(editableFields)
+    handleSelectBoxChange(selectBoxes)
+
     function handleButtons(buttons) {
         if (buttons) {
             buttons.forEach((button) => {
@@ -39,16 +43,21 @@ function handleEvents() {
         if (editableFields) {
             editableFields.forEach((editableField) => {
                 editableField.addEventListener('keydown', (e) => {
-                    e.target.style.color = '#47b5ff'
                     e.target.classList.add('edited')
                 })
             })
         }
     }
 
-    handleButtons(sidebarButtons)
-    handleButtons(toolbarButtons)
-    handleFieldChange(editableFields)
+    function handleSelectBoxChange(selectBoxes) {
+        if (selectBoxes) {
+            selectBoxes.forEach((selectBox) => {
+                selectBox.addEventListener('change', (e) => {
+                    e.target.classList.add('edited')
+                })
+            })
+        }
+    }
 }
 
 // Thay đổi giao diện của chức năng
@@ -101,7 +110,7 @@ async function getRoomTypes() {
 // Chức năng thêm phòng
 async function addRoomHandler() {
     const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
-    const errorMessage = $('.table-wrapper').querySelector('.error-message')
+    const message = $('.table-wrapper').querySelector('.message')
     const inputs = sampleEntry.querySelectorAll('input')
 
     const errors = []
@@ -121,6 +130,7 @@ async function addRoomHandler() {
         // Nếu đúng hết thì mới gọi API để thêm
         if (isValidRoomID && isValidRoomType && isValidRoomStatus) {
             await addRoom()
+            addRoomToUI()
         } else {
             if (!isValidRoomID)
                 errors.push(
@@ -133,15 +143,15 @@ async function addRoomHandler() {
                 )
             if (!isValidRoomStatus) errors.push('Tình trạng cần phải là một số')
 
-            errorMessage.textContent = errors.join('. ')
-            errorMessage.classList.add('fail')
+            message.textContent = errors.join('. ')
+            message.classList.add('fail')
         }
     } else {
         errors.push(
             'Cả ba trường mã phòng, mã loại phòng và tình trạng không được để trống',
         )
-        errorMessage.textContent = errors.join(', ')
-        errorMessage.classList.add('fail')
+        message.textContent = errors.join(', ')
+        message.classList.add('fail')
     }
 
     // Lấy dữ liệu nhập vào từ các trường
@@ -153,7 +163,7 @@ async function addRoomHandler() {
     }
 
     // Gọi API để thêm phòng
-    async function addRoom(roomPrice) {
+    async function addRoom() {
         const addRoomAPI =
             API_ROOT +
             `src/BLL/v1/POST/RoomList.php?MaPhong=${roomID}&MaLoai=${roomType}&TinhTrang=${roomStatus}`
@@ -161,17 +171,14 @@ async function addRoomHandler() {
         try {
             const addRoomResponse = await fetch(addRoomAPI)
             const addRoomData = await addRoomResponse.json()
-            const { success, message, result } = addRoomData
+            const { success, message: queryMessage } = addRoomData
 
-            errorMessage.textContent = message
+            message.textContent = queryMessage
 
-            if (!success) errorMessage.classList.add('fail')
-            else {
-                errorMessage.classList.remove('fail')
-                addRoomToUI()
-            }
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
         } catch (e) {
-            errorMessage.textContent = e
+            message.textContent = e
         }
     }
 
@@ -194,7 +201,7 @@ async function addRoomHandler() {
 
 // Chức năng xóa phòng
 async function deleteRoomHandler() {
-    const errorMessage = $('.table-wrapper').querySelector('.error-message')
+    const message = $('.table-wrapper').querySelector('.message')
     const entries = $('table tbody').querySelectorAll('tr')
     const selectedEntries = Array.from(entries).filter(
         (field) => field.querySelector('input')?.checked,
@@ -222,17 +229,84 @@ async function deleteRoomHandler() {
         try {
             const deleteRoomResponse = await fetch(deleteRoomAPI)
             const deleteRoomData = await deleteRoomResponse.json()
-            const { success, message, result } = deleteRoomData
+            const { success, message: queryMessage } = deleteRoomData
 
-            errorMessage.textContent = message
+            message.textContent = queryMessage
 
-            if (!success) errorMessage.classList.add('fail')
-            else {
-                errorMessage.classList.remove('fail')
-            }
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
         } catch (e) {
-            errorMessage.textContent = e
-            errorMessage.classList.add('fail')
+            message.textContent = e
+            message.classList.add('fail')
         }
+    }
+}
+
+// Chức năng chỉnh sửa phòng
+async function updateRoomHandler() {
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const editedEntries = Array.from(entries).filter((entry) =>
+        entry.querySelector('.edited'),
+    )
+
+    const messages = []
+
+    for (entry of editedEntries) {
+        const roomInfo = getRoomInfo(entry)
+
+        // Cập nhật phía database
+        const success = await updateRoom(roomInfo)
+
+        // Cập nhật ở trên giao diện
+        updateRoomOnUI(entry, success)
+    }
+
+    function getRoomInfo(entry) {
+        const fields = entry.querySelectorAll('td')
+
+        const roomID = fields[1].getAttribute('name')
+        const newRoomID = fields[1].textContent
+        const newRoomType = entry.querySelector('select').value
+        const newRoomStatus = fields[4].textContent
+
+        return [roomID, newRoomID, newRoomType, newRoomStatus]
+    }
+
+    async function updateRoom([roomID, newRoomID, newRoomType, newRoomStatus]) {
+        const updateRoomAPI =
+            API_ROOT +
+            `src/BLL/v1/PUT/RoomList.php?
+            MaPhong=${roomID}&
+            MaPhongMoi=${newRoomID}&
+            MaLoai=${newRoomType}&
+            TinhTrang=${newRoomStatus}`
+
+        try {
+            const updateRoomResponse = await fetch(updateRoomAPI)
+            const updateRoomData = await updateRoomResponse.json()
+            const { success, message: queryMessage } = updateRoomData
+
+            messages.push(queryMessage)
+            return success
+        } catch (e) {
+            messages.push(e)
+            return false
+        }
+    }
+
+    function updateRoomOnUI(entry, success) {
+        const editedFields = entry.querySelectorAll('.edited')
+        editedFields.forEach((field) => field.classList.remove('edited'))
+
+        message.textContent = messages.join(', ')
+
+        if (success) message.classList.remove('fail')
+        else message.classList.add('fail')
+
+        setTimeout(() => {
+            message.textContent = ''
+            messages.length = 0
+        }, 5000)
     }
 }

@@ -60,6 +60,10 @@ $column-width: 15%;
         }
         td[contenteditable='true'] {
             outline: none;
+
+            &.edited {
+                color: $primary-color;
+            }
         }
 
         select {
@@ -110,21 +114,7 @@ $column-width: 15%;
         }
     }
 
-    .error-message {
-        height: 20px;
-        width: 100%;
-        margin: 10px 0;
-        font-size: 1.2rem;
-        text-align: center;
-
-        &.success {
-            color: $success-color;
-        }
-        &.fail {
-            color: $fail-color;
-        }
-    }
-    .error-message {
+    .message {
         height: 20px;
         width: 100%;
         margin: 10px 0;
@@ -133,20 +123,6 @@ $column-width: 15%;
         text-align: center;
         color: $success-color;
 
-        &.fail {
-            color: $fail-color;
-        }
-    }
-    .error-message {
-        height: 20px;
-        width: 100%;
-        margin: 10px 0;
-        font-size: 1.2rem;
-        text-align: center;
-
-        &.success {
-            color: $success-color;
-        }
         &.fail {
             color: $fail-color;
         }

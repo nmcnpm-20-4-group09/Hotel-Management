@@ -60,7 +60,7 @@ function getRooms($editable = false)
             ["value" => $index + 1],
             ["value" => $room['MaPhong'], "editable" => $editable],
             ["value" => $room['MaLoai'], "options" => makeRoomTypeOptions()],
-            ["value" => $room['DonGia'], "editable" => $editable],
+            ["value" => $room['DonGia']],
             ["value" => $room['TinhTrang'], "editable" => $editable],
         ];
     }
@@ -133,7 +133,7 @@ route("room", function () {
             "action" => $action,
             "entries" => getRooms(true),
             "buttons" => [
-                ["text" => "Lưu thay đổi"],
+                ["text" => "Lưu thay đổi", "handler" => "updateRoomHandler()"],
             ],
         ]);
     } else if ($action == "justify") {

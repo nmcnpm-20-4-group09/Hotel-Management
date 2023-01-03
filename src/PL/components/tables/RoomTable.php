@@ -74,7 +74,7 @@ class RoomTable extends TableComponent
                 $editableAttribute = $editable ? "contenteditable='true'" : "";
 
                 $entryElement .= <<< EOT
-                    <td $editableAttribute>$value</td>
+                    <td $editableAttribute name='$value'>$value</td>
                 EOT;
             }
         }
@@ -118,7 +118,7 @@ class RoomTable extends TableComponent
                     </tbody>
                 </table>
                 $sampleEntry
-                <p class="error-message"></p>
+                <p class="message"></p>
                 $tableButtons
             </div>
             EOT;
