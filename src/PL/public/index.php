@@ -85,6 +85,25 @@ function getBookings($editable = false)
     return $entries;
 }
 
+function getCustomers($editable = false)
+{
+    $uri = API_ROOT . 'src/BLL/v1/GET/CustomerList.php';
+    $customers = fetchAPI($uri);
+
+    $entries = [];
+    foreach ($customers as $index => $customers) {
+        $entries[] = [
+            ["value" => $index + 1],
+            ["value" => $customers['IDKhachHang'], "editable" => $editable],
+            ["value" => $customers['LoaiKhach']],
+            ["value" => $customers['HoTen'], "editable" => $editable],
+            ["value" => $customers['SoDienThoai'], "editable" => $editable],
+            ["value" => $customers['CMND'], "editable" => $editable]
+        ];
+    }
+    return $entries;
+}
+
 route("home", function () {
     $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
@@ -195,23 +214,51 @@ route("booking", function () {
 });
 
 route("customer", function () {
-    $uri =  API_ROOT .  'src/BLL/v1/GET/CustomerList.php';
-    $customers = fetchAPI($uri);
+    $action = $_GET['action'] ?? "view";
 
-    $entries = [];
-    foreach ($customers as $index => $customer) {
-        $entry = [
-            ["value" => $index + 1],
-            ["value" => $customer['IDKhachHang']],
-            ["value" => $customer['LoaiKhach']],
-            ["value" => $customer['HoTen']],
-            ["value" => $customer['SoDienThoai']],
-            ["value" => $customer['CMND']],
-        ];
-        $entries[] = $entry;
+    if ($action == "add") {
+        View::renderView("room", [
+            "action" => $action,
+            "entries" => getRooms(),
+            "buttons" =>
+            [
+                ["text" => "Thêm", "handler" => "addRoomHandler()"],
+            ]
+        ]);
+    } else if ($action == "delete") {
+        View::renderView("room", [
+            "action" => $action,
+            "entries" => getRooms(),
+            "buttons" =>
+            [
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteRoomHandler()"],
+                ["text" => "Chọn tất cả", "handler" => "selectAllEntries()"],
+            ]
+        ]);
+    } else if ($action == "edit") {
+        View::renderView("room", [
+            "action" => $action,
+            "entries" => getRooms(true),
+            "buttons" => [
+                ["text" => "Lưu thay đổi", "handler" => "updateRoomHandler()"],
+            ],
+        ]);
+    } else if ($action == "justify") {
+        View::renderView("room", [
+            "action" => $action,
+            "entries" => getRoomTypes(true),
+            "buttons" =>
+            [
+                ["text" => "Xóa các dòng đã chọn",],
+                ["text" => "Lưu thay đổi"],
+            ]
+        ]);
+    } else {
+        View::renderView("customer", [
+            "action" => $action,
+            "entries" => getCustomers(),
+        ]);
     }
-
-    View::renderView("customer", ["entries" => $entries]);
 });
 
 route("bill", function () {
