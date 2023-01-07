@@ -28,6 +28,12 @@ class MySQLQueryStringGenerator
         return $queryString;
     }
 
+    public static function danhSachLoaiKhach()
+    {
+        $queryString = "call v1_sp_danhSachLoaiKhach();";
+        return $queryString;
+    }
+
     public static function doiTiLePhuThu($MaPhuThu, $TiLeMoi)
     {
         $queryString = "call v1_sp_doiTiLePhuThu ('" . $MaPhuThu . "', " . $TiLeMoi . ")";

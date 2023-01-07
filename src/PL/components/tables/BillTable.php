@@ -13,7 +13,7 @@ class BillTable extends TableComponent
             'Số hóa đơn',
             'Ngày thanh toán',
             'Trị giá',
-            'Chi tiết hóa đơn',
+            'Chi tiết',
         ];
     }
 

@@ -139,7 +139,7 @@ async function addRoomHandler() {
             if (!isValidRoomType)
                 errors.push(
                     'Mã loại phòng không tồn tại, các loại phòng hiện có là: ' +
-                        Object.keys(roomTypes).join(', '),
+                    Object.keys(roomTypes).join(', '),
                 )
             if (!isValidRoomStatus) errors.push('Tình trạng cần phải là một số')
 
@@ -310,3 +310,192 @@ async function updateRoomHandler() {
         }, 5000)
     }
 }
+
+/*KHÁCH*/
+// Thêm 
+async function addCustomerHandler() {
+    const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
+    const message = $('.table-wrapper').querySelector('.message')
+    const inputs = sampleEntry.querySelectorAll('input')
+
+    const errors = []
+
+    // Lấy các trường thông tin nhập vào
+    const [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND] = getCustomerInfo(inputs)
+
+    if (IDKhachHang && DiaChi && SoDienThoai && HoTen && CMND) {
+        // await addCustomer()
+        addCustomerToUI()
+    } else {
+        errors.push(
+            'Cần điền đầy đủ các trường dữ liệu!'
+        )
+        message.textContent = errors.join(', ')
+        message.classList.add('fail')
+    }
+
+    // Lấy dữ liệu nhập vào từ các trường
+    function getCustomerInfo(inputs) {
+        const [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND] = Array.from(inputs).map(
+            (input) => input.value,
+        )
+        return [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND]
+    }
+
+    // Gọi API để thêm
+    async function addCustomer() {
+        const addCustomerAPI =
+            API_ROOT +
+            `src/BLL/v1/POST/CustomerList.php?IDKhachHang=${IDKhachHang}&LoaiKhach=${LoaiKhach}&HoTen=${HoTen}&DiaChi=${DiaChi}&SoDienThoai=${SoDienThoai}&CMND=${CMND}`
+
+        try {
+            const addCustomerResponse = await fetch(addCustomerAPI)
+            const addCustomerData = await addCustomerResponse.json()
+            const { success, message: queryMessage } = addCustomerData
+
+            message.textContent = queryMessage
+
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
+        } catch (e) {
+            message.textContent = e
+        }
+    }
+
+    function addCustomerToUI() {
+        const entries = $('table tbody').querySelectorAll('tr')
+        const newEntry = entries[0].cloneNode(true)
+        const fields = newEntry.querySelectorAll('td')
+        fields[0].textContent = entries.length + 1
+        fields[1].textContent = IDKhachHang
+        fields[2].textContent = LoaiKhach
+        fields[3].textContent = HoTen
+        fields[4].textContent = DiaChi
+        fields[5].textContent = SoDienThoai
+        fields[6].textContent = CMND
+        $('table tbody').appendChild(newEntry)
+    }
+}
+
+// Sửa
+async function updateCustomerHandler() {
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const editedEntries = Array.from(entries).filter((entry) =>
+        entry.querySelector('.edited'),
+    )
+
+    const messages = []
+
+    for (entry of editedEntries) {
+        const customerInfo = getCustomerInfo(entry)
+
+        // Cập nhật phía database
+        const success = await updateCustomer(customerInfo)
+
+        // Cập nhật ở trên giao diện
+        updateCustomerOnUI(entry, success)
+    }
+
+    function getCustomerInfo(entry) {
+        const fields = entry.querySelectorAll('td')
+        const MaKhach = fields[1].getAttribute('name')
+        const MaKhachMoi = fields[1].textContent
+        const LoaiKhach = entry.querySelector('select').value
+        const HoTen = fields[3].textContent
+        const DiaChi = fields[4].textContent
+        const SoDienThoai = fields[5].textContent
+        const CMND = fields[6].textContent
+        return [MaKhach, MaKhachMoi, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND]
+    }
+
+    async function updateCustomer([MaKhach, MaKhachMoi, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND]) {
+        const updateCustomerAPI =
+            API_ROOT +
+            `src/BLL/v1/PUT/CustomerList.php?
+            IDKhachHang=${MaKhach}&
+            IDMoi=${MaKhachMoi}&
+            LoaiKhach=${LoaiKhach}&
+            HoTen=${HoTen}
+            DiaChi=${DiaChi}
+            SoDienThoai=${SoDienThoai}
+            CMND=${CMND}`
+
+        try {
+            const updateCustomerResponse = await fetch(updateCustomerAPI)
+            const updateCustomerData = await updateCustomerResponse.json()
+            const { success, message: queryMessage } = updateCustomerData
+
+            messages.push(queryMessage)
+            return success
+        } catch (e) {
+            messages.push(e)
+            return false
+        }
+    }
+
+    function updateCustomerOnUI(entry, success) {
+        const editedFields = entry.querySelectorAll('.edited')
+        editedFields.forEach((field) => field.classList.remove('edited'))
+
+        message.textContent = messages.join(', ')
+
+        if (success) message.classList.remove('fail')
+        else message.classList.add('fail')
+
+        setTimeout(() => {
+            message.textContent = ''
+            messages.length = 0
+        }, 5000)
+    }
+}
+
+// Xóa
+async function deleteCustomerHandler() {
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const selectedEntries = Array.from(entries).filter(
+        (field) => field.querySelector('input')?.checked,
+    )
+
+    if (selectedEntries.length) {
+        if (confirm('Bạn có chắc là muốn xóa những khách hàng này?')) {
+            for (entry of selectedEntries) {
+                // Lấy mã khách
+                const IDKhachHang = entry.querySelectorAll('td')[1].textContent
+
+                // Xóa ở phía database (khi có code php thì mở comment !!!!)
+                //await deleteCustomer(IDKhachHang)
+
+                // Cập nhật ở phía giao diện
+                entry.remove()
+            }
+            // Cập nhật lại STT các dòng:
+            const entries = $('table tbody').querySelectorAll('tr')
+            i = 1
+            for (entry of entries) {
+                entry.querySelectorAll('td')[0].textContent = i++
+            }
+        }
+    }
+
+    async function deleteCustomer(MaKhach) {
+        const deleteCustomerAPI =
+            API_ROOT + `src/BLL/v1/DELETE/CustomerList.php?IDKhachHang=${MaKhach}`
+
+        try {
+            const deleteCustomerResponse = await fetch(deleteCustomerAPI)
+            const deleteCustomerData = await deleteCustomerResponse.json()
+            const { success, message: queryMessage } = deleteCustomerData
+
+            message.textContent = queryMessage
+
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
+        } catch (e) {
+            message.textContent = e
+            message.classList.add('fail')
+        }
+    }
+}
+// Sửa quy định phụ thu

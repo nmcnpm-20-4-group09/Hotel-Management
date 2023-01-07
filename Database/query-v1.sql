@@ -25,6 +25,17 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Lấy danh sách loại khách
+DROP PROCEDURE IF EXISTS v1_sp_danhSachLoaiKhach;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_danhSachLoaiKhach ()   
+BEGIN
+    SELECT *
+    FROM LoaiKhach;
+END//
+DELIMITER ;
+
 -- Lấy danh mục phòng
 DROP PROCEDURE IF EXISTS v1_sp_danhMucPhong;
 DELIMITER //

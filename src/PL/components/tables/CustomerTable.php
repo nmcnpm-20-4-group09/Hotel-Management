@@ -13,6 +13,7 @@ class CustomerTable extends TableComponent
                 'Mã khách',
                 'Loại khách',
                 'Họ và tên',
+                'Địa chỉ',
                 'SĐT',
                 'CMND'
             ];
@@ -20,31 +21,32 @@ class CustomerTable extends TableComponent
         // Chế độ xóa có thêm check box để chọn nên cần thêm field này vào tiêu đề cột
         if ($this->action == "delete")  $this->fields[] = "Chọn";
 
-        // Chế độ chỉnh sửa có dữ liệu lấy từ bảng loại phòng
+        // Chế độ chỉnh sửa quy định có dữ liệu lấy từ bảng loại phòng
         if ($this->action == "justify") {
             $this->fields = [
                 "STT",
-                "Mã khách",
-                'Loại khách',
-                'Họ và tên',
-                'SĐT',
-                'CMND',
+                "Mã loại khách",
+                "Tên loại khách",
+                "Hệ số",
                 "Chọn",
             ];
 
-            // $this->sampleEntryFields = [
-            //     "Mã khách" => "MaLoai",
-            //     "Số lượng phòng" => "SoLuongPhong",
-            //     "Họ và tên" => "DonGia",
-            //     "SĐT" => "LuongKhachToiDa",
-            // ];
+            $this->sampleEntryFields = [
+                "Mã loại khách" => "IDKhachHang",
+                "Loại khách" => "LoaiKhach",
+                "Tên loại khách" => "HoTen",
+                "Hệ số" => "DiaChi",
+            ];
         }
 
         if ($this->action == "add") {
             $this->sampleEntryFields = [
-                "Mã phòng" => "MaPhong",
-                "Loại phòng" => "MaLoai",
-                "Tình trạng" => "TinhTrang"
+                "Mã khách" => "IDKhachHang",
+                "Loại khách" => "LoaiKhach",
+                "Họ và tên" => "HoTen",
+                "Địa chỉ" => "DiaChi",
+                "Số điện thoại" => "SoDienThoai",
+                "CMND" => "CMND"
             ];
         }
     }
@@ -69,7 +71,6 @@ class CustomerTable extends TableComponent
             // Thêm select box khi ở chế độ chỉnh sửa và có options
             if ($this->action == "edit" && isset($field['options'])) {
                 $selectBox = $this->makeSelectBox($field['options'], $value);
-
                 $entryElement .= <<< EOT
                     <td>$selectBox</td>
                 EOT;
@@ -86,7 +87,6 @@ class CustomerTable extends TableComponent
 
         return $entryElement;
     }
-
 
     // Tạo checkbox khi ở chế độ delete và justify
     private function makeCheckBoxColumn()
@@ -109,8 +109,8 @@ class CustomerTable extends TableComponent
 
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($checkBoxColumn);
-
-        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry("STT") : "";
+        // render them option box cho Loai Khach !!!
+        $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT
