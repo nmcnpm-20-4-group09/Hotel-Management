@@ -892,7 +892,7 @@ async function addSurchargeHandler() {
     async function addSurcharge() {
         const addSurchargeAPI =
             API_ROOT +
-            `src/BLL/v1/POST/Surcharge.php?MaPhuThu=${MaPhuThu}&TenPhuThu=${TenPhuThu}&TiLe=${TiLe}`
+            `src/BLL/v1/POST/SurchargeList.php?MaPhuThu=${MaPhuThu}&TenPhuThu=${TenPhuThu}&TiLe=${TiLe}`
 
         try {
             const addSurchargeResponse = await fetch(addSurchargeAPI)
@@ -1015,7 +1015,7 @@ async function deleteSurchargeHandler() {
 
     async function deleteSurcharge(MaPhuThu) {
         const deleteSurchargeAPI =
-            API_ROOT + `src/BLL/v1/DELETE/Surcharge.php?MaPhuThu=${MaPhuThu}`
+            API_ROOT + `src/BLL/v1/DELETE/SurchargeList.php?MaPhuThu=${MaPhuThu}`
 
         try {
             const deleteSurchargeResponse = await fetch(deleteSurchargeAPI)
