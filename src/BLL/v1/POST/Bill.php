@@ -69,8 +69,6 @@ if (!$isValidData) {
                     $message = $dto;
                 }
             }
-            
-            $success = true;
         }
         else {
             $success = false;
