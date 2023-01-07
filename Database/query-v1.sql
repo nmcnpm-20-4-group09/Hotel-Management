@@ -298,3 +298,14 @@ BEGIN
     WHERE lk.MaLoaiKhach = MaLoaiKhach;
 END//
 DELIMITER ;
+
+-- Lấy danh sách phụ thu
+DROP PROCEDURE IF EXISTS v1_sp_danhSachPhuThu;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_danhSachPhuThu ()
+BEGIN    
+	SELECT *
+    FROM phuthu;
+END//
+DELIMITER ;
