@@ -175,19 +175,20 @@ function getBills($editable = false)
     return $entries;
 }
 
-function getBillDetail($editable = false)
+function getBillDetails($editable = false)
 {
     $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php';
-    $bills = fetchAPI($uri);
+    
+    $details = fetchAPI($uri);
 
     $entries = [];
-    foreach ($bills as $index => $bill) {
+    foreach ($details as $index => $detail) {
         $entries[] = [
             ["value" => $index + 1],
-            ["value" => $bill['SoHoaDon'], "editable" => $editable],
-            ["value" => $bill['SoNgayThueThuc']],
-            ["value" => $bill['TienThuePhong']],
-            ["value" => $bill['PhuThu'], "options" => makeSurchargesOptions()],
+            ["value" => $detail['SoHoaDon'], "editable" => $editable],
+            ["value" => $detail['SoNgayThueThuc']],
+            ["value" => $detail['TienThuePhong']],
+            ["value" => $detail['PhuThu'], "options" => makeSurchargesOptions()],
         ];
     }
     return $entries;
