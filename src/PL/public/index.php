@@ -149,6 +149,23 @@ function getBills($editable = false)
     return $entries;
 }
 
+function getSurcharge($editable = false)
+{
+    $uri = API_ROOT . 'src/BLL/v2/GET/Surcharge.php';
+    $bills = fetchAPI($uri);
+
+    $entries = [];
+    foreach ($fees as $index => $fees) {
+        $entries[] = [
+            ["value" => $index + 1],
+            ["value" => $fees['SoHoaDon'], "editable" => $editable],
+            ["value" => $fees['IDKhachHang']],
+            ["value" => $fees['NgayThanhToan'], "editable" => $editable],
+            ["value" => $fees['TriGia']],
+        ];
+    }
+    return $entries;
+}
 route("home", function () {
     $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
@@ -339,11 +356,11 @@ route("bill", function () {
     } else if ($action == "justify") {
         View::renderView("bill", [
             "action" => $action,
-            "entries" => getBillTypes(true),
+            "entries" => getSurcharges(true),
             "buttons" =>
             [
-                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillHandler()"],
-                ["text" => "Lưu thay đổi", updateBillTypeHandler],
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteSurcharge()"],
+                ["text" => "Lưu thay đổi", updateSurchargeHandler],
             ]
         ]);
     } else {
