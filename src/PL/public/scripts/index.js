@@ -312,7 +312,7 @@ async function updateRoomHandler() {
 }
 
 /*KHÁCH*/
-// Thêm 
+// Thêm khách
 async function addCustomerHandler() {
     const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
     const message = $('.table-wrapper').querySelector('.message')
@@ -377,7 +377,7 @@ async function addCustomerHandler() {
     }
 }
 
-// Sửa
+// Sửa thông tin khách
 async function updateCustomerHandler() {
     const message = $('.table-wrapper').querySelector('.message')
     const entries = $('table tbody').querySelectorAll('tr')
@@ -450,7 +450,7 @@ async function updateCustomerHandler() {
     }
 }
 
-// Xóa
+// Xóa khách
 async function deleteCustomerHandler() {
     const message = $('.table-wrapper').querySelector('.message')
     const entries = $('table tbody').querySelectorAll('tr')
@@ -498,4 +498,182 @@ async function deleteCustomerHandler() {
         }
     }
 }
-// Sửa quy định phụ thu
+
+// Thêm loại khách
+async function addCustomerTypeHandler() {
+    const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
+    const message = $('.table-wrapper').querySelector('.message')
+    const inputs = sampleEntry.querySelectorAll('input')
+
+    const errors = []
+
+    // Lấy các trường thông tin nhập vào
+    const [MaLoai, TenLoai, HeSo] = getCustomerTypeInfo(inputs)
+
+    if (MaLoai && TenLoai && HeSo) {
+        // await addCustomerType()
+        addCustomerTypeToUI()
+    } else {
+        errors.push(
+            'Cần điền đầy đủ các trường dữ liệu!'
+        )
+        message.textContent = errors.join(', ')
+        message.classList.add('fail')
+    }
+
+    // Lấy dữ liệu nhập vào từ các trường
+    function getCustomerTypeInfo(inputs) {
+        const [MaLoai, TenLoai, HeSo] = Array.from(inputs).map(
+            (input) => input.value,
+        )
+        return [MaLoai, TenLoai, HeSo]
+    }
+
+    // Gọi API để thêm
+    async function addCustomerType() {
+        const addCustomerTypeAPI =
+            API_ROOT +
+            `src/BLL/v1/POST/CustomerTypeList.php?MaLoaiKhach=${MaLoai}&TenLoaiKhach=${TenLoai}&HeSo=${HeSo}`
+
+        try {
+            const addCustomerTypeResponse = await fetch(addCustomerTypeAPI)
+            const addCustomerTypeData = await addCustomerTypeResponse.json()
+            const { success, message: queryMessage } = addCustomerTypeData
+
+            message.textContent = queryMessage
+
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
+        } catch (e) {
+            message.textContent = e
+        }
+    }
+
+    function addCustomerTypeToUI() {
+        const entries = $('table tbody').querySelectorAll('tr')
+        const newEntry = entries[0].cloneNode(true)
+        const fields = newEntry.querySelectorAll('td')
+        fields[0].textContent = entries.length + 1
+        fields[1].textContent = MaLoai
+        fields[2].textContent = TenLoai
+        fields[3].textContent = HeSo
+        $('table tbody').appendChild(newEntry)
+    }
+}
+
+// Xóa loại khách
+async function deleteCustomerTypeHandler() {
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const selectedEntries = Array.from(entries).filter(
+        (field) => field.querySelector('input')?.checked,
+    )
+
+    if (selectedEntries.length) {
+        if (confirm('Bạn có chắc là muốn xóa những loại khách này?')) {
+            for (entry of selectedEntries) {
+                // Lấy mã khách
+                const MaLoai = entry.querySelectorAll('td')[1].textContent
+
+                // Xóa ở phía database (khi có code php thì mở comment !!!!)
+                //await deleteCustomerType(MaLoai)
+
+                // Cập nhật ở phía giao diện
+                entry.remove()
+            }
+            // Cập nhật lại STT các dòng:
+            const entries = $('table tbody').querySelectorAll('tr')
+            i = 1
+            for (entry of entries) {
+                entry.querySelectorAll('td')[0].textContent = i++
+            }
+        }
+    }
+
+    async function deleteCustomerType(MaKhach) {
+        const deleteCustomerTypeAPI =
+            API_ROOT + `src/BLL/v1/DELETE/CustomerTypeList.php?MaLoaiKhach=${MaLoai}`
+
+        try {
+            const deleteCustomerTypeResponse = await fetch(deleteCustomerTypeAPI)
+            const deleteCustomerTypeData = await deleteCustomerTypeResponse.json()
+            const { success, message: queryMessage } = deleteCustomerTypeData
+
+            message.textContent = queryMessage
+
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
+        } catch (e) {
+            message.textContent = e
+            message.classList.add('fail')
+        }
+    }
+}
+
+// Sửa quy định loại khách
+async function updateCustomerTypeHandler() {
+    addCustomerTypeHandler()
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const editedEntries = Array.from(entries).filter((entry) =>
+        entry.querySelector('.edited'),
+    )
+
+    const messages = []
+
+    for (entry of editedEntries) {
+        const CustomerTypeInfo = getCustomerTypeInfo(entry)
+
+        // Cập nhật phía database
+        const success = await updateCustomerType(CustomerTypeInfo)
+
+        // Cập nhật ở trên giao diện
+        updateCustomerTypeOnUI(entry, success)
+    }
+
+    function getCustomerTypeInfo(entry) {
+        const fields = entry.querySelectorAll('td')
+        const MaLoai = fields[1].getAttribute('name')
+        const MaLoaiMoi = fields[1].textContent
+        const TenLoai = entry.querySelector('select').value
+        const HeSo = fields[3].textContent
+        return [MaLoai, MaLoaiMoi, TenLoai, HeSo]
+    }
+
+    async function updateCustomerType([MaLoai, MaLoaiMoi, TenLoai, HeSo]) {
+        const updateCustomerTypeAPI =
+            API_ROOT +
+            `src/BLL/v1/PUT/CustomerTypeList.php?
+            MaLoaiKhach=${MaLoai}&
+            MaLoaiMoi=${MaLoaiMoi}&
+            TenLoaiKhach=${TenLoai}&
+            HeSo=${HeSo}`
+
+        try {
+            const updateCustomerTypeResponse = await fetch(updateCustomerTypeAPI)
+            const updateCustomerTypeData = await updateCustomerTypeResponse.json()
+            const { success, message: queryMessage } = updateCustomerTypeData
+
+            messages.push(queryMessage)
+            return success
+        } catch (e) {
+            messages.push(e)
+            return false
+        }
+    }
+
+    function updateCustomerTypeOnUI(entry, success) {
+        const editedFields = entry.querySelectorAll('.edited')
+        editedFields.forEach((field) => field.classList.remove('edited'))
+
+        message.textContent = messages.join(', ')
+
+        if (success) message.classList.remove('fail')
+        else message.classList.add('fail')
+
+        setTimeout(() => {
+            message.textContent = ''
+            messages.length = 0
+        }, 5000)
+    }
+}

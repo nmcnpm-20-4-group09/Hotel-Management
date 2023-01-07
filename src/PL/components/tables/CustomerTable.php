@@ -32,10 +32,9 @@ class CustomerTable extends TableComponent
             ];
 
             $this->sampleEntryFields = [
-                "Mã loại khách" => "IDKhachHang",
-                "Loại khách" => "LoaiKhach",
-                "Tên loại khách" => "HoTen",
-                "Hệ số" => "DiaChi",
+                "Mã loại khách" => "MaLoaiKhach",
+                "Tên loại khách" => "TenLoaiKhach",
+                "Hệ số" => "HeSo",
             ];
         }
 

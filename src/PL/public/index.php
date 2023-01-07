@@ -277,8 +277,8 @@ route("customer", function () {
             "entries" => getCustomerTypes(true),
             "buttons" =>
             [
-                ["text" => "Xóa các dòng đã chọn",],
-                ["text" => "Lưu thay đổi"],
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteCustomerTypeHandler()"],
+                ["text" => "Lưu thay đổi", "handler" => "updateCustomerTypeHandler()"],
             ]
         ]);
     } else {
@@ -290,21 +290,53 @@ route("customer", function () {
 });
 
 route("bill", function () {
-    $uri =  API_ROOT . 'src/BLL/v1/GET/BillList.php';
-    $bills = fetchAPI($uri);
-
-    $entries = [];
-    foreach ($bills as $index => $bill) {
-        $entry = [
-            ["value" => $index + 1],
-            ["value" => $bill['SoHoaDon']],
-            ["value" => $bill['NgayThanhToan']],
-            ["value" => $bill['TriGia'] ?? "Chưa có"],
-        ];
-        $entries[] = $entry;
-    }
-
     View::renderView("bill", ["entries" => $entries]);
+
+    $action = $_GET['action'] ?? "view";
+
+    if ($action == "add") {
+        View::renderView("bill", [
+            "action" => $action,
+            "entries" => getBills(),
+            "buttons" =>
+            [
+                ["text" => "Thêm", "handler" => "addBillHandler()"],
+            ]
+        ]);
+    } else if ($action == "delete") {
+        View::renderView("bill", [
+            "action" => $action,
+            "entries" => getBills(),
+            "buttons" =>
+            [
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillHandler()"],
+                ["text" => "Chọn tất cả", "handler" => "selectAllEntries()"],
+            ]
+        ]);
+    } else if ($action == "edit") {
+        View::renderView("bill", [
+            "action" => $action,
+            "entries" => getBills(true),
+            "buttons" => [
+                ["text" => "Lưu thay đổi", "handler" => "updateBillHandler()"],
+            ],
+        ]);
+    } else if ($action == "justify") {
+        View::renderView("bill", [
+            "action" => $action,
+            "entries" => getBillTypes(true),
+            "buttons" =>
+            [
+                ["text" => "Xóa các dòng đã chọn",],
+                ["text" => "Lưu thay đổi"],
+            ]
+        ]);
+    } else {
+        View::renderView("bill", [
+            "action" => $action,
+            "entries" => getBills(),
+        ]);
+    }
 });
 
 route("report", function () {
