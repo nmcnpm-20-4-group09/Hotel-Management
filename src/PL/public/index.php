@@ -120,7 +120,7 @@ function getCustomers($editable = false)
     foreach ($customers as $index => $customers) {
         $entries[] = [
             ["value" => $index + 1],
-            ["value" => $customers['ID_KhachHang'], "editable" => $editable],
+            ["value" => $customers['IDKhachHang'], "editable" => $editable],
             ["value" => $customers['LoaiKhach'], "options" => makeCustomerTypeOptions()],
             ["value" => $customers['HoTen'], "editable" => $editable],
             ["value" => $customers['DiaChi'], "editable" => $editable],
