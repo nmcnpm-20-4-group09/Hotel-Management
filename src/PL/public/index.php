@@ -120,7 +120,7 @@ function getCustomers($editable = false)
     foreach ($customers as $index => $customers) {
         $entries[] = [
             ["value" => $index + 1],
-            ["value" => $customers['IDKhachHang'], "editable" => $editable],
+            ["value" => $customers['ID_KhachHang'], "editable" => $editable],
             ["value" => $customers['LoaiKhach'], "options" => makeCustomerTypeOptions()],
             ["value" => $customers['HoTen'], "editable" => $editable],
             ["value" => $customers['DiaChi'], "editable" => $editable],
@@ -141,7 +141,7 @@ function getBills($editable = false)
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $bills['SoHoaDon'], "editable" => $editable],
-            ["value" => $bills['IDKhachHang']],
+            ["value" => $bills['ID_KhachHang']],
             ["value" => $bills['NgayThanhToan'], "editable" => $editable],
             ["value" => $bills['TriGia']],
         ];
@@ -159,7 +159,7 @@ function getSurcharge($editable = false)
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $fees['SoHoaDon'], "editable" => $editable],
-            ["value" => $fees['IDKhachHang']],
+            ["value" => $fees['ID_KhachHang']],
             ["value" => $fees['NgayThanhToan'], "editable" => $editable],
             ["value" => $fees['TriGia']],
         ];
