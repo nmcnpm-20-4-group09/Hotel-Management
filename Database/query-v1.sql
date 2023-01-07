@@ -153,7 +153,12 @@ PROCEDURE v1_sp_themHoaDon (SoHoaDon int(11), NgayThanhToan date, TriGia double)
 BEGIN
     INSERT INTO hoadon (SoHoaDon, NgayThanhToan, TriGia)
     VALUES (SoHoaDon, NgayThanhToan, TriGia);
-END
+
+    SELECT *
+    FROM hoadon hd
+    WHERE hd.SoHoaDon = SoHoaDon
+    and hd.NgayThanhToan = NgayThanhToan
+    and hd.TriGia = TriGia; 
 END//
 DELIMITER ;
 

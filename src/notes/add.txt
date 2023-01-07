@@ -1,6 +1,4 @@
-- Trang danh sách hóa đơn thêm cột ID Khách 
 - Thêm/xóa/sửa hóa đơn
-- Thêm/xóa/sửa chi tiết hóa đơn
 - Thêm/xóa/sửa chi tiết hóa đơn
 - Thêm/xóa/sửa khách
 - Thêm/xóa/sửa loại khách
