@@ -85,7 +85,6 @@ function getBookings($editable = false)
     return $entries;
 }
 
-
 function getCustomerTypes($editable = false)
 {
     $uri = API_ROOT . 'src/BLL/v1/GET/CustomerTypeList.php';
@@ -127,6 +126,24 @@ function getCustomers($editable = false)
             ["value" => $customers['DiaChi'], "editable" => $editable],
             ["value" => $customers['SoDienThoai'], "editable" => $editable],
             ["value" => $customers['CMND'], "editable" => $editable]
+        ];
+    }
+    return $entries;
+}
+
+function getBills($editable = false)
+{
+    $uri = API_ROOT . 'src/BLL/v2/GET/BillList.php';
+    $bills = fetchAPI($uri);
+
+    $entries = [];
+    foreach ($bills as $index => $bills) {
+        $entries[] = [
+            ["value" => $index + 1],
+            ["value" => $bills['SoHoaDon'], "editable" => $editable],
+            ["value" => $bills['IDKhachHang']],
+            ["value" => $bills['NgayThanhToan'], "editable" => $editable],
+            ["value" => $bills['TriGia']],
         ];
     }
     return $entries;
@@ -290,8 +307,6 @@ route("customer", function () {
 });
 
 route("bill", function () {
-    View::renderView("bill", ["entries" => $entries]);
-
     $action = $_GET['action'] ?? "view";
 
     if ($action == "add") {
@@ -327,8 +342,8 @@ route("bill", function () {
             "entries" => getBillTypes(true),
             "buttons" =>
             [
-                ["text" => "Xóa các dòng đã chọn",],
-                ["text" => "Lưu thay đổi"],
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillHandler()"],
+                ["text" => "Lưu thay đổi", updateBillTypeHandler],
             ]
         ]);
     } else {

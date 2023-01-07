@@ -677,3 +677,251 @@ async function updateCustomerTypeHandler() {
         }, 5000)
     }
 }
+
+/* HÓA ĐƠN */
+// Thêm hóa đơn
+async function addBillHandler() {
+    const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
+    const message = $('.table-wrapper').querySelector('.message')
+    const inputs = sampleEntry.querySelectorAll('input')
+
+    const errors = []
+
+    // Lấy các trường thông tin nhập vào
+    const [SoHoaDon, NgayThanhToan, TriGia] = getBillInfo(inputs)
+
+    if (SoHoaDon && NgayThanhToan && TriGia) {
+        // await addBill()
+        addBillToUI()
+    } else {
+        errors.push(
+            'Cần điền đầy đủ các trường dữ liệu!'
+        )
+        message.textContent = errors.join(', ')
+        message.classList.add('fail')
+    }
+
+    // Lấy dữ liệu nhập vào từ các trường
+    function getBillInfo(inputs) {
+        const [SoHoaDon, NgayThanhToan, TriGia] = Array.from(inputs).map(
+            (input) => input.value,
+        )
+        return [SoHoaDon, NgayThanhToan, TriGia]
+    }
+
+    // Gọi API để thêm
+    async function addBill() {
+        const addBillAPI =
+            API_ROOT +
+            `src/BLL/v1/POST/BillList.php?SoHoaDon=${SoHoaDon}&NgayThanhToan=${NgayThanhToan}&TriGia=${TriGia}`
+
+        try {
+            const addBillResponse = await fetch(addBillAPI)
+            const addBillData = await addBillResponse.json()
+            const { success, message: queryMessage } = addBillData
+
+            message.textContent = queryMessage
+
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
+        } catch (e) {
+            message.textContent = e
+        }
+    }
+
+    function addBillToUI() {
+        const entries = $('table tbody').querySelectorAll('tr')
+        const newEntry = entries[0].cloneNode(true)
+        const fields = newEntry.querySelectorAll('td')
+        fields[0].textContent = entries.length + 1
+        fields[1].textContent = SoHoaDon
+        fields[2].textContent = NgayThanhToan
+        fields[3].textContent = TriGia
+        $('table tbody').appendChild(newEntry)
+    }
+}
+
+// Sửa thông tin hóa đơn
+async function updateBillHandler() {
+    addBillHandler()
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const editedEntries = Array.from(entries).filter((entry) =>
+        entry.querySelector('.edited'),
+    )
+
+    const messages = []
+
+    for (entry of editedEntries) {
+        const BillInfo = getBillInfo(entry)
+
+        // Cập nhật phía database
+        const success = await updateBill(BillInfo)
+
+        // Cập nhật ở trên giao diện
+        updateBillOnUI(entry, success)
+    }
+
+    function getBillInfo(entry) {
+        const fields = entry.querySelectorAll('td')
+        const SoHoaDon = fields[1].getAttribute('name')
+        const SoHoaDonMoi = fields[1].textContent
+        const NgayThanhToan = fields[2].textContent
+        const TriGia = fields[3].textContent
+        return [SoHoaDon, SoHoaDonMoi, NgayThanhToan, TriGia]
+    }
+
+    async function updateBill([SoHoaDon, SoHoaDonMoi, NgayThanhToan, TriGia]) {
+        const updateBillAPI =
+            API_ROOT +
+            `src/BLL/v1/PUT/BillList.php?
+            SoHoaDon=${SoHoaDon}&
+            SoHoaDonMoi=${SoHoaDonMoi}&
+            NgayThanhToan=${NgayThanhToan}&
+            TriGia=${TriGia}`
+
+        try {
+            const updateBillResponse = await fetch(updateBillAPI)
+            const updateBillData = await updateBillResponse.json()
+            const { success, message: queryMessage } = updateBillData
+
+            messages.push(queryMessage)
+            return success
+        } catch (e) {
+            messages.push(e)
+            return false
+        }
+    }
+
+    function updateBillOnUI(entry, success) {
+        const editedFields = entry.querySelectorAll('.edited')
+        editedFields.forEach((field) => field.classList.remove('edited'))
+
+        message.textContent = messages.join(', ')
+
+        if (success) message.classList.remove('fail')
+        else message.classList.add('fail')
+
+        setTimeout(() => {
+            message.textContent = ''
+            messages.length = 0
+        }, 5000)
+    }
+}
+
+// Xóa hóa đơn
+async function deleteBillHandler() {
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const selectedEntries = Array.from(entries).filter(
+        (field) => field.querySelector('input')?.checked,
+    )
+
+    if (selectedEntries.length) {
+        if (confirm('Bạn có chắc là muốn xóa những hóa đơn này?')) {
+            for (entry of selectedEntries) {
+                // Lấy mã khách
+                const SoHoaDon = entry.querySelectorAll('td')[1].textContent
+
+                // Xóa ở phía database (khi có code php thì mở comment !!!!)
+                //await deleteBill(SoHoaDon)
+
+                // Cập nhật ở phía giao diện
+                entry.remove()
+            }
+            // Cập nhật lại STT các dòng:
+            const entries = $('table tbody').querySelectorAll('tr')
+            i = 1
+            for (entry of entries) {
+                entry.querySelectorAll('td')[0].textContent = i++
+            }
+        }
+    }
+
+    async function deleteBill(SoHoaDon) {
+        const deleteBillAPI =
+            API_ROOT + `src/BLL/v1/DELETE/BillList.php?SoHoaDon=${SoHoaDon}`
+
+        try {
+            const deleteBillResponse = await fetch(deleteBillAPI)
+            const deleteBillData = await deleteBillResponse.json()
+            const { success, message: queryMessage } = deleteBillData
+
+            message.textContent = queryMessage
+
+            if (!success) message.classList.add('fail')
+            else message.classList.remove('fail')
+        } catch (e) {
+            message.textContent = e
+            message.classList.add('fail')
+        }
+    }
+}
+
+// Sửa quy định phụ thu
+async function updateExtraFeeHandler() {
+    addBillTypeHandler()
+    const message = $('.table-wrapper').querySelector('.message')
+    const entries = $('table tbody').querySelectorAll('tr')
+    const editedEntries = Array.from(entries).filter((entry) =>
+        entry.querySelector('.edited'),
+    )
+
+    const messages = []
+
+    for (entry of editedEntries) {
+        const BillTypeInfo = getBillTypeInfo(entry)
+
+        // Cập nhật phía database
+        const success = await updateBillType(BillTypeInfo)
+
+        // Cập nhật ở trên giao diện
+        updateBillTypeOnUI(entry, success)
+    }
+
+    function getBillTypeInfo(entry) {
+        const fields = entry.querySelectorAll('td')
+        const MaLoai = fields[1].getAttribute('name')
+        const MaLoaiMoi = fields[1].textContent
+        const TenLoai = entry.querySelector('select').value
+        const HeSo = fields[3].textContent
+        return [MaLoai, MaLoaiMoi, TenLoai, HeSo]
+    }
+
+    async function updateBillType([MaLoai, MaLoaiMoi, TenLoai, HeSo]) {
+        const updateBillTypeAPI =
+            API_ROOT +
+            `src/BLL/v1/PUT/BillTypeList.php?
+            MaLoaiKhach=${MaLoai}&
+            MaLoaiMoi=${MaLoaiMoi}&
+            TenLoaiKhach=${TenLoai}&
+            HeSo=${HeSo}`
+
+        try {
+            const updateBillTypeResponse = await fetch(updateBillTypeAPI)
+            const updateBillTypeData = await updateBillTypeResponse.json()
+            const { success, message: queryMessage } = updateBillTypeData
+
+            messages.push(queryMessage)
+            return success
+        } catch (e) {
+            messages.push(e)
+            return false
+        }
+    }
+
+    function updateBillTypeOnUI(entry, success) {
+        const editedFields = entry.querySelectorAll('.edited')
+        editedFields.forEach((field) => field.classList.remove('edited'))
+
+        message.textContent = messages.join(', ')
+
+        if (success) message.classList.remove('fail')
+        else message.classList.add('fail')
+
+        setTimeout(() => {
+            message.textContent = ''
+            messages.length = 0
+        }, 5000)
+    }
+}
