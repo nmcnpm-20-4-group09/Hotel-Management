@@ -1,6 +1,6 @@
 <?php
 
-$response = file_get_contents('http://localhost/hotel_management/src/BLL/v2/GET/RoomList.php');
+$response = file_get_contents('http://localhost/hotel_management/src/BLL/v1/GET/CustomerTypeList.php');
 // echo $response;
 $response = json_decode($response, true);
 // echo $response;
@@ -10,10 +10,10 @@ echo $response["message"];
 echo "</br>";
 foreach ($response["result"] as $item)
 {
-    echo $item["MaPhong"]; echo " ";
-    echo $item["MaLoai"]; echo " ";
-    echo $item["DonGia"]; echo " ";
-    echo $item["TinhTrang"]; echo "</br>";
+    echo $item["MaLoaiKhach"]; echo " ";
+    echo $item["TenLoaiKhach"]; echo " ";
+    echo $item["HeSo"]; echo " ";
+    echo "</br>";
 }
 
 

@@ -27,7 +27,7 @@ if ($connection == null) {
     $dtoList = $connection->execQuery(
         $queryString,
         $isReading = true,
-        CustomerDTO::getPrototype()
+        CustomerTypeDTO::getPrototype()
     );
 
     $result = [];
