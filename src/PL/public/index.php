@@ -72,7 +72,7 @@ function getBookings($editable = false)
     $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
 
-    //? Trường 'ngày bắt đầu thuê' và 'số ngày thuê' đem qua chi tiết thuê
+    //? Thiếu trường 'ngày bắt đầu thuê' và 'số ngày thuê'
     $entries = [];
     foreach ($bookings as $index => $booking) {
         $entries[] = [
@@ -426,7 +426,7 @@ route ("bill-detail", function () {
             "buttons" =>
             [
                 ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillDetailHandler()"],
-                ["text" => "Lưu thay đổi", updateBillDetailHandler],
+                ["text" => "Lưu thay đổi", "handler" => "updateBillDetailHandler()"],
             ]
         ]);
     } else {
