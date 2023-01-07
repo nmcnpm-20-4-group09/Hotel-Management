@@ -141,7 +141,7 @@ function getBills($editable = false)
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $bills['SoHoaDon'], "editable" => $editable],
-            ["value" => $bills['ID_KhachHang']],
+            ["value" => $bills['ID_KhachHang']?? "Chưa cập nhật"],
             ["value" => $bills['NgayThanhToan'], "editable" => $editable],
             ["value" => $bills['TriGia']?? "Chưa cập nhật"],
         ];
