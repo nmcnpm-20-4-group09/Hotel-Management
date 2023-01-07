@@ -73,7 +73,6 @@ class BookingTable extends TableComponent
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
 
-        // TODO: sửa tham số của renderSampleEntry
         $sampleEntry = $this->action == "add" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
@@ -88,6 +87,7 @@ class BookingTable extends TableComponent
                 </tbody>
             </table>
             $sampleEntry
+            <p class="message"></p>
             $tableButtons
         </div>
         EOT;
