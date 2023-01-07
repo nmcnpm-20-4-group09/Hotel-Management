@@ -85,7 +85,6 @@ function getBookings($editable = false)
     return $entries;
 }
 
-
 function getCustomerTypes($editable = false)
 {
     $uri = API_ROOT . 'src/BLL/v1/GET/CustomerTypeList.php';
@@ -132,6 +131,41 @@ function getCustomers($editable = false)
     return $entries;
 }
 
+function getBills($editable = false)
+{
+    $uri = API_ROOT . 'src/BLL/v2/GET/BillList.php';
+    $bills = fetchAPI($uri);
+
+    $entries = [];
+    foreach ($bills as $index => $bills) {
+        $entries[] = [
+            ["value" => $index + 1],
+            ["value" => $bills['SoHoaDon'], "editable" => $editable],
+            ["value" => $bills['IDKhachHang']],
+            ["value" => $bills['NgayThanhToan'], "editable" => $editable],
+            ["value" => $bills['TriGia']],
+        ];
+    }
+    return $entries;
+}
+
+function getSurcharge($editable = false)
+{
+    $uri = API_ROOT . 'src/BLL/v2/GET/Surcharge.php';
+    $bills = fetchAPI($uri);
+
+    $entries = [];
+    foreach ($fees as $index => $fees) {
+        $entries[] = [
+            ["value" => $index + 1],
+            ["value" => $fees['SoHoaDon'], "editable" => $editable],
+            ["value" => $fees['IDKhachHang']],
+            ["value" => $fees['NgayThanhToan'], "editable" => $editable],
+            ["value" => $fees['TriGia']],
+        ];
+    }
+    return $entries;
+}
 route("home", function () {
     $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
@@ -290,8 +324,6 @@ route("customer", function () {
 });
 
 route("bill", function () {
-    View::renderView("bill", ["entries" => $entries]);
-
     $action = $_GET['action'] ?? "view";
 
     if ($action == "add") {
@@ -324,11 +356,11 @@ route("bill", function () {
     } else if ($action == "justify") {
         View::renderView("bill", [
             "action" => $action,
-            "entries" => getBillTypes(true),
+            "entries" => getSurcharges(true),
             "buttons" =>
             [
-                ["text" => "Xóa các dòng đã chọn",],
-                ["text" => "Lưu thay đổi"],
+                ["text" => "Xóa các dòng đã chọn", "handler" => "deleteSurcharge()"],
+                ["text" => "Lưu thay đổi", updateSurchargeHandler],
             ]
         ]);
     } else {

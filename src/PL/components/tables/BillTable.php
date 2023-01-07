@@ -8,13 +8,96 @@ class BillTable extends TableComponent
     {
         parent::__construct($props);
 
-        $this->fields = [
-            'STT',
-            'Số hóa đơn',
-            'Ngày thanh toán',
-            'Trị giá',
-            'Chi tiết',
-        ];
+        if (empty($this->fields)) {
+            $this->fields = [
+                'STT',
+                'Số hóa đơn',
+                'Mã khách hàng',
+                'Ngày thanh toán',
+                'Trị giá',
+                'Chi tiết',
+            ];
+        }
+
+        // Chế độ xóa có thêm check box để chọn nên cần thêm field này vào tiêu đề cột
+        if ($this->action == "delete")  $this->fields[] = "Chọn";
+        
+        // Chế độ chỉnh sửa quy định có dữ liệu lấy từ bảng loại phòng
+        if ($this->action == "justify") {
+            $this->fields = [
+                "STT",
+                "Mã phụ thu",
+                "Tên phụ thu",
+                "Tỉ lệ",
+                "Chọn",
+            ];
+
+            $this->sampleEntryFields = [
+                "Mã phụ thu" => "MaPhuThu",
+                "Tên phụ thu" => "TenPhuThu",
+                "Tỉ lệ" => "TiLe",
+            ];
+        }
+
+        if ($this->action == "add") {
+            $this->sampleEntryFields = [
+                "Số hóa đơn" => "SoHoaDon",
+                "Mã khách hàng" => "IDKhachHang",
+                "Ngày thanh toán" => "NgayThanhToan",
+                "Trị giá" => "TriGia",
+            ];
+        }
+    }
+
+    private function makeSelectBox($options, $currentValue)
+    {
+        $optionsElement = "";
+        foreach ($options as $option) {
+            $selected = $currentValue == $option ? "selected" : "";
+            $optionsElement .= "<option value='$option' $selected>$option</option>";
+        }
+        return "<select>$optionsElement</select>";
+    }
+
+    function renderEntry($entry)
+    {
+        $entryElement = "";
+        foreach ($entry as $field) {
+            $value = $field['value'] ?? '';
+
+            // Thêm select box khi ở chế độ chỉnh sửa và có options
+            if ($this->action == "edit" && isset($field['options'])) {
+                $selectBox = $this->makeSelectBox($field['options'], $value);
+                $entryElement .= <<< EOT
+                    <td>$selectBox</td>
+                EOT;
+            } else {
+                // Thêm thuộc tính editable cho các cột có thể chỉnh sửa
+                $editable = $field['editable'] ?? false;
+                $editableAttribute = $editable ? "contenteditable='true'" : "";
+
+                $entryElement .= <<< EOT
+                    <td $editableAttribute>$value</td>
+                EOT;
+            }
+        }
+
+        return $entryElement;
+    }
+
+    // Tạo checkbox khi ở chế độ delete và justify
+    private function makeCheckBoxColumn()
+    {
+        if ($this->action == "delete" || $this->action == "justify") {
+            return "
+            <td>
+                <label>
+                    <input type='checkbox' class='checkbox'>
+                    <span class='checkmark'></span> 
+                </label>
+            </td>
+            ";
+        }
     }
 
     public function renderEntries()
@@ -27,16 +110,24 @@ class BillTable extends TableComponent
             <td>
                 <i class="fa-solid fa-circle-info"></i>
             </td>';
+            // Thêm các column truyền vào nếu có
+            foreach (func_get_args() as $column)
+                $entryElement .= $column;
+
             $entryElements .= "<tr>" . $entryElement . "</tr>";
         }
 
         return $entryElements;
     }
 
-    public function render()
+    function render()
     {
         $fieldElements = $this->renderFields();
-        $entryElements = $this->renderEntries();
+
+        $checkBoxColumn = $this->makeCheckBoxColumn();
+        $entryElements = $this->renderEntries($checkBoxColumn);
+        $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
+        $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT
             <div class="table-wrapper">
@@ -48,6 +139,8 @@ class BillTable extends TableComponent
                         $entryElements
                     </tbody>
                 </table>
+                $sampleEntry
+                $tableButtons
             </div>
             EOT;
     }
