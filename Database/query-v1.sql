@@ -144,3 +144,152 @@ BEGIN
     WHERE p.MaPhong = MaPhong;
 END//
 DELIMITER ;
+
+-- Thêm một hóa đơn mới
+DROP PROCEDURE IF EXISTS v1_sp_themHoaDon;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_themHoaDon (SoHoaDon int(11), NgayThanhToan date, TriGia double)
+BEGIN
+    INSERT INTO hoadon (SoHoaDon, NgayThanhToan, TriGia)
+    VALUES (SoHoaDon, NgayThanhToan, TriGia);
+END
+END//
+DELIMITER ;
+
+-- Xóa hóa đơn
+DROP PROCEDURE IF EXISTS v1_sp_xoaHoaDon;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_xoaHoaDon (SoHoaDon INT(11)) 
+BEGIN    
+	DELETE hd
+    FROM hoadon hd
+    WHERE hd.SoHoaDon = SoHoaDon;
+END//
+DELIMITER ;
+
+-- Cần phải cập nhật ở các nơi có tham chiếu khóa ngoại
+-- Chỉnh sửa hóa đơn
+DROP PROCEDURE IF EXISTS v1_sp_chinhHoaDon;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_chinhHoaDon (SoHoaDon int(11), NgayThanhToan date, TriGia double)
+BEGIN    
+	UPDATE hoadon hd
+    SET hd.SoHoaDon = SoHoaDon, hd.NgayThanhToan = NgayThanhToan, hd.TriGia = TriGia
+    WHERE hd.SoHoaDon = SoHoaDon;
+END//
+DELIMITER ;
+
+
+-- Thêm một chi tiết hóa đơn mới
+DROP PROCEDURE IF EXISTS v1_sp_themChiTiet_HD;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_themChiTiet_HD (SoPhieuThue int(11), SoHoaDon int(11), SoNgayThueThuc int(11), TienThuePhong double, MaPhuThu varchar(5))
+BEGIN
+    INSERT INTO phong (SoPhieuThue, SoHoaDon, SoNgayThueThuc, TienThuePhong, MaPhuThu)
+    VALUES (SoPhieuThue, SoHoaDon, SoNgayThueThuc, TienThuePhong, MaPhuThu);
+END
+END//
+DELIMITER ;
+
+-- Xóa chi tiết hóa đơn
+DROP PROCEDURE IF EXISTS v1_sp_xoaChiTiet_HD;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_xoaChiTiet_HD (SoHoaDon int(11)) 
+BEGIN    
+	DELETE cthd
+    FROM chitiet_hoadon cthd
+    WHERE cthd.SoHoaDon = SoHoaDon;
+END//
+DELIMITER ;
+
+-- Cần phải cập nhật ở các nơi có tham chiếu khóa ngoại
+-- Chỉnh sửa chi tiết hóa đơn
+DROP PROCEDURE IF EXISTS v1_sp_chinhSuaChiTiet_HD;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_chinhSuaChiTiet_HD (SoPhieuThue int(11), SoHoaDon int(11), SoNgayThueThuc int(11), TienThuePhong double, MaPhuThu varchar(5))
+BEGIN    
+	UPDATE chitiet_hoadon cthd
+    SET cthd.SoPhieuThue = SoPhieuThue, cthd.SoHoaDon = SoHoaDon, cthd.SoNgayThueThuc = SoNgayThueThuc, cthd.TienThuePhong = TienThuePhong, cthd.MaPhuThu = MaPhuThu
+    WHERE cthd.SoHoaDon = SoHoaDon;
+END//
+DELIMITER ;
+
+-- Thêm một khách hàng
+DROP PROCEDURE IF EXISTS v1_sp_themKhachHang;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_themKhachHang (ID_KhachHang varchar(12), LoaiKhach char(2), HoTen varchar(100), NgaySinh date, DiaChi varchar(100), SoDienThoai varchar(11), CMND varchar(12))
+BEGIN
+    INSERT INTO khachhang (ID_KhachHang, LoaiKhach, HoTen, NgaySinh, DiaChi, SoDienThoai, CMND)
+    VALUES (ID_KhachHang, LoaiKhach, HoTen, NgaySinh, DiaChi, SoDienThoai, CMND);
+END
+END//
+DELIMITER ;
+
+-- Xóa khách hàng
+DROP PROCEDURE IF EXISTS v1_sp_xoaKhachHang;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_xoaPhong (ID_KhachHang varchar(12)) 
+BEGIN    
+	DELETE kh
+    FROM khachhang kh
+    WHERE kh.ID_KhachHang = ID_KhachHang;
+END//
+DELIMITER ;
+
+-- Cần phải cập nhật ở các nơi có tham chiếu khóa ngoại
+-- Chỉnh sửa khách hàng
+DROP PROCEDURE IF EXISTS v1_sp_chinhsuaKhachHang;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_chinhsuaKhachHang (ID_KhachHang varchar(12), LoaiKhach char(2), HoTen varchar(100), NgaySinh date, DiaChi varchar(100), SoDienThoai varchar(11), CMND varchar(12))
+BEGIN
+    UPDATE khachhang kh
+    SET kh.ID_KhachHang = ID_KhachHang, kh.LoaiKhach = LoaiKhach, kh.HoTen = HoTen, kh.NgaySinh = NgaySinh, kh.DiaChi = DiaChi, kh.SoDienThoai = SoDienThoai, kh.CMND = CMND
+    WHERE kh.ID_KhachHang = ID_KhachHang;
+END//
+DELIMITER ;
+
+-- Thêm một loại khách
+DROP PROCEDURE IF EXISTS v1_sp_themLoaiKhach;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_themLoaiKhach (MaLoaiKhach char(2), TenLoaiKhach varchar(30), HeSo double)
+BEGIN
+    INSERT INTO loaikhach (MaLoaiKhach, TenLoaiKhach, HeSo)
+    VALUES (MaLoaiKhach, TenLoaiKhach, HeSo);
+END
+END//
+DELIMITER ;
+
+-- Xóa loại khách
+DROP PROCEDURE IF EXISTS v1_sp_xoaLoaiKhach;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_xoaLoaiKhach (MaLoaiKhach char(2)) 
+BEGIN    
+	DELETE lk
+    FROM loaikhach lk
+    WHERE lk.MaLoaiKhach = MaLoaiKhach;
+END//
+DELIMITER ;
+
+-- Cần phải cập nhật ở các nơi có tham chiếu khóa ngoại
+-- Chỉnh sửa loại khách
+DROP PROCEDURE IF EXISTS v1_sp_chinhsuaLoaiKhach;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_chinhsuaLoaiKhach (MaLoaiKhach char(2), TenLoaiKhach varchar(30), HeSo double)
+BEGIN    
+	UPDATE loaikhach lk
+    SET lk.MaLoaiKhach = MaLoaiKhach, lk.TenLoaiKhach = TenLoaiKhach, lk.HeSo = HeSo
+    WHERE lk.MaLoaiKhach = MaLoaiKhach;
+END//
+DELIMITER ;
