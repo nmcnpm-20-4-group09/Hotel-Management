@@ -153,7 +153,12 @@ PROCEDURE v1_sp_themHoaDon (SoHoaDon int(11), NgayThanhToan date, TriGia double)
 BEGIN
     INSERT INTO hoadon (SoHoaDon, NgayThanhToan, TriGia)
     VALUES (SoHoaDon, NgayThanhToan, TriGia);
-END
+
+    SELECT *
+    FROM hoadon hd
+    WHERE hd.SoHoaDon = SoHoaDon
+    and hd.NgayThanhToan = NgayThanhToan
+    and hd.TriGia = TriGia; 
 END//
 DELIMITER ;
 
@@ -291,5 +296,16 @@ BEGIN
 	UPDATE loaikhach lk
     SET lk.MaLoaiKhach = MaLoaiKhach, lk.TenLoaiKhach = TenLoaiKhach, lk.HeSo = HeSo
     WHERE lk.MaLoaiKhach = MaLoaiKhach;
+END//
+DELIMITER ;
+
+-- Lấy danh sách phụ thu
+DROP PROCEDURE IF EXISTS v1_sp_danhSachPhuThu;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_danhSachPhuThu ()
+BEGIN    
+	SELECT *
+    FROM phuthu;
 END//
 DELIMITER ;

@@ -141,7 +141,7 @@ function getBills($editable = false)
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $bills['SoHoaDon'], "editable" => $editable],
-            ["value" => $bills['IDKhachHang']?? "Chưa cập nhật"],
+            ["value" => $bills['ID_KhachHang']],
             ["value" => $bills['NgayThanhToan'], "editable" => $editable],
             ["value" => $bills['TriGia']?? "Chưa cập nhật"],
         ];
@@ -159,7 +159,7 @@ function getSurcharges($editable = false)
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $fees['SoHoaDon'], "editable" => $editable],
-            ["value" => $fees['IDKhachHang']],
+            ["value" => $fees['ID_KhachHang']],
             ["value" => $fees['NgayThanhToan'], "editable" => $editable],
             ["value" => $fees['TriGia']],
         ];
