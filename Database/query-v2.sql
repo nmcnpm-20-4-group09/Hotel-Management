@@ -12,3 +12,18 @@ BEGIN
     ON p.MaLoai = lp.MaLoai;
 END//
 DELIMITER ;
+
+-- Lấy danh sách hóa đơn
+DROP PROCEDURE IF EXISTS v2_sp_danhSachHoaDon;
+DELIMITER //
+CREATE 
+PROCEDURE v2_sp_danhSachHoaDon ()   
+BEGIN
+    SELECT hd.SoHoaDon, pt.ID_KhachHang, hd.NgayThanhToan, hd.TriGia
+    FROM `hoadon` hd
+    INNER JOIN `chitiet_hoadon` cthd
+    ON hd.SoHoaDon = cthd.SoHoaDon
+    INNER JOIN `phieu_thuephong` pt
+    ON pt.SoPhieuThue = cthd.SoPhieuThue;
+END//
+DELIMITER ;
