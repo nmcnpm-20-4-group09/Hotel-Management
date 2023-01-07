@@ -49,6 +49,17 @@ class BillTable extends TableComponent
         }
     }
 
+    // Thêm nút chi tiết phiếu thuê
+    private function makeDetailColumn()
+    {
+        return '
+        <td>
+            <a href="./bill-detail">
+                <i class="fa-solid fa-circle-info"></i>
+            </a>
+        </td>';
+    }
+
     private function makeSelectBox($options, $currentValue)
     {
         $optionsElement = "";
@@ -100,32 +111,14 @@ class BillTable extends TableComponent
         }
     }
 
-    public function renderEntries()
-    {
-        $entryElements = '';
-
-        foreach ($this->entries as $entry) {
-            $entryElement = $this->renderEntry($entry);
-            $entryElement .= '
-            <td>
-                <i class="fa-solid fa-circle-info"></i>
-            </td>';
-            // Thêm các column truyền vào nếu có
-            foreach (func_get_args() as $column)
-                $entryElement .= $column;
-
-            $entryElements .= "<tr>" . $entryElement . "</tr>";
-        }
-
-        return $entryElements;
-    }
-
     function render()
     {
         $fieldElements = $this->renderFields();
 
+        $detailColumn = $this->makeDetailColumn();
         $checkBoxColumn = $this->makeCheckBoxColumn();
-        $entryElements = $this->renderEntries($checkBoxColumn);
+        $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
+
         $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 

@@ -141,15 +141,15 @@ function getBills($editable = false)
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $bills['SoHoaDon'], "editable" => $editable],
-            ["value" => $bills['IDKhachHang']],
+            ["value" => $bills['IDKhachHang']?? "Chưa cập nhật"],
             ["value" => $bills['NgayThanhToan'], "editable" => $editable],
-            ["value" => $bills['TriGia']],
+            ["value" => $bills['TriGia']?? "Chưa cập nhật"],
         ];
     }
     return $entries;
 }
 
-function getSurcharge($editable = false)
+function getSurcharges($editable = false)
 {
     $uri = API_ROOT . 'src/BLL/v2/GET/Surcharge.php';
     $bills = fetchAPI($uri);
@@ -166,6 +166,7 @@ function getSurcharge($editable = false)
     }
     return $entries;
 }
+
 route("home", function () {
     $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
