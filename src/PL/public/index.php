@@ -177,15 +177,14 @@ function getBills($editable = false)
 
 function getBillDetails($editable = false)
 {
-    $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php';
-    
+    $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php?SoHoaDon=${SoHoaDon}';
     $details = fetchAPI($uri);
 
     $entries = [];
     foreach ($details as $index => $detail) {
         $entries[] = [
             ["value" => $index + 1],
-            ["value" => $detail['SoHoaDon'], "editable" => $editable],
+            ["value" => $detail['SoPhieuThue'], "editable" => $editable],
             ["value" => $detail['SoNgayThueThuc']],
             ["value" => $detail['TienThuePhong']],
             ["value" => $detail['PhuThu'], "options" => makeSurchargesOptions()],
@@ -405,7 +404,7 @@ route ("bill-detail", function () {
     if ($action == "add") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(),
+            "entries" => getBillDetails(),
             "buttons" =>
             [
                 ["text" => "Thêm", "handler" => "addBillDetailHandler()"],
@@ -414,7 +413,7 @@ route ("bill-detail", function () {
     } else if ($action == "delete") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(),
+            "entries" => getBillDetails(),
             "buttons" =>
             [
                 ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillDetailHandler()"],
@@ -424,7 +423,7 @@ route ("bill-detail", function () {
     } else if ($action == "edit") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(true),
+            "entries" => getBillDetails(true),
             "buttons" => [
                 ["text" => "Lưu thay đổi", "handler" => "updateBillDetailHandler()"],
             ],
@@ -432,7 +431,7 @@ route ("bill-detail", function () {
     } else if ($action == "justify") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(true),
+            "entries" => getBillDetails(true),
             "buttons" =>
             [
                 ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillDetailHandler()"],
@@ -442,7 +441,7 @@ route ("bill-detail", function () {
     } else {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(),
+            "entries" => getBillDetails(),
         ]);
     }
 });
