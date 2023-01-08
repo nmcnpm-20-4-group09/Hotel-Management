@@ -56,12 +56,13 @@ function getRooms($editable = false)
 
     $entries = [];
     foreach ($rooms as $index => $room) {
+        $roomStatus = ["Trống", "Đã thuê"];
         $entries[] = [
             ["value" => $index + 1],
-            ["value" => $room['MaPhong'], "editable" => $editable],
+            ["value" => $room['MaPhong']],
             ["value" => $room['MaLoai'], "options" => makeRoomTypeOptions()],
             ["value" => $room['DonGia']],
-            ["value" => $room['TinhTrang'] == 0 ? "Trống" : "Đang được thuê", "editable" => $editable],
+            ["value" => $room['TinhTrang'] == 0 ? "Trống" : "Đã thuê", "options" => $roomStatus],
         ];
     }
     return $entries;
@@ -242,7 +243,7 @@ route("room", function () {
             "action" => $action,
             "entries" => getRooms(true),
             "buttons" => [
-                ["text" => "Lưu thay đổi", "handler" => "addRoomHandler()"],
+                ["text" => "Lưu thay đổi", "handler" => "updateRoomHandler()"],
             ],
         ]);
     } else if ($action == "justify") {

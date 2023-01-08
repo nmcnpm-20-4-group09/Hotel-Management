@@ -58,7 +58,7 @@ class RoomTable extends TableComponent
             $selected = $currentValue == $option ? "selected" : "";
             $optionsElement .= "<option value='$option' $selected>$option</option>";
         }
-        return "<select>$optionsElement</select>";
+        return "<select class='input'>$optionsElement</select>";
     }
 
     function renderEntry($entry)
@@ -104,17 +104,62 @@ class RoomTable extends TableComponent
         }
     }
 
+    protected function getTypes()
+    {
+        $uri = API_ROOT . 'src/BLL/v1/GET/RoomCategoryList.php';
+        $Types = fetchAPI($uri);
+
+        $entries = [];
+        foreach ($Types as $Type) {
+            $entries[] = [
+                ["value" => $Type],
+            ];
+        }
+        return $entries;
+    }
+
+    // tạo options PK từ ds loại
+    protected function makeTypeOptions()
+    {
+        $Types = $this->getTypes();
+        $options = array_map(function ($Type) {
+            return $Type[0]['value']['MaLoai'];
+        }, $Types);
+        return $options;
+    }
+
+
     protected function renderSampleEntry($fields = [], $action = "add-action")
     {
         $sampleEntryElement = "<div class='sample-entry $action'>";
 
         foreach ($fields as $title => $name) {
-            $sampleEntryElement .= <<< EOT
+            if ($name == "MaLoai") {
+                $options = $this->makeTypeOptions();
+                $selectBox = $this->makeSelectBox($options, $options[0]);
+                $sampleEntryElement .= <<< EOT
                 <div>
-                <label for="$name">$title</label>
-                <input type="text" name="$name" id="$name"></input>
+                    <label for="$name">$title</label>
+                    $selectBox
                 </div>
                 EOT;
+            } else if ($name == "TinhTrang") {
+                $options = ['Trống', 'Đã thuê'];
+                $selectBox = $this->makeSelectBox($options, $options[0]);
+                $sampleEntryElement .= <<< EOT
+                <div>
+                    <label for="$name">$title</label>
+                    $selectBox
+                </div>
+                EOT;
+            } else {
+                $sampleEntryElement .= <<< EOT
+                <div>
+                <label for="$name">$title</label>
+                <input class="input" type="text" name="$name" id="$name"></input>
+                </div>
+                EOT;
+            }
         }
 
         return $sampleEntryElement . '</div>';

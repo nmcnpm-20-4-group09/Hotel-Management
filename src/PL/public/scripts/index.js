@@ -111,46 +111,38 @@ async function getRoomTypes() {
 async function addRoomHandler() {
     const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
     const message = $('.table-wrapper').querySelector('.message')
-    const inputs = sampleEntry.querySelectorAll('input')
+    const inputs = sampleEntry.querySelectorAll('.input')
 
     const messages = []
 
     // Lấy các trường thông tin nhập vào
     const [roomID, roomType, roomStatus] = getRoomInfo(inputs)
 
+    console.log(roomID, roomType, roomStatus)
+
     // Lấy các loại phòng
     const roomTypes = await getRoomTypes()
 
-    if (roomID && roomType && roomStatus) {
+    if (roomID) {
         // Validate dữ liệu
-        const isValidRoomID = validateRoomID(roomID)
-        const isValidRoomType = Object.keys(roomTypes).includes(roomType)
-        const isValidRoomStatus = isNumeric(roomStatus)
+        const validRoomID = isValidRoomID(roomID)
 
         // Nếu đúng hết thì mới gọi API để thêm
-        if (isValidRoomID && isValidRoomType && isValidRoomStatus) {
-            await addRoom()
-            addRoomToUI()
+        if (validRoomID) {
+            const success = await addRoom()
+
+            updateUI(success)
         } else {
-            if (!isValidRoomID)
+            if (!validRoomID)
                 messages.push(
                     'Định dạng của mã phòng không đúng, định dạng đúng là "P01"',
                 )
-            if (!isValidRoomType)
-                messages.push(
-                    'Mã loại phòng không tồn tại, các loại phòng hiện có là: ' +
-                        Object.keys(roomTypes).join(', '),
-                )
-            if (!isValidRoomStatus) messages.push('Tình trạng cần phải là một số')
 
             message.textContent = messages.join('. ')
             message.classList.add('fail')
         }
     } else {
-        messages.push(
-            'Cả ba trường mã phòng, mã loại phòng và tình trạng không được để trống',
-        )
-        message.textContent = messages.join(', ')
+        message.textContent = 'Vui lòng nhập đầy đủ thông tin'
         message.classList.add('fail')
     }
 
@@ -166,36 +158,43 @@ async function addRoomHandler() {
     async function addRoom() {
         const addRoomAPI =
             API_ROOT +
-            `src/BLL/v1/POST/RoomList.php?MaPhong=${roomID}&MaLoai=${roomType}&TinhTrang=${roomStatus}`
+            `src/BLL/v1/POST/RoomList.php?MaPhong=${roomID}&MaLoai=${roomType}&TinhTrang=${
+                roomStatus === 'Trống' ? 0 : 1
+            }`
 
         try {
             const addRoomResponse = await fetch(addRoomAPI)
             const addRoomData = await addRoomResponse.json()
             const { success, message: queryMessage } = addRoomData
 
-            message.textContent = queryMessage
-
-            if (!success) message.classList.add('fail')
-            else message.classList.remove('fail')
+            messages.push(queryMessage)
+            return success
         } catch (e) {
-            message.textContent = e
+            message.push(e)
+            return false
         }
     }
 
-    function addRoomToUI() {
-        const entries = $('table tbody').querySelectorAll('tr')
-        const newEntry = entries[0].cloneNode(true)
-        const fields = newEntry.querySelectorAll('td')
+    function updateUI(success) {
+        if (success) {
+            const entries = $('table tbody').querySelectorAll('tr')
+            const newEntry = entries[0].cloneNode(true)
+            const fields = newEntry.querySelectorAll('td')
 
-        const roomPrice = roomTypes[roomType]
+            const roomPrice = roomTypes[roomType]
 
-        fields[0].textContent = entries.length + 1
-        fields[1].textContent = roomID
-        fields[2].textContent = roomType
-        fields[3].textContent = roomPrice
-        fields[4].textContent = roomStatus
+            fields[0].textContent = entries.length + 1
+            fields[1].textContent = roomID
+            fields[2].textContent = roomType
+            fields[3].textContent = roomPrice
+            fields[4].textContent = roomStatus
 
-        $('table tbody').appendChild(newEntry)
+            $('table tbody').appendChild(newEntry)
+
+            message.classList.remove('fail')
+        } else message.classList.add('fail')
+
+        message.textContent = messages.join('. ')
     }
 }
 
@@ -255,6 +254,8 @@ async function updateRoomHandler() {
     for (entry of editedEntries) {
         const roomInfo = getRoomInfo(entry)
 
+        console.log(roomInfo)
+
         // Cập nhật phía database
         const success = await updateRoom(roomInfo)
 
@@ -267,8 +268,8 @@ async function updateRoomHandler() {
 
         const roomID = fields[1].getAttribute('name')
         const newRoomID = fields[1].textContent
-        const newRoomType = entry.querySelector('select').value
-        const newRoomStatus = fields[4].textContent
+        const newRoomType = entry.querySelectorAll('select')[0].value
+        const newRoomStatus = entry.querySelectorAll('select')[1].value
 
         return [roomID, newRoomID, newRoomType, newRoomStatus]
     }
@@ -280,7 +281,7 @@ async function updateRoomHandler() {
             MaPhong=${roomID}&
             MaPhongMoi=${newRoomID}&
             MaLoai=${newRoomType}&
-            TinhTrang=${newRoomStatus}`
+            TinhTrang=${newRoomStatus == 'Trống' ? 0 : 1}`
 
         try {
             const updateRoomResponse = await fetch(updateRoomAPI)
@@ -303,11 +304,6 @@ async function updateRoomHandler() {
 
         if (success) message.classList.remove('fail')
         else message.classList.add('fail')
-
-        setTimeout(() => {
-            message.textContent = ''
-            messages.length = 0
-        }, 5000)
     }
 }
 
@@ -326,11 +322,10 @@ async function addBookingHandler() {
 
     startDate = swapYearAndDay(startDate)
 
-
     async function addBooking() {
         const addBookingAPI =
-            API_ROOT + 
-        `src/BLL/v1/PUT/Booking.php?
+            API_ROOT +
+            `src/BLL/v1/PUT/Booking.php?
         SoPhieuThue=${bookingID}&
         IDKhachHang =${customerID}&
         NgayBatDauThue=${startDate}&

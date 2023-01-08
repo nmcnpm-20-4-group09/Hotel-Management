@@ -199,6 +199,15 @@ html {
   justify-content: center;
   align-items: center;
 }
+.table-wrapper .sample-entry div select {
+  outline: none;
+  padding: 8px;
+  border: 1px solid #47b5ff;
+  border-radius: 8px;
+  min-width: 100px;
+  min-height: 43px;
+  cursor: pointer;
+}
 .table-wrapper .sample-entry label {
   font-size: 1.4rem;
   font-weight: 500;
