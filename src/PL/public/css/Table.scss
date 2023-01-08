@@ -97,6 +97,15 @@ $column-width: 15%;
         div {
             margin: 20px;
             @include flex(column, center, center);
+
+            select {
+                outline: none;
+                padding: 8px;
+                border: 1px solid $primary-color;
+                border-radius: 8px;
+                min-width: 100px;
+                cursor: pointer;
+            }
         }
 
         label {
@@ -120,14 +129,6 @@ $column-width: 15%;
             &[type='date'] {
                 text-align: center;
             }
-        }
-
-        select {
-            outline: none;
-            padding: 8px;
-            border: 1px solid $primary-color;
-            border-radius: 8px;
-            cursor: pointer;
         }
     }
 

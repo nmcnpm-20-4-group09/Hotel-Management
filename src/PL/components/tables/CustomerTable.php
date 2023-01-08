@@ -117,24 +117,22 @@ class CustomerTable extends TableComponent
         $sampleEntryElement = "<div class='sample-entry'>";
 
         foreach ($fields as $title => $name) {
-            if($name != "LoaiKhach") {
+            if ($name != "LoaiKhach") {
                 $sampleEntryElement .= <<< EOT
                 <div>
                     <label for="$name">$title</label>
                     <input type="text" name="$name" id="$name"></input>
                 </div>
             EOT;
-            }
-            else {
-                
-                $options = $this -> makeTypeOptions();
-                $selectBox= $this -> makeSelectBox($options, $options[0]);
+            } else {
+                $options = $this->makeTypeOptions();
+                $selectBox = $this->makeSelectBox($options, $options[0]);
                 $sampleEntryElement .= <<< EOT
                 <div>
                     <label for="$name">$title</label>
                     $selectBox
                 </div>
-            EOT;
+                EOT;
             }
         }
 

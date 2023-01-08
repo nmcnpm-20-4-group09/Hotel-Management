@@ -34,7 +34,7 @@ function toNonAccentVietnamese(str) {
     return str
 }
 
-function validateRoomID(roomID)
+function isValidRoomID(roomID)
 {
     const pattern = /^P[0-9]+$/g
     const match = pattern.test(roomID)
