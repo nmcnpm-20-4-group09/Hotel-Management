@@ -12,14 +12,15 @@ class BillDetailView
     public function __construct($props = [])
     {
         $this->props = $props;
+        $this->SoHoaDon = $_GET['SoHoaDon'] ?? "";
     }
 
     public function render()
     {
         $sideBar =  View::render(new Sidebar());
-        $header = View::render(new Header());
+        $header = View::render(new Header(['title' => "Chi tiết hóa đơn $this->SoHoaDon"]));
         $toolbar = View::render(new Toolbar($this->props));
-        $table = View::render(new BillDetailTable($this->props));
+        $billDetailTable = View::render(new BillDetailTable($this->props));
 
         $view =  <<<EOT
         <body>
@@ -29,7 +30,7 @@ class BillDetailView
                     $header
 
                     <div class="feature">
-                        $table
+                        $billDetailTable
                         $toolbar
                     </div>
                 </div>

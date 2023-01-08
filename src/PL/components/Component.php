@@ -90,7 +90,7 @@ abstract class TableComponent extends Component
         return $entries;
     }
 
-    // tạo options PK từ ds loại
+    // tạo options từ ds loại
     protected function makeTypeOptions()
     {
         $Types = $this->getTypes();
