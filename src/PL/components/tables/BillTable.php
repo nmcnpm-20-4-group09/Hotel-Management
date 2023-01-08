@@ -52,6 +52,8 @@ class BillTable extends TableComponent
     // Thêm nút chi tiết phiếu thuê
     private function makeDetailColumn()
     {
+        if ($this->action == "justify")
+            return '';
         return '
         <td>
             <a href="./bill-detail">
@@ -114,7 +116,7 @@ class BillTable extends TableComponent
     function render()
     {
         $fieldElements = $this->renderFields();
-
+        
         $detailColumn = $this->makeDetailColumn();
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
