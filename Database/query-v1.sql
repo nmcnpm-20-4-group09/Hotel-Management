@@ -196,7 +196,6 @@ PROCEDURE v1_sp_themChiTiet_HD (SoPhieuThue int(11), SoHoaDon int(11), SoNgayThu
 BEGIN
     INSERT INTO phong (SoPhieuThue, SoHoaDon, SoNgayThueThuc, TienThuePhong, MaPhuThu)
     VALUES (SoPhieuThue, SoHoaDon, SoNgayThueThuc, TienThuePhong, MaPhuThu);
-END
 END//
 DELIMITER ;
 
@@ -233,7 +232,6 @@ PROCEDURE v1_sp_themKhachHang (ID_KhachHang varchar(12), LoaiKhach char(2), HoTe
 BEGIN
     INSERT INTO khachhang (ID_KhachHang, LoaiKhach, HoTen, NgaySinh, DiaChi, SoDienThoai, CMND)
     VALUES (ID_KhachHang, LoaiKhach, HoTen, NgaySinh, DiaChi, SoDienThoai, CMND);
-END
 END//
 DELIMITER ;
 
@@ -241,7 +239,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS v1_sp_xoaKhachHang;
 DELIMITER //
 CREATE 
-PROCEDURE v1_sp_xoaPhong (ID_KhachHang varchar(12)) 
+PROCEDURE v1_sp_xoaKhachHang (ID_KhachHang varchar(12)) 
 BEGIN    
 	DELETE kh
     FROM khachhang kh
@@ -270,7 +268,6 @@ PROCEDURE v1_sp_themLoaiKhach (MaLoaiKhach char(2), TenLoaiKhach varchar(30), He
 BEGIN
     INSERT INTO loaikhach (MaLoaiKhach, TenLoaiKhach, HeSo)
     VALUES (MaLoaiKhach, TenLoaiKhach, HeSo);
-END
 END//
 DELIMITER ;
 
