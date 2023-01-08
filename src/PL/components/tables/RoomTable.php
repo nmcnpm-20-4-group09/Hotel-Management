@@ -51,7 +51,7 @@ class RoomTable extends TableComponent
         }
     }
 
-    private function makeSelectBox($options, $currentValue)
+    function makeSelectBox($options, $currentValue)
     {
         $optionsElement = "";
         foreach ($options as $option) {

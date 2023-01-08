@@ -62,7 +62,7 @@ class BillTable extends TableComponent
         </td>';
     }
 
-    private function makeSelectBox($options, $currentValue)
+    function makeSelectBox($options, $currentValue)
     {
         $optionsElement = "";
         foreach ($options as $option) {

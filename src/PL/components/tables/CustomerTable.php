@@ -112,7 +112,7 @@ class CustomerTable extends TableComponent
         return $entries;
     }
 
-    function renderSampleEntry($fields = [])
+    function renderSampleEntry($fields = [], $actions = "add-action")
     {
         $sampleEntryElement = "<div class='sample-entry'>";
 
