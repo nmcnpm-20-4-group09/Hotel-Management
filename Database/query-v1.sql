@@ -5,12 +5,11 @@
 DROP PROCEDURE IF EXISTS v1_sp_chiTietHoaDon;
 DELIMITER //
 CREATE 
-PROCEDURE v1_sp_chiTietHoaDon (SoPhieuThue int, SoHoaDon int) 
+PROCEDURE v1_sp_chiTietHoaDon (SoHoaDon int) 
 BEGIN    
 	SELECT *
 	FROM chitiet_hoadon ct
-    WHERE ct.SoPhieuThue = SoPhieuThue
-    AND ct.SoHoaDon = SoHoaDon;
+    WHERE ct.SoHoaDon = SoHoaDon;
 END//
 DELIMITER ;
 
