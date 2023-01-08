@@ -129,7 +129,9 @@ async function addRoomHandler() {
 
         // Nếu đúng hết thì mới gọi API để thêm
         if (validRoomID) {
-            await addRoom()
+            const success = await addRoom()
+
+            updateUI(success)
         } else {
             if (!validRoomID)
                 messages.push(
@@ -165,32 +167,34 @@ async function addRoomHandler() {
             const addRoomData = await addRoomResponse.json()
             const { success, message: queryMessage } = addRoomData
 
-            message.textContent = queryMessage
-
-            if (!success) message.classList.add('fail')
-            else {
-                addRoomToUI()
-                message.classList.remove('fail')
-            }
+            messages.push(queryMessage)
+            return success
         } catch (e) {
-            message.textContent = e
+            message.push(e)
+            return false
         }
     }
 
-    function addRoomToUI() {
-        const entries = $('table tbody').querySelectorAll('tr')
-        const newEntry = entries[0].cloneNode(true)
-        const fields = newEntry.querySelectorAll('td')
+    function updateUI(success) {
+        if (success) {
+            const entries = $('table tbody').querySelectorAll('tr')
+            const newEntry = entries[0].cloneNode(true)
+            const fields = newEntry.querySelectorAll('td')
 
-        const roomPrice = roomTypes[roomType]
+            const roomPrice = roomTypes[roomType]
 
-        fields[0].textContent = entries.length + 1
-        fields[1].textContent = roomID
-        fields[2].textContent = roomType
-        fields[3].textContent = roomPrice
-        fields[4].textContent = roomStatus
+            fields[0].textContent = entries.length + 1
+            fields[1].textContent = roomID
+            fields[2].textContent = roomType
+            fields[3].textContent = roomPrice
+            fields[4].textContent = roomStatus
 
-        $('table tbody').appendChild(newEntry)
+            $('table tbody').appendChild(newEntry)
+
+            message.classList.remove('fail')
+        } else message.classList.add('fail')
+
+        message.textContent = messages.join('. ')
     }
 }
 
@@ -250,6 +254,8 @@ async function updateRoomHandler() {
     for (entry of editedEntries) {
         const roomInfo = getRoomInfo(entry)
 
+        console.log(roomInfo)
+
         // Cập nhật phía database
         const success = await updateRoom(roomInfo)
 
@@ -262,8 +268,8 @@ async function updateRoomHandler() {
 
         const roomID = fields[1].getAttribute('name')
         const newRoomID = fields[1].textContent
-        const newRoomType = entry.querySelector('select').value
-        const newRoomStatus = fields[4].textContent
+        const newRoomType = entry.querySelectorAll('select')[0].value
+        const newRoomStatus = entry.querySelectorAll('select')[1].value
 
         return [roomID, newRoomID, newRoomType, newRoomStatus]
     }
@@ -275,7 +281,7 @@ async function updateRoomHandler() {
             MaPhong=${roomID}&
             MaPhongMoi=${newRoomID}&
             MaLoai=${newRoomType}&
-            TinhTrang=${newRoomStatus}`
+            TinhTrang=${newRoomStatus == 'Trống' ? 0 : 1}`
 
         try {
             const updateRoomResponse = await fetch(updateRoomAPI)
@@ -298,11 +304,6 @@ async function updateRoomHandler() {
 
         if (success) message.classList.remove('fail')
         else message.classList.add('fail')
-
-        setTimeout(() => {
-            message.textContent = ''
-            messages.length = 0
-        }, 5000)
     }
 }
 
