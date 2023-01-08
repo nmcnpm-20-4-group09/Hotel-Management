@@ -75,6 +75,41 @@ abstract class TableComponent extends Component
         return $entryElements;
     }
 
+    // Lấy danh sách loại để cho vào select box:
+    protected function getTypes()
+    {
+        $uri = API_ROOT . 'src/BLL/v1/GET/CustomerTypeList.php';
+        $Types = fetchAPI($uri);
+
+        $entries = [];
+        foreach ($Types as $index => $Type) {
+            $entries[] = [
+                ["value" => $index + 1],
+            ];
+        }
+        return $entries;
+    }
+
+    // tạo options PK từ ds loại
+    protected function makeTypeOptions()
+    {
+        $Types = $this->getTypes();
+        $options = array_map(function ($Type) {
+            return $Type[1]['value'];
+        }, $Types);
+        return $options;
+    }
+
+    protected function makeSelectBox($options, $currentValue)
+    {
+        $optionsElement = "";
+        foreach ($options as $option) {
+            $selected = $currentValue == $option ? "selected" : "";
+            $optionsElement .= "<option value='$option' $selected>$option</option>";
+        }
+        return "<select>$optionsElement</select>";
+    }
+
     // Tạo ra một dòng cho phép chỉnh sửa trong bảng
     // - param (optional): các fields cần hiển thị
     // - return: chuỗi html của dòng chỉnh sửa
