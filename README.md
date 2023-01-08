@@ -38,3 +38,9 @@
     - Thục hiện các bước như khi chạy trên localhost (kể cả start các module của XAMPP).
     - Ở bước truy cập phần mềm, thay vì nhập http://localhost/src/PL/public/home, ta nhập:
         - fordwarding-link-do-ngrok-cung-cấp/src/PL/public/home
+
+## Current Status
+Loading...
+
+## Future Work
+Loading...
