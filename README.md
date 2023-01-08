@@ -45,12 +45,7 @@
 
 ## Current Status
 - Giao diện hoàn chỉnh.
-- Chức năng đã hoạt động tốt:
-    - .....
-    - .....
-- Chức năng chưa có API:
-    - .....
-    - .....
+- Một số chức năng chưa hoàn thiện xem tại [link file đánh giá](https://docs.google.com/spreadsheets/d/12x2jVoTfIan2ozjRgwk22vGxmOonJRAv/edit#gid=1861759264)
 ## Future Work
 - Thiết kế cơ sở dữ liệu để lưu tài khoản và mật khẩu.
 - Thiết kế thuật toán mã hóa mật khẩu.

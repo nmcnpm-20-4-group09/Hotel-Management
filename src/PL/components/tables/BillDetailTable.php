@@ -36,16 +36,6 @@ class BillDetailTable extends TableComponent
         }
     }
 
-    private function makeSelectBox($options, $currentValue)
-    {
-        $optionsElement = "";
-        foreach ($options as $option) {
-            $selected = $currentValue == $option ? "selected" : "";
-            $optionsElement .= "<option value='$option' $selected>$option</option>";
-        }
-        return "<select>$optionsElement</select>";
-    }
-
     function renderEntry($entry)
     {
         $entryElement = "";
