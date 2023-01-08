@@ -61,7 +61,7 @@ function getRooms($editable = false)
             ["value" => $room['MaPhong'], "editable" => $editable],
             ["value" => $room['MaLoai'], "options" => makeRoomTypeOptions()],
             ["value" => $room['DonGia']],
-            ["value" => $room['TinhTrang'], "editable" => $editable],
+            ["value" => $room['TinhTrang'] == 0 ? "Trống" : "Đang được thuê", "editable" => $editable],
         ];
     }
     return $entries;
@@ -72,13 +72,14 @@ function getBookings($editable = false)
     $uri =  API_ROOT . 'src/BLL/v1/GET/BookingList.php';
     $bookings = fetchAPI($uri);
 
-    //? Thiếu trường 'ngày bắt đầu thuê' và 'số ngày thuê'
     $entries = [];
     foreach ($bookings as $index => $booking) {
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $booking['SoPhieuThue'], "editable" => $editable],
             ["value" => $booking['ID_KhachHang'], "editable" => $editable],
+            ["value" => $booking['NgayBatDauThue'], "editable" => $editable, "datetime"],
+            ["value" => $booking['SoNgayThue'], "editable" => $editable],
             ["value" => $booking['MaPhong'], "editable" => $editable],
         ];
     }
@@ -167,9 +168,9 @@ function getBills($editable = false)
         $entries[] = [
             ["value" => $index + 1],
             ["value" => $bill['SoHoaDon'], "editable" => $editable],
-            ["value" => $bill['ID_KhachHang']?? "Chưa cập nhật"],
+            ["value" => $bill['ID_KhachHang'] ?? "Chưa cập nhật"],
             ["value" => $bill['NgayThanhToan'], "editable" => $editable],
-            ["value" => $bill['TriGia']?? "Chưa cập nhật"],
+            ["value" => $bill['TriGia'] ?? "Chưa cập nhật"],
         ];
     }
     return $entries;
@@ -187,7 +188,7 @@ function getBillDetails($editable = false)
             ["value" => $detail['SoPhieuThue'], "editable" => $editable],
             ["value" => $detail['SoNgayThueThuc']],
             ["value" => $detail['TienThuePhong']],
-            ["value" => $detail['PhuThu'], "options" => makeSurchargesOptions()],
+            // ["value" => $detail['PhuThu'], "options" => makeSurchargesOptions()],
         ];
     }
     return $entries;
@@ -271,7 +272,7 @@ route("booking", function () {
             "entries" => getBookings(),
             "buttons" =>
             [
-                ["text" => "Thêm"],
+                ["text" => "Thêm", "handler" => "addBookingHandler()"],
             ]
         ]);
     } else if ($action == "delete") {
@@ -299,6 +300,24 @@ route("booking", function () {
             "action" => $action,
             "entries" => getBookings(),
         ]);
+    }
+});
+
+route("booking-detail", function () {
+    $action = $_GET['action'] ?? "view";
+
+    if ($action == "add") {
+        View::renderView("booking-detail", ["action" => $action, "buttons" => [
+            ["text" => "Thêm"],
+        ]]);
+    } else if ($action == "delete") {
+        View::renderView("booking-detail", ["action" => $action,]);
+    } else if ($action == "edit") {
+        View::renderView("booking-detail", ["action" => $action,]);
+    } else if ($action == "justify") {
+        View::renderView("booking-detail", ["action" => $action]);
+    } else {
+        View::renderView("booking-detail", ["action" => $action,]);
     }
 });
 
@@ -398,7 +417,7 @@ route("bill", function () {
     }
 });
 
-route ("bill-detail", function () {
+route("bill-detail", function () {
     $action = $_GET['action'] ?? "view";
 
     if ($action == "add") {
