@@ -111,46 +111,36 @@ async function getRoomTypes() {
 async function addRoomHandler() {
     const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
     const message = $('.table-wrapper').querySelector('.message')
-    const inputs = sampleEntry.querySelectorAll('input')
+    const inputs = sampleEntry.querySelectorAll('.input')
 
     const messages = []
 
     // Lấy các trường thông tin nhập vào
     const [roomID, roomType, roomStatus] = getRoomInfo(inputs)
 
+    console.log(roomID, roomType, roomStatus)
+
     // Lấy các loại phòng
     const roomTypes = await getRoomTypes()
 
-    if (roomID && roomType && roomStatus) {
+    if (roomID) {
         // Validate dữ liệu
-        const isValidRoomID = validateRoomID(roomID)
-        const isValidRoomType = Object.keys(roomTypes).includes(roomType)
-        const isValidRoomStatus = isNumeric(roomStatus)
+        const validRoomID = isValidRoomID(roomID)
 
         // Nếu đúng hết thì mới gọi API để thêm
-        if (isValidRoomID && isValidRoomType && isValidRoomStatus) {
+        if (validRoomID) {
             await addRoom()
-            addRoomToUI()
         } else {
-            if (!isValidRoomID)
+            if (!validRoomID)
                 messages.push(
                     'Định dạng của mã phòng không đúng, định dạng đúng là "P01"',
                 )
-            if (!isValidRoomType)
-                messages.push(
-                    'Mã loại phòng không tồn tại, các loại phòng hiện có là: ' +
-                        Object.keys(roomTypes).join(', '),
-                )
-            if (!isValidRoomStatus) messages.push('Tình trạng cần phải là một số')
 
             message.textContent = messages.join('. ')
             message.classList.add('fail')
         }
     } else {
-        messages.push(
-            'Cả ba trường mã phòng, mã loại phòng và tình trạng không được để trống',
-        )
-        message.textContent = messages.join(', ')
+        message.textContent = 'Vui lòng nhập đầy đủ thông tin'
         message.classList.add('fail')
     }
 
@@ -166,7 +156,9 @@ async function addRoomHandler() {
     async function addRoom() {
         const addRoomAPI =
             API_ROOT +
-            `src/BLL/v1/POST/RoomList.php?MaPhong=${roomID}&MaLoai=${roomType}&TinhTrang=${roomStatus}`
+            `src/BLL/v1/POST/RoomList.php?MaPhong=${roomID}&MaLoai=${roomType}&TinhTrang=${
+                roomStatus === 'Trống' ? 0 : 1
+            }`
 
         try {
             const addRoomResponse = await fetch(addRoomAPI)
@@ -176,7 +168,10 @@ async function addRoomHandler() {
             message.textContent = queryMessage
 
             if (!success) message.classList.add('fail')
-            else message.classList.remove('fail')
+            else {
+                addRoomToUI()
+                message.classList.remove('fail')
+            }
         } catch (e) {
             message.textContent = e
         }
@@ -326,11 +321,10 @@ async function addBookingHandler() {
 
     startDate = swapYearAndDay(startDate)
 
-
     async function addBooking() {
         const addBookingAPI =
-            API_ROOT + 
-        `src/BLL/v1/PUT/Booking.php?
+            API_ROOT +
+            `src/BLL/v1/PUT/Booking.php?
         SoPhieuThue=${bookingID}&
         IDKhachHang =${customerID}&
         NgayBatDauThue=${startDate}&
