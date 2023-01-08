@@ -178,7 +178,7 @@ function getBills($editable = false)
 
 function getBillDetails($editable = false)
 {
-    $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php?SoHoaDon=${SoHoaDon}';
+    $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php?SoHoaDon={$this->SoHoaDon}';
     $details = fetchAPI($uri);
 
     $entries = [];

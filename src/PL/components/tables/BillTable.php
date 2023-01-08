@@ -49,27 +49,32 @@ class BillTable extends TableComponent
         }
     }
 
-    // Thêm nút chi tiết phiếu thuê
-    private function makeDetailColumn()
+    protected function renderEntries()
     {
-        if ($this->action == "justify")
-            return '';
-        return '
-        <td>
-            <a href="./bill-detail">
-                <i class="fa-solid fa-circle-info"></i>
-            </a>
-        </td>';
-    }
+        $entryElements = '';
 
-    function makeSelectBox($options, $currentValue)
-    {
-        $optionsElement = "";
-        foreach ($options as $option) {
-            $selected = $currentValue == $option ? "selected" : "";
-            $optionsElement .= "<option value='$option' $selected>$option</option>";
+        foreach ($this->entries as $entry) {
+            $entryElement = $this->renderEntry($entry);
+
+            // Thêm cột chi tiết
+            $SoHoaDon = $entry[1]['value'];
+            $entryElement .= <<<EOT
+                <td>
+                <a href='./bill-detail?SoHoaDon={$SoHoaDon}'>
+                    <i class='fa-solid fa-circle-info'></i>
+                </a>
+            </td>
+            EOT;
+
+            // Thêm các column truyền vào nếu có
+            foreach (func_get_args() as $column) {
+                $entryElement .= $column;
+            }
+
+            $entryElements .= "<tr>" . $entryElement . "</tr>";
         }
-        return "<select>$optionsElement</select>";
+
+        return $entryElements;
     }
 
     function renderEntry($entry)
@@ -117,9 +122,8 @@ class BillTable extends TableComponent
     {
         $fieldElements = $this->renderFields();
         
-        $detailColumn = $this->makeDetailColumn();
         $checkBoxColumn = $this->makeCheckBoxColumn();
-        $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
+        $entryElements = $this->renderEntries($checkBoxColumn);
 
         $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
@@ -135,6 +139,7 @@ class BillTable extends TableComponent
                     </tbody>
                 </table>
                 $sampleEntry
+                <p class="message"></p>
                 $tableButtons
             </div>
             EOT;
