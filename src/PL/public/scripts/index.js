@@ -163,7 +163,12 @@ async function addRoomHandler() {
             }`
 
         try {
-            const addRoomResponse = await fetch(addRoomAPI)
+            const addRoomResponse = await fetch(addRoomAPI, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+            })
             const addRoomData = await addRoomResponse.json()
             const { success, message: queryMessage } = addRoomData
 
@@ -317,10 +322,12 @@ async function addBookingHandler() {
     const messages = []
 
     // Lấy các trường thông tin nhập vào
-    const [bookingID, customerID, startDate, duration, roomID] =
+    let [bookingID, customerID, startDate, duration, roomID] =
         getBookingInfo(inputs)
 
     startDate = swapYearAndDay(startDate)
+
+    console.log(bookingID, customerID, startDate, duration, roomID);
 
     async function addBooking() {
         const addBookingAPI =
@@ -338,7 +345,6 @@ async function addBookingHandler() {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
                 },
-                body: JSON.stringify(data),
             })
             const addBookingData = await addBookingResponse.json()
             const { success, message: queryMessage } = addBookingData

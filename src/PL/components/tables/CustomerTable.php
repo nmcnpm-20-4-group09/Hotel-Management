@@ -112,9 +112,9 @@ class CustomerTable extends TableComponent
         return $entries;
     }
 
-    function renderSampleEntry($fields = [], $actions = "add-action")
+    function renderSampleEntry($fields = [], $action = "add-action")
     {
-        $sampleEntryElement = "<div class='sample-entry'>";
+        $sampleEntryElement = "<div class='sample-entry $action'>";
 
         foreach ($fields as $title => $name) {
             if ($name != "LoaiKhach") {
@@ -180,6 +180,20 @@ class CustomerTable extends TableComponent
     .table-wrapper .sample-entry.add-action input {
         font-size: 1.2rem;
         padding: 10px 8px;
-        width: 180px;
+        width: 200px;
+    }
+
+    .table-wrapper thead th {
+        font-size: 1.6rem;
+    }
+
+    .table-wrapper thead th:nth-of-type(2),
+    .table-wrapper tbody td:nth-of-type(2) {
+        width: 10%;
+    }
+
+    .table-wrapper thead th:nth-of-type(n + 6),
+    .table-wrapper tbody td:nth-of-type(n + 6) {
+        width: 10%;
     }
 </style>
