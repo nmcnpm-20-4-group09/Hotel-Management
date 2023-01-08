@@ -214,6 +214,13 @@ html {
   color: #47b5ff;
   outline: 1px solid #256d85;
 }
+.table-wrapper .sample-entry select {
+  outline: none;
+  padding: 8px;
+  border: 1px solid #47b5ff;
+  border-radius: 8px;
+  cursor: pointer;
+}
 .table-wrapper .message {
   height: 20px;
   width: 100%;

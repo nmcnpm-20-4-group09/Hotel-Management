@@ -691,7 +691,7 @@ async function addBillHandler() {
     const [SoHoaDon, NgayThanhToan, TriGia] = getBillInfo(inputs)
 
     if (SoHoaDon && NgayThanhToan && TriGia) {
-        // await addBill()
+        await addBill()
         addBillToUI()
     } else {
         errors.push(

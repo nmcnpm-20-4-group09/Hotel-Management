@@ -50,16 +50,6 @@ class CustomerTable extends TableComponent
         }
     }
 
-    private function makeSelectBox($options, $currentValue)
-    {
-        $optionsElement = "";
-        foreach ($options as $option) {
-            $selected = $currentValue == $option ? "selected" : "";
-            $optionsElement .= "<option value='$option' $selected>$option</option>";
-        }
-        return "<select>$optionsElement</select>";
-    }
-
     function renderEntry($entry)
     {
         $entryElement = "";
@@ -100,6 +90,53 @@ class CustomerTable extends TableComponent
             </td>
             ";
         }
+    }
+
+    // Lấy danh sách loại để cho vào select box:
+    function getTypes()
+    {
+        $uri = API_ROOT . 'src/BLL/v1/GET/CustomerTypeList.php';
+        $customerTypes = fetchAPI($uri);
+        $entries = [];
+
+        foreach ($customerTypes as $index => $customerType) {
+            $entries[] = [
+                ["value" => $index + 1],
+                ["value" => $customerType['MaLoaiKhach']],
+                ["value" => $customerType['TenLoaiKhach']],
+                ["value" => $customerType['HeSo']],
+            ];
+        }
+        return $entries;
+    }
+
+    function renderSampleEntry($fields = [])
+    {
+        $sampleEntryElement = "<div class='sample-entry'>";
+
+        foreach ($fields as $title => $name) {
+            if($name != "LoaiKhach") {
+                $sampleEntryElement .= <<< EOT
+                <div>
+                    <label for="$name">$title</label>
+                    <input type="text" name="$name" id="$name"></input>
+                </div>
+            EOT;
+            }
+            else {
+                
+                $options = $this -> makeTypeOptions();
+                $selectBox= $this -> makeSelectBox($options, $options[0]);
+                $sampleEntryElement .= <<< EOT
+                <div>
+                    <label for="$name">$title</label>
+                    $selectBox
+                </div>
+            EOT;
+            }
+        }
+
+        return $sampleEntryElement . '</div>';
     }
 
     function render()
