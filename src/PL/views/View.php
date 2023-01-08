@@ -7,6 +7,7 @@ class View
         "home" => HomeView::class,
         "room" => RoomView::class,
         "booking" => BookingView::class,
+        "booking-detail" => BookingDetailView::class,
         "customer" => CustomerView::class,
         "bill" => BillView::class,
         "report" => ReportView::class,

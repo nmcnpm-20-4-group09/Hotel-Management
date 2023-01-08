@@ -1,5 +1,7 @@
 <?php
+
 namespace Components\Tables;
+
 use Components\TableComponent;
 
 class CustomerTable extends TableComponent
@@ -108,8 +110,14 @@ class CustomerTable extends TableComponent
 
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($checkBoxColumn);
+
         // render them option box cho Loai Khach !!!
-        $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
+        $sampleEntry = "";
+        if ($this->action == "add")
+            $sampleEntry = $this->renderSampleEntry($this->sampleEntryFields, "add-action");
+        else if ($this->action == "justify")
+            $sampleEntry = $this->renderSampleEntry($this->sampleEntryFields, "justify-action");
+
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT
@@ -123,6 +131,7 @@ class CustomerTable extends TableComponent
                     </tbody>
                 </table>
                 $sampleEntry
+                <p class="message"></p>
                 $tableButtons
             </div>
             EOT;
@@ -131,3 +140,11 @@ class CustomerTable extends TableComponent
 ?>
 
 <link rel="stylesheet" href="./css/Table.css">
+
+<style>
+    .table-wrapper .sample-entry.add-action input {
+        font-size: 1.2rem;
+        padding: 10px 8px;
+        width: 180px;
+    }
+</style>

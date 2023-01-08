@@ -107,7 +107,7 @@ async function getRoomTypes() {
     return []
 }
 
-// Chức năng thêm phòng
+// Thêm phòng
 async function addRoomHandler() {
     const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
     const message = $('.table-wrapper').querySelector('.message')
@@ -199,7 +199,7 @@ async function addRoomHandler() {
     }
 }
 
-// Chức năng xóa phòng
+// Xóa phòng
 async function deleteRoomHandler() {
     const message = $('.table-wrapper').querySelector('.message')
     const entries = $('table tbody').querySelectorAll('tr')
@@ -242,7 +242,7 @@ async function deleteRoomHandler() {
     }
 }
 
-// Chức năng chỉnh sửa phòng
+// Chỉnh sửa phòng
 async function updateRoomHandler() {
     const message = $('.table-wrapper').querySelector('.message')
     const entries = $('table tbody').querySelectorAll('tr')
@@ -311,6 +311,30 @@ async function updateRoomHandler() {
     }
 }
 
+/*PHIẾU THUÊ*/
+// Thêm phiếu thuê
+async function addBookingHandler() {
+    const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
+    const message = $('.table-wrapper').querySelector('.message')
+    const inputs = sampleEntry.querySelectorAll('input')
+
+    const errors = []
+
+    // Lấy các trường thông tin nhập vào
+    const [bookingID, customerID, startDate, duration, roomID] = getBookingInfo(inputs)
+
+    
+
+
+
+    // Lấy dữ liệu nhập vào từ các trường
+    function getBookingInfo(inputs) {
+        const bookingInfo = Array.from(inputs).map(
+            (input) => input.value,
+        )
+        return bookingInfo
+    }
+}
 /*KHÁCH*/
 // Thêm khách
 async function addCustomerHandler() {

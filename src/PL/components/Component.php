@@ -78,9 +78,9 @@ abstract class TableComponent extends Component
     // Tạo ra một dòng cho phép chỉnh sửa trong bảng
     // - param (optional): các fields cần hiển thị
     // - return: chuỗi html của dòng chỉnh sửa
-    protected function renderSampleEntry($fields = [])
+    protected function renderSampleEntry($fields = [], $action = "add-action")
     {
-        $sampleEntryElement = "<div class='sample-entry'>";
+        $sampleEntryElement = "<div class='sample-entry $action'>";
 
         foreach ($fields as $title => $name) {
             $sampleEntryElement .= <<< EOT
