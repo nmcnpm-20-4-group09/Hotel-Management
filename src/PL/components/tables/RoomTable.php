@@ -104,6 +104,22 @@ class RoomTable extends TableComponent
         }
     }
 
+    protected function renderSampleEntry($fields = [], $action = "add-action")
+    {
+        $sampleEntryElement = "<div class='sample-entry $action'>";
+
+        foreach ($fields as $title => $name) {
+            $sampleEntryElement .= <<< EOT
+                <div>
+                <label for="$name">$title</label>
+                <input type="text" name="$name" id="$name"></input>
+                </div>
+                EOT;
+        }
+
+        return $sampleEntryElement . '</div>';
+    }
+
     function render()
     {
         $fieldElements = $this->renderFields();
@@ -111,7 +127,7 @@ class RoomTable extends TableComponent
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($checkBoxColumn);
 
-        $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
+        $sampleEntry = $this->action == "add" || $this->action == "justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT

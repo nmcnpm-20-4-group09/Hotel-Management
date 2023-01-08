@@ -107,13 +107,13 @@ async function getRoomTypes() {
     return []
 }
 
-// Chức năng thêm phòng
+// Thêm phòng
 async function addRoomHandler() {
     const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
     const message = $('.table-wrapper').querySelector('.message')
     const inputs = sampleEntry.querySelectorAll('input')
 
-    const errors = []
+    const messages = []
 
     // Lấy các trường thông tin nhập vào
     const [roomID, roomType, roomStatus] = getRoomInfo(inputs)
@@ -133,24 +133,24 @@ async function addRoomHandler() {
             addRoomToUI()
         } else {
             if (!isValidRoomID)
-                errors.push(
+                messages.push(
                     'Định dạng của mã phòng không đúng, định dạng đúng là "P01"',
                 )
             if (!isValidRoomType)
-                errors.push(
+                messages.push(
                     'Mã loại phòng không tồn tại, các loại phòng hiện có là: ' +
-                    Object.keys(roomTypes).join(', '),
+                        Object.keys(roomTypes).join(', '),
                 )
-            if (!isValidRoomStatus) errors.push('Tình trạng cần phải là một số')
+            if (!isValidRoomStatus) messages.push('Tình trạng cần phải là một số')
 
-            message.textContent = errors.join('. ')
+            message.textContent = messages.join('. ')
             message.classList.add('fail')
         }
     } else {
-        errors.push(
+        messages.push(
             'Cả ba trường mã phòng, mã loại phòng và tình trạng không được để trống',
         )
-        message.textContent = errors.join(', ')
+        message.textContent = messages.join(', ')
         message.classList.add('fail')
     }
 
@@ -199,7 +199,7 @@ async function addRoomHandler() {
     }
 }
 
-// Chức năng xóa phòng
+// Xóa phòng
 async function deleteRoomHandler() {
     const message = $('.table-wrapper').querySelector('.message')
     const entries = $('table tbody').querySelectorAll('tr')
@@ -242,7 +242,7 @@ async function deleteRoomHandler() {
     }
 }
 
-// Chức năng chỉnh sửa phòng
+// Chỉnh sửa phòng
 async function updateRoomHandler() {
     const message = $('.table-wrapper').querySelector('.message')
     const entries = $('table tbody').querySelectorAll('tr')
@@ -311,6 +311,62 @@ async function updateRoomHandler() {
     }
 }
 
+/*PHIẾU THUÊ*/
+// Thêm phiếu thuê
+async function addBookingHandler() {
+    const sampleEntry = $('.table-wrapper').querySelector('.sample-entry')
+    const message = $('.table-wrapper').querySelector('.message')
+    const inputs = sampleEntry.querySelectorAll('input')
+
+    const messages = []
+
+    // Lấy các trường thông tin nhập vào
+    const [bookingID, customerID, startDate, duration, roomID] =
+        getBookingInfo(inputs)
+
+    startDate = swapYearAndDay(startDate)
+
+
+    async function addBooking() {
+        const addBookingAPI =
+            API_ROOT + 
+        `src/BLL/v1/PUT/Booking.php?
+        SoPhieuThue=${bookingID}&
+        IDKhachHang =${customerID}&
+        NgayBatDauThue=${startDate}&
+        SoNgayThue =${duration}&
+        MaPhong=${roomID}`
+
+        try {
+            const addBookingResponse = await fetch(addBookingAPI, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(data),
+            })
+            const addBookingData = await addBookingResponse.json()
+            const { success, message: queryMessage } = addBookingData
+
+            messages.push(queryMessage)
+            return success
+        } catch (e) {
+            messages.push(e)
+            return false
+        }
+    }
+
+    // Lấy dữ liệu nhập vào từ các trường
+    function getBookingInfo(inputs) {
+        const bookingInfo = Array.from(inputs).map((input) => input.value)
+        return bookingInfo
+    }
+
+    function swapYearAndDay(date) {
+        const [day, month, year] = date.split('-')
+        return `${year}-${month}-${day}`
+    }
+}
 /*KHÁCH*/
 // Thêm khách
 async function addCustomerHandler() {
@@ -321,24 +377,22 @@ async function addCustomerHandler() {
     const errors = []
 
     // Lấy các trường thông tin nhập vào
-    const [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND] = getCustomerInfo(inputs)
+    const [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND] =
+        getCustomerInfo(inputs)
 
     if (IDKhachHang && DiaChi && SoDienThoai && HoTen && CMND) {
         // await addCustomer()
         addCustomerToUI()
     } else {
-        errors.push(
-            'Cần điền đầy đủ các trường dữ liệu!'
-        )
+        errors.push('Cần điền đầy đủ các trường dữ liệu!')
         message.textContent = errors.join(', ')
         message.classList.add('fail')
     }
 
     // Lấy dữ liệu nhập vào từ các trường
     function getCustomerInfo(inputs) {
-        const [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND] = Array.from(inputs).map(
-            (input) => input.value,
-        )
+        const [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND] =
+            Array.from(inputs).map((input) => input.value)
         return [IDKhachHang, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND]
     }
 
@@ -406,10 +460,26 @@ async function updateCustomerHandler() {
         const DiaChi = fields[4].textContent
         const SoDienThoai = fields[5].textContent
         const CMND = fields[6].textContent
-        return [MaKhach, MaKhachMoi, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND]
+        return [
+            MaKhach,
+            MaKhachMoi,
+            LoaiKhach,
+            HoTen,
+            DiaChi,
+            SoDienThoai,
+            CMND,
+        ]
     }
 
-    async function updateCustomer([MaKhach, MaKhachMoi, LoaiKhach, HoTen, DiaChi, SoDienThoai, CMND]) {
+    async function updateCustomer([
+        MaKhach,
+        MaKhachMoi,
+        LoaiKhach,
+        HoTen,
+        DiaChi,
+        SoDienThoai,
+        CMND,
+    ]) {
         const updateCustomerAPI =
             API_ROOT +
             `src/BLL/v1/PUT/CustomerList.php?
@@ -481,7 +551,8 @@ async function deleteCustomerHandler() {
 
     async function deleteCustomer(MaKhach) {
         const deleteCustomerAPI =
-            API_ROOT + `src/BLL/v1/DELETE/CustomerList.php?IDKhachHang=${MaKhach}`
+            API_ROOT +
+            `src/BLL/v1/DELETE/CustomerList.php?IDKhachHang=${MaKhach}`
 
         try {
             const deleteCustomerResponse = await fetch(deleteCustomerAPI)
@@ -514,9 +585,7 @@ async function addCustomerTypeHandler() {
         // await addCustomerType()
         addCustomerTypeToUI()
     } else {
-        errors.push(
-            'Cần điền đầy đủ các trường dữ liệu!'
-        )
+        errors.push('Cần điền đầy đủ các trường dữ liệu!')
         message.textContent = errors.join(', ')
         message.classList.add('fail')
     }
@@ -592,11 +661,15 @@ async function deleteCustomerTypeHandler() {
 
     async function deleteCustomerType(MaKhach) {
         const deleteCustomerTypeAPI =
-            API_ROOT + `src/BLL/v1/DELETE/CustomerTypeList.php?MaLoaiKhach=${MaLoai}`
+            API_ROOT +
+            `src/BLL/v1/DELETE/CustomerTypeList.php?MaLoaiKhach=${MaLoai}`
 
         try {
-            const deleteCustomerTypeResponse = await fetch(deleteCustomerTypeAPI)
-            const deleteCustomerTypeData = await deleteCustomerTypeResponse.json()
+            const deleteCustomerTypeResponse = await fetch(
+                deleteCustomerTypeAPI,
+            )
+            const deleteCustomerTypeData =
+                await deleteCustomerTypeResponse.json()
             const { success, message: queryMessage } = deleteCustomerTypeData
 
             message.textContent = queryMessage
@@ -650,8 +723,11 @@ async function updateCustomerTypeHandler() {
             HeSo=${HeSo}`
 
         try {
-            const updateCustomerTypeResponse = await fetch(updateCustomerTypeAPI)
-            const updateCustomerTypeData = await updateCustomerTypeResponse.json()
+            const updateCustomerTypeResponse = await fetch(
+                updateCustomerTypeAPI,
+            )
+            const updateCustomerTypeData =
+                await updateCustomerTypeResponse.json()
             const { success, message: queryMessage } = updateCustomerTypeData
 
             messages.push(queryMessage)
@@ -694,9 +770,7 @@ async function addBillHandler() {
         await addBill()
         addBillToUI()
     } else {
-        errors.push(
-            'Cần điền đầy đủ các trường dữ liệu!'
-        )
+        errors.push('Cần điền đầy đủ các trường dữ liệu!')
         message.textContent = errors.join(', ')
         message.classList.add('fail')
     }
@@ -873,9 +947,7 @@ async function addSurchargeHandler() {
         // await addSurcharge()
         addSurchargeToUI()
     } else {
-        errors.push(
-            'Cần điền đầy đủ các trường dữ liệu!'
-        )
+        errors.push('Cần điền đầy đủ các trường dữ liệu!')
         message.textContent = errors.join(', ')
         message.classList.add('fail')
     }
@@ -952,8 +1024,7 @@ async function updateSurchargeHandler() {
 
     async function updateSurcharge([MaPhuThu, TenPhuThu, TiLe]) {
         const updateSurchargeAPI =
-            API_ROOT +
-            `src/BLL/v1/PUT/Surcharge.php?MaPhuThu=${MaPhuThu}`
+            API_ROOT + `src/BLL/v1/PUT/Surcharge.php?MaPhuThu=${MaPhuThu}`
 
         try {
             const updateSurchargeResponse = await fetch(updateSurchargeAPI)
@@ -1015,7 +1086,8 @@ async function deleteSurchargeHandler() {
 
     async function deleteSurcharge(MaPhuThu) {
         const deleteSurchargeAPI =
-            API_ROOT + `src/BLL/v1/DELETE/SurchargeList.php?MaPhuThu=${MaPhuThu}`
+            API_ROOT +
+            `src/BLL/v1/DELETE/SurchargeList.php?MaPhuThu=${MaPhuThu}`
 
         try {
             const deleteSurchargeResponse = await fetch(deleteSurchargeAPI)

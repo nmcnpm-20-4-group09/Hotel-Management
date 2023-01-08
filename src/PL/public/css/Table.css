@@ -207,6 +207,7 @@ html {
 .table-wrapper .sample-entry input {
   font-size: 1.4rem;
   padding: 10px 20px;
+  min-width: 220px;
   border-radius: 10px;
   border: 1px solid #47b5ff;
 }
@@ -214,12 +215,8 @@ html {
   color: #47b5ff;
   outline: 1px solid #256d85;
 }
-.table-wrapper .sample-entry select {
-  outline: none;
-  padding: 8px;
-  border: 1px solid #47b5ff;
-  border-radius: 8px;
-  cursor: pointer;
+.table-wrapper .sample-entry input[type=date] {
+  text-align: center;
 }
 .table-wrapper .message {
   height: 20px;
@@ -256,4 +253,4 @@ html {
 .table-wrapper .table-buttons button:active {
   transform: translateY(5px);
   box-shadow: none;
-}/*# sourceMappingURL=Table.css.map */
+}

@@ -15,6 +15,8 @@ class BookingTable extends TableComponent
                 "STT",
                 "Số phiếu thuê",
                 "Mã khách hàng",
+                "Ngày bắt đầu thuê",
+                "Số ngày thuê",
                 "Mã phòng",
                 "Chi tiết",
             ];
@@ -28,6 +30,8 @@ class BookingTable extends TableComponent
             $this->sampleEntryFields = [
                 "Số phiếu thuê" => "SoPhieuThue",
                 "Mã khách hàng" => "ID_KhachHang",
+                "Ngày bắt đầu thuê" => "NgayBatDauThue",
+                "Số ngày thuê" => "SoNgayThue",
                 "Mã phòng" => "MaPhong"
             ];
         }
@@ -36,17 +40,6 @@ class BookingTable extends TableComponent
         if ($this->action == "justify") {
             $this->fields = array();
         }
-    }
-
-    // Thêm nút chi tiết phiếu thuê
-    private function makeDetailColumn()
-    {
-        return '
-        <td>
-            <a href="./booking-detail">
-                <i class="fa-solid fa-circle-info"></i>
-            </a>
-        </td>';
     }
 
     // Thêm checkbox vào các dòng trong chế độ delete
@@ -65,15 +58,60 @@ class BookingTable extends TableComponent
         return "";
     }
 
+    protected function renderEntries()
+    {
+        $entryElements = '';
+
+        foreach ($this->entries as $entry) {
+            $entryElement = $this->renderEntry($entry);
+
+            // Thêm cột chi tiết
+            $bookingID = $entry[0]['value'];
+            $entryElement .= <<<EOT
+                <td>
+                <a href='./booking-detail?bookingID={$bookingID}'>
+                    <i class='fa-solid fa-circle-info'></i>
+                </a>
+            </td>
+            EOT;
+
+            // Thêm các column truyền vào nếu có
+            foreach (func_get_args() as $column) {
+                $entryElement .= $column;
+            }
+
+            $entryElements .= "<tr>" . $entryElement . "</tr>";
+        }
+
+        return $entryElements;
+    }
+
+    protected function renderSampleEntry($fields = [], $action = "add-action")
+    {
+        $sampleEntryElement = "<div class='sample-entry $action'>";
+
+        foreach ($fields as $title => $name) {
+            $inputType = $name == "NgayBatDauThue" ? "date" : "text";
+
+            $sampleEntryElement .= <<< EOT
+                <div>
+                    <label for="$name">$title</label>
+                    <input type="$inputType" name="$name" id="$name"></input>
+                </div>
+            EOT;
+        }
+
+        return $sampleEntryElement . '</div>';
+    }
+
     function render()
     {
         $fieldElements = $this->renderFields();
 
-        $detailColumn = $this->makeDetailColumn();
         $checkBoxColumn = $this->makeCheckBoxColumn();
-        $entryElements = $this->renderEntries($detailColumn, $checkBoxColumn);
+        $entryElements = $this->renderEntries($checkBoxColumn);
 
-        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
+        $sampleEntry = $this->action == "add" ? $this->renderSampleEntry($this->sampleEntryFields, "add-action") : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<< EOT
@@ -96,3 +134,25 @@ class BookingTable extends TableComponent
 ?>
 
 <link rel="stylesheet" href="./css/Table.css">
+
+<style>
+    .table-wrapper .sample-entry.add-action input {
+        font-size: 1.2rem;
+        padding: 10px 12px;
+    }
+
+    .table-wrapper thead th {
+        font-size: 1.6rem;
+    }
+
+    .table-wrapper tbody td:nth-of-type(2),
+    .table-wrapper thead th:nth-of-type(2) {
+        width: 10%;
+    }
+
+    .table-wrapper tbody td:nth-of-type(n + 6),
+    .table-wrapper thead th:nth-of-type(n + 6) {
+        width: 10%;
+    }
+
+</style>
