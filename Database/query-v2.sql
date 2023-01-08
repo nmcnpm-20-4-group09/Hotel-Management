@@ -27,3 +27,17 @@ BEGIN
     ON pt.SoPhieuThue = cthd.SoPhieuThue;
 END//
 DELIMITER ;
+
+-- Lấy danh sách chi tiết hóa đơn
+DROP PROCEDURE IF EXISTS v2_sp_chiTietPhieuThue;
+DELIMITER //
+CREATE 
+PROCEDURE v2_sp_chiTietPhieuThue (SoPhieuThue int(11))   
+BEGIN
+    SELECT * 
+    FROM chitiet_phieuthue ct
+    INNER JOIN khachhang kh
+    ON ct.ID_KhachHang = kh.ID_KhachHang
+    WHERE ct.SoPhieuThue = SoPhieuThue;
+END//
+DELIMITER ;

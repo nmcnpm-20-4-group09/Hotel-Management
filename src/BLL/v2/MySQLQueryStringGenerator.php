@@ -15,6 +15,12 @@ class MySQLQueryStringGenerator
         $queryString = "call v2_sp_danhSachHoaDon()";
         return $queryString;
     }
+
+    public static function chiTietPhieuThue($soPhieuThue)
+    {
+        $queryString = "call v2_sp_chiTietPhieuThue(" . $soPhieuThue . ")";
+        return $queryString;
+    }
 }
 
 ?>
