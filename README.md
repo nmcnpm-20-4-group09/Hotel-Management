@@ -42,7 +42,17 @@
     - fordwarding-link-do-ngrok-cung-cấp/src/PL/public/home
 
 ## Current Status
-Loading...
-
+- Giao diện hoàn chỉnh.
+- Chức năng đã hoạt động tốt:
+    - .....
+    - .....
+- Chức năng chưa có API:
+    - .....
+    - .....
 ## Future Work
-Loading...
+- Thiết kế cơ sở dữ liệu để lưu tài khoản và mật khẩu.
+- Thiết kế thuật toán mã hóa mật khẩu.
+- Hoàn thiện chức năng đăng nhập/đăng kí.
+- Quản lý phiên đăng nhập.
+- Triển khai chức năng gửi mail khôi phục mật khẩu.
+- Hoàn thiện các API còn thiếu.
