@@ -4,9 +4,9 @@ namespace BLLv1;
 
 class MySQLQueryStringGenerator
 {
-    public static function chiTietHoaDon($SoPhieuThue, $SoHoaDon)
+    public static function chiTietHoaDon($SoHoaDon)
     {
-        $queryString = "call v1_sp_chiTietHoaDon(" . $SoPhieuThue . ", " . $SoHoaDon . ");";
+        $queryString = "call v1_sp_chiTietHoaDon(" . $SoHoaDon . ");";
         return $queryString;
     }
 

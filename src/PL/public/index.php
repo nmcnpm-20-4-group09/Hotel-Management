@@ -179,7 +179,7 @@ function getBills($editable = false)
 
 function getBillDetails($editable = false)
 {
-    $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php?SoHoaDon={$this->SoHoaDon}';
+    $uri = API_ROOT . "src/BLL/v1/GET/BillDetail.php?SoHoaDon={$this->SoHoaDon}";
     $details = fetchAPI($uri);
 
     $entries = [];
@@ -424,7 +424,7 @@ route("bill-detail", function () {
     if ($action == "add") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetails(),
+            //"entries" => getBillDetails(),
             "buttons" =>
             [
                 ["text" => "Thêm", "handler" => "addBillDetailHandler()"],
@@ -433,7 +433,7 @@ route("bill-detail", function () {
     } else if ($action == "delete") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetails(),
+            //"entries" => getBillDetails(),
             "buttons" =>
             [
                 ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillDetailHandler()"],
@@ -443,7 +443,7 @@ route("bill-detail", function () {
     } else if ($action == "edit") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetails(true),
+            //"entries" => getBillDetails(true),
             "buttons" => [
                 ["text" => "Lưu thay đổi", "handler" => "updateBillDetailHandler()"],
             ],
@@ -451,7 +451,7 @@ route("bill-detail", function () {
     } else if ($action == "justify") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetails(true),
+            //"entries" => getBillDetails(true),
             "buttons" =>
             [
                 ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillDetailHandler()"],
@@ -461,7 +461,7 @@ route("bill-detail", function () {
     } else {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetails(),
+            //"entries" => getBillDetails(),
         ]);
     }
 });
