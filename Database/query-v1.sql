@@ -309,3 +309,22 @@ BEGIN
     FROM phuthu;
 END//
 DELIMITER ;
+
+-- Cập nhật phiếu thuê
+DROP PROCEDURE IF EXISTS v1_sp_capNhatPhieuThue;
+DELIMITER //
+CREATE 
+PROCEDURE v1_sp_capNhatPhieuThue (SoPhieuThue int(12), ID_KhachHang VARCHAR(12), NgayBatDauThue date, SoNgayThue int, MaPhong VARCHAR(5))
+BEGIN    
+	UPDATE phieu_thuephong pt
+    SET pt.ID_KhachHang = ID_KhachHang, pt.NgayBatDauThue = NgayBatDauThue, pt.SoNgayThue = SoNgayThue, pt.MaPhong = MaPhong
+    WHERE pt.SoPhieuThue = SoPhieuThue;
+
+    SELECT * 
+    FROM phieu_thuephong pt
+    WHERE pt.ID_KhachHang = ID_KhachHang
+    and pt.NgayBatDauThue = NgayBatDauThue
+    and pt.SoNgayThue = SoNgayThue
+    and pt.MaPhong = MaPhong;
+END//
+DELIMITER ;

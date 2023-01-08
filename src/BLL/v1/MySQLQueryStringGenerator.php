@@ -87,4 +87,31 @@ class MySQLQueryStringGenerator
         $queryString = "call v1_sp_danhSachPhuThu();";
         return $queryString;
     }
+
+    public static function capNhatPhieuThue(
+        $SoPhieuThue,
+        $ID_KhachHang,
+        $NgayBatDauThue,
+        $SoNgayThue,
+        $MaPhong    
+    ) {
+        $queryString = "call v1_sp_capNhatPhieuThue (" 
+            . $SoPhieuThue 
+            . ", \"" 
+            . $ID_KhachHang 
+            . "\", \"" 
+            . $NgayBatDauThue 
+            . "\", "
+            . $SoNgayThue 
+            . ", \""
+            . $MaPhong 
+            . "\")";
+        return $queryString;
+    }
+
+    public static function capNhatLoaiKhach($MaLoaiKhach, $TenLoaiKhach, $HeSo)
+    {
+        $queryString = "call v1_sp_chinhsuaLoaiKhach (\"" . $MaLoaiKhach . "\", \"" . $TenLoaiKhach . "\", " . $HeSo . ")";
+        return $queryString;
+    }
 }
