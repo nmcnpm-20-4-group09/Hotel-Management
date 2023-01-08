@@ -8,7 +8,7 @@ use BLLv1\MySQLQueryStringGenerator;
 use DALv1\MySQLiConnection;
 use DTOv1\BillDetailDTO;
 
-$soPhieuThue = $_GET["SoPhieuThue"];
+//$soPhieuThue = $_GET["SoPhieuThue"];
 $soHoaDon = $_GET["SoHoaDon"];
 
 $success = true;
@@ -17,9 +17,7 @@ $result = [];
 
 $pattern = "/^[0-9]+$/"; // INT
 
-$isValidData = (preg_match($pattern, $soPhieuThue) and
-    preg_match($pattern, $soHoaDon)
-);
+$isValidData = preg_match($pattern, $soHoaDon);
 
 if (!$isValidData) {
     $success = FALSE;
@@ -36,10 +34,7 @@ if (!$isValidData) {
         $message = "Unable to connect to the database!";
     } else {
         $queryString = MySQLQueryStringGenerator
-            ::chiTietHoaDon(
-                $soPhieuThue,
-                $soHoaDon
-            );
+            ::chiTietHoaDon($soHoaDon);
 
         $dtoList = $connection->execQuery(
             $queryString,

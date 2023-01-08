@@ -4,23 +4,22 @@ namespace Views;
 use Components\Sidebar;
 use Components\Header;
 use Components\Toolbar;
-use Components\Tables\BookingDetailTable;
+use Components\Tables\BillDetailTable;
 
 
-class BookingDetailView
+class BillDetailView
 {
-    public function __construct($props)
+    public function __construct($props = [])
     {
         $this->props = $props;
-        $this->roomID = $_GET['bookingID'] ?? "";
     }
 
     public function render()
     {
         $sideBar =  View::render(new Sidebar());
-        $header = View::render(new Header(['title' => "Chi tiết thuê phòng $this->roomID"]));
-        $bookingDetailTable = View::render(new BookingDetailTable($this->props));
+        $header = View::render(new Header());
         $toolbar = View::render(new Toolbar($this->props));
+        $table = View::render(new BillDetailTable($this->props));
 
         $view =  <<<EOT
         <body>
@@ -30,7 +29,7 @@ class BookingDetailView
                     $header
 
                     <div class="feature">
-                        $bookingDetailTable
+                        $table
                         $toolbar
                     </div>
                 </div>
@@ -38,11 +37,13 @@ class BookingDetailView
 
             <script>
                 handleEvents()
+                updateFeature('bill')
             </script>
             </body>
         </html>
         EOT;
 
         return $view;
+
     }
 }

@@ -66,10 +66,10 @@ class BookingTable extends TableComponent
             $entryElement = $this->renderEntry($entry);
 
             // Thêm cột chi tiết
-            $roomID = $entry[5]['value'];
+            $bookingID = $entry[0]['value'];
             $entryElement .= <<<EOT
                 <td>
-                <a href='./booking-detail?room={$roomID}'>
+                <a href='./booking-detail?bookingID={$bookingID}'>
                     <i class='fa-solid fa-circle-info'></i>
                 </a>
             </td>
@@ -84,6 +84,24 @@ class BookingTable extends TableComponent
         }
 
         return $entryElements;
+    }
+
+    protected function renderSampleEntry($fields = [], $action = "add-action")
+    {
+        $sampleEntryElement = "<div class='sample-entry $action'>";
+
+        foreach ($fields as $title => $name) {
+            $inputType = $name == "NgayBatDauThue" ? "date" : "text";
+
+            $sampleEntryElement .= <<< EOT
+                <div>
+                    <label for="$name">$title</label>
+                    <input type="$inputType" name="$name" id="$name"></input>
+                </div>
+            EOT;
+        }
+
+        return $sampleEntryElement . '</div>';
     }
 
     function render()
@@ -122,4 +140,19 @@ class BookingTable extends TableComponent
         font-size: 1.2rem;
         padding: 10px 12px;
     }
+
+    .table-wrapper thead th {
+        font-size: 1.6rem;
+    }
+
+    .table-wrapper tbody td:nth-of-type(2),
+    .table-wrapper thead th:nth-of-type(2) {
+        width: 10%;
+    }
+
+    .table-wrapper tbody td:nth-of-type(n + 6),
+    .table-wrapper thead th:nth-of-type(n + 6) {
+        width: 10%;
+    }
+
 </style>

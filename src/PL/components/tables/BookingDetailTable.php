@@ -19,7 +19,7 @@ class BookingDetailTable extends TableComponent
                 "Địa chỉ",
             ];
         }
-        
+
         // Chế độ add có một dòng mẫu
         if ($this->action == "add") {
             $this->sampleEntryFields = [
@@ -30,7 +30,6 @@ class BookingDetailTable extends TableComponent
             ];
         }
     }
-
 
     function render()
     {
@@ -61,3 +60,9 @@ class BookingDetailTable extends TableComponent
 ?>
 
 <link rel="stylesheet" href="./css/Table.css">
+
+<style>
+    .table-wrapper .th {
+        width: 10%;
+    }
+</style>

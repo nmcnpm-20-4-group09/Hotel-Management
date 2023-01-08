@@ -61,7 +61,7 @@ function getRooms($editable = false)
             ["value" => $room['MaPhong'], "editable" => $editable],
             ["value" => $room['MaLoai'], "options" => makeRoomTypeOptions()],
             ["value" => $room['DonGia']],
-            ["value" => $room['TinhTrang'], "editable" => $editable],
+            ["value" => $room['TinhTrang'] == 0 ? "Trống" : "Đang được thuê", "editable" => $editable],
         ];
     }
     return $entries;
@@ -132,6 +132,32 @@ function getCustomers($editable = false)
     return $entries;
 }
 
+function getSurcharges($editable = false)
+{
+    $uri = API_ROOT . 'src/BLL/v1/GET/SurchargeList.php';
+    $surcharges = fetchAPI($uri);
+
+    $entries = [];
+    foreach ($surcharges as $index => $surcharge) {
+        $entries[] = [
+            ["value" => $index + 1],
+            ["value" => $surcharge['MaPhuThu'], "editable" => $editable],
+            ["value" => $surcharge['TenPhuThu'], "editable" => $editable],
+            ["value" => $surcharge['TiLe'], "editable" => $editable],
+        ];
+    }
+    return $entries;
+}
+
+function makeSurchargeOptions()
+{
+    $surcharges = getSurcharges();
+    $options = array_map(function ($surcharges) {
+        return $surcharges[1]['value'];
+    }, $surcharges);
+    return $options;
+}
+
 function getBills($editable = false)
 {
     $uri = API_ROOT . 'src/BLL/v1/GET/BillList.php';
@@ -150,36 +176,19 @@ function getBills($editable = false)
     return $entries;
 }
 
-function getSurcharges($editable = false)
+function getBillDetails($editable = false)
 {
-    $uri = API_ROOT . 'src/BLL/v1/GET/SurchargeList.php';
-    $surcharges = fetchAPI($uri);
+    $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php?SoHoaDon=${SoHoaDon}';
+    $details = fetchAPI($uri);
 
     $entries = [];
-    foreach ($surcharges as $index => $surcharge) {
+    foreach ($details as $index => $detail) {
         $entries[] = [
             ["value" => $index + 1],
-            ["value" => $surcharge['MaPhuThu'], "editable" => $editable],
-            ["value" => $surcharge['TenPhuThu'], "editable" => $editable],
-            ["value" => $surcharge['TiLe'], "editable" => $editable],
-        ];
-    }
-    return $entries;
-}
-
-function getBillDetail($editable = false)
-{
-    $uri = API_ROOT . 'src/BLL/v1/GET/BillDetail.php';
-    $bills = fetchAPI($uri);
-
-    $entries = [];
-    foreach ($bills as $index => $bills) {
-        $entries[] = [
-            ["value" => $index + 1],
-            ["value" => $bills['SoHoaDon'], "editable" => $editable],
-            ["value" => $bills['ID_KhachHang'] ?? "Chưa cập nhật"],
-            ["value" => $bills['NgayThanhToan'], "editable" => $editable],
-            ["value" => $bills['TriGia'] ?? "Chưa cập nhật"],
+            ["value" => $detail['SoPhieuThue'], "editable" => $editable],
+            ["value" => $detail['SoNgayThueThuc']],
+            ["value" => $detail['TienThuePhong']],
+            // ["value" => $detail['PhuThu'], "options" => makeSurchargesOptions()],
         ];
     }
     return $entries;
@@ -414,7 +423,7 @@ route("bill-detail", function () {
     if ($action == "add") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(),
+            "entries" => getBillDetails(),
             "buttons" =>
             [
                 ["text" => "Thêm", "handler" => "addBillDetailHandler()"],
@@ -423,7 +432,7 @@ route("bill-detail", function () {
     } else if ($action == "delete") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(),
+            "entries" => getBillDetails(),
             "buttons" =>
             [
                 ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillDetailHandler()"],
@@ -433,7 +442,7 @@ route("bill-detail", function () {
     } else if ($action == "edit") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(true),
+            "entries" => getBillDetails(true),
             "buttons" => [
                 ["text" => "Lưu thay đổi", "handler" => "updateBillDetailHandler()"],
             ],
@@ -441,7 +450,7 @@ route("bill-detail", function () {
     } else if ($action == "justify") {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(true),
+            "entries" => getBillDetails(true),
             "buttons" =>
             [
                 ["text" => "Xóa các dòng đã chọn", "handler" => "deleteBillDetailHandler()"],
@@ -451,7 +460,7 @@ route("bill-detail", function () {
     } else {
         View::renderView("bill-detail", [
             "action" => $action,
-            "entries" => getBillDetail(),
+            "entries" => getBillDetails(),
         ]);
     }
 });

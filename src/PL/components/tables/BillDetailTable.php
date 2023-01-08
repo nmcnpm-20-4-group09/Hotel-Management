@@ -1,52 +1,37 @@
 <?php
-
 namespace Components\Tables;
-
 use Components\TableComponent;
 
-class RoomTable extends TableComponent
+class BillDetailTable extends TableComponent
 {
-    function __construct($props = [])
+    public function __construct($props = [])
     {
         parent::__construct($props);
 
         if (empty($this->fields)) {
             $this->fields = [
                 'STT',
-                'Mã phòng',
-                'Loại phòng',
-                'Đơn giá',
-                'Tình trạng',
+                'Số phiếu thuê',
+                'Số ngày thuê thực',
+                'Tiền thuê phòng',
+                'Phụ thu',
             ];
         }
 
         // Chế độ xóa có thêm check box để chọn nên cần thêm field này vào tiêu đề cột
         if ($this->action == "delete")  $this->fields[] = "Chọn";
-
-        // Chế độ chỉnh sửa có dữ liệu lấy từ bảng loại phòng
+        
+        // Chế độ chỉnh sửa quy định không có chức năng nên xóa hết tiêu đề cột
         if ($this->action == "justify") {
-            $this->fields = [
-                "STT",
-                "Mã loại phòng",
-                "Số lượng phòng",
-                "Đơn giá",
-                "Lượng khách tối đa",
-                "Chọn",
-            ];
-
-            $this->sampleEntryFields = [
-                "Mã loại phòng" => "MaLoai",
-                "Số lượng phòng" => "SoLuongPhong",
-                "Đơn giá" => "DonGia",
-                "Lượng khách tối đa" => "LuongKhachToiDa",
-            ];
+            $this->fields = array();
         }
 
         if ($this->action == "add") {
             $this->sampleEntryFields = [
-                "Mã phòng" => "MaPhong",
-                "Loại phòng" => "MaLoai",
-                "Tình trạng" => "TinhTrang"
+                "Số phiếu thuê" => "SoPhieuThue",
+                "Số ngày thuê thực" => "SoNgayThueThuc",
+                "Tiền thuê phòng" => "TienThuePhong",
+                "Phụ thu" => "MaPhuThu",
             ];
         }
     }
@@ -64,14 +49,12 @@ class RoomTable extends TableComponent
     function renderEntry($entry)
     {
         $entryElement = "";
-
         foreach ($entry as $field) {
             $value = $field['value'] ?? '';
 
             // Thêm select box khi ở chế độ chỉnh sửa và có options
             if ($this->action == "edit" && isset($field['options'])) {
                 $selectBox = $this->makeSelectBox($field['options'], $value);
-
                 $entryElement .= <<< EOT
                     <td>$selectBox</td>
                 EOT;
@@ -81,7 +64,7 @@ class RoomTable extends TableComponent
                 $editableAttribute = $editable ? "contenteditable='true'" : "";
 
                 $entryElement .= <<< EOT
-                    <td $editableAttribute name='$value'>$value</td>
+                    <td $editableAttribute>$value</td>
                 EOT;
             }
         }
@@ -104,30 +87,14 @@ class RoomTable extends TableComponent
         }
     }
 
-    protected function renderSampleEntry($fields = [], $action = "add-action")
-    {
-        $sampleEntryElement = "<div class='sample-entry $action'>";
-
-        foreach ($fields as $title => $name) {
-            $sampleEntryElement .= <<< EOT
-                <div>
-                <label for="$name">$title</label>
-                <input type="text" name="$name" id="$name"></input>
-                </div>
-                EOT;
-        }
-
-        return $sampleEntryElement . '</div>';
-    }
-
     function render()
     {
         $fieldElements = $this->renderFields();
-
+        
         $checkBoxColumn = $this->makeCheckBoxColumn();
         $entryElements = $this->renderEntries($checkBoxColumn);
 
-        $sampleEntry = $this->action == "add" || $this->action == "justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
+        $sampleEntry = $this->action == "add" || $this->action =="justify" ? $this->renderSampleEntry($this->sampleEntryFields) : "";
         $tableButtons = $this->buttons != [] ?  $this->renderButtons() : "";
 
         return <<<EOT
@@ -141,7 +108,6 @@ class RoomTable extends TableComponent
                     </tbody>
                 </table>
                 $sampleEntry
-                <p class="message"></p>
                 $tableButtons
             </div>
             EOT;

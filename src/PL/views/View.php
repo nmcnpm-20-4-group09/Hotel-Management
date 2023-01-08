@@ -10,6 +10,7 @@ class View
         "booking-detail" => BookingDetailView::class,
         "customer" => CustomerView::class,
         "bill" => BillView::class,
+        "bill-detail" => BillDetailView::class,
         "report" => ReportView::class,
         "form" => FormView::class
     ];

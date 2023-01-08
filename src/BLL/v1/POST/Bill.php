@@ -61,7 +61,6 @@ if (!$isValidData) {
                 {
                     $result[] = $dto->toDictionary();
                     $success = true;
-                    $message = $dtoList;
                 }
                 else
                 {
