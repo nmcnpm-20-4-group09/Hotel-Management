@@ -33,7 +33,7 @@
         - http://localhost/src/PL/public/home
 
 - Host web bằng máy cá nhân:
-    - Đăng kí tài khoản và ngrok tại https://ngrok.com/.
+    - Đăng kí tài khoản và cài ngrok tại https://ngrok.com/.
     - Thực hiện tạo đường hầm kết nối giữa máy cá nhân và internet theo hướng dẫn của ngrok.
     - Thục hiện các bước như khi chạy trên localhost (kể cả start các module của XAMPP).
     - Ở bước truy cập phần mềm, thay vì nhập http://localhost/src/PL/public/home, ta nhập:
